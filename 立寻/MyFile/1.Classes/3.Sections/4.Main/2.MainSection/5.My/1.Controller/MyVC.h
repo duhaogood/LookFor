@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MyVC.h
 //  立寻
 //
 //  Created by mac_hao on 2017/5/23.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MyVC : UIViewController
 
 @end
-
