@@ -38,6 +38,8 @@
         //修改title字体颜色及大小
         nc.navigationBar.titleTextAttributes = dictColor;
         [self addChildViewController:nc];
+        nc.tabBarItem.image = [UIImage imageNamed:@"look"];
+        nc.tabBarItem.selectedImage = [UIImage imageNamed:@"look_select"];
     }
     //发现
     {
