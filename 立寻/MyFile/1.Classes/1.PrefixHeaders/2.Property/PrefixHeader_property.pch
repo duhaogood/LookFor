@@ -19,8 +19,9 @@
 #define MYTOOL DHTOOL
 //网络工具类
 #define MYNETWORKING [DHNetWorking sharedDHNetWorking]
-//获取用户id
-#define MEMBERID [MYTOOL getProjectPropertyWithKey:@"memberId"]
+//字体名字
+#define FONT_NAME @"PingFang SC Regular"
+
 
 
 //颜色

@@ -94,7 +94,7 @@
         //修改navigationbar背景色
         nc.navigationBar.translucent = NO;
         nc.title = @"我的";
-        nc.navigationBar.barTintColor = [MYTOOL RGBWithRed:0 green:204 blue:203 alpha:1];
+        nc.navigationBar.barTintColor = bgColor;
         //修改title字体颜色及大小
         nc.navigationBar.titleTextAttributes = dictColor;
         [self addChildViewController:nc];
@@ -110,7 +110,7 @@
     [self.tabBar addSubview:btn];
     [btn addTarget:self action:@selector(issueBtnCallback) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    self.selectedIndex = 4;//以后删除
 }
 //发布按钮
 -(void)issueBtnCallback{
