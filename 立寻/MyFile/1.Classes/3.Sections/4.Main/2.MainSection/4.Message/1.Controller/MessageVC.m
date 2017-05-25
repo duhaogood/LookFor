@@ -23,9 +23,7 @@
 -(void)loadMainView{
     self.view.backgroundColor = [UIColor whiteColor];
     
-    
-    
-    
+    self.navigationController.tabBarItem.badgeValue = @"2";
     
 }
 

@@ -335,7 +335,7 @@
                     {
                         icon.image = [UIImage imageNamed:middle_data_array[i][1]];
                         //                        icon.backgroundColor = [UIColor greenColor];
-                        icon.frame = CGRectMake(width/2-w/2.0 + (width+1)*col, h/2.0+(height+1)*row, w, h);
+                        icon.frame = CGRectMake(width/2-w/2.0 + (width+1)*col, height/2.0-h+(height+1)*row, w, h);
                         [view addSubview:icon];
                     }
                     //文字
