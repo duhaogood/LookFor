@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */; };
 		78375AC11ED4734C0046F8C3 /* DHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A0E1ED4734C0046F8C3 /* DHTool.m */; };
 		78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A211ED4734C0046F8C3 /* MainVC.m */; };
 		78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A281ED4734C0046F8C3 /* LookForVC.m */; };
@@ -91,6 +92,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04A990031ED84C7E00C1C6EC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04A990051ED8617300C1C6EC /* FirstPageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageHeaderView.h; sourceTree = "<group>"; };
+		04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageHeaderView.m; sourceTree = "<group>"; };
 		783759FD1ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		783759FF1ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		78375A011ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
@@ -266,6 +270,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				04A990051ED8617300C1C6EC /* FirstPageHeaderView.h */,
+				04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */,
+			);
+			path = 01.FirstPageHeaderView;
+			sourceTree = "<group>";
+		};
 		783759FC1ED4734C0046F8C3 /* MyFile */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +508,8 @@
 		78375A291ED4734C0046F8C3 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04A990031ED84C7E00C1C6EC /* 0.Comments.h */,
+				04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -1150,6 +1165,7 @@
 				78375AD91ED4734C0046F8C3 /* MJRefreshGifHeader.m in Sources */,
 				78375ACE1ED4734C0046F8C3 /* MJRefreshAutoFooter.m in Sources */,
 				78375AC11ED4734C0046F8C3 /* DHTool.m in Sources */,
+				04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */,
 				78375AE71ED4734C0046F8C3 /* SDCycleScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

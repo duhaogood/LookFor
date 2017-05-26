@@ -110,7 +110,7 @@
     [self.tabBar addSubview:btn];
     [btn addTarget:self action:@selector(issueBtnCallback) forControlEvents:UIControlEventTouchUpInside];
     
-    self.selectedIndex = 4;//以后删除
+//    self.selectedIndex = 4;//以后删除
 }
 //发布按钮
 -(void)issueBtnCallback{

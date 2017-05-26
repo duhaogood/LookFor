@@ -28,7 +28,8 @@
 #define MYCOLOR_46_42_42 [MYTOOL RGBWithRed:46 green:42 blue:42 alpha:1]
 #define MYCOLOR_181_181_181 [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1]
 #define MYCOLOR_229_64_73 [MYTOOL RGBWithRed:229 green:64 blue:73 alpha:1]
-
+#define MYCOLOR_240_240_240 [MYTOOL RGBWithRed:240 green:240 blue:240 alpha:1]
+#define MYCOLOR_40_199_0 [MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1]
 //获取label的size
 #define LABEL_SIZE [MYTOOL getSizeWithLabel:label]
 

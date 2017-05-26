@@ -503,6 +503,7 @@
                 self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, max_width, size.height);
             }
 //        }
+        //123321
     }
     self.editView.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9 + self.signTF.frame.size.width+2, self.signTF.frame.origin.y+self.signTF.frame.size.height/2-10, 20, 20);
     return true;

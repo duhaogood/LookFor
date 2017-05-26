@@ -10,4 +10,17 @@
 
 @interface LookForVC : UIViewController
 
+
+
+
+
+
+
+
+//tableview数据源选择
+-(void)selectServiceType:(UIButton *)btn;
+//中部图标点击事件
+-(void)iconClick:(UIButton *)tap;
+//签到事件
+-(void)signClick:(UIButton *)btn;
 @end

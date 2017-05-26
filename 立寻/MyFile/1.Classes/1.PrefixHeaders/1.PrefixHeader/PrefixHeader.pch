@@ -21,8 +21,13 @@
 #include "DHTool.h"
 
 #include "UIImageView+WebCache.h"
-
 #include "MJRefresh.h"
+
+
+#import "SDCycleScrollView.h"
+
+
+
 #endif /* PrefixHeader_pch */
 
 
