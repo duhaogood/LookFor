@@ -23,4 +23,6 @@
 -(void)iconClick:(UIButton *)tap;
 //签到事件
 -(void)signClick:(UIButton *)btn;
+//置顶、最新事件
+-(void)up_newClick:(UIButton *)btn;
 @end

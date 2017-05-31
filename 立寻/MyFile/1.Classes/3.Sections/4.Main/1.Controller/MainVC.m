@@ -31,7 +31,6 @@
     //立寻
     {
         LookForVC * look = [LookForVC new];
-        look.title = @"立寻";
         UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:look];
         //修改navigationbar背景色
         nc.navigationBar.translucent = NO;
@@ -110,7 +109,7 @@
     [self.tabBar addSubview:btn];
     [btn addTarget:self action:@selector(issueBtnCallback) forControlEvents:UIControlEventTouchUpInside];
     
-//    self.selectedIndex = 4;//以后删除
+    self.selectedIndex = 1;//以后删除
 }
 //发布按钮
 -(void)issueBtnCallback{

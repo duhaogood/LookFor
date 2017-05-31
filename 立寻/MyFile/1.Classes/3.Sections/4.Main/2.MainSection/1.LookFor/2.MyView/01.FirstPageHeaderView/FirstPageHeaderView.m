@@ -63,7 +63,7 @@
                     UILabel * label = [UILabel new];
                     label.text = btnName_imgArray[i][1];
                     label.textColor = [MYTOOL RGBWithRed:16 green:16 blue:16 alpha:1];
-                    label.font = [UIFont systemFontOfSize:11];
+                    label.font = [UIFont systemFontOfSize:14];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.textAlignment = NSTextAlignmentCenter;
                     label.frame = CGRectMake(btn_width * col, 50 + space_y * 2 + btn_height * row - size.height / 2, btn_width, size.height);
@@ -139,7 +139,7 @@
                         label.font = [UIFont systemFontOfSize:10];
                     }
                     CGSize size = [MYTOOL getSizeWithLabel:label];
-                    label.frame = CGRectMake(14, (height - 7 + sign_down) / 2 - size.height/2 , size.width, size.height);
+                    label.frame = CGRectMake(14, sign_down + 7, size.width, size.height);
                     [view addSubview:label];
                 }
             }
@@ -231,13 +231,59 @@
                     downBtnView.layer.cornerRadius = 1.5;
                 }
             }
-            
+            //置顶、最新按钮
+            {
+                //置顶-zhiding
+                {
+                    UIButton * btn = [UIButton new];
+                    self.leftTypeBtn = btn;
+                    btn.tag = 100;
+                    [btn setTitle:@"置顶" forState:UIControlStateNormal];
+                    btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+                    [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
+                    
+                    btn.frame = CGRectMake(10, height/4.0*3-10, 50, 20);
+                    [view addSubview:btn];
+                    btn.enabled = false;
+                    [btn addTarget:delegate action:@selector(up_newClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                //最新-zuixin
+                {
+                    UIButton * btn = [UIButton new];
+                    btn.tag = 200;
+                    self.rightTypeBtn = btn;
+                    [btn setTitle:@"最新" forState:UIControlStateNormal];
+                    btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+                    [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
+                    btn.frame = CGRectMake(10+5+50, height/4.0*3-10, 50, 20);
+                    [view addSubview:btn];
+                    [btn addTarget:delegate action:@selector(up_newClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
         }
         
     }
     return self;
 }
+-(void)selectBtnForUpOrNew:(UIButton *)btn{
+    if (btn.tag == 100) {//选中置顶
+        self.leftTypeBtn.enabled = false;
+        self.rightTypeBtn.enabled = true;
+    }else{//选中最新
+        self.rightTypeBtn.enabled = false;
+        self.leftTypeBtn.enabled = true;
+    }
+}
 -(void)selectServiceCallback:(NSInteger)tag{
+    //默认选中置顶
+    self.leftTypeBtn.enabled = false;
+    self.rightTypeBtn.enabled = true;
     if (tag == 100) {
         //左按钮选中
         [self.leftServiceBtn setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateNormal];

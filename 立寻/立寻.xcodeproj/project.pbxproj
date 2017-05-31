@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04874F141ED913CE00049758 /* LookForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04874F131ED913CE00049758 /* LookForCell.m */; };
 		04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */; };
 		78375AC11ED4734C0046F8C3 /* DHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A0E1ED4734C0046F8C3 /* DHTool.m */; };
 		78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A211ED4734C0046F8C3 /* MainVC.m */; };
@@ -92,6 +93,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04874F121ED913CE00049758 /* LookForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCell.h; sourceTree = "<group>"; };
+		04874F131ED913CE00049758 /* LookForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCell.m; sourceTree = "<group>"; };
 		04A990031ED84C7E00C1C6EC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		04A990051ED8617300C1C6EC /* FirstPageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageHeaderView.h; sourceTree = "<group>"; };
 		04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageHeaderView.m; sourceTree = "<group>"; };
@@ -270,6 +273,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04874F111ED913AA00049758 /* 02.LookForCell */ = {
+			isa = PBXGroup;
+			children = (
+				04874F121ED913CE00049758 /* LookForCell.h */,
+				04874F131ED913CE00049758 /* LookForCell.m */,
+			);
+			path = 02.LookForCell;
+			sourceTree = "<group>";
+		};
 		04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +522,7 @@
 			children = (
 				04A990031ED84C7E00C1C6EC /* 0.Comments.h */,
 				04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */,
+				04874F111ED913AA00049758 /* 02.LookForCell */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -1116,6 +1129,7 @@
 				78375AD81ED4734C0046F8C3 /* MJRefreshBackStateFooter.m in Sources */,
 				78C23C4A1ED3450A000CD40E /* AppDelegate.m in Sources */,
 				78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */,
+				04874F141ED913CE00049758 /* LookForCell.m in Sources */,
 				78375ADE1ED4734C0046F8C3 /* NSBundle+MJRefresh.m in Sources */,
 				78375AFA1ED4734C0046F8C3 /* SVProgressHUD.m in Sources */,
 				78375AEB1ED4734C0046F8C3 /* SDImageCache.m in Sources */,
@@ -1310,7 +1324,7 @@
 				INFOPLIST_FILE = "立寻/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hao.green1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hao.looking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1324,7 +1338,7 @@
 				INFOPLIST_FILE = "立寻/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hao.green1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hao.looking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

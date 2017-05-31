@@ -30,4 +30,11 @@
  */
 -(void)selectServiceCallback:(NSInteger)tag;
 
+
+/**
+ 置顶、最新按钮被选择后更改两个按钮状态
+
+ @param btn 被选中的按钮
+ */
+-(void)selectBtnForUpOrNew:(UIButton *)btn;
 @end
