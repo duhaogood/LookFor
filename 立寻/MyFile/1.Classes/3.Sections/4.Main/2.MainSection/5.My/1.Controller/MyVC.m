@@ -86,6 +86,13 @@
                 bgView.layer.cornerRadius = (size.height + 10)/2.0;
                 label.frame = CGRectMake(10, 5, size.width, size.height);
                 [bgView addSubview:label];
+                //按钮
+                {
+                    UIButton * btn = [UIButton new];
+                    btn.frame = bgView.bounds;
+                    [btn addTarget:self action:@selector(personalEditCallback) forControlEvents:UIControlEventTouchUpInside];
+                    [bgView addSubview:btn];
+                }
             }
             label.text = [NSString stringWithFormat:@"完善度%@",userInfo[@"progress"]];
         }
@@ -270,6 +277,13 @@
                 }
             }
         }
+        //按钮
+        {
+            UIButton * btn = [UIButton new];
+            btn.frame = view.bounds;
+            [view addSubview:btn];
+            [btn addTarget:self action:@selector(accountBalanceCallback) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     //功能区-270
     {
@@ -314,14 +328,14 @@
             }
             //图片、文字  数据
             middle_data_array = @[
-                                  @[@"我的寻找",@"my_find",@"25",@"25"],
-                                  @[@"招领认领",@"zlrl",@"29",@"25"],
-                                  @[@"我的推广",@"my_tg",@"30",@"25"],
-                                  @[@"草稿箱",@"draftbox",@"25",@"25"],
-                                  @[@"网络社交",@"networking",@"25",@"25"],
-                                  @[@"我的关注",@"guanzhu",@"29",@"25"],
-                                  @[@"提供线索",@"xiansuo",@"33",@"25"],
-                                  @[@"好友邀请",@"yaoqing",@"23",@"25"]
+                                  @[@"我的寻找",@"my_find",@"25",@"25",@"MyLookingVC"],
+                                  @[@"招领认领",@"zlrl",@"29",@"25",@"Found_ClaimVC"],
+                                  @[@"我的推广",@"my_tg",@"30",@"25",@"MyExtensionVC"],
+                                  @[@"草稿箱",@"draftbox",@"25",@"25",@"DraftsVC"],
+                                  @[@"网络社交",@"networking",@"25",@"25",@"NetworkSocialVC"],
+                                  @[@"我的关注",@"guanzhu",@"29",@"25",@"MyFollowVC"],
+                                  @[@"提供线索",@"xiansuo",@"33",@"25",@"ProvideClueVC"],
+                                  @[@"好友邀请",@"yaoqing",@"23",@"25",@"InvitingFriendsVC"]
                                   ];
             //加载图片和文字
             {
@@ -486,47 +500,62 @@
             self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, max_width, size.height);
         }else{//按钮右边还有位置
             self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, size.width, size.height);
-//            if (size.width < 100) {//不再往左移动
-//                self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, 100, size.height);
-//            }
         }
     }else{//减少
         UILabel * label = [UILabel new];
         label.font = [UIFont systemFontOfSize:10];
         label.text = [textField.text substringToIndex:textField.text.length-1];
         CGSize size = [MYTOOL getSizeWithLabel:label];
-//        if (size.width < 100) {//不再往左移动
-////            self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, 100, size.height);
-//        }else{//往左移动
-            self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, size.width, size.height);
-            if (size.width > max_width) {//按钮到边了
-                self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, max_width, size.height);
-            }
-//        }
-        //123321
+        self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, size.width, size.height);
+        if (size.width > max_width) {//按钮到边了
+            self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, max_width, size.height);
+        }
     }
     self.editView.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9 + self.signTF.frame.size.width+2, self.signTF.frame.origin.y+self.signTF.frame.size.height/2-10, 20, 20);
     return true;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSLog(@"%@",textField.text);
+    
 }
-#pragma mark - 按钮回调
+#pragma mark - 上侧功能区按钮回调
+//账户余额
+-(void)accountBalanceCallback{
+    AccountBalanceVC * vc = [AccountBalanceVC new];
+    vc.title = @"账户余额";
+    [self.navigationController pushViewController:vc animated:true];
+}
+//个人编辑
+-(void)personalEditCallback{
+    NSLog(@"个人编辑");
+}
+#pragma mark - 中间功能区按钮回调
 //中间功能区按钮回调
 -(void)middleBtnCallback:(UIButton *)btn{
     NSString * text = middle_data_array[btn.tag][0];
-    [SVProgressHUD showSuccessWithStatus:text duration:1];
+    NSString * className = middle_data_array[btn.tag][4];
+    Class class = NSClassFromString(className);
+    UIViewController * vc = [class new];
+    vc.title = text;
+    [self.navigationController pushViewController:vc animated:true];
 }
+#pragma mark - 下部功能区按钮回调
 //个人认证
 -(void)personalCertifyCallback{
-    [SVProgressHUD showSuccessWithStatus:@"个人认证" duration:1];
+    PersonalCertificationVC * vc = [PersonalCertificationVC new];
+    vc.title = @"个人认证";
+    [self.navigationController pushViewController:vc animated:true];
 }
 //设置回调
 -(void)settingCallback{
-    [SVProgressHUD showSuccessWithStatus:@"设置回调" duration:1];
+    SettingVC * vc = [SettingVC new];
+    vc.title = @"设置";
+    [self.navigationController pushViewController:vc animated:true];
 }
 //投诉建议
 -(void)complainProposeCallback{
-    [SVProgressHUD showSuccessWithStatus:@"投诉建议" duration:1];
+    ComplaintSuggestionVC * vc = [ComplaintSuggestionVC new];
+    vc.title = @"投诉建议";
+    [self.navigationController pushViewController:vc animated:true];
 }
 @end

@@ -159,18 +159,6 @@
             }
             //悬赏标志
             {
-                UILabel * label = [UILabel new];
-                label.text = @"悬赏金";
-                label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
-                label.backgroundColor = MYCOLOR_240_240_240;
-                label.textAlignment = NSTextAlignmentCenter;
-                label.font = [UIFont systemFontOfSize:8];
-//                CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(right - 37, top_all, 37, money_height);
-//                [self addSubview:label];
-                label.layer.masksToBounds = true;
-                label.layer.cornerRadius = money_height/2;
-                
                 UIImageView * icon = [UIImageView new];
                 icon.image = [UIImage imageNamed:@"btn_xsj_xs"];
                 icon.frame = CGRectMake(right - 37, top_all, 37, money_height);
@@ -262,7 +250,7 @@
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                num_left -= size.width + 20;
+                num_left -= size.width + 10;
                 label.frame = CGRectMake(num_left, top_down-size.height/2, size.width, size.height);
                 [self addSubview:label];
             }
@@ -285,7 +273,7 @@
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                num_left -= size.width + 20;
+                num_left -= size.width + 10;
                 label.frame = CGRectMake(num_left, top_down-size.height/2, size.width, size.height);
                 [self addSubview:label];
             }

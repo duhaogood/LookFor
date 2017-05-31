@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		04874F141ED913CE00049758 /* LookForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04874F131ED913CE00049758 /* LookForCell.m */; };
+		049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */; };
+		049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */; };
+		049B5E1E1EDF07070080D552 /* MyLookingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E1D1EDF07070080D552 /* MyLookingVC.m */; };
+		049B5E211EDF07150080D552 /* Found_ClaimVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E201EDF07150080D552 /* Found_ClaimVC.m */; };
+		049B5E241EDF07240080D552 /* MyExtensionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E231EDF07240080D552 /* MyExtensionVC.m */; };
+		049B5E271EDF07330080D552 /* DraftsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E261EDF07330080D552 /* DraftsVC.m */; };
+		049B5E2A1EDF07410080D552 /* NetworkSocialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E291EDF07410080D552 /* NetworkSocialVC.m */; };
+		049B5E2D1EDF07510080D552 /* MyFollowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E2C1EDF07510080D552 /* MyFollowVC.m */; };
+		049B5E301EDF07600080D552 /* ProvideClueVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E2F1EDF07600080D552 /* ProvideClueVC.m */; };
+		049B5E331EDF076D0080D552 /* InvitingFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E321EDF076D0080D552 /* InvitingFriendsVC.m */; };
+		049B5E361EDF077F0080D552 /* PersonalCertificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E351EDF077F0080D552 /* PersonalCertificationVC.m */; };
+		049B5E391EDF07900080D552 /* ComplaintSuggestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E381EDF07900080D552 /* ComplaintSuggestionVC.m */; };
+		049B5E3C1EDF07A20080D552 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E3B1EDF07A20080D552 /* FeedbackVC.m */; };
+		049B5E3F1EDF07B00080D552 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E3E1EDF07B00080D552 /* AboutVC.m */; };
+		049B5E421EDF07BD0080D552 /* CheckUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E411EDF07BD0080D552 /* CheckUpdateVC.m */; };
+		049B5E451EDF07C90080D552 /* ClearCacheVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E441EDF07C90080D552 /* ClearCacheVC.m */; };
+		049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E471EDF07D80080D552 /* NotificationMessageVC.m */; };
+		049B5E4B1EDF07E90080D552 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E4A1EDF07E90080D552 /* SettingVC.m */; };
 		04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */; };
 		78375AC11ED4734C0046F8C3 /* DHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A0E1ED4734C0046F8C3 /* DHTool.m */; };
 		78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A211ED4734C0046F8C3 /* MainVC.m */; };
@@ -95,6 +113,65 @@
 /* Begin PBXFileReference section */
 		04874F121ED913CE00049758 /* LookForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCell.h; sourceTree = "<group>"; };
 		04874F131ED913CE00049758 /* LookForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCell.m; sourceTree = "<group>"; };
+		049B5DC51EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
+		049B5DC71EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
+		049B5DC91EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DCD1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DD11EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
+		049B5DD31EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DD71EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DDB1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DDF1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DE31EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DE71EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DEB1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DEF1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DF31EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
+		049B5DF51EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DF91EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DFD1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5DFF1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5E031EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5E071EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5E0B1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5E0F1EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5E131EDF055C0080D552 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B5E161EDF06DF0080D552 /* AccountBalanceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountBalanceVC.h; sourceTree = "<group>"; };
+		049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountBalanceVC.m; sourceTree = "<group>"; };
+		049B5E191EDF06EE0080D552 /* PersonalMainPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMainPageVC.h; sourceTree = "<group>"; };
+		049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMainPageVC.m; sourceTree = "<group>"; };
+		049B5E1C1EDF07070080D552 /* MyLookingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLookingVC.h; sourceTree = "<group>"; };
+		049B5E1D1EDF07070080D552 /* MyLookingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLookingVC.m; sourceTree = "<group>"; };
+		049B5E1F1EDF07150080D552 /* Found_ClaimVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Found_ClaimVC.h; sourceTree = "<group>"; };
+		049B5E201EDF07150080D552 /* Found_ClaimVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Found_ClaimVC.m; sourceTree = "<group>"; };
+		049B5E221EDF07240080D552 /* MyExtensionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExtensionVC.h; sourceTree = "<group>"; };
+		049B5E231EDF07240080D552 /* MyExtensionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExtensionVC.m; sourceTree = "<group>"; };
+		049B5E251EDF07330080D552 /* DraftsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftsVC.h; sourceTree = "<group>"; };
+		049B5E261EDF07330080D552 /* DraftsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftsVC.m; sourceTree = "<group>"; };
+		049B5E281EDF07410080D552 /* NetworkSocialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSocialVC.h; sourceTree = "<group>"; };
+		049B5E291EDF07410080D552 /* NetworkSocialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSocialVC.m; sourceTree = "<group>"; };
+		049B5E2B1EDF07510080D552 /* MyFollowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowVC.h; sourceTree = "<group>"; };
+		049B5E2C1EDF07510080D552 /* MyFollowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowVC.m; sourceTree = "<group>"; };
+		049B5E2E1EDF07600080D552 /* ProvideClueVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvideClueVC.h; sourceTree = "<group>"; };
+		049B5E2F1EDF07600080D552 /* ProvideClueVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvideClueVC.m; sourceTree = "<group>"; };
+		049B5E311EDF076D0080D552 /* InvitingFriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitingFriendsVC.h; sourceTree = "<group>"; };
+		049B5E321EDF076D0080D552 /* InvitingFriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitingFriendsVC.m; sourceTree = "<group>"; };
+		049B5E341EDF077F0080D552 /* PersonalCertificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCertificationVC.h; sourceTree = "<group>"; };
+		049B5E351EDF077F0080D552 /* PersonalCertificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCertificationVC.m; sourceTree = "<group>"; };
+		049B5E371EDF07900080D552 /* ComplaintSuggestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplaintSuggestionVC.h; sourceTree = "<group>"; };
+		049B5E381EDF07900080D552 /* ComplaintSuggestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplaintSuggestionVC.m; sourceTree = "<group>"; };
+		049B5E3A1EDF07A20080D552 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
+		049B5E3B1EDF07A20080D552 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
+		049B5E3D1EDF07B00080D552 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		049B5E3E1EDF07B00080D552 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
+		049B5E401EDF07BD0080D552 /* CheckUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateVC.h; sourceTree = "<group>"; };
+		049B5E411EDF07BD0080D552 /* CheckUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateVC.m; sourceTree = "<group>"; };
+		049B5E431EDF07C90080D552 /* ClearCacheVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearCacheVC.h; sourceTree = "<group>"; };
+		049B5E441EDF07C90080D552 /* ClearCacheVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearCacheVC.m; sourceTree = "<group>"; };
+		049B5E461EDF07D80080D552 /* NotificationMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationMessageVC.h; sourceTree = "<group>"; };
+		049B5E471EDF07D80080D552 /* NotificationMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationMessageVC.m; sourceTree = "<group>"; };
+		049B5E491EDF07E90080D552 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		049B5E4A1EDF07E90080D552 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		04A990031ED84C7E00C1C6EC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		04A990051ED8617300C1C6EC /* FirstPageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageHeaderView.h; sourceTree = "<group>"; };
 		04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageHeaderView.m; sourceTree = "<group>"; };
@@ -280,6 +357,525 @@
 				04874F131ED913CE00049758 /* LookForCell.m */,
 			);
 			path = 02.LookForCell;
+			sourceTree = "<group>";
+		};
+		049B5DC61EDF055C0080D552 /* 01.UpperRegion */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DC71EDF055C0080D552 /* 00.Comments.h */,
+				049B5DC81EDF055C0080D552 /* 01.AccountBalance */,
+				049B5DCC1EDF055C0080D552 /* 02.PersonalMainPage */,
+			);
+			path = 01.UpperRegion;
+			sourceTree = "<group>";
+		};
+		049B5DC81EDF055C0080D552 /* 01.AccountBalance */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DC91EDF055C0080D552 /* 0.Comments.h */,
+				049B5DCA1EDF055C0080D552 /* 1.Controller */,
+				049B5DCB1EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 01.AccountBalance;
+			sourceTree = "<group>";
+		};
+		049B5DCA1EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E161EDF06DF0080D552 /* AccountBalanceVC.h */,
+				049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DCB1EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DCC1EDF055C0080D552 /* 02.PersonalMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DCD1EDF055C0080D552 /* 0.Comments.h */,
+				049B5DCE1EDF055C0080D552 /* 1.Controller */,
+				049B5DCF1EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 02.PersonalMainPage;
+			sourceTree = "<group>";
+		};
+		049B5DCE1EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E191EDF06EE0080D552 /* PersonalMainPageVC.h */,
+				049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DCF1EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DD01EDF055C0080D552 /* 02.MiddleRegion */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DD11EDF055C0080D552 /* 00.Comments.h */,
+				049B5DD21EDF055C0080D552 /* 01.MyLooking */,
+				049B5DD61EDF055C0080D552 /* 02.Found_Claim */,
+				049B5DDA1EDF055C0080D552 /* 03.MyExtension */,
+				049B5DDE1EDF055C0080D552 /* 04.Drafts */,
+				049B5DE21EDF055C0080D552 /* 05.NetworkSocial */,
+				049B5DE61EDF055C0080D552 /* 06.MyFollow */,
+				049B5DEA1EDF055C0080D552 /* 07.ProvideClue */,
+				049B5DEE1EDF055C0080D552 /* 08.InvitingFriends */,
+			);
+			path = 02.MiddleRegion;
+			sourceTree = "<group>";
+		};
+		049B5DD21EDF055C0080D552 /* 01.MyLooking */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DD31EDF055C0080D552 /* 0.Comments.h */,
+				049B5DD41EDF055C0080D552 /* 1.Controller */,
+				049B5DD51EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 01.MyLooking;
+			sourceTree = "<group>";
+		};
+		049B5DD41EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E1C1EDF07070080D552 /* MyLookingVC.h */,
+				049B5E1D1EDF07070080D552 /* MyLookingVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DD51EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DD61EDF055C0080D552 /* 02.Found_Claim */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DD71EDF055C0080D552 /* 0.Comments.h */,
+				049B5DD81EDF055C0080D552 /* 1.Controller */,
+				049B5DD91EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 02.Found_Claim;
+			sourceTree = "<group>";
+		};
+		049B5DD81EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E1F1EDF07150080D552 /* Found_ClaimVC.h */,
+				049B5E201EDF07150080D552 /* Found_ClaimVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DD91EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DDA1EDF055C0080D552 /* 03.MyExtension */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DDB1EDF055C0080D552 /* 0.Comments.h */,
+				049B5DDC1EDF055C0080D552 /* 1.Controller */,
+				049B5DDD1EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 03.MyExtension;
+			sourceTree = "<group>";
+		};
+		049B5DDC1EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E221EDF07240080D552 /* MyExtensionVC.h */,
+				049B5E231EDF07240080D552 /* MyExtensionVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DDD1EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DDE1EDF055C0080D552 /* 04.Drafts */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DDF1EDF055C0080D552 /* 0.Comments.h */,
+				049B5DE01EDF055C0080D552 /* 1.Controller */,
+				049B5DE11EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 04.Drafts;
+			sourceTree = "<group>";
+		};
+		049B5DE01EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E251EDF07330080D552 /* DraftsVC.h */,
+				049B5E261EDF07330080D552 /* DraftsVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DE11EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DE21EDF055C0080D552 /* 05.NetworkSocial */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DE31EDF055C0080D552 /* 0.Comments.h */,
+				049B5DE41EDF055C0080D552 /* 1.Controller */,
+				049B5DE51EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 05.NetworkSocial;
+			sourceTree = "<group>";
+		};
+		049B5DE41EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E281EDF07410080D552 /* NetworkSocialVC.h */,
+				049B5E291EDF07410080D552 /* NetworkSocialVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DE51EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DE61EDF055C0080D552 /* 06.MyFollow */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DE71EDF055C0080D552 /* 0.Comments.h */,
+				049B5DE81EDF055C0080D552 /* 1.Controller */,
+				049B5DE91EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 06.MyFollow;
+			sourceTree = "<group>";
+		};
+		049B5DE81EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E2B1EDF07510080D552 /* MyFollowVC.h */,
+				049B5E2C1EDF07510080D552 /* MyFollowVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DE91EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DEA1EDF055C0080D552 /* 07.ProvideClue */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DEB1EDF055C0080D552 /* 0.Comments.h */,
+				049B5DEC1EDF055C0080D552 /* 1.Controller */,
+				049B5DED1EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 07.ProvideClue;
+			sourceTree = "<group>";
+		};
+		049B5DEC1EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E2E1EDF07600080D552 /* ProvideClueVC.h */,
+				049B5E2F1EDF07600080D552 /* ProvideClueVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DED1EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DEE1EDF055C0080D552 /* 08.InvitingFriends */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DEF1EDF055C0080D552 /* 0.Comments.h */,
+				049B5DF01EDF055C0080D552 /* 1.Controller */,
+				049B5DF11EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 08.InvitingFriends;
+			sourceTree = "<group>";
+		};
+		049B5DF01EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E311EDF076D0080D552 /* InvitingFriendsVC.h */,
+				049B5E321EDF076D0080D552 /* InvitingFriendsVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DF11EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DF21EDF055C0080D552 /* 03LowerRegion */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DF31EDF055C0080D552 /* 00.Comments.h */,
+				049B5DF41EDF055C0080D552 /* 01.PersonalCertification */,
+				049B5DF81EDF055C0080D552 /* 02.Setting */,
+				049B5E121EDF055C0080D552 /* 03.ComplaintSuggestion */,
+			);
+			path = 03LowerRegion;
+			sourceTree = "<group>";
+		};
+		049B5DF41EDF055C0080D552 /* 01.PersonalCertification */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DF51EDF055C0080D552 /* 0.Comments.h */,
+				049B5DF61EDF055C0080D552 /* 1.Controller */,
+				049B5DF71EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 01.PersonalCertification;
+			sourceTree = "<group>";
+		};
+		049B5DF61EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E341EDF077F0080D552 /* PersonalCertificationVC.h */,
+				049B5E351EDF077F0080D552 /* PersonalCertificationVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DF71EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DF81EDF055C0080D552 /* 02.Setting */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DF91EDF055C0080D552 /* 0.Comments.h */,
+				049B5DFA1EDF055C0080D552 /* 1.Controller */,
+				049B5DFB1EDF055C0080D552 /* 2.MyView */,
+				049B5DFC1EDF055C0080D552 /* 3.Sections */,
+			);
+			path = 02.Setting;
+			sourceTree = "<group>";
+		};
+		049B5DFA1EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E491EDF07E90080D552 /* SettingVC.h */,
+				049B5E4A1EDF07E90080D552 /* SettingVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5DFB1EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5DFC1EDF055C0080D552 /* 3.Sections */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DFD1EDF055C0080D552 /* 0.Comments.h */,
+				049B5DFE1EDF055C0080D552 /* 1.NotificationMessage */,
+				049B5E021EDF055C0080D552 /* 2.ClearCache */,
+				049B5E061EDF055C0080D552 /* 3.CheckUpdate */,
+				049B5E0A1EDF055C0080D552 /* 4.About */,
+				049B5E0E1EDF055C0080D552 /* 5.Feedback */,
+			);
+			path = 3.Sections;
+			sourceTree = "<group>";
+		};
+		049B5DFE1EDF055C0080D552 /* 1.NotificationMessage */ = {
+			isa = PBXGroup;
+			children = (
+				049B5DFF1EDF055C0080D552 /* 0.Comments.h */,
+				049B5E001EDF055C0080D552 /* 1.Controller */,
+				049B5E011EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 1.NotificationMessage;
+			sourceTree = "<group>";
+		};
+		049B5E001EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E461EDF07D80080D552 /* NotificationMessageVC.h */,
+				049B5E471EDF07D80080D552 /* NotificationMessageVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5E011EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5E021EDF055C0080D552 /* 2.ClearCache */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E031EDF055C0080D552 /* 0.Comments.h */,
+				049B5E041EDF055C0080D552 /* 1.Controller */,
+				049B5E051EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 2.ClearCache;
+			sourceTree = "<group>";
+		};
+		049B5E041EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E431EDF07C90080D552 /* ClearCacheVC.h */,
+				049B5E441EDF07C90080D552 /* ClearCacheVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5E051EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5E061EDF055C0080D552 /* 3.CheckUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E071EDF055C0080D552 /* 0.Comments.h */,
+				049B5E081EDF055C0080D552 /* 1.Controller */,
+				049B5E091EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 3.CheckUpdate;
+			sourceTree = "<group>";
+		};
+		049B5E081EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E401EDF07BD0080D552 /* CheckUpdateVC.h */,
+				049B5E411EDF07BD0080D552 /* CheckUpdateVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5E091EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5E0A1EDF055C0080D552 /* 4.About */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E0B1EDF055C0080D552 /* 0.Comments.h */,
+				049B5E0C1EDF055C0080D552 /* 1.Controller */,
+				049B5E0D1EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 4.About;
+			sourceTree = "<group>";
+		};
+		049B5E0C1EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E3D1EDF07B00080D552 /* AboutVC.h */,
+				049B5E3E1EDF07B00080D552 /* AboutVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5E0D1EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5E0E1EDF055C0080D552 /* 5.Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E0F1EDF055C0080D552 /* 0.Comments.h */,
+				049B5E101EDF055C0080D552 /* 1.Controller */,
+				049B5E111EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 5.Feedback;
+			sourceTree = "<group>";
+		};
+		049B5E101EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E3A1EDF07A20080D552 /* FeedbackVC.h */,
+				049B5E3B1EDF07A20080D552 /* FeedbackVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5E111EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B5E121EDF055C0080D552 /* 03.ComplaintSuggestion */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E131EDF055C0080D552 /* 0.Comments.h */,
+				049B5E141EDF055C0080D552 /* 1.Controller */,
+				049B5E151EDF055C0080D552 /* 2.MyView */,
+			);
+			path = 03.ComplaintSuggestion;
+			sourceTree = "<group>";
+		};
+		049B5E141EDF055C0080D552 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B5E371EDF07900080D552 /* ComplaintSuggestionVC.h */,
+				049B5E381EDF07900080D552 /* ComplaintSuggestionVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B5E151EDF055C0080D552 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
 			sourceTree = "<group>";
 		};
 		04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */ = {
@@ -674,6 +1270,10 @@
 		78375A471ED4734C0046F8C3 /* 3.Sections */ = {
 			isa = PBXGroup;
 			children = (
+				049B5DC51EDF055C0080D552 /* 00.Comments.h */,
+				049B5DC61EDF055C0080D552 /* 01.UpperRegion */,
+				049B5DD01EDF055C0080D552 /* 02.MiddleRegion */,
+				049B5DF21EDF055C0080D552 /* 03LowerRegion */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -1122,8 +1722,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				78375ACD1ED4734C0046F8C3 /* AFURLSessionManager.m in Sources */,
+				049B5E4B1EDF07E90080D552 /* SettingVC.m in Sources */,
+				049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */,
+				049B5E301EDF07600080D552 /* ProvideClueVC.m in Sources */,
 				78375AF51ED4734C0046F8C3 /* UIImage+WebP.m in Sources */,
 				78375AF21ED4734C0046F8C3 /* UIButton+WebCache.m in Sources */,
+				049B5E451EDF07C90080D552 /* ClearCacheVC.m in Sources */,
+				049B5E211EDF07150080D552 /* Found_ClaimVC.m in Sources */,
 				78375AD31ED4734C0046F8C3 /* MJRefreshAutoGifFooter.m in Sources */,
 				78375ADB1ED4734C0046F8C3 /* MJRefreshStateHeader.m in Sources */,
 				78375AD81ED4734C0046F8C3 /* MJRefreshBackStateFooter.m in Sources */,
@@ -1132,10 +1737,14 @@
 				04874F141ED913CE00049758 /* LookForCell.m in Sources */,
 				78375ADE1ED4734C0046F8C3 /* NSBundle+MJRefresh.m in Sources */,
 				78375AFA1ED4734C0046F8C3 /* SVProgressHUD.m in Sources */,
+				049B5E3F1EDF07B00080D552 /* AboutVC.m in Sources */,
 				78375AEB1ED4734C0046F8C3 /* SDImageCache.m in Sources */,
 				78375AC71ED4734C0046F8C3 /* MyVC.m in Sources */,
+				049B5E1E1EDF07070080D552 /* MyLookingVC.m in Sources */,
 				78375AEA1ED4734C0046F8C3 /* NSData+ImageContentType.m in Sources */,
+				049B5E2A1EDF07410080D552 /* NetworkSocialVC.m in Sources */,
 				78375AE31ED4734C0046F8C3 /* TAAnimatedDotView.m in Sources */,
+				049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */,
 				78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */,
 				78375ACA1ED4734C0046F8C3 /* AFSecurityPolicy.m in Sources */,
 				78375AE91ED4734C0046F8C3 /* MKAnnotationView+WebCache.m in Sources */,
@@ -1145,23 +1754,30 @@
 				78375AE51ED4734C0046F8C3 /* TAPageControl.m in Sources */,
 				78375ADA1ED4734C0046F8C3 /* MJRefreshNormalHeader.m in Sources */,
 				78375AEF1ED4734C0046F8C3 /* SDWebImageDownloaderOperation.m in Sources */,
+				049B5E2D1EDF07510080D552 /* MyFollowVC.m in Sources */,
 				78375AE11ED4734C0046F8C3 /* UIView+MJExtension.m in Sources */,
 				78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */,
 				78375ACB1ED4734C0046F8C3 /* AFURLRequestSerialization.m in Sources */,
 				78375ADD1ED4734C0046F8C3 /* MJRefreshConst.m in Sources */,
+				049B5E271EDF07330080D552 /* DraftsVC.m in Sources */,
 				78375AEC1ED4734C0046F8C3 /* SDWebImageCompat.m in Sources */,
 				78375AC61ED4734C0046F8C3 /* MessageVC.m in Sources */,
 				78375AF31ED4734C0046F8C3 /* UIImage+GIF.m in Sources */,
 				78375AF61ED4734C0046F8C3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				78C23C471ED3450A000CD40E /* main.m in Sources */,
 				78375AF41ED4734C0046F8C3 /* UIImage+MultiFormat.m in Sources */,
+				049B5E361EDF077F0080D552 /* PersonalCertificationVC.m in Sources */,
 				78375AE81ED4734C0046F8C3 /* UIView+SDExtension.m in Sources */,
 				78375AD41ED4734C0046F8C3 /* MJRefreshAutoNormalFooter.m in Sources */,
 				78375AC81ED4734C0046F8C3 /* AFHTTPSessionManager.m in Sources */,
 				78375AF01ED4734C0046F8C3 /* SDWebImageManager.m in Sources */,
 				78375AED1ED4734C0046F8C3 /* SDWebImageDecoder.m in Sources */,
 				78375AC51ED4734C0046F8C3 /* IssueVC.m in Sources */,
+				049B5E241EDF07240080D552 /* MyExtensionVC.m in Sources */,
+				049B5E391EDF07900080D552 /* ComplaintSuggestionVC.m in Sources */,
+				049B5E3C1EDF07A20080D552 /* FeedbackVC.m in Sources */,
 				78375ACF1ED4734C0046F8C3 /* MJRefreshBackFooter.m in Sources */,
+				049B5E331EDF076D0080D552 /* InvitingFriendsVC.m in Sources */,
 				78375AD11ED4734C0046F8C3 /* MJRefreshFooter.m in Sources */,
 				78375AE01ED4734C0046F8C3 /* UIScrollView+MJRefresh.m in Sources */,
 				78375AC91ED4734C0046F8C3 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1169,8 +1785,10 @@
 				78375AF81ED4734C0046F8C3 /* UIView+WebCacheOperation.m in Sources */,
 				78375AD21ED4734C0046F8C3 /* MJRefreshHeader.m in Sources */,
 				78375AD71ED4734C0046F8C3 /* MJRefreshBackNormalFooter.m in Sources */,
+				049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */,
 				78375AD01ED4734C0046F8C3 /* MJRefreshComponent.m in Sources */,
 				78375ACC1ED4734C0046F8C3 /* AFURLResponseSerialization.m in Sources */,
+				049B5E421EDF07BD0080D552 /* CheckUpdateVC.m in Sources */,
 				78375AF11ED4734C0046F8C3 /* SDWebImagePrefetcher.m in Sources */,
 				78375AE61ED4734C0046F8C3 /* SDCollectionViewCell.m in Sources */,
 				78375ADF1ED4734C0046F8C3 /* UIScrollView+MJExtension.m in Sources */,

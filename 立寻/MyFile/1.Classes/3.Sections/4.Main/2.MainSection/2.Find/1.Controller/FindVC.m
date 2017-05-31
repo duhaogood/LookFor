@@ -12,6 +12,7 @@
 @property(nonatomic,strong)NSArray * select_1_array;//一级分类数据
 @property(nonatomic,strong)NSDictionary * select_2_dict;//二级分类数据
 @property(nonatomic,strong)UIView * select_1_view;//一级分类按钮提示view
+@property(nonatomic,strong)UIView * select_3_view;//三级分类按钮view
 @property(nonatomic,strong)UIScrollView * select_2_view;//二级分类滚动view
 @property(nonatomic,strong)UIButton * up_btn;//置顶按钮
 @property(nonatomic,strong)UIButton * newest_btn;//最新按钮
@@ -54,29 +55,34 @@
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.backgroundColor = MYCOLOR_240_240_240;
-    tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64 - 49);
     [self.view addSubview:tableView];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.automaticallyAdjustsScrollViewInsets = false;
     [self loadCellDate];
     //选择数据源view
     {
-        float height = 140;
+        float height = 100;
         UIView * view = [UIView new];
         view.backgroundColor = [UIColor whiteColor];
         view.frame = CGRectMake(0, 0, WIDTH, height);
-        tableView.tableHeaderView = view;
+        tableView.frame = CGRectMake(0, height, WIDTH, HEIGHT - 64 - 49-100);
+        [self.view addSubview:view];
         //一级分类按钮及下侧提示view
         {
             //初始化一级分类数组
             select_1_btn_array = [NSMutableArray new];
+            UILabel * label = [UILabel new];
+            label.font = [UIFont systemFontOfSize:13];
+            label.text = @"委托找人";
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            float space_btn = (WIDTH - 5 * (size.width + 10))/6.0;
             for (int i = 0; i < self.select_1_array.count; i ++) {
                 UIButton * btn = [UIButton new];
                 [btn setTitle:self.select_1_array[i] forState:UIControlStateNormal];
                 [btn addTarget:self action:@selector(select_1_callback:) forControlEvents:UIControlEventTouchUpInside];
-                btn.titleLabel.font = [UIFont systemFontOfSize:14];
+                btn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [btn setTitleColor:[MYTOOL RGBWithRed:51 green:51 blue:51 alpha:1] forState:UIControlStateNormal];
-                btn.frame = CGRectMake(10 + (10 + 60) * i, 10, 60, 30);
+                btn.frame = CGRectMake(space_btn + (space_btn + size.width+10) * i, 10, 60, 30);
                 [view addSubview:btn];
                 btn.tag = i;
                 [select_1_btn_array addObject:btn];
@@ -116,16 +122,16 @@
             for (int i = 0; i < btn_data_array.count; i ++) {
                 UIButton * btn = [UIButton new];
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:13];
                 label.text = btn_data_array[i];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 float width = size.width + 20;
                 if (width < 60) {
                     width = 60;
                 }
-                btn.frame = CGRectMake(left, 10, width, 30);
+                btn.frame = CGRectMake(left, 12.5, width, 25);
                 left += width + 20;
-                btn.titleLabel.font = [UIFont systemFontOfSize:14];
+                btn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [btn setTitle:btn_data_array[i] forState:UIControlStateNormal];
                 [btn setTitleColor:[MYTOOL RGBWithRed:102 green:102 blue:102 alpha:1] forState:UIControlStateNormal];
                 [btn setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateDisabled];
@@ -185,13 +191,21 @@
         //下分割线
         {
             UIView * space = [UIView new];
-            space.frame = CGRectMake(0, 100, WIDTH, 1);
+            space.frame = CGRectMake(0, 99, WIDTH, 1);
             space.backgroundColor = MYCOLOR_240_240_240;
             [view addSubview:space];
         }
         //三个按钮
         {
             select_3_btn_array = [NSMutableArray new];
+            //背景view
+            {
+                self.select_3_view = [UIView new];
+                self.select_3_view.frame = CGRectMake(0, 60, WIDTH, 40);
+                self.select_3_view.hidden = true;
+                self.select_3_view.backgroundColor = [UIColor whiteColor];
+                [self.view insertSubview:self.select_3_view atIndex:0];
+            }
             //置顶
             {
                 UIButton * btn = [UIButton new];
@@ -203,8 +217,8 @@
                 [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
-                btn.frame = CGRectMake(10, 110, 50, 20);
-                [view addSubview:btn];
+                btn.frame = CGRectMake(10, 10, 50, 20);
+                [self.select_3_view addSubview:btn];
                 btn.enabled = false;
                 current_3_btn = btn;
                 [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
@@ -220,8 +234,8 @@
                 [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
-                btn.frame = CGRectMake(70, 110, 50, 20);
-                [view addSubview:btn];
+                btn.frame = CGRectMake(70, 10, 50, 20);
+                [self.select_3_view addSubview:btn];
                 [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
                 [select_3_btn_array addObject:btn];
             }
@@ -235,8 +249,8 @@
                 [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
-                btn.frame = CGRectMake(130, 110, 50, 20);
-                [view addSubview:btn];
+                btn.frame = CGRectMake(130, 10, 50, 20);
+                [self.select_3_view addSubview:btn];
                 [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
                 [select_3_btn_array addObject:btn];
             }
@@ -269,10 +283,38 @@
     
     return cell;
 }
+#pragma mark - UIScrollViewDelegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (self.select_3_view.hidden) {
+        return;
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        self.select_3_view.frame = CGRectMake(0, 60, WIDTH, 40);
+        self.tableView.frame = CGRectMake(0, 100, WIDTH, HEIGHT-64-49-100);
+    } completion:^(BOOL finished) {
+        self.select_3_view.hidden = true;
+    }];
+}
 #pragma mark - 按钮事件
 //筛选事件
 -(void)selectCallback{
-    NSLog(@"别急哈");
+    if (self.select_3_view.hidden) {
+        self.select_3_view.hidden = false;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.select_3_view.frame = CGRectMake(0, 100, WIDTH, 40);
+            self.tableView.frame = CGRectMake(0, 140, WIDTH, HEIGHT-64-49-140);
+        }];
+    }else{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.select_3_view.frame = CGRectMake(0, 60, WIDTH, 40);
+            self.tableView.frame = CGRectMake(0, 100, WIDTH, HEIGHT-64-49-100);
+        } completion:^(BOOL finished) {
+            self.select_3_view.hidden = true;
+        }];
+    }
+    
+    
+    
 }
 //置顶、最新、悬赏  按钮事件
 -(void)select_3_btns_callback:(UIButton *)btn{
