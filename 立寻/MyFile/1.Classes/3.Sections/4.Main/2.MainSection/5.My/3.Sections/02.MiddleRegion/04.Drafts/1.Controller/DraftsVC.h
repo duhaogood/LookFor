@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DraftsVC : UIViewController
-
+//cell编辑回调
+-(void)cellEditCallback:(UIButton *)btn;
 @end

@@ -171,4 +171,5 @@
 
 
 -(void)showAlertWithViewController:(UIViewController *)vc andTitle:(NSString *)title andSureTile:(NSString *)sureTitle andSureBlock:(void(^)(void))sure andCacel:(void(^)(void))cancel;
+-(NSString *)getAPPVersion;
 @end

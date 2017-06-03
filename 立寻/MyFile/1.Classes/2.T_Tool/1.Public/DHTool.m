@@ -243,4 +243,8 @@ static id instance;
 -(float)getHeightWithIphone_six:(float)height{
     return height/667.0*HEIGHT;
 }
+-(NSString *)getAPPVersion{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    return [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+}
 @end

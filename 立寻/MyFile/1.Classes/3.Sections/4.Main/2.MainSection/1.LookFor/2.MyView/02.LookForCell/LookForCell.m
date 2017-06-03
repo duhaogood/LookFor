@@ -9,15 +9,18 @@
 #import "LookForCell.h"
 
 @implementation LookForCell
--(instancetype)initWithDictionary:(NSDictionary *)dictionary{
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary isFirstPage:(BOOL)firstPage{
     if (self = [super init]) {
         float height = [MYTOOL getHeightWithIphone_six:200];
         //上分割线
         {
             UIView * space = [UIView new];
-            space.frame = CGRectMake(0, 2, WIDTH, 1);
+            space.frame = CGRectMake(0, 3, WIDTH, 1);
             space.backgroundColor = MYCOLOR_240_240_240;
             [self addSubview:space];
+            if (!firstPage) {
+                space.frame = CGRectMake(0, 0, WIDTH, 3);
+            }
         }
         //头像
         {
@@ -306,9 +309,12 @@
         //下分割线
         {
             UIView * space = [UIView new];
-            space.frame = CGRectMake(0, height - 3, WIDTH, 1);
+            space.frame = CGRectMake(0, height - 4, WIDTH, 1);
             space.backgroundColor = MYCOLOR_240_240_240;
             [self addSubview:space];
+            if (!firstPage) {
+                space.frame = CGRectMake(0, height-3, WIDTH, 3);
+            }
         }
     }
     return self;

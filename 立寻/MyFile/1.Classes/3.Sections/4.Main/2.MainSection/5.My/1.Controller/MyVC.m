@@ -522,7 +522,7 @@
 //账户余额
 -(void)accountBalanceCallback{
     AccountBalanceVC * vc = [AccountBalanceVC new];
-    vc.title = @"账户余额";
+    vc.title = @"现金余额";
     [self.navigationController pushViewController:vc animated:true];
 }
 //个人编辑
@@ -554,7 +554,7 @@
 }
 //投诉建议
 -(void)complainProposeCallback{
-    ComplaintSuggestionVC * vc = [ComplaintSuggestionVC new];
+    FeedbackVC * vc = [FeedbackVC new];
     vc.title = @"投诉建议";
     [self.navigationController pushViewController:vc animated:true];
 }

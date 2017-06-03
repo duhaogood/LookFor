@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "NotificationMessageVC.h"
+#import "ClearCacheVC.h"
+#import "CheckUpdateVC.h"
+#import "AboutVC.h"
+#import "FeedbackVC.h"
 @interface SettingVC : UIViewController
 
 @end

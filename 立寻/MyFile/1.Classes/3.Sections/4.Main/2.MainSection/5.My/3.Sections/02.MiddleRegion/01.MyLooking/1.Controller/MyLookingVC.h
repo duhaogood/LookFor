@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyLookingVC : UIViewController
-
+//cell中按钮回调
+-(void)cellBtnCallback:(UIButton *)btn;
 @end

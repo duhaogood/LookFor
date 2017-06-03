@@ -278,7 +278,7 @@
     return self.cell_show_array.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    LookForCell * cell = [[LookForCell alloc] initWithDictionary:self.cell_show_array[indexPath.row]];
+    LookForCell * cell = [[LookForCell alloc] initWithDictionary:self.cell_show_array[indexPath.row] isFirstPage:false];
     
     
     return cell;

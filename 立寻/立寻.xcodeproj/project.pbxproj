@@ -27,6 +27,13 @@
 		049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E471EDF07D80080D552 /* NotificationMessageVC.m */; };
 		049B5E4B1EDF07E90080D552 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E4A1EDF07E90080D552 /* SettingVC.m */; };
 		04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */; };
+		04DE08671EE2709B003F9943 /* DraftsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08661EE2709B003F9943 /* DraftsCell.m */; };
+		04DE086A1EE29A31003F9943 /* ClueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08691EE29A31003F9943 /* ClueCell.m */; };
+		04DE086D1EE29D6D003F9943 /* FollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE086C1EE29D6D003F9943 /* FollowCell.m */; };
+		04DE08701EE29F4C003F9943 /* ExtensionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE086F1EE29F4C003F9943 /* ExtensionCell.m */; };
+		04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08721EE2C3DB003F9943 /* MyLookingForCell.m */; };
+		04DE087B1EE30890003F9943 /* FoundClaimCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08791EE30890003F9943 /* FoundClaimCell.m */; };
+		04DE087E1EE308AA003F9943 /* MyClaimCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE087D1EE308AA003F9943 /* MyClaimCell.m */; };
 		78375AC11ED4734C0046F8C3 /* DHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A0E1ED4734C0046F8C3 /* DHTool.m */; };
 		78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A211ED4734C0046F8C3 /* MainVC.m */; };
 		78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A281ED4734C0046F8C3 /* LookForVC.m */; };
@@ -175,6 +182,20 @@
 		04A990031ED84C7E00C1C6EC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		04A990051ED8617300C1C6EC /* FirstPageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageHeaderView.h; sourceTree = "<group>"; };
 		04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageHeaderView.m; sourceTree = "<group>"; };
+		04DE08651EE2709B003F9943 /* DraftsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftsCell.h; sourceTree = "<group>"; };
+		04DE08661EE2709B003F9943 /* DraftsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftsCell.m; sourceTree = "<group>"; };
+		04DE08681EE29A31003F9943 /* ClueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClueCell.h; sourceTree = "<group>"; };
+		04DE08691EE29A31003F9943 /* ClueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClueCell.m; sourceTree = "<group>"; };
+		04DE086B1EE29D6D003F9943 /* FollowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowCell.h; sourceTree = "<group>"; };
+		04DE086C1EE29D6D003F9943 /* FollowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowCell.m; sourceTree = "<group>"; };
+		04DE086E1EE29F4C003F9943 /* ExtensionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensionCell.h; sourceTree = "<group>"; };
+		04DE086F1EE29F4C003F9943 /* ExtensionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtensionCell.m; sourceTree = "<group>"; };
+		04DE08711EE2C3DB003F9943 /* MyLookingForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLookingForCell.h; sourceTree = "<group>"; };
+		04DE08721EE2C3DB003F9943 /* MyLookingForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLookingForCell.m; sourceTree = "<group>"; };
+		04DE08781EE30890003F9943 /* FoundClaimCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundClaimCell.h; sourceTree = "<group>"; };
+		04DE08791EE30890003F9943 /* FoundClaimCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundClaimCell.m; sourceTree = "<group>"; };
+		04DE087C1EE308AA003F9943 /* MyClaimCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClaimCell.h; sourceTree = "<group>"; };
+		04DE087D1EE308AA003F9943 /* MyClaimCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClaimCell.m; sourceTree = "<group>"; };
 		783759FD1ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		783759FF1ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		78375A011ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
@@ -459,6 +480,8 @@
 		049B5DD51EDF055C0080D552 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04DE08711EE2C3DB003F9943 /* MyLookingForCell.h */,
+				04DE08721EE2C3DB003F9943 /* MyLookingForCell.m */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -485,6 +508,8 @@
 		049B5DD91EDF055C0080D552 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04DE08771EE30890003F9943 /* 1.MyFoundCell */,
+				04DE087A1EE30890003F9943 /* 2.MyClaimCell */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -511,6 +536,8 @@
 		049B5DDD1EDF055C0080D552 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04DE086E1EE29F4C003F9943 /* ExtensionCell.h */,
+				04DE086F1EE29F4C003F9943 /* ExtensionCell.m */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -537,6 +564,8 @@
 		049B5DE11EDF055C0080D552 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04DE08651EE2709B003F9943 /* DraftsCell.h */,
+				04DE08661EE2709B003F9943 /* DraftsCell.m */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -589,6 +618,8 @@
 		049B5DE91EDF055C0080D552 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04DE086B1EE29D6D003F9943 /* FollowCell.h */,
+				04DE086C1EE29D6D003F9943 /* FollowCell.m */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -615,6 +646,8 @@
 		049B5DED1EDF055C0080D552 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				04DE08681EE29A31003F9943 /* ClueCell.h */,
+				04DE08691EE29A31003F9943 /* ClueCell.m */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -885,6 +918,24 @@
 				04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */,
 			);
 			path = 01.FirstPageHeaderView;
+			sourceTree = "<group>";
+		};
+		04DE08771EE30890003F9943 /* 1.MyFoundCell */ = {
+			isa = PBXGroup;
+			children = (
+				04DE08781EE30890003F9943 /* FoundClaimCell.h */,
+				04DE08791EE30890003F9943 /* FoundClaimCell.m */,
+			);
+			path = 1.MyFoundCell;
+			sourceTree = "<group>";
+		};
+		04DE087A1EE30890003F9943 /* 2.MyClaimCell */ = {
+			isa = PBXGroup;
+			children = (
+				04DE087C1EE308AA003F9943 /* MyClaimCell.h */,
+				04DE087D1EE308AA003F9943 /* MyClaimCell.m */,
+			);
+			path = 2.MyClaimCell;
 			sourceTree = "<group>";
 		};
 		783759FC1ED4734C0046F8C3 /* MyFile */ = {
@@ -1745,6 +1796,8 @@
 				049B5E2A1EDF07410080D552 /* NetworkSocialVC.m in Sources */,
 				78375AE31ED4734C0046F8C3 /* TAAnimatedDotView.m in Sources */,
 				049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */,
+				04DE086D1EE29D6D003F9943 /* FollowCell.m in Sources */,
+				04DE087E1EE308AA003F9943 /* MyClaimCell.m in Sources */,
 				78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */,
 				78375ACA1ED4734C0046F8C3 /* AFSecurityPolicy.m in Sources */,
 				78375AE91ED4734C0046F8C3 /* MKAnnotationView+WebCache.m in Sources */,
@@ -1758,6 +1811,7 @@
 				78375AE11ED4734C0046F8C3 /* UIView+MJExtension.m in Sources */,
 				78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */,
 				78375ACB1ED4734C0046F8C3 /* AFURLRequestSerialization.m in Sources */,
+				04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */,
 				78375ADD1ED4734C0046F8C3 /* MJRefreshConst.m in Sources */,
 				049B5E271EDF07330080D552 /* DraftsVC.m in Sources */,
 				78375AEC1ED4734C0046F8C3 /* SDWebImageCompat.m in Sources */,
@@ -1765,6 +1819,8 @@
 				78375AF31ED4734C0046F8C3 /* UIImage+GIF.m in Sources */,
 				78375AF61ED4734C0046F8C3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				78C23C471ED3450A000CD40E /* main.m in Sources */,
+				04DE08701EE29F4C003F9943 /* ExtensionCell.m in Sources */,
+				04DE08671EE2709B003F9943 /* DraftsCell.m in Sources */,
 				78375AF41ED4734C0046F8C3 /* UIImage+MultiFormat.m in Sources */,
 				049B5E361EDF077F0080D552 /* PersonalCertificationVC.m in Sources */,
 				78375AE81ED4734C0046F8C3 /* UIView+SDExtension.m in Sources */,
@@ -1782,6 +1838,7 @@
 				78375AE01ED4734C0046F8C3 /* UIScrollView+MJRefresh.m in Sources */,
 				78375AC91ED4734C0046F8C3 /* AFNetworkReachabilityManager.m in Sources */,
 				78375AEE1ED4734C0046F8C3 /* SDWebImageDownloader.m in Sources */,
+				04DE086A1EE29A31003F9943 /* ClueCell.m in Sources */,
 				78375AF81ED4734C0046F8C3 /* UIView+WebCacheOperation.m in Sources */,
 				78375AD21ED4734C0046F8C3 /* MJRefreshHeader.m in Sources */,
 				78375AD71ED4734C0046F8C3 /* MJRefreshBackNormalFooter.m in Sources */,
@@ -1794,6 +1851,7 @@
 				78375ADF1ED4734C0046F8C3 /* UIScrollView+MJExtension.m in Sources */,
 				78375AE41ED4734C0046F8C3 /* TADotView.m in Sources */,
 				78375AE21ED4734C0046F8C3 /* TAAbstractDotView.m in Sources */,
+				04DE087B1EE30890003F9943 /* FoundClaimCell.m in Sources */,
 				78375AD91ED4734C0046F8C3 /* MJRefreshGifHeader.m in Sources */,
 				78375ACE1ED4734C0046F8C3 /* MJRefreshAutoFooter.m in Sources */,
 				78375AC11ED4734C0046F8C3 /* DHTool.m in Sources */,

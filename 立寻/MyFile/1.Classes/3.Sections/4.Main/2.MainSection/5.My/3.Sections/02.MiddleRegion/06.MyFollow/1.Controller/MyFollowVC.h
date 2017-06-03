@@ -10,4 +10,8 @@
 
 @interface MyFollowVC : UIViewController
 
+
+//取消关注回调
+-(void)cancelFollowCallback:(UIButton *)btn;
+
 @end

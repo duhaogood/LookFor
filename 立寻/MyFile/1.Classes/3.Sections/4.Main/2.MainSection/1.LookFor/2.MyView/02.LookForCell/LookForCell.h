@@ -11,6 +11,6 @@
 @interface LookForCell : UITableViewCell
 
 
--(instancetype)initWithDictionary:(NSDictionary *)dictionary;
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary isFirstPage:(BOOL)firstPage;
 
 @end
