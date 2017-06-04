@@ -7,7 +7,7 @@
 //
 
 #import "MainVC.h"
-
+#import "IssueFirstPageVC.h"
 @interface MainVC ()<UITabBarControllerDelegate>
 
 @end
@@ -82,6 +82,9 @@
         //修改title字体颜色及大小
         nc.navigationBar.titleTextAttributes = dictColor;
         [self addChildViewController:nc];
+        //设置消息数量
+        message.navigationController.tabBarItem.badgeValue = @"2";
+        
         nc.tabBarItem.image = [UIImage imageNamed:@"notice"];
         nc.tabBarItem.selectedImage = [UIImage imageNamed:@"notice_active"];
     }
@@ -113,7 +116,8 @@
 }
 //发布按钮
 -(void)issueBtnCallback{
-    [SVProgressHUD showSuccessWithStatus:@"不要着急，亲" duration:1];
+    IssueFirstPageVC * first = [IssueFirstPageVC new];
+    [first show];
 }
 
 //发布不让选择

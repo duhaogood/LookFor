@@ -630,17 +630,17 @@
     if (count <= 10) {
         self.contentCountLabel.text = @"10/100";
     }else{
-        self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/100",count];
+        self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/100",(long)count];
     }
 }
 #pragma mark - 提交事件
 //提交投诉举报
 -(void)submitSelectTypeLeftBtn{
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"提交投诉图片\n数量:%ld",[self getCountOfImgV_arr]] duration:1];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"提交投诉图片\n数量:%ld",(long)[self getCountOfImgV_arr]] duration:1];
 }
 //提交APP吐槽
 -(void)submitSelectTypeRightBtn{
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"APP吐槽图片\n数量:%ld",[self getCountOfImgV_arr]] duration:1];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"APP吐槽图片\n数量:%ld",(long)[self getCountOfImgV_arr]] duration:1];
 }
 
 
