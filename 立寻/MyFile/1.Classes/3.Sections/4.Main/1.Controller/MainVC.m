@@ -117,6 +117,8 @@
 //发布按钮
 -(void)issueBtnCallback{
     IssueFirstPageVC * first = [IssueFirstPageVC new];
+    UINavigationController * nc = self.selectedViewController;
+    first.delegate = nc.topViewController;
     [first show];
 }
 

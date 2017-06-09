@@ -22,7 +22,7 @@
 //字体名字
 #define FONT_NAME @"PingFang SC Regular"
 
-
+#define APPID_MINE @"99999999"
 
 //颜色
 #define MYCOLOR_48_48_48 [MYTOOL RGBWithRed:48 green:48 blue:48 alpha:1]

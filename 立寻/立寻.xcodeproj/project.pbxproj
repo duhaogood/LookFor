@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0410B0501EE3DDA200E8CBA1 /* IssueFirstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */; };
+		0446698A1EEA45A30082D8BC /* IssueInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669891EEA45A30082D8BC /* IssueInfoVC.m */; };
+		044669921EEA47BB0082D8BC /* DHNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669901EEA47BB0082D8BC /* DHNetWorking.m */; };
+		044669961EEA72160082D8BC /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669951EEA72160082D8BC /* MyTextView.m */; };
+		0446699D1EEA755B0082D8BC /* IssueInfoUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446699C1EEA755B0082D8BC /* IssueInfoUpView.m */; };
+		044669A01EEA75680082D8BC /* IssueInfoMiddleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446699F1EEA75680082D8BC /* IssueInfoMiddleView.m */; };
+		044669A31EEA75780082D8BC /* IssueInfoLowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669A21EEA75780082D8BC /* IssueInfoLowerView.m */; };
 		04874F141ED913CE00049758 /* LookForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04874F131ED913CE00049758 /* LookForCell.m */; };
 		049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */; };
 		049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */; };
@@ -122,6 +128,20 @@
 		0410B04D1EE3DD6800E8CBA1 /* 0.Comments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		0410B04E1EE3DDA200E8CBA1 /* IssueFirstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueFirstPageVC.h; sourceTree = "<group>"; };
 		0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueFirstPageVC.m; sourceTree = "<group>"; };
+		044669851EEA455F0082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669881EEA45A30082D8BC /* IssueInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoVC.h; sourceTree = "<group>"; };
+		044669891EEA45A30082D8BC /* IssueInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoVC.m; sourceTree = "<group>"; };
+		0446698F1EEA47BB0082D8BC /* DHNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHNetWorking.h; sourceTree = "<group>"; };
+		044669901EEA47BB0082D8BC /* DHNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHNetWorking.m; sourceTree = "<group>"; };
+		044669941EEA72160082D8BC /* MyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
+		044669951EEA72160082D8BC /* MyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
+		044669971EEA75280082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		0446699B1EEA755B0082D8BC /* IssueInfoUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoUpView.h; sourceTree = "<group>"; };
+		0446699C1EEA755B0082D8BC /* IssueInfoUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoUpView.m; sourceTree = "<group>"; };
+		0446699E1EEA75680082D8BC /* IssueInfoMiddleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoMiddleView.h; sourceTree = "<group>"; };
+		0446699F1EEA75680082D8BC /* IssueInfoMiddleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoMiddleView.m; sourceTree = "<group>"; };
+		044669A11EEA75780082D8BC /* IssueInfoLowerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoLowerView.h; sourceTree = "<group>"; };
+		044669A21EEA75780082D8BC /* IssueInfoLowerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoLowerView.m; sourceTree = "<group>"; };
 		04874F121ED913CE00049758 /* LookForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCell.h; sourceTree = "<group>"; };
 		04874F131ED913CE00049758 /* LookForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCell.m; sourceTree = "<group>"; };
 		049B5DC51EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
@@ -382,6 +402,88 @@
 				0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */,
 			);
 			path = 1.IssueFirstPage;
+			sourceTree = "<group>";
+		};
+		044669841EEA455F0082D8BC /* 2.IssueInfo */ = {
+			isa = PBXGroup;
+			children = (
+				044669851EEA455F0082D8BC /* 0.Comments.h */,
+				044669861EEA455F0082D8BC /* 1.Controller */,
+				044669871EEA455F0082D8BC /* 2.MyView */,
+			);
+			path = 2.IssueInfo;
+			sourceTree = "<group>";
+		};
+		044669861EEA455F0082D8BC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				044669881EEA45A30082D8BC /* IssueInfoVC.h */,
+				044669891EEA45A30082D8BC /* IssueInfoVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		044669871EEA455F0082D8BC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				044669971EEA75280082D8BC /* 0.Comments.h */,
+				044669981EEA75280082D8BC /* 1.IssueInfoUpView */,
+				044669991EEA75280082D8BC /* 2.IssueInfoMiddleView */,
+				0446699A1EEA75280082D8BC /* 3.IssueInfolowerView */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		0446698B1EEA47BB0082D8BC /* 1.SharedVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 1.SharedVC;
+			sourceTree = "<group>";
+		};
+		0446698E1EEA47BB0082D8BC /* 2.netWorking */ = {
+			isa = PBXGroup;
+			children = (
+				0446698F1EEA47BB0082D8BC /* DHNetWorking.h */,
+				044669901EEA47BB0082D8BC /* DHNetWorking.m */,
+			);
+			path = 2.netWorking;
+			sourceTree = "<group>";
+		};
+		044669931EEA71EC0082D8BC /* 1.MyTextTV */ = {
+			isa = PBXGroup;
+			children = (
+				044669941EEA72160082D8BC /* MyTextView.h */,
+				044669951EEA72160082D8BC /* MyTextView.m */,
+			);
+			path = 1.MyTextTV;
+			sourceTree = "<group>";
+		};
+		044669981EEA75280082D8BC /* 1.IssueInfoUpView */ = {
+			isa = PBXGroup;
+			children = (
+				0446699B1EEA755B0082D8BC /* IssueInfoUpView.h */,
+				0446699C1EEA755B0082D8BC /* IssueInfoUpView.m */,
+			);
+			path = 1.IssueInfoUpView;
+			sourceTree = "<group>";
+		};
+		044669991EEA75280082D8BC /* 2.IssueInfoMiddleView */ = {
+			isa = PBXGroup;
+			children = (
+				0446699E1EEA75680082D8BC /* IssueInfoMiddleView.h */,
+				0446699F1EEA75680082D8BC /* IssueInfoMiddleView.m */,
+			);
+			path = 2.IssueInfoMiddleView;
+			sourceTree = "<group>";
+		};
+		0446699A1EEA75280082D8BC /* 3.IssueInfolowerView */ = {
+			isa = PBXGroup;
+			children = (
+				044669A11EEA75780082D8BC /* IssueInfoLowerView.h */,
+				044669A21EEA75780082D8BC /* IssueInfoLowerView.m */,
+			);
+			path = 3.IssueInfolowerView;
 			sourceTree = "<group>";
 		};
 		04874F111ED913AA00049758 /* 02.LookForCell */ = {
@@ -1041,24 +1143,10 @@
 			isa = PBXGroup;
 			children = (
 				78375A101ED4734C0046F8C3 /* 0.Comments.h */,
-				78375A111ED4734C0046F8C3 /* 1.NetWorking */,
-				78375A121ED4734C0046F8C3 /* 2.Shared */,
+				0446698B1EEA47BB0082D8BC /* 1.SharedVC */,
+				0446698E1EEA47BB0082D8BC /* 2.netWorking */,
 			);
 			path = 2.Private;
-			sourceTree = "<group>";
-		};
-		78375A111ED4734C0046F8C3 /* 1.NetWorking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 1.NetWorking;
-			sourceTree = "<group>";
-		};
-		78375A121ED4734C0046F8C3 /* 2.Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.Shared;
 			sourceTree = "<group>";
 		};
 		78375A131ED4734C0046F8C3 /* 3.Pay */ = {
@@ -1251,16 +1339,9 @@
 		78375A371ED4734C0046F8C3 /* 2.MyView */ = {
 			isa = PBXGroup;
 			children = (
-				78375A381ED4734C0046F8C3 /* 1.IssueTabBar */,
+				044669931EEA71EC0082D8BC /* 1.MyTextTV */,
 			);
 			path = 2.MyView;
-			sourceTree = "<group>";
-		};
-		78375A381ED4734C0046F8C3 /* 1.IssueTabBar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 1.IssueTabBar;
 			sourceTree = "<group>";
 		};
 		78375A391ED4734C0046F8C3 /* 3.Sections */ = {
@@ -1268,6 +1349,7 @@
 			children = (
 				0410B04D1EE3DD6800E8CBA1 /* 0.Comments.h */,
 				0410B04C1EE3DD6200E8CBA1 /* 1.IssueFirstPage */,
+				044669841EEA455F0082D8BC /* 2.IssueInfo */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -1797,10 +1879,12 @@
 				049B5E211EDF07150080D552 /* Found_ClaimVC.m in Sources */,
 				78375AD31ED4734C0046F8C3 /* MJRefreshAutoGifFooter.m in Sources */,
 				78375ADB1ED4734C0046F8C3 /* MJRefreshStateHeader.m in Sources */,
+				044669961EEA72160082D8BC /* MyTextView.m in Sources */,
 				78375AD81ED4734C0046F8C3 /* MJRefreshBackStateFooter.m in Sources */,
 				78C23C4A1ED3450A000CD40E /* AppDelegate.m in Sources */,
 				78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */,
 				04874F141ED913CE00049758 /* LookForCell.m in Sources */,
+				0446698A1EEA45A30082D8BC /* IssueInfoVC.m in Sources */,
 				78375ADE1ED4734C0046F8C3 /* NSBundle+MJRefresh.m in Sources */,
 				78375AFA1ED4734C0046F8C3 /* SVProgressHUD.m in Sources */,
 				049B5E3F1EDF07B00080D552 /* AboutVC.m in Sources */,
@@ -1825,6 +1909,7 @@
 				78375AEF1ED4734C0046F8C3 /* SDWebImageDownloaderOperation.m in Sources */,
 				049B5E2D1EDF07510080D552 /* MyFollowVC.m in Sources */,
 				78375AE11ED4734C0046F8C3 /* UIView+MJExtension.m in Sources */,
+				044669A01EEA75680082D8BC /* IssueInfoMiddleView.m in Sources */,
 				78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */,
 				78375ACB1ED4734C0046F8C3 /* AFURLRequestSerialization.m in Sources */,
 				04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */,
@@ -1832,6 +1917,7 @@
 				049B5E271EDF07330080D552 /* DraftsVC.m in Sources */,
 				78375AEC1ED4734C0046F8C3 /* SDWebImageCompat.m in Sources */,
 				78375AC61ED4734C0046F8C3 /* MessageVC.m in Sources */,
+				044669A31EEA75780082D8BC /* IssueInfoLowerView.m in Sources */,
 				78375AF31ED4734C0046F8C3 /* UIImage+GIF.m in Sources */,
 				78375AF61ED4734C0046F8C3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				78C23C471ED3450A000CD40E /* main.m in Sources */,
@@ -1846,6 +1932,7 @@
 				78375AED1ED4734C0046F8C3 /* SDWebImageDecoder.m in Sources */,
 				78375AC51ED4734C0046F8C3 /* IssueVC.m in Sources */,
 				049B5E241EDF07240080D552 /* MyExtensionVC.m in Sources */,
+				0446699D1EEA755B0082D8BC /* IssueInfoUpView.m in Sources */,
 				049B5E391EDF07900080D552 /* ComplaintSuggestionVC.m in Sources */,
 				049B5E3C1EDF07A20080D552 /* FeedbackVC.m in Sources */,
 				78375ACF1ED4734C0046F8C3 /* MJRefreshBackFooter.m in Sources */,
@@ -1859,6 +1946,7 @@
 				78375AD21ED4734C0046F8C3 /* MJRefreshHeader.m in Sources */,
 				78375AD71ED4734C0046F8C3 /* MJRefreshBackNormalFooter.m in Sources */,
 				049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */,
+				044669921EEA47BB0082D8BC /* DHNetWorking.m in Sources */,
 				78375AD01ED4734C0046F8C3 /* MJRefreshComponent.m in Sources */,
 				78375ACC1ED4734C0046F8C3 /* AFURLResponseSerialization.m in Sources */,
 				049B5E421EDF07BD0080D552 /* CheckUpdateVC.m in Sources */,

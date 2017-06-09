@@ -7,7 +7,7 @@
 //
 
 #import "IssueFirstPageVC.h"
-
+#import "IssueInfoVC.h"
 @interface IssueFirstPageVC ()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *backgroundTapView;
@@ -40,22 +40,17 @@
 //加载主界面
 -(void)loadMainView{
     self.view.backgroundColor = [MYTOOL RGBWithRed:0 green:0 blue:0 alpha:0.7];
-//    UIView * view = [UIView new];
-//    float height = HEIGHT/2.0;
-//    view.frame = CGRectMake(0, HEIGHT-height, WIDTH, height);
-//    view.backgroundColor = [UIColor greenColor];
-//    [self.view addSubview:view];
     //图片按钮数组
     img_name_array = @[
                        @[
-                           @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109"],
-                           @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96"],
-                           @[@"fbbtn_quanzi",@"立寻圈子",@"96",@"109"]
+                           @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109",@"80"],
+                           @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96",@"81"],
+                           @[@"fbbtn_quanzi",@"立寻圈子",@"96",@"109",@"549"]
                            ],//第一行
                        @[
-                           @[@"fbbtn_xunren",@"委托寻人",@"96",@"109"],
-                           @[@"fbbtn_xw",@"委托寻物",@"88",@"96"],
-                           @[@"fbbtn_zlrl",@"招领认领",@"96",@"109"]
+                           @[@"fbbtn_xunren",@"委托寻人",@"96",@"109",@"83"],
+                           @[@"fbbtn_xw",@"委托寻物",@"88",@"96",@"82"],
+                           @[@"fbbtn_zlrl",@"招领认领",@"96",@"109",@"394"]
                            ]//第二行
                       ];
     //加载按钮
@@ -104,8 +99,29 @@
 #pragma mark - 按钮事件
 //图片按钮事件
 -(void)submitImgBtn:(UIButton *)btn{
-    NSString * title = img_name_array[btn.tag/10][btn.tag%10][1];
-    [SVProgressHUD showSuccessWithStatus:title duration:1];
+    [MYTOOL netWorkingWithTitle:@"获取分类列表……"];
+    
+    //一级分类的CategoryID------获取二级分类的依据
+    NSString * parentid = img_name_array[btn.tag/10][btn.tag%10][4];
+    NSString * interface = @"publish/publish/getcategorytwolist.html";
+    NSDictionary * send = @{
+                            @"appid":APPID_MINE,
+                            @"parentid":parentid
+                            };
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        //跳转
+        IssueInfoVC * issue = [IssueInfoVC new];
+        issue.typeTitle = img_name_array[btn.tag/10][btn.tag%10][1];
+        issue.title = @"发布信息";
+        issue.secondTypeList = back_dic[@"Data"];
+        [[self.delegate navigationController] pushViewController:issue animated:true];
+        [self submitCloseBtn];
+    }];
+    
+    
+    
+    
+    
 }
 //关闭按钮事件
 -(void)submitCloseBtn{
