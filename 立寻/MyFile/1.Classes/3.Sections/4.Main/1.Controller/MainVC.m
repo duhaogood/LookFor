@@ -8,6 +8,7 @@
 
 #import "MainVC.h"
 #import "IssueFirstPageVC.h"
+#import "LoginVC.h"
 @interface MainVC ()<UITabBarControllerDelegate>
 
 @end
@@ -112,7 +113,7 @@
     [self.tabBar addSubview:btn];
     [btn addTarget:self action:@selector(issueBtnCallback) forControlEvents:UIControlEventTouchUpInside];
     
-    self.selectedIndex = 4;//以后删除
+//    self.selectedIndex = 4;//以后删除
 }
 //发布按钮
 -(void)issueBtnCallback{
@@ -125,6 +126,15 @@
 //发布不让选择
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     NSString * title = viewController.title;
+    if ([title isEqualToString:@"发布"] || [title isEqualToString:@"我的"] || [title isEqualToString:@"消息"]) {
+        if (![MYTOOL isLogin]) {
+            UINavigationController * nc = self.selectedViewController;
+            LoginVC * login = [LoginVC new];
+            login.title = @"登录";
+            [nc pushViewController:login animated:true];
+        }
+        return false;
+    }
     if ([title isEqualToString:@"发布"]) {
         [self issueBtnCallback];
         return false;

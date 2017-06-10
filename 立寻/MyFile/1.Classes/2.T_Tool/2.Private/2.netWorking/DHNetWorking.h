@@ -20,13 +20,5 @@
 
 -(void)getWithInterfaceName:(NSString *)interfaceName andDictionary:(NSDictionary *)send_dic andSuccess:(void(^)(NSDictionary * back_dic)) back_block;
 
--(void)getWithInterfaceName:(NSString *)interfaceName andDictionary:(NSDictionary *)send_dic andSuccess:(void (^)(NSDictionary * back_dic))back_block andFailure:(void(^)(NSError * error_failure)) failure;
-
-/**
- 获取用户购物车商品数量
-
- @param back_block @{@"count":@"0"}
- */
--(void)getNumberOfShoppingCartCallback:(void (^)(NSDictionary * backDict))back_block;
 
 @end

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0410B0501EE3DDA200E8CBA1 /* IssueFirstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */; };
+		0436B5A31EEB0EA50003D4AB /* city_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0436B5A21EEB0EA50003D4AB /* city_code.plist */; };
+		043EF4A71EEC0E65007AABCD /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4A61EEC0E65007AABCD /* LoginVC.m */; };
+		043EF4AA1EEC0E7C007AABCD /* FindPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */; };
+		043EF4AD1EEC0E8F007AABCD /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4AC1EEC0E8F007AABCD /* RegisterVC.m */; };
 		0446698A1EEA45A30082D8BC /* IssueInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669891EEA45A30082D8BC /* IssueInfoVC.m */; };
 		044669921EEA47BB0082D8BC /* DHNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669901EEA47BB0082D8BC /* DHNetWorking.m */; };
 		044669961EEA72160082D8BC /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669951EEA72160082D8BC /* MyTextView.m */; };
@@ -128,6 +132,13 @@
 		0410B04D1EE3DD6800E8CBA1 /* 0.Comments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		0410B04E1EE3DDA200E8CBA1 /* IssueFirstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueFirstPageVC.h; sourceTree = "<group>"; };
 		0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueFirstPageVC.m; sourceTree = "<group>"; };
+		0436B5A21EEB0EA50003D4AB /* city_code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city_code.plist; sourceTree = "<group>"; };
+		043EF4A51EEC0E65007AABCD /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		043EF4A61EEC0E65007AABCD /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		043EF4A81EEC0E7C007AABCD /* FindPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordVC.h; sourceTree = "<group>"; };
+		043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordVC.m; sourceTree = "<group>"; };
+		043EF4AB1EEC0E8F007AABCD /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		043EF4AC1EEC0E8F007AABCD /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		044669851EEA455F0082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		044669881EEA45A30082D8BC /* IssueInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoVC.h; sourceTree = "<group>"; };
 		044669891EEA45A30082D8BC /* IssueInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoVC.m; sourceTree = "<group>"; };
@@ -402,6 +413,15 @@
 				0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */,
 			);
 			path = 1.IssueFirstPage;
+			sourceTree = "<group>";
+		};
+		043EF4A41EEC0E4C007AABCD /* 3.FindPassword */ = {
+			isa = PBXGroup;
+			children = (
+				043EF4A81EEC0E7C007AABCD /* FindPasswordVC.h */,
+				043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */,
+			);
+			path = 3.FindPassword;
 			sourceTree = "<group>";
 		};
 		044669841EEA455F0082D8BC /* 2.IssueInfo */ = {
@@ -1186,6 +1206,7 @@
 				78375A191ED4734C0046F8C3 /* 0.Comments.h */,
 				78375A1A1ED4734C0046F8C3 /* 1.Start */,
 				78375A1B1ED4734C0046F8C3 /* 2.Login */,
+				043EF4A41EEC0E4C007AABCD /* 3.FindPassword */,
 				78375A1C1ED4734C0046F8C3 /* 3.Register */,
 				78375A1D1ED4734C0046F8C3 /* 4.Main */,
 			);
@@ -1202,6 +1223,8 @@
 		78375A1B1ED4734C0046F8C3 /* 2.Login */ = {
 			isa = PBXGroup;
 			children = (
+				043EF4A51EEC0E65007AABCD /* LoginVC.h */,
+				043EF4A61EEC0E65007AABCD /* LoginVC.m */,
 			);
 			path = 2.Login;
 			sourceTree = "<group>";
@@ -1209,6 +1232,8 @@
 		78375A1C1ED4734C0046F8C3 /* 3.Register */ = {
 			isa = PBXGroup;
 			children = (
+				043EF4AB1EEC0E8F007AABCD /* RegisterVC.h */,
+				043EF4AC1EEC0E8F007AABCD /* RegisterVC.m */,
 			);
 			path = 3.Register;
 			sourceTree = "<group>";
@@ -1668,6 +1693,7 @@
 		78375AC01ED4734C0046F8C3 /* 3.P_Plist */ = {
 			isa = PBXGroup;
 			children = (
+				0436B5A21EEB0EA50003D4AB /* city_code.plist */,
 			);
 			path = 3.P_Plist;
 			sourceTree = "<group>";
@@ -1841,6 +1867,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0436B5A31EEB0EA50003D4AB /* city_code.plist in Resources */,
 				78C23C551ED3450A000CD40E /* LaunchScreen.storyboard in Resources */,
 				78C23C521ED3450A000CD40E /* Assets.xcassets in Resources */,
 				78375ADC1ED4734C0046F8C3 /* MJRefresh.bundle in Resources */,
@@ -1913,7 +1940,9 @@
 				78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */,
 				78375ACB1ED4734C0046F8C3 /* AFURLRequestSerialization.m in Sources */,
 				04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */,
+				043EF4A71EEC0E65007AABCD /* LoginVC.m in Sources */,
 				78375ADD1ED4734C0046F8C3 /* MJRefreshConst.m in Sources */,
+				043EF4AA1EEC0E7C007AABCD /* FindPasswordVC.m in Sources */,
 				049B5E271EDF07330080D552 /* DraftsVC.m in Sources */,
 				78375AEC1ED4734C0046F8C3 /* SDWebImageCompat.m in Sources */,
 				78375AC61ED4734C0046F8C3 /* MessageVC.m in Sources */,
@@ -1949,6 +1978,7 @@
 				044669921EEA47BB0082D8BC /* DHNetWorking.m in Sources */,
 				78375AD01ED4734C0046F8C3 /* MJRefreshComponent.m in Sources */,
 				78375ACC1ED4734C0046F8C3 /* AFURLResponseSerialization.m in Sources */,
+				043EF4AD1EEC0E8F007AABCD /* RegisterVC.m in Sources */,
 				049B5E421EDF07BD0080D552 /* CheckUpdateVC.m in Sources */,
 				78375AF11ED4734C0046F8C3 /* SDWebImagePrefetcher.m in Sources */,
 				78375AE61ED4734C0046F8C3 /* SDCollectionViewCell.m in Sources */,

@@ -10,4 +10,8 @@
 
 @interface IssueInfoLowerView : UIView
 
+
+-(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate;
+
+
 @end

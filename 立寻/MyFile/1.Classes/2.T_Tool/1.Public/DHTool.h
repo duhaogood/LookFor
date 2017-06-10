@@ -172,4 +172,11 @@
 
 -(void)showAlertWithViewController:(UIViewController *)vc andTitle:(NSString *)title andSureTile:(NSString *)sureTitle andSureBlock:(void(^)(void))sure andCacel:(void(^)(void))cancel;
 -(NSString *)getAPPVersion;
+/**
+ 处理拍照上传图片旋转问题
+ 
+ @param aImage 拍摄后的照片
+ @return 处理好之后的图片
+ */
+- (UIImage *)fixOrientationOfImage:(UIImage *)aImage;
 @end

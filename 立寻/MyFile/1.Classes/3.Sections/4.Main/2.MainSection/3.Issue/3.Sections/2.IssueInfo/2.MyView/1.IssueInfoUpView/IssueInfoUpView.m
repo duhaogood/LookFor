@@ -36,7 +36,7 @@
             //右侧数字提示
             {
                 UILabel * label = [UILabel new];
-                label.text = @" 0/20";
+                label.text = @"   0/20";
                 label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
                 [delegate setTitleNumberLabel:label];
                 label.font = [UIFont systemFontOfSize:10];
@@ -134,9 +134,9 @@
             //右侧
             {
                 UITextField * typeTF = [UITextField new];
-                typeTF.text = @"0";
+                typeTF.text = typeArray[0][@"CategoryTitle"];
                 typeTF.textAlignment = NSTextAlignmentCenter;
-                typeTF.frame = CGRectMake(left, top -5, 70, label_height + 10);
+                typeTF.frame = CGRectMake(left, top -5, 100, label_height + 10);
                 typeTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
                 typeTF.tag = 100;
                 typeTF.delegate = delegate;
@@ -145,6 +145,44 @@
                 typeTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
                 [delegate setTypeTF:typeTF];
                 [self addSubview:typeTF];
+                //输入
+                {
+                    UIPickerView * pick = [UIPickerView new];
+                    [delegate setTypePicker:pick];
+                    pick.tag = 200;
+                    UIView * v = [UIView new];
+                    typeTF.inputView = v;
+                    v.frame = CGRectMake(0, 500, WIDTH, 271);
+                    pick.frame = CGRectMake(0, 44, WIDTH, 271-44);
+                    pick.dataSource = delegate;
+                    pick.delegate = delegate;
+                    [v addSubview:pick];
+                    [delegate setPicker:pick];
+                    //toolbar
+                    UIToolbar * bar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+                    [v addSubview:bar];
+                    [bar setBarStyle:UIBarStyleDefault];
+                    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+                    
+                    UIBarButtonItem *myDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                                   target: delegate action: @selector(clickOkOfPickerView:)];
+                    myDoneButton.tag = 200;
+                    myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:delegate action:@selector(clickOkOfPickerView:)];
+                    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    
+                    [buttons addObject:flexibleSpace];
+                    [buttons addObject: myDoneButton];
+                    
+                    
+                    [bar setItems:buttons animated:TRUE];
+                    
+                    //toolbar加个label
+                    UILabel * label = [UILabel new];
+                    label.text = [NSString stringWithFormat:@"请选择相应的类型"];
+                    label.frame = CGRectMake(WIDTH/2-70, 12, 140, 20);
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [v addSubview:label];
+                }
             }
             top += label_height;
         }
@@ -171,6 +209,7 @@
                 moneyTF.frame = CGRectMake(left, top -5, 70, label_height + 10);
                 moneyTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
                 moneyTF.tag = 200;
+                moneyTF.keyboardType = UIKeyboardTypeNumberPad;
                 moneyTF.delegate = delegate;
                 moneyTF.layer.masksToBounds = true;
                 moneyTF.layer.borderWidth = 1;
@@ -227,6 +266,43 @@
                 cityTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
                 [delegate setCityTF:cityTF];
                 [self addSubview:cityTF];
+                //输入
+                {
+                    UIPickerView * pick = [UIPickerView new];
+                    pick.tag = 100;
+                    UIView * v = [UIView new];
+                    cityTF.inputView = v;
+                    v.frame = CGRectMake(0, 500, WIDTH, 271);
+                    pick.frame = CGRectMake(0, 44, WIDTH, 271-44);
+                    pick.dataSource = delegate;
+                    pick.delegate = delegate;
+                    [v addSubview:pick];
+                    [delegate setPicker:pick];
+                    //toolbar
+                    UIToolbar * bar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+                    [v addSubview:bar];
+                    [bar setBarStyle:UIBarStyleDefault];
+                    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+                    
+                    UIBarButtonItem *myDoneButton = [[ UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                                   target: delegate action: @selector(clickOkOfPickerView:)];
+                    myDoneButton.tag = 100;
+                    myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:delegate action:@selector(clickOkOfPickerView:)];
+                    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    
+                    [buttons addObject:flexibleSpace];
+                    [buttons addObject: myDoneButton];
+                    
+                    
+                    [bar setItems:buttons animated:TRUE];
+                    
+                    //toolbar加个label
+                    UILabel * label = [UILabel new];
+                    label.text = [NSString stringWithFormat:@"请选择省、市"];
+                    label.frame = CGRectMake(WIDTH/2-70, 12, 140, 20);
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [v addSubview:label];
+                }
             }
             top += label_height;
         }
