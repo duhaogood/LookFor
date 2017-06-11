@@ -11,7 +11,7 @@
 
 @interface DHTool : NSObject
 @property(nonatomic,copy)NSString * store_version;//商店版本
-
+@property(nonatomic,strong)NSDictionary * userInfo;//用户信息
 /**
  *  获取单例工具类对象
  *
@@ -179,4 +179,7 @@
  @return 处理好之后的图片
  */
 - (UIImage *)fixOrientationOfImage:(UIImage *)aImage;
+
+-(void)getUserInfo;
+- (NSString *)getJsonFromDictionaryOrArray:(id)dictionaryOrArray;
 @end

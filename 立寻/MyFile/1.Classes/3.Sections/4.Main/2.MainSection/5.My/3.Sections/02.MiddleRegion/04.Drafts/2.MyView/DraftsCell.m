@@ -25,7 +25,7 @@
             //时间文本
             {
                 UILabel * label = [UILabel new];
-                label.text = [NSString stringWithFormat:@"最新编辑时间：%@",dictionary[@"lastEditTime"]];
+                label.text = [NSString stringWithFormat:@"最新编辑时间：%@",dictionary[@"UpdateTime"]];
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 [self addSubview:label];
@@ -55,7 +55,7 @@
             {
                 UIImageView * imgV = [UIImageView new];
                 imgV.frame = CGRectMake(left, top + 8, imgHeight, imgHeight);
-                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"url"]];
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"PicturePath"]];
                 [self addSubview:imgV];
                 left += imgHeight + 10;
             }
@@ -63,7 +63,7 @@
             {
                 top += 8;
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"title"];
+                label.text = dictionary[@"Title"];
                 label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -73,7 +73,7 @@
             //内容
             {
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"content"];
+                label.text = dictionary[@"Content"];
                 label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -104,7 +104,7 @@
             //悬赏金额
             {
                 UILabel * label = [UILabel new];
-                NSString * money = dictionary[@"money"];
+                NSString * money = dictionary[@"Money"];
                 label.font = [UIFont systemFontOfSize:12];
                 label.text = [NSString stringWithFormat:@"%@元",money];
                 label.textColor = [MYTOOL RGBWithRed:255 green:83 blue:95 alpha:1];

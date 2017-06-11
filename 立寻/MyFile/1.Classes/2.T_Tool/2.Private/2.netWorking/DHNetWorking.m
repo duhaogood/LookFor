@@ -42,6 +42,7 @@ static id instance;
         if (![[responseObject valueForKey:@"Result"] boolValue]) {
             [SVProgressHUD showErrorWithStatus:[responseObject valueForKey:@"Message"] duration:2];
         }else{
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"Message"] duration:1];
             back_block(responseObject);
         }
     } failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -67,7 +68,26 @@ static id instance;
         [SVProgressHUD showErrorWithStatus:@"网络出错" duration:2];
     }];
 }
-
+-(void)getNoPopWithInterfaceName:(NSString *)interfaceName andDictionary:(NSDictionary *)send_dic andSuccess:(void(^)(NSDictionary * back_dic)) back_block{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+    
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",SERVER_URL,interfaceName];
+    NSMutableDictionary * send = [NSMutableDictionary dictionaryWithDictionary:send_dic];
+    //验证参数
+    [send setValue:@"99999999" forKey:@"appid"];
+    [manager GET:urlString parameters:send progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if (![[responseObject valueForKey:@"Result"] boolValue]) {
+            [SVProgressHUD showErrorWithStatus:[responseObject valueForKey:@"Message"] duration:2];
+        }else{
+            back_block(responseObject);
+        }
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"网络出错" duration:2];
+    }];
+}
 
 
 

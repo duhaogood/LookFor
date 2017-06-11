@@ -7,7 +7,7 @@
 //
 
 #import "RegisterVC.h"
-
+#import "AgreementVC.h"
 @interface RegisterVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField * phoneTF;//手机号码
 @property(nonatomic,strong)UITextField * codeTF;//验证码
@@ -239,14 +239,23 @@
 }
 //用户协议事件
 -(void)userAgreeBtnCallback{
-    NSLog(@"用户协议");
-    [SVProgressHUD showSuccessWithStatus:@"您已经同意了" duration:1];
+    NSString * interface = @"/common/setting/getregagree.html";
+    NSDictionary * send = @{};
+    [MYTOOL netWorkingWithTitle:@"请稍后"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        AgreementVC * vc = [AgreementVC new];
+        vc.title = @"用户协议";
+        vc.content = back_dic[@"Data"];
+        [self.navigationController pushViewController:vc animated:true];
+    }];
+    
+    
+    
+    
     
 }
 //注册事件
 -(void)registerCallback{
-    NSLog(@"注册");
-    
     //参数
     NSString * mobile = self.phoneTF.text;//手机号
     NSString * vaildcode = self.codeTF.text;//验证码

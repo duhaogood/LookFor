@@ -52,6 +52,7 @@
                 tf.font = [UIFont systemFontOfSize:12];
                 tf.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 tf.delegate = delegate;
+                [delegate setTitleTF:tf];
                 tf.tag = 50;
                 [self addSubview:tf];
                 CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)tf];

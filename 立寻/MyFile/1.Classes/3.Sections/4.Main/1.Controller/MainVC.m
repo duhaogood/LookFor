@@ -17,6 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([MYTOOL isLogin]) {
+        [MYTOOL getUserInfo];
+    }
     self.delegate = self;
     UIColor * bgColor = [MYTOOL RGBWithRed:0 green:201 blue:25 alpha:1];
     //改变tabbar选中及未选中的字体颜色
@@ -132,8 +135,8 @@
             LoginVC * login = [LoginVC new];
             login.title = @"登录";
             [nc pushViewController:login animated:true];
+            return false;
         }
-        return false;
     }
     if ([title isEqualToString:@"发布"]) {
         [self issueBtnCallback];

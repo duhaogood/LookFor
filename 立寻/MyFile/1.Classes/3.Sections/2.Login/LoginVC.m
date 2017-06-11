@@ -219,9 +219,46 @@
 }
 //登录事件
 -(void)loginCallback{
-    NSLog(@"登录");
-    
-    
+    //参数
+    NSString * mobile = self.phoneTF.text;//手机号
+    NSString * password = self.passwordTF.text;//密码
+    //验证
+    {
+        //手机号
+        {
+            //正则表达式匹配11位手机号码
+            NSString *regex = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
+            NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+            BOOL isMatch = [pred evaluateWithObject:mobile];
+            if (!isMatch) {
+                [SVProgressHUD showErrorWithStatus:@"手机号格式不正确" duration:2];
+                return;
+            }
+        }
+        //密码
+        {
+            if (password.length < 6) {
+                [SVProgressHUD showErrorWithStatus:@"密码不能少于6位" duration:2];
+                return;
+            }
+        }
+    }
+    NSString * interface = @"/user/memberuser/memberuserlogin.html";
+    NSDictionary * send = @{
+                            @"mobile":mobile,
+                            @"password":password
+                            };
+    [MYTOOL netWorkingWithTitle:@"登录中"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+//        NSLog(@"back:%@",back_dic);
+        [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+        [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"1"];
+        MYTOOL.userInfo = back_dic[@"Data"];
+        NSString * UserID = back_dic[@"Data"][@"UserID"];
+        NSLog(@"UserID:%@",UserID);
+        [MYTOOL setProjectPropertyWithKey:@"UserID" andValue:UserID];
+        [self.navigationController popViewControllerAnimated:true];
+    }];
     
     
 }

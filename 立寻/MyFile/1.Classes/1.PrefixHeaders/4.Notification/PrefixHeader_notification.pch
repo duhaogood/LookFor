@@ -15,6 +15,7 @@
 //支付成功
 #define NOTIFICATION_PAY_SUCCESS @"notification_pay_success"
 
-
+//用户信息更新
+#define NOTIFICATION_USERINFO_UPDATE @"NOTIFICATION_USERINFO_UPDATE"
 
 #endif /* PrefixHeader_notification_pch */

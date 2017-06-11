@@ -25,9 +25,10 @@
 
 
 #import "SDCycleScrollView.h"
-
+#import "MainVC.h"
 #import "DHNetWorking.h"
 #import "MyTextView.h"
+#import "AFNetworking.h"
 #endif /* PrefixHeader_pch */
 
 

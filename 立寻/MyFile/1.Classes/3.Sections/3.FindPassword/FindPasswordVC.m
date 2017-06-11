@@ -21,6 +21,7 @@
 {
     NSTimer * codeTimer;//验证码定时器
     int timeSpace;//时间间隔
+    NSString * codeid_id;//验证码id
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -177,6 +178,59 @@
 //找回密码
 -(void)findBackPasswordCallback{
     [SVProgressHUD showSuccessWithStatus:@"找回成功" duration:1];
+    NSString * mobile = self.phoneTF.text;//手机号
+    NSString * vaildcode = self.codeTF.text;//验证码
+    NSString * codeid = codeid_id;//验证码编号
+    NSString * password = self.passwordTF.text;//密码
+    //验证
+    {
+        //手机号
+        {
+            //正则表达式匹配11位手机号码
+            NSString *regex = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
+            NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+            BOOL isMatch = [pred evaluateWithObject:mobile];
+            if (!isMatch) {
+                [SVProgressHUD showErrorWithStatus:@"手机号格式不正确" duration:2];
+                return;
+            }
+        }
+        //验证码
+        {
+            if (vaildcode.length != 6) {
+                [SVProgressHUD showErrorWithStatus:@"验证码长度不正确" duration:2];
+                return;
+            }
+        }
+        //验证码id
+        {
+            if (codeid_id == nil || codeid.length == 0) {
+                [SVProgressHUD showErrorWithStatus:@"请先发送验证码" duration:2];
+                return;
+            }
+        }
+        //密码
+        {
+            if (password.length < 6) {
+                [SVProgressHUD showErrorWithStatus:@"密码不能少于6位" duration:2];
+                return;
+            }
+        }
+    }
+    [MYTOOL netWorkingWithTitle:@"找回密码……"];
+    NSString * interface = @"/user/memberuser/memberuserretrievepassword.html";
+    NSDictionary * send = @{
+                            @"mobile":mobile,
+                            @"vaildcode":vaildcode,
+                            @"codeid":codeid,
+                            @"password":password
+                            };
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+        [self popUpViewController];
+    }];
+    
+    
 }
 //发送验证码事件
 -(void)sendCode:(UIButton *)btn{
@@ -190,13 +244,7 @@
         [SVProgressHUD showErrorWithStatus:@"手机格式不正确" duration:2];
         return;
     }
-    
-    self.sendCodeBtn.enabled = false;
-    timeSpace = 10;
-    [self.sendCodeBtn setTitle:[NSString stringWithFormat:@"%d秒后可用",timeSpace] forState:UIControlStateDisabled];
-    codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerWorkInHere) userInfo:nil repeats:true];
-    
-    return;
+    [MYTOOL netWorkingWithTitle:@"发送验证码……"];
     //发送手机号码
     NSString * interface = @"/common/messages/sendsmscode.html";
     NSDictionary * send = @{@"mobile":mobile};
@@ -204,7 +252,10 @@
         [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
         //发送成功后,按钮置为不可用
         self.sendCodeBtn.enabled = false;
-        
+        timeSpace = 10;
+        [self.sendCodeBtn setTitle:[NSString stringWithFormat:@"%d秒后可用",timeSpace] forState:UIControlStateDisabled];
+        codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerWorkInHere) userInfo:nil repeats:true];
+        codeid_id = back_dic[@"Data"];
     }];
     
     

@@ -7,7 +7,7 @@
 //
 
 #import "SettingVC.h"
-
+#import "MainVC.h"
 @interface SettingVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * view_data_array;//界面数据数组
@@ -66,7 +66,20 @@
 
 //退出当前帐号
 -(void)exitCurrentUser{
-    [SVProgressHUD showSuccessWithStatus:@"算你退出了" duration:1];
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * aa_sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"0"];
+        [SVProgressHUD showSuccessWithStatus:@"退出成功" duration:1];
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        MainVC * main = (MainVC *)delegate.window.rootViewController;
+        [main setSelectedIndex:0];
+    }];
+    UIAlertAction * aa_cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [ac addAction:aa_sure];
+    [ac addAction:aa_cancel];
+    [self presentViewController:ac animated:true completion:nil];
 }
 
 #pragma mrak  - UITableViewDataSource,UITableViewDelegate

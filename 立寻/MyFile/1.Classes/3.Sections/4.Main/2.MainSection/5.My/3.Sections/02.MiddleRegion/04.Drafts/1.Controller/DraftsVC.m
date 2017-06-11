@@ -10,36 +10,14 @@
 #import "DraftsCell.h"
 @interface DraftsVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
-@property(nonatomic,strong)NSArray * cellDateArray;//cell数据
+@property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
+@property(nonatomic,strong)UIView * noDataView;//没有数据显示
 @end
 
 @implementation DraftsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cellDateArray = @[
-                           @{
-                               @"lastEditTime":@"2017-10-15 12:30",
-                               @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455804&di=ed51db649dbb42387c611a890c5769f2&imgtype=0&src=http%3A%2F%2Fimg.tuku.cn%2Ffile_thumb%2F201503%2Fm2015032016253154.jpg",
-                               @"title":@"寻找我家狗狗",
-                               @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望 有知道线索者提供信息，一定酬劳感谢!...",
-                               @"money":@"10"
-                               },
-                           @{
-                               @"lastEditTime":@"2017-10-15 12:30",
-                               @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455804&di=ed51db649dbb42387c611a890c5769f2&imgtype=0&src=http%3A%2F%2Fimg.tuku.cn%2Ffile_thumb%2F201503%2Fm2015032016253154.jpg",
-                               @"title":@"寻找我家狗狗",
-                               @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望 有知道线索者提供信息，一定酬劳感谢!...",
-                               @"money":@"10"
-                               },
-                           @{
-                               @"lastEditTime":@"2017-10-15 12:30",
-                               @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455804&di=ed51db649dbb42387c611a890c5769f2&imgtype=0&src=http%3A%2F%2Fimg.tuku.cn%2Ffile_thumb%2F201503%2Fm2015032016253154.jpg",
-                               @"title":@"寻找我家狗狗",
-                               @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望 有知道线索者提供信息，一定酬劳感谢!...",
-                               @"money":@"10"
-                               }
-                           ];
     //加载主界面
     [self loadMainView];
 }
@@ -61,6 +39,36 @@
         tableView.rowHeight = [MYTOOL getHeightWithIphone_six:145];
         tableView.backgroundColor = MYCOLOR_240_240_240;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self headerRefresh];
+            // 结束刷新
+            [tableView.mj_header endRefreshing];
+        }];
+        
+        // 设置自动切换透明度(在导航栏下面自动隐藏)
+        tableView.mj_header.automaticallyChangeAlpha = YES;
+        
+        // 上拉刷新
+        tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [self footerRefresh];
+            [tableView.mj_footer endRefreshing];
+        }];
+        //
+        //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
+        {
+            UIView * view = [UIView new];
+            self.noDataView = view;
+            view.frame = tableView.frame;
+            view.backgroundColor = MYCOLOR_240_240_240;
+            [tableView addSubview:view];
+            //图片-170*135
+            {
+                UIImageView * icon = [UIImageView new];
+                icon.image = [UIImage imageNamed:@"nodate"];
+                icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
+                [view addSubview:icon];
+            }
+        }
     }
 }
 
@@ -86,6 +94,36 @@
 -(void)cellEditCallback:(UIButton *)btn{
     NSLog(@"点击:%@",self.cellDateArray[btn.tag]);
 }
+//加载所有数据
+-(void)loadCellData{
+    
+    
+    
+}
+//下拉刷新
+-(void)headerRefresh{
+    NSString * interface = @"/publish/publish/getuserdraftpublishlist.html";
+    NSDictionary * send = @{@"userid":USER_ID};
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+//        NSLog(@"back:%@",back_dic);
+        NSArray * array = back_dic[@"Data"];
+        self.cellDateArray = [NSMutableArray arrayWithArray:array];
+        if (array && array.count > 0) {
+            self.noDataView.hidden = true;
+        }else{
+            self.noDataView.hidden = false;
+        }
+        [self.tableView reloadData];
+    }];
+    
+}
+//上拉刷新
+-(void)footerRefresh{
+    
+    
+    
+    
+}
 //返回上个界面
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];
@@ -95,6 +133,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
+    [self headerRefresh];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [MYTOOL showTabBar];

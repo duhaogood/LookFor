@@ -30,6 +30,8 @@
     UIImageView * currentImgView;//当前编辑的图片框
     UIImageView * show_img_view;//查看图片的view
     int current_upload_img_index;//当前上传图片序号
+    NSMutableArray * fileid_array;//上传图片的id数组
+    BOOL isIssue;//是否发布，还是保存草稿箱
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +40,7 @@
     self.view.backgroundColor = MYCOLOR_240_240_240;
     //初始化省市区数据
     self.city_code_array = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_code" ofType:@"plist"]];
-    NSLog(@"list:%@",self.secondTypeList);
+//    NSLog(@"list:%@",self.secondTypeList);
     //加载主界面
     [self loadMainView];
 }
@@ -137,21 +139,37 @@
     scrollView.contentSize = CGSizeMake(0, top);
     
 }
+//判断是否有信息不全
+-(BOOL)checkInfoOfIssue{
+    //检查所有参数是否合法
+    
+    
+    return true;
+}
 #pragma mark - 按钮回调
 //保存至草稿箱
 -(void)saveBtnCallback{
-    NSLog(@"保存");
     //先判断是否有空
-    
-    
-    
+    if (![self checkInfoOfIssue]) {
+        return;
+    }
+    isIssue = false;//保存草稿箱
     //上传图片
     current_upload_img_index = 0;
+    fileid_array = [NSMutableArray new];
     [self upLoadAllImage];
 }
 //现在发布
 -(void)issueBtnCallback{
-    NSLog(@"issue");
+    //先判断是否有空
+    if (![self checkInfoOfIssue]) {
+        return;
+    }
+    isIssue = true;//现在发布
+    //上传图片
+    current_upload_img_index = 0;
+    fileid_array = [NSMutableArray new];
+    [self upLoadAllImage];
 }
 //上传所有图片
 -(void)upLoadAllImage{
@@ -168,6 +186,7 @@
     if (![dic[@"have_image"] boolValue]) {
         current_upload_img_index ++;
         [self upLoadAllImage];
+        return;
     }
     //上传图片
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
@@ -176,7 +195,7 @@
     NSDictionary * parameter = @{
                                  @"imageType":@"posts",
                                  @"appid":@"99999999",
-                                 @"userid":@"8"
+                                 @"userid":[MYTOOL getProjectPropertyWithKey:@"UserID"]
                                  };
     // 访问路径
     NSString *stringURL = [NSString stringWithFormat:@"%@%@",SERVER_URL,@"/common/filespace/uploadimg.html"];
@@ -202,11 +221,14 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"上传结果:%@",responseObject);
-        if ([responseObject[@"code"] boolValue]) {
+        if ([responseObject[@"Result"] boolValue]) {
+            NSObject * fileid = responseObject[@"Data"][@"fileid"];
+            [fileid_array addObject:@{@"PictureID":fileid}];
             current_upload_img_index ++;
             if (current_upload_img_index >= count_img) {
-                
+                [SVProgressHUD dismiss];
+                //上传完毕
+                [self startIssue];
             }else{
                 [self upLoadAllImage];
             }
@@ -214,9 +236,67 @@
             [SVProgressHUD showErrorWithStatus:responseObject[@"Message"] duration:2];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"上传失败:%@",error);
         [SVProgressHUD showErrorWithStatus:@"上传失败" duration:2];
     }];
+}
+//准备发布信息
+-(void)startIssue{
+    NSString * state = isIssue ? @"发布中……" : @"保存中……";
+    [MYTOOL netWorkingWithTitle:state];
+    //拼装发布信息
+    NSMutableDictionary * publishinfo_dictionary = [NSMutableDictionary new];
+    NSString * Title = self.titleTF.text;//标题
+    NSString * Content = self.contentTV.text;//发布详情
+    NSObject * CategoryID = nil;//分类ID
+    NSString * type = self.typeTF.text;
+    for (NSDictionary * dic in self.secondTypeList) {
+        NSString * CategoryTitle = dic[@"CategoryTitle"];
+        if ([CategoryTitle isEqualToString:type]) {
+            CategoryID = dic[@"CategoryID"];
+            break;
+        }
+    }
+    NSString * Money = self.moneyTF.text;//金额
+    NSString * Province = @"2";//省份
+    NSString * City = @"3";//城市
+    NSString * Country = @"4";//县
+    NSString * Address = self.addressTF.text;//详细地址
+    NSString * PushType = @"0";//推送地区类型（0.丢失地区，1.全国）
+    NSString * PushMoney = self.pushMoneyTF.text;//推送金额
+    NSString * TopType = @"0";//地区置顶类型（0.不需要，1.需要）
+    NSString * TopMoney = self.haveMoneyTF.text;//置顶金额
+//    NSString * PublishStatus = self.addressTF.text;//发布状态（1.待发布，2.已发布，3.已结束，4.已完成）
+    //拼装
+    [publishinfo_dictionary setValue:Title forKey:@"Title"];
+    [publishinfo_dictionary setValue:Content forKey:@"Content"];
+    [publishinfo_dictionary setValue:CategoryID forKey:@"CategoryID"];
+    [publishinfo_dictionary setValue:Money forKey:@"Money"];
+    [publishinfo_dictionary setValue:Province forKey:@"Province"];
+    [publishinfo_dictionary setValue:City forKey:@"City"];
+    [publishinfo_dictionary setValue:Country forKey:@"Country"];
+    [publishinfo_dictionary setValue:Address forKey:@"Address"];
+    [publishinfo_dictionary setValue:PushType forKey:@"PushType"];
+    [publishinfo_dictionary setValue:PushMoney forKey:@"PushMoney"];
+    [publishinfo_dictionary setValue:TopType forKey:@"TopType"];
+    [publishinfo_dictionary setValue:TopMoney forKey:@"TopMoney"];
+    [publishinfo_dictionary setValue:PushMoney forKey:@"PushMoney"];
+
+    //正式拼装
+    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
+    NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
+    NSString * publishinfo = [MYTOOL getJsonFromDictionaryOrArray:publishinfo_dictionary];//发布参数
+    NSDictionary * send = @{
+                            @"userid":userid,
+                            @"picturelist":picturelist,
+                            @"publishinfo":publishinfo
+                            };
+    NSLog(@"send:%@",send);
+    NSString * interface = @"/publish/publish/addpublishinfo.html";
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSLog(@"back:%@",back_dic);
+    }];
+    
+    
 }
 //推送地区按钮
 -(void)pushAreaButtonCallback:(UIButton *)btn{

@@ -7,8 +7,9 @@
 //
 
 #import "MyVC.h"
-
+#import "PerfectVC.h"
 @interface MyVC ()<UITextFieldDelegate>
+@property(nonatomic,strong)UIImageView * user_img;//头像
 @property(nonatomic,strong)UILabel * accountBalanceLabel;//账户余额
 @property(nonatomic,strong)UILabel * rewardAmountLabel;//悬赏金额
 @property(nonatomic,strong)UILabel * myPointsLabel;//我的积分
@@ -32,7 +33,9 @@
 -(void)loadMainView{
     self.view.backgroundColor = [MYTOOL RGBWithRed:240 green:240 blue:240 alpha:1];
     float top_all = 0;
-    NSDictionary * userInfo = @{
+    NSDictionary * userInfo = DHTOOL.userInfo;
+  
+  @{
                                 @"url":@"http://imgtu.5011.net/uploads/content/20170421/8543101492743770.jpg",
                                 @"name":@"呆哥哥",
                                 @"sign":@"日复一日，年复一年，岁月就是杀猪刀",
@@ -58,6 +61,7 @@
             UIImageView * userImgV = [UIImageView new];
             userImgV.frame = CGRectMake(10, view_height/2.0-icon_r/2.0, icon_r, icon_r);
             [view addSubview:userImgV];
+            self.user_img = userImgV;
             NSString * url = userInfo[@"url"];
             [MYTOOL setImageIncludePrograssOfImageView:userImgV withUrlString:url];
             userImgV.layer.masksToBounds = true;
@@ -79,7 +83,7 @@
             {
                 UIView * bgView = [UIView new];
                 bgView.backgroundColor = [UIColor whiteColor];
-                bgView.frame = CGRectMake(WIDTH - size.width - 20 - 15, view_height * 0.16, size.width + 20, size.height + 10);
+                bgView.frame = CGRectMake(WIDTH - size.width - 20 - 20, view_height * 0.16, size.width + 20, size.height + 10);
                 nameLabelRight = WIDTH - size.width - 20 - 15;
                 [view addSubview:bgView];
                 bgView.layer.masksToBounds = true;
@@ -93,8 +97,17 @@
                     [btn addTarget:self action:@selector(personalEditCallback) forControlEvents:UIControlEventTouchUpInside];
                     [bgView addSubview:btn];
                 }
+                //小图标-arrow_right_md-6*12
+                {
+                    UIImageView * icon = [UIImageView new];
+                    icon.image = [UIImage imageNamed:@"arrow_right_md"];
+                    [view addSubview:icon];
+                    icon.frame = CGRectMake(bgView.frame.size.width + 5+bgView.frame.origin.x, 5+size.height/2.0-6 + bgView.frame.origin.y, 6, 12);
+                }
             }
             label.text = [NSString stringWithFormat:@"完善度%@",userInfo[@"progress"]];
+            
+            
         }
         //用户名
         {
@@ -515,7 +528,18 @@
     return true;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"%@",textField.text);
+    if ([self.signTF isEqual:textField]) {
+        NSString * motto = self.signTF.text;
+        NSString * interface = @"/user/memberuser/modifyusermotto.html";
+        [MYTOOL netWorkingWithTitle:@"更新签名"];
+        NSDictionary * send = @{
+                                @"motto":motto,
+                                @"userid":USER_ID
+                                };
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [self viewWillAppear:true];
+        }];
+    }
     
 }
 #pragma mark - 上侧功能区按钮回调
@@ -527,7 +551,9 @@
 }
 //个人编辑
 -(void)personalEditCallback{
-    NSLog(@"个人编辑");
+    PerfectVC * vc = [PerfectVC new];
+    vc.title = @"完善个人信息";
+    [self.navigationController pushViewController:vc animated:true];
 }
 #pragma mark - 中间功能区按钮回调
 //中间功能区按钮回调
@@ -557,5 +583,59 @@
     FeedbackVC * vc = [FeedbackVC new];
     vc.title = @"投诉建议";
     [self.navigationController pushViewController:vc animated:true];
+}
+//更新用户信息
+-(void)userInfoUpdate{
+    NSString * url = DHTOOL.userInfo[@"ImgFilePath"];//用户头像
+    NSString * UserName = DHTOOL.userInfo[@"UserName"];//用户名
+    NSString * Motto = DHTOOL.userInfo[@"Motto"];//签名
+    int ApproveState = [DHTOOL.userInfo[@"ApproveState"] intValue];// 1未认证 2待认证  3未通过 4已认证
+    
+    //更新用户头像
+    [self.user_img sd_setImageWithURL:[NSURL URLWithString:url]];
+    self.nameLabel.text = UserName;
+    //
+    self.signTF.text = Motto;
+    CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)self.signTF];
+    float max_width = WIDTH - ([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9) - 30;
+    if (size.width > max_width) {//按钮到边了
+        self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, max_width, size.height);
+    }else{//按钮右边还有位置
+        self.signTF.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9, [MYTOOL getHeightWithIphone_six:98]/2, size.width, size.height);
+    }
+    self.editView.frame = CGRectMake([MYTOOL getHeightWithIphone_six:98] * 0.65 + 10 + 9 + self.signTF.frame.size.width+2, self.signTF.frame.origin.y+self.signTF.frame.size.height/2-10, 20, 20);
+    //
+    switch (ApproveState) {
+        case 1:
+            self.authenticationLabel.text = @"未认证";
+            break;
+        case 2:
+            self.authenticationLabel.text = @"待认证";
+            break;
+        case 3:
+            self.authenticationLabel.text = @"未通过";
+            break;
+        default:
+            self.authenticationLabel.text = @"已认证";
+            break;
+    }
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    NSString * interface = @"/user/memberuser/getmemberuserinfo.html";
+    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];
+    if (!userid) {
+        return;
+    }
+    NSDictionary * send = @{
+                            @"userid": userid
+                            };
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        MYTOOL.userInfo = back_dic[@"Data"];
+        [self userInfoUpdate];
+    }];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    
 }
 @end

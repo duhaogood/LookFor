@@ -324,4 +324,24 @@ static id instance;
     CGImageRelease(cgimg);
     return img;
 }
+-(void)getUserInfo{
+    NSString * interface = @"/user/memberuser/getmemberuserinfo.html";
+    NSString * userid = [self getProjectPropertyWithKey:@"UserID"];
+    if (!userid) {
+        return;
+    }
+    NSDictionary * send = @{
+                            @"userid": userid
+                            };
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        self.userInfo = back_dic[@"Data"];
+        NSLog(@"UserID:%@",MYTOOL.userInfo);
+    }];
+    
+}
+- (NSString *)getJsonFromDictionaryOrArray:(id)dictionaryOrArray {
+    NSData *data=[NSJSONSerialization dataWithJSONObject:dictionaryOrArray options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    return jsonStr;
+}
 @end

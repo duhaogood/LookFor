@@ -21,7 +21,7 @@
 #define MYNETWORKING [DHNetWorking sharedDHNetWorking]
 //字体名字
 #define FONT_NAME @"PingFang SC Regular"
-
+#define USER_ID [MYTOOL getProjectPropertyWithKey:@"UserID"]
 #define APPID_MINE @"99999999"
 
 //颜色
