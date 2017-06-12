@@ -13,7 +13,7 @@
 @property(nonatomic,assign)UITextField * love_tf;
 @property(nonatomic,assign)UITextField * area_tf;
 @property(nonatomic,assign)UITextField * address_tf;
-
+@property(nonatomic,assign)UIPickerView * picker;//地区选择
 
 
 
@@ -24,4 +24,10 @@
 
 //完成按钮
 -(void)finishBtnCallback;
+//pickerView中事件-确定
+-(void)clickOkOfPickerView:(UIBarButtonItem*)btn;
+
+
+
+
 @end

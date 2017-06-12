@@ -17,6 +17,7 @@
 		043EF4A71EEC0E65007AABCD /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4A61EEC0E65007AABCD /* LoginVC.m */; };
 		043EF4AA1EEC0E7C007AABCD /* FindPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */; };
 		043EF4AD1EEC0E8F007AABCD /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4AC1EEC0E8F007AABCD /* RegisterVC.m */; };
+		04410F571EEEBF720063CC32 /* area_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04410F561EEEBF720063CC32 /* area_code.plist */; };
 		0446698A1EEA45A30082D8BC /* IssueInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669891EEA45A30082D8BC /* IssueInfoVC.m */; };
 		044669921EEA47BB0082D8BC /* DHNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669901EEA47BB0082D8BC /* DHNetWorking.m */; };
 		044669961EEA72160082D8BC /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669951EEA72160082D8BC /* MyTextView.m */; };
@@ -157,6 +158,7 @@
 		043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordVC.m; sourceTree = "<group>"; };
 		043EF4AB1EEC0E8F007AABCD /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
 		043EF4AC1EEC0E8F007AABCD /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
+		04410F561EEEBF720063CC32 /* area_code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area_code.plist; sourceTree = "<group>"; };
 		044669851EEA455F0082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		044669881EEA45A30082D8BC /* IssueInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoVC.h; sourceTree = "<group>"; };
 		044669891EEA45A30082D8BC /* IssueInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoVC.m; sourceTree = "<group>"; };
@@ -1788,6 +1790,7 @@
 		78375AC01ED4734C0046F8C3 /* 3.P_Plist */ = {
 			isa = PBXGroup;
 			children = (
+				04410F561EEEBF720063CC32 /* area_code.plist */,
 				0436B5A21EEB0EA50003D4AB /* city_code.plist */,
 			);
 			path = 3.P_Plist;
@@ -1962,6 +1965,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04410F571EEEBF720063CC32 /* area_code.plist in Resources */,
 				0436B5A31EEB0EA50003D4AB /* city_code.plist in Resources */,
 				78C23C551ED3450A000CD40E /* LaunchScreen.storyboard in Resources */,
 				78C23C521ED3450A000CD40E /* Assets.xcassets in Resources */,

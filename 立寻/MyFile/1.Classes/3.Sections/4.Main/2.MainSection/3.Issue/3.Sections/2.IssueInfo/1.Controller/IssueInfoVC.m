@@ -10,12 +10,12 @@
 
 @interface IssueInfoVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
-@property(nonatomic,strong)NSArray * city_code_array;//省市code及名称数组
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
 @property(nonatomic,strong)UILabel * num_label;//预览图片时显示的图片序号
 @property(nonatomic,strong)UIView * img_bg_view;//图片背景view
+@property(nonatomic,strong)NSArray * areaArray;//地区数组
 
-
+@property(nonatomic,strong)NSArray * city_code_array;//省市code及名称数组
 
 @end
 
@@ -32,6 +32,7 @@
     int current_upload_img_index;//当前上传图片序号
     NSMutableArray * fileid_array;//上传图片的id数组
     BOOL isIssue;//是否发布，还是保存草稿箱
+    NSDictionary * uploadAreaDic;//需要上传的地区信息
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +40,9 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
     self.view.backgroundColor = MYCOLOR_240_240_240;
     //初始化省市区数据
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"area_code" ofType:@"plist"];
+    self.areaArray = [NSArray arrayWithContentsOfFile:path];
+    
     self.city_code_array = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_code" ofType:@"plist"]];
 //    NSLog(@"list:%@",self.secondTypeList);
     //加载主界面
@@ -391,13 +395,10 @@
         return self.secondTypeList.count;
     }
     if (component == 0) {
-        cityList = self.city_code_array[provinceRow][@"cityList"];
-        return self.city_code_array.count;
-    }else if (component == 1){
-        regionList = self.city_code_array[provinceRow][@"cityList"][regionRow][@"regionList"];
-        return cityList.count;
+        return self.areaArray.count;
     }else{
-        return regionList.count;
+        NSArray * cityArray = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"];
+        return cityArray.count;
     }
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -405,7 +406,7 @@
     if (tag == 200) {
         return 1;
     }
-    return 3;
+    return 2;
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     NSInteger tag = pickerView.tag;
@@ -413,12 +414,11 @@
         return self.secondTypeList[row][@"CategoryTitle"];
     }
     if (component == 0) {
-        NSString * title = self.city_code_array[row][@"provinceName"];
+        NSString * title = self.areaArray[row][@"provinceName"];
         return title;
-    }if (component == 1){
-        return cityList[row][@"cityName"];
+    }else{
+        return self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][row][@"cityName"];
     }
-    return regionList[row][@"regionName"];
 }
 //数据变动
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
@@ -427,18 +427,11 @@
         return;
     }
     if (component == 0) {
-        provinceRow = row;
-        cityList = self.city_code_array[row][@"cityList"];
         [pickerView reloadComponent:1];
         [pickerView selectRow:0 inComponent:1 animated:true];
-        //
-        regionRow = 0;
-        regionList = self.city_code_array[provinceRow][@"cityList"][0][@"regionList"];
         [pickerView reloadComponent:2];
         [pickerView selectRow:0 inComponent:2 animated:true];
-    }if (component == 1) {
-        regionRow = row;
-        regionList = self.city_code_array[provinceRow][@"cityList"][row][@"regionList"];
+    }else{
         [pickerView reloadComponent:2];
         [pickerView selectRow:0 inComponent:2 animated:true];
     }
@@ -456,23 +449,22 @@
     NSInteger row0 = [self.picker selectedRowInComponent:0];
     NSInteger row1 = [self.picker selectedRowInComponent:1];
     NSInteger row2 = [self.picker selectedRowInComponent:2];
-    NSDictionary * provinceDic = self.city_code_array[row0];
-    NSArray * array = provinceDic[@"cityList"];
-    NSDictionary * cityDic = array[row1];
-    NSArray * arr_region = cityDic[@"regionList"];
-    NSDictionary * regionDic = arr_region[row2];
     
-    NSString * provinceCode = provinceDic[@"provinceCode"];//省id
+    NSDictionary * provinceDic = self.areaArray[row0];
+    NSArray * cityArray = provinceDic[@"cityArray"];
+    NSDictionary * cityDic = cityArray[row1];
+    NSArray * countryArray = cityDic[@"countryArray"];
+    NSDictionary * countryDic = countryArray[row2];
+    
+    NSString * provinceId = provinceDic[@"provinceId"];//省id
     NSString * provinceName = provinceDic[@"provinceName"];//省名字
-    NSString * cityCode = cityDic[@"cityCode"];//城市id
+    NSString * cityId = cityDic[@"cityId"];//城市id
     NSString * cityName = cityDic[@"cityName"];//城市名字
-    NSString * regionName = regionDic[@"regionName"];//区名字
-    NSString * regionCode = regionDic[@"regionCode"];//区id
-    //    NSLog(@"provinceCode:%@",provinceCode);
-    //    NSLog(@"provinceName:%@",provinceName);
-    //    NSLog(@"cityCode:%@",cityCode);
-    //    NSLog(@"cityName:%@",cityName);
-    self.cityTF.text = [NSString stringWithFormat:@"%@%@%@",provinceName,cityName,regionName];
+    uploadAreaDic = @{
+                      @"provinceid":provinceId,
+                      @"cityid":cityId
+                      };
+    self.cityTF.text = [NSString stringWithFormat:@"%@%@",provinceName,cityName];
     [MYTOOL hideKeyboard];
 }
 //点击增加图片

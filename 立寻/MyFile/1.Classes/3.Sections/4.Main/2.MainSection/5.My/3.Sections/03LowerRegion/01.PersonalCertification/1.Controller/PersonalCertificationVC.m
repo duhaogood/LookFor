@@ -50,6 +50,9 @@
 //用户图片点击事件
 -(void)clickImgOfUser:(UITapGestureRecognizer *)tap{
     
+    
+    
+    
 }
 
 

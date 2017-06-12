@@ -156,6 +156,44 @@
                 tf.delegate = delegate;
                 [self addSubview:tf];
                 [delegate setArea_tf:tf];
+                //输入
+                {
+                    UIPickerView * pick = [UIPickerView new];
+                    [delegate setPicker:pick];
+                    pick.tag = 200;
+                    UIView * v = [UIView new];
+                    tf.inputView = v;
+                    v.frame = CGRectMake(0, 500, WIDTH, 271);
+                    pick.frame = CGRectMake(0, 44, WIDTH, 271-44);
+                    pick.dataSource = delegate;
+                    pick.delegate = delegate;
+                    [v addSubview:pick];
+                    [delegate setPicker:pick];
+                    //toolbar
+                    UIToolbar * bar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+                    [v addSubview:bar];
+                    [bar setBarStyle:UIBarStyleDefault];
+                    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+                    
+                    UIBarButtonItem *myDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                                  target: delegate action: @selector(clickOkOfPickerView:)];
+                    myDoneButton.tag = 200;
+                    myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:delegate action:@selector(clickOkOfPickerView:)];
+                    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    
+                    [buttons addObject:flexibleSpace];
+                    [buttons addObject: myDoneButton];
+                    
+                    
+                    [bar setItems:buttons animated:TRUE];
+                    
+                    //toolbar加个label
+                    UILabel * label = [UILabel new];
+                    label.text = [NSString stringWithFormat:@"请选择相应的类型"];
+                    label.frame = CGRectMake(WIDTH/2-70, 12, 140, 20);
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [v addSubview:label];
+                }
             }
             //右侧图标
             {

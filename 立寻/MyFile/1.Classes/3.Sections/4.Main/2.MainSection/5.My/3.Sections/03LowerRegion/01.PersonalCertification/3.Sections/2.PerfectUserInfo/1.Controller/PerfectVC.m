@@ -8,8 +8,8 @@
 
 #import "PerfectVC.h"
 #import "PerfectView.h"
-@interface PerfectVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-
+@interface PerfectVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
+@property(nonatomic,strong)NSArray * areaArray;//地区数组
 @end
 
 @implementation PerfectVC
@@ -19,11 +19,13 @@
     UIImageView * show_img_view;//查看图片的view
     
     bool isChangeUserImg;//是否改变
+    NSDictionary * uploadAreaDic;//需要上传的地区信息
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"area_code" ofType:@"plist"];
+    self.areaArray = [NSArray arrayWithContentsOfFile:path];
     //加载主界面
     [self loadMainView];
 
@@ -33,7 +35,74 @@
     PerfectView * view = [[PerfectView alloc]initWithFrame:self.view.bounds andDelegate:self];
     [self.view addSubview:view];
 }
-
+#pragma mark - UITextFieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    return false;
+}
+#pragma mark - UIPickerViewDelegate,UIPickerViewDataSource
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    if (component == 0) {
+        return self.areaArray.count;
+    }else if (component == 1){
+        NSArray * cityArray = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"];
+        return cityArray.count;
+    }else{
+        NSArray * countryArray = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][[pickerView selectedRowInComponent:1]][@"countryArray"];
+        return countryArray.count;
+    }
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 3;
+}
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    if (component == 0) {
+        NSString * title = self.areaArray[row][@"provinceName"];
+        return title;
+    }if (component == 1){
+        return self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][row][@"cityName"];
+    }
+    return self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][[pickerView selectedRowInComponent:1]][@"countryArray"][row][@"countryName"];
+}
+//数据变动
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    if (component == 0) {
+        [pickerView reloadComponent:1];
+        [pickerView selectRow:0 inComponent:1 animated:true];
+        [pickerView reloadComponent:2];
+        [pickerView selectRow:0 inComponent:2 animated:true];
+    }if (component == 1) {
+        [pickerView reloadComponent:2];
+        [pickerView selectRow:0 inComponent:2 animated:true];
+    }
+    
+}
+//pickerView中事件-确定
+-(void)clickOkOfPickerView:(UIBarButtonItem*)btn{
+    NSInteger row0 = [self.picker selectedRowInComponent:0];
+    NSInteger row1 = [self.picker selectedRowInComponent:1];
+    NSInteger row2 = [self.picker selectedRowInComponent:2];
+    
+    NSDictionary * provinceDic = self.areaArray[row0];
+    NSArray * cityArray = provinceDic[@"cityArray"];
+    NSDictionary * cityDic = cityArray[row1];
+    NSArray * countryArray = cityDic[@"countryArray"];
+    NSDictionary * countryDic = countryArray[row2];
+    
+    NSString * provinceId = provinceDic[@"provinceId"];//省id
+    NSString * provinceName = provinceDic[@"provinceName"];//省名字
+    NSString * cityId = cityDic[@"cityId"];//城市id
+    NSString * cityName = cityDic[@"cityName"];//城市名字
+    NSString * regionName = countryDic[@"countryName"];//区名字
+    NSString * countryId = countryDic[@"countryId"];//区id
+    uploadAreaDic = @{
+                      @"provinceid":provinceId,
+                      @"cityid":cityId,
+                      @"countryid":countryId
+                      };
+    self.area_tf.text = [NSString stringWithFormat:@"%@%@%@",provinceName,cityName,regionName];
+    [MYTOOL hideKeyboard];
+}
 //完成按钮
 -(void)finishBtnCallback{
     if (isChangeUserImg) {
@@ -60,18 +129,16 @@
         [SVProgressHUD showErrorWithStatus:@"请先选择地区" duration:2];
         return;
     }
-    NSString * provinceid = @"2";//省份ID
-    NSString * cityid = @"3";//城市ID
-    NSString * countryid = @"4";//县ID
-    
-    NSDictionary * send = @{
+    NSMutableDictionary * send = [NSMutableDictionary dictionaryWithDictionary:@{
                             @"summary":summary,
                             @"address":address,
-                            @"provinceid":provinceid,
-                            @"cityid":cityid,
-                            @"countryid":countryid,
                             @"userid":USER_ID
-                            };
+                            }];
+    for (NSString * key in uploadAreaDic) {
+        [send setValue:uploadAreaDic[key] forKey:key];
+    }
+    
+    NSLog(@"更新send:%@",send);
     [MYTOOL netWorkingWithTitle:@"更新用户信息"];
     NSString * interface = @"/user/memberuser/modifyuserinfo.html";
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
@@ -261,6 +328,11 @@
     self.love_tf.text = MySummary;
     self.address_tf.text = Address;
     self.area_tf.text = [NSString stringWithFormat:@"%@%@%@",ProvinceName,CityName,CountryName];
+    uploadAreaDic = @{
+                      @"provinceid":MYTOOL.userInfo[@"Province"],
+                      @"cityid":MYTOOL.userInfo[@"Country"],
+                      @"countryid":MYTOOL.userInfo[@"City"]
+                      };
 }
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
