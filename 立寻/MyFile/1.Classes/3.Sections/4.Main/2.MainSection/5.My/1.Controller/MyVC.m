@@ -34,16 +34,6 @@
     self.view.backgroundColor = [MYTOOL RGBWithRed:240 green:240 blue:240 alpha:1];
     float top_all = 0;
     NSDictionary * userInfo = DHTOOL.userInfo;
-  
-  @{
-                                @"url":@"http://imgtu.5011.net/uploads/content/20170421/8543101492743770.jpg",
-                                @"name":@"呆哥哥",
-                                @"sign":@"日复一日，年复一年，岁月就是杀猪刀",
-                                @"progress":@"60%",
-                                @"authentication":@"1",
-                                @"3":@"",
-                                @"4":@""
-                                };
     //个人资料
     {
         float left = 0;
@@ -502,7 +492,6 @@
     if (range.length == 0) {//增加
         if ([string isEqualToString:@"\n"]) {
             [textField resignFirstResponder];
-#warning 更新签名
             return false;
         }
         UILabel * label = [UILabel new];

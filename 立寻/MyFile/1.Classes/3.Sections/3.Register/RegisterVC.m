@@ -7,7 +7,7 @@
 //
 
 #import "RegisterVC.h"
-#import "AgreementVC.h"
+//#import "AgreementVC.h"
 @interface RegisterVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField * phoneTF;//手机号码
 @property(nonatomic,strong)UITextField * codeTF;//验证码
@@ -243,10 +243,11 @@
     NSDictionary * send = @{};
     [MYTOOL netWorkingWithTitle:@"请稍后"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        AgreementVC * vc = [AgreementVC new];
-        vc.title = @"用户协议";
-        vc.content = back_dic[@"Data"];
-        [self.navigationController pushViewController:vc animated:true];
+//        AgreementVC * vc = [AgreementVC new];
+//        vc.title = @"用户协议";
+//        vc.content = back_dic[@"Data"];
+//        [self.navigationController pushViewController:vc animated:true];
+        [SVProgressHUD showSuccessWithStatus:back_dic[@"Data"] duration:1];
     }];
     
     

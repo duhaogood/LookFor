@@ -9,7 +9,7 @@
 #import "UpUserCardVC.h"
 #import "UpUserCardView.h"
 #import "PerfectVC.h"
-@interface UpUserCardVC ()<UIImagePickerControllerDelegate>
+@interface UpUserCardVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
 

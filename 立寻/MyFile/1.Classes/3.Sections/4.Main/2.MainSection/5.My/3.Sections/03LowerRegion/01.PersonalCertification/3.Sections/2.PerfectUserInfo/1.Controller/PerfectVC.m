@@ -248,9 +248,35 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [MYTOOL hideKeyboard];
 }
+//更新用户信息
+-(void)userInfoUpdate{
+    NSString * MySummary = MYTOOL.userInfo[@"MySummary"];
+    NSString * Address = MYTOOL.userInfo[@"Address"];
+    NSString * ProvinceName = MYTOOL.userInfo[@"ProvinceName"];
+    NSString * CityName = MYTOOL.userInfo[@"CityName"];
+    NSString * CountryName = MYTOOL.userInfo[@"CountryName"];
+    NSString * url = MYTOOL.userInfo[@"ImgFilePath"];
+    
+    [self.user_imgV sd_setImageWithURL:[NSURL URLWithString:url]];
+    self.love_tf.text = MySummary;
+    self.address_tf.text = Address;
+    self.area_tf.text = [NSString stringWithFormat:@"%@%@%@",ProvinceName,CityName,CountryName];
+}
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
     [self.navigationController setNavigationBarHidden:true animated:true];
+    NSString * interface = @"/user/memberuser/getmemberuserinfo.html";
+    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];
+    if (!userid) {
+        return;
+    }
+    NSDictionary * send = @{
+                            @"userid": userid
+                            };
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        MYTOOL.userInfo = back_dic[@"Data"];
+        [self userInfoUpdate];
+    }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [MYTOOL showTabBar];
