@@ -28,7 +28,18 @@
     self.areaArray = [NSArray arrayWithContentsOfFile:path];
     //加载主界面
     [self loadMainView];
-
+    NSString * interface = @"/user/memberuser/getmemberuserinfo.html";
+    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];
+    if (!userid) {
+        return;
+    }
+    NSDictionary * send = @{
+                            @"userid": userid
+                            };
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        MYTOOL.userInfo = back_dic[@"Data"];
+        [self userInfoUpdate];
+    }];
 }
 //加载主界面
 -(void)loadMainView{
@@ -323,8 +334,12 @@
     NSString * CityName = MYTOOL.userInfo[@"CityName"];
     NSString * CountryName = MYTOOL.userInfo[@"CountryName"];
     NSString * url = MYTOOL.userInfo[@"ImgFilePath"];
-    
-    [self.user_imgV sd_setImageWithURL:[NSURL URLWithString:url]];
+    //更新用户头像
+    if (url == nil || [url isKindOfClass:[NSNull class]]) {
+        
+    }else{
+        [self.user_imgV sd_setImageWithURL:[NSURL URLWithString:url]];
+    }
     self.love_tf.text = MySummary;
     self.address_tf.text = Address;
     self.area_tf.text = [NSString stringWithFormat:@"%@%@%@",ProvinceName,CityName,CountryName];
@@ -334,21 +349,11 @@
                       @"countryid":MYTOOL.userInfo[@"City"]
                       };
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
     [self.navigationController setNavigationBarHidden:true animated:true];
-    NSString * interface = @"/user/memberuser/getmemberuserinfo.html";
-    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];
-    if (!userid) {
-        return;
-    }
-    NSDictionary * send = @{
-                            @"userid": userid
-                            };
-    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        MYTOOL.userInfo = back_dic[@"Data"];
-        [self userInfoUpdate];
-    }];
+    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [MYTOOL showTabBar];

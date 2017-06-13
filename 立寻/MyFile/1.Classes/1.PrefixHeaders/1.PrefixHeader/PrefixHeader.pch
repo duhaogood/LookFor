@@ -29,6 +29,9 @@
 #import "DHNetWorking.h"
 #import "MyTextView.h"
 #import "AFNetworking.h"
+#import "MyLocationManager.h"
+
+
 #endif /* PrefixHeader_pch */
 
 

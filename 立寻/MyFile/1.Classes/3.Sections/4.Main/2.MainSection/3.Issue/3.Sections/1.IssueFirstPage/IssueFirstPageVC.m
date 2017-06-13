@@ -7,7 +7,10 @@
 //
 
 #import "IssueFirstPageVC.h"
-#import "IssueInfoVC.h"
+#import "LookForCircleVC.h"
+#import "NetShowHelpVC.h"
+#import "LookManSomeThingVC.h"
+#import "PickUpSomeThingVC.h"
 @interface IssueFirstPageVC ()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *backgroundTapView;
@@ -43,14 +46,14 @@
     //图片按钮数组
     img_name_array = @[
                        @[
-                           @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109",@"80"],
-                           @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96",@"81"],
-                           @[@"fbbtn_quanzi",@"立寻圈子",@"96",@"109",@"549"]
+                           @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109",@"80",@"NetShowHelpVC"],
+                           @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96",@"81",@"NetShowHelpVC"],
+                           @[@"fbbtn_quanzi",@"立寻圈子",@"96",@"109",@"549",@"LookForCircleVC"]
                            ],//第一行
                        @[
-                           @[@"fbbtn_xunren",@"委托寻人",@"96",@"109",@"83"],
-                           @[@"fbbtn_xw",@"委托寻物",@"88",@"96",@"82"],
-                           @[@"fbbtn_zlrl",@"招领认领",@"96",@"109",@"394"]
+                           @[@"fbbtn_xunren",@"委托寻人",@"96",@"109",@"83",@"LookManSomeThingVC"],
+                           @[@"fbbtn_xw",@"委托寻物",@"88",@"96",@"82",@"LookManSomeThingVC"],
+                           @[@"fbbtn_zlrl",@"招领认领",@"96",@"109",@"394",@"PickUpSomeThingVC"]
                            ]//第二行
                       ];
     //加载按钮
@@ -108,13 +111,15 @@
                             @"appid":APPID_MINE,
                             @"parentid":parentid
                             };
-    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSString * className = img_name_array[btn.tag/10][btn.tag%10][5];
+        NSString * title = img_name_array[btn.tag/10][btn.tag%10][1];
+        Class class = NSClassFromString(className);
+        UIViewController * vc = [class new];
+        vc.title = title;
+        ((PickUpSomeThingVC *)vc).secondTypeList = back_dic[@"Data"];
         //跳转
-        IssueInfoVC * issue = [IssueInfoVC new];
-        issue.typeTitle = img_name_array[btn.tag/10][btn.tag%10][1];
-        issue.title = @"发布信息";
-        issue.secondTypeList = back_dic[@"Data"];
-        [[self.delegate navigationController] pushViewController:issue animated:true];
+        [[self.delegate navigationController] pushViewController:vc animated:true];
         [self submitCloseBtn];
     }];
     

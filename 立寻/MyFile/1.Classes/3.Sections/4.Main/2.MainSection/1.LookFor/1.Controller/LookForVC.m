@@ -9,12 +9,15 @@
 #import "LookForVC.h"
 #import "FirstPageHeaderView.h"
 #import "LookForCell.h"
-@interface LookForVC ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate>
+@interface LookForVC ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * lookForArray;//找寻数据
 @property(nonatomic,strong)NSArray * cell_show_array;//cell数据源
+@property(nonatomic,strong)UILabel * cityLabel;//城市名label
+@property(nonatomic,strong)UISearchBar * searchBar;//搜索框
+@property(nonatomic,strong)UIImageView * areaIcon;//城市图标
 @end
 
 @implementation LookForVC
@@ -30,8 +33,73 @@
     self.automaticallyAdjustsScrollViewInsets = false;
     //加载轮播图数据
     [self loadBannerArray];
-    
-    
+    //左侧定位按钮
+    {
+        UIView * v = [UIView new];
+        v.frame = CGRectMake(0, 0, 70, 44);
+        UIBarButtonItem * bar = [[UIBarButtonItem alloc] initWithCustomView:v];
+        self.navigationItem.leftBarButtonItem = bar;
+        //右侧图标-arrow_bottom_md 11*6
+        {
+            UIImageView * icon = [UIImageView new];
+            icon.image = [UIImage imageNamed:@"arrow_bottom_md"];
+            self.areaIcon = icon;
+            [v addSubview:icon];
+            //城市名称
+            UILabel * label = [UILabel new];
+            label.font = [UIFont systemFontOfSize:13];
+            label.textColor = [UIColor whiteColor];
+            [v addSubview:label];
+            label.text = @"定位中…";
+            self.cityLabel = label;
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            label.frame = CGRectMake(0, 22-size.height/2, size.width, size.height);
+            icon.frame = CGRectMake(label.frame.origin.x + label.frame.size.width + 5, 19, 11, 6);
+        }
+        //按钮
+        {
+            UIButton * btn = [UIButton new];
+            btn.frame = v.bounds;
+            [v addSubview:btn];
+            [btn addTarget:self action:@selector(clickUpLeftCityBtn) forControlEvents:UIControlEventTouchUpInside];
+        }
+//        [[MyLocationManager sharedLocationManager] startLocation];
+    }
+    //右侧筛选按钮
+    {
+        UIView * view = [UIView new];
+        view.frame = CGRectMake(0, 0, 50, 44);
+//        view.backgroundColor = [UIColor redColor];
+        UIBarButtonItem * barBtn = [[UIBarButtonItem alloc] initWithCustomView:view];
+        self.navigationItem.rightBarButtonItem = barBtn;
+        //图标
+        UIImageView * icon = [UIImageView new];
+        icon.image = [UIImage imageNamed:@"filter"];
+        icon.frame = CGRectMake(view.frame.size.width-12, view.frame.size.height/2-6, 12, 12);
+        [view addSubview:icon];
+        //文字
+        UILabel * label = [UILabel new];
+        label.text = @"筛选";
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:13];
+        CGSize size = [MYTOOL getSizeWithLabel:label];
+        label.frame = CGRectMake(view.frame.size.width-12-size.width, view.frame.size.height/2-size.height/2, size.width, size.height);
+        [view addSubview:label];
+        //按钮
+        UIButton * btn = [UIButton new];
+        btn.frame = view.bounds;
+        [view addSubview:btn];
+        [btn addTarget:self action:@selector(clickUpRightSelectBtn) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+//点击左上角定位城市事件
+-(void)clickUpLeftCityBtn{
+    NSLog(@"当前城市:%@",self.cityLabel.text);
+    [SVProgressHUD showErrorWithStatus:@"不要着急，亲\n选择地区还没弄" duration:1];
+}
+//点击右上角筛选
+-(void)clickUpRightSelectBtn{
+    [SVProgressHUD showErrorWithStatus:@"不要着急，亲\n筛选还没弄" duration:1];
 }
 #pragma mark - 头view点击事件
 //tableview数据源选择
@@ -77,6 +145,11 @@
 #pragma mark - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     NSLog(@"轮播图tag:%ld,点击了第%ld张图片",cycleScrollView.tag,index);
+}
+#pragma mark - UISearchBarDelegate
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    [SVProgressHUD showErrorWithStatus:@"不要乱点，亲\n稍后有页面跳转" duration:1];
+    return false;
 }
 //加载轮播图数据
 -(void)loadBannerArray{
@@ -195,4 +268,48 @@
                              ];
     [self.tableView reloadData];
 }
+//设置顶上文字
+-(void)setCityName:(NSString *)city{
+    if (city && city.length > 0) {
+        if (city.length > 4) {//如果长度大于4，取前3个字+…
+            city = [city substringToIndex:3];
+            city = [NSString stringWithFormat:@"%@…",city];
+        }
+        self.cityLabel.text = city;
+        CGSize size = [MYTOOL getSizeWithLabel:self.cityLabel];
+        self.cityLabel.frame = CGRectMake(0, 22-size.height/2, size.width, size.height);
+        self.areaIcon.frame = CGRectMake(self.cityLabel.frame.origin.x + self.cityLabel.frame.size.width + 5, 19, 11, 6);
+    }
+}
+//接收到定位成功通知
+-(void)receiveUpdateLocationSuccessNotification:(NSNotification *)notification{
+    NSDictionary * obj = notification.object;
+    NSString * city = obj[@"city"];
+    [self setCityName:city];
+}
+//接收到定位失败通知
+-(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [MYCENTER_NOTIFICATION addObserver:self selector:@selector(receiveUpdateLocationSuccessNotification:) name:NOTIFICATION_UPDATELOCATION_SUCCESS object:nil];
+    [MYCENTER_NOTIFICATION addObserver:self selector:@selector(receiveUpdateLocationFailedNotification:) name:NOTIFICATION_UPDATELOCATION_FAILED object:nil];
+    //搜索框
+    UISearchBar * searchBar = [[UISearchBar alloc]init];
+    searchBar.delegate = self;
+    self.searchBar = searchBar;
+    searchBar.frame = CGRectMake(90, 14, WIDTH-160, 14.5);
+    [self.navigationController.navigationBar addSubview:searchBar];
+    searchBar.placeholder = @"请输入查询的关键字";
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    //删除通知
+    [MYCENTER_NOTIFICATION removeObserver:self name:NOTIFICATION_UPDATELOCATION_SUCCESS object:nil];
+    [MYCENTER_NOTIFICATION removeObserver:self name:NOTIFICATION_UPDATELOCATION_FAILED object:nil];
+    [self.searchBar removeFromSuperview];
+    self.searchBar = nil;
+}
+
+
+
 @end

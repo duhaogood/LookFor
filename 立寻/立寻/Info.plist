@@ -43,5 +43,9 @@
 	<string>使用摄像头</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>查看相册</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>需要定位</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>需要定位哦</string>
 </dict>
 </plist>
