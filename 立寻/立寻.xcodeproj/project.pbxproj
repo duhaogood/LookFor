@@ -13,23 +13,28 @@
 		0418F0111EECEF2800063E93 /* UpUserCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0101EECEF2800063E93 /* UpUserCardView.m */; };
 		0418F0171EED7ADF00063E93 /* PerfectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0161EED7ADF00063E93 /* PerfectView.m */; };
 		0418F01A1EED7AF200063E93 /* PerfectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0191EED7AF200063E93 /* PerfectVC.m */; };
-		0436B5A31EEB0EA50003D4AB /* city_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0436B5A21EEB0EA50003D4AB /* city_code.plist */; };
 		0436E5EF1EF007730031FC2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5EE1EF007730031FC2B /* CoreLocation.framework */; };
 		0436E5F11EF0077B0031FC2B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5F01EF0077B0031FC2B /* MapKit.framework */; };
 		0436E5F41EF007960031FC2B /* MyLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E5F31EF007960031FC2B /* MyLocationManager.m */; };
-		0436E61E1EF02A870031FC2B /* PickUpSomeThingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E6121EF02A870031FC2B /* PickUpSomeThingVC.m */; };
-		0436E61F1EF02A870031FC2B /* IssueInfoUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E6171EF02A870031FC2B /* IssueInfoUpView.m */; };
-		0436E6201EF02A870031FC2B /* IssueInfoMiddleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E61A1EF02A870031FC2B /* IssueInfoMiddleView.m */; };
-		0436E6211EF02A870031FC2B /* IssueInfoLowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E61D1EF02A870031FC2B /* IssueInfoLowerView.m */; };
-		0436E6241EF02B880031FC2B /* LookForCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E6231EF02B880031FC2B /* LookForCircleVC.m */; };
-		0436E6271EF02B960031FC2B /* NetShowHelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E6261EF02B960031FC2B /* NetShowHelpVC.m */; };
-		0436E62A1EF02BA50031FC2B /* LookManSomeThingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436E6291EF02BA50031FC2B /* LookManSomeThingVC.m */; };
 		043EF4A71EEC0E65007AABCD /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4A61EEC0E65007AABCD /* LoginVC.m */; };
 		043EF4AA1EEC0E7C007AABCD /* FindPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */; };
 		043EF4AD1EEC0E8F007AABCD /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043EF4AC1EEC0E8F007AABCD /* RegisterVC.m */; };
 		04410F571EEEBF720063CC32 /* area_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04410F561EEEBF720063CC32 /* area_code.plist */; };
 		044669921EEA47BB0082D8BC /* DHNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669901EEA47BB0082D8BC /* DHNetWorking.m */; };
 		044669961EEA72160082D8BC /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669951EEA72160082D8BC /* MyTextView.m */; };
+		044669DC1EF11A010082D8BC /* LookForCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669B31EF11A010082D8BC /* LookForCircleVC.m */; };
+		044669DD1EF11A010082D8BC /* LookForCircleUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669B81EF11A010082D8BC /* LookForCircleUpView.m */; };
+		044669DE1EF11A010082D8BC /* NetShowHelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669BE1EF11A010082D8BC /* NetShowHelpVC.m */; };
+		044669DF1EF11A010082D8BC /* LookManSomeThingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669C71EF11A010082D8BC /* LookManSomeThingVC.m */; };
+		044669E01EF11A010082D8BC /* PickUpSomeThingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669D01EF11A010082D8BC /* PickUpSomeThingVC.m */; };
+		044669E11EF11A010082D8BC /* IssueInfoUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669D51EF11A010082D8BC /* IssueInfoUpView.m */; };
+		044669E21EF11A010082D8BC /* IssueInfoMiddleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669D81EF11A010082D8BC /* IssueInfoMiddleView.m */; };
+		044669E31EF11A010082D8BC /* IssueInfoLowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669DB1EF11A010082D8BC /* IssueInfoLowerView.m */; };
+		044669E61EF11A2E0082D8BC /* LookForCircleLowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669E51EF11A2E0082D8BC /* LookForCircleLowerView.m */; };
+		044669EC1EF12F360082D8BC /* NetShowHelpDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669EB1EF12F360082D8BC /* NetShowHelpDownView.m */; };
+		044669EF1EF12F4C0082D8BC /* NetShowHelpUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669EE1EF12F4C0082D8BC /* NetShowHelpUpView.m */; };
+		044669F21EF131A20082D8BC /* LookManSomeThingUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669F11EF131A20082D8BC /* LookManSomeThingUpView.m */; };
+		044669F51EF131AC0082D8BC /* LookManSomeThingDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044669F41EF131AC0082D8BC /* LookManSomeThingDownView.m */; };
 		04874F141ED913CE00049758 /* LookForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04874F131ED913CE00049758 /* LookForCell.m */; };
 		049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */; };
 		049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */; };
@@ -157,34 +162,10 @@
 		0418F0161EED7ADF00063E93 /* PerfectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfectView.m; sourceTree = "<group>"; };
 		0418F0181EED7AF200063E93 /* PerfectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerfectVC.h; sourceTree = "<group>"; };
 		0418F0191EED7AF200063E93 /* PerfectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfectVC.m; sourceTree = "<group>"; };
-		0436B5A21EEB0EA50003D4AB /* city_code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city_code.plist; sourceTree = "<group>"; };
 		0436E5EE1EF007730031FC2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0436E5F01EF0077B0031FC2B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0436E5F21EF007960031FC2B /* MyLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationManager.h; sourceTree = "<group>"; };
 		0436E5F31EF007960031FC2B /* MyLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationManager.m; sourceTree = "<group>"; };
-		0436E5F51EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E5F71EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E5FA1EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E5FF1EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E6021EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E6071EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E60A1EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E60F1EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E6111EF02A870031FC2B /* PickUpSomeThingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickUpSomeThingVC.h; sourceTree = "<group>"; };
-		0436E6121EF02A870031FC2B /* PickUpSomeThingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickUpSomeThingVC.m; sourceTree = "<group>"; };
-		0436E6141EF02A870031FC2B /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		0436E6161EF02A870031FC2B /* IssueInfoUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoUpView.h; sourceTree = "<group>"; };
-		0436E6171EF02A870031FC2B /* IssueInfoUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoUpView.m; sourceTree = "<group>"; };
-		0436E6191EF02A870031FC2B /* IssueInfoMiddleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoMiddleView.h; sourceTree = "<group>"; };
-		0436E61A1EF02A870031FC2B /* IssueInfoMiddleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoMiddleView.m; sourceTree = "<group>"; };
-		0436E61C1EF02A870031FC2B /* IssueInfoLowerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoLowerView.h; sourceTree = "<group>"; };
-		0436E61D1EF02A870031FC2B /* IssueInfoLowerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoLowerView.m; sourceTree = "<group>"; };
-		0436E6221EF02B880031FC2B /* LookForCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCircleVC.h; sourceTree = "<group>"; };
-		0436E6231EF02B880031FC2B /* LookForCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCircleVC.m; sourceTree = "<group>"; };
-		0436E6251EF02B960031FC2B /* NetShowHelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetShowHelpVC.h; sourceTree = "<group>"; };
-		0436E6261EF02B960031FC2B /* NetShowHelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetShowHelpVC.m; sourceTree = "<group>"; };
-		0436E6281EF02BA50031FC2B /* LookManSomeThingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookManSomeThingVC.h; sourceTree = "<group>"; };
-		0436E6291EF02BA50031FC2B /* LookManSomeThingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookManSomeThingVC.m; sourceTree = "<group>"; };
 		043EF4A51EEC0E65007AABCD /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		043EF4A61EEC0E65007AABCD /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		043EF4A81EEC0E7C007AABCD /* FindPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordVC.h; sourceTree = "<group>"; };
@@ -196,6 +177,41 @@
 		044669901EEA47BB0082D8BC /* DHNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHNetWorking.m; sourceTree = "<group>"; };
 		044669941EEA72160082D8BC /* MyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
 		044669951EEA72160082D8BC /* MyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
+		044669AE1EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669B01EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669B21EF11A010082D8BC /* LookForCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCircleVC.h; sourceTree = "<group>"; };
+		044669B31EF11A010082D8BC /* LookForCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCircleVC.m; sourceTree = "<group>"; };
+		044669B51EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669B71EF11A010082D8BC /* LookForCircleUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCircleUpView.h; sourceTree = "<group>"; };
+		044669B81EF11A010082D8BC /* LookForCircleUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCircleUpView.m; sourceTree = "<group>"; };
+		044669BB1EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669BD1EF11A010082D8BC /* NetShowHelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetShowHelpVC.h; sourceTree = "<group>"; };
+		044669BE1EF11A010082D8BC /* NetShowHelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetShowHelpVC.m; sourceTree = "<group>"; };
+		044669C01EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669C41EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669C61EF11A010082D8BC /* LookManSomeThingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookManSomeThingVC.h; sourceTree = "<group>"; };
+		044669C71EF11A010082D8BC /* LookManSomeThingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookManSomeThingVC.m; sourceTree = "<group>"; };
+		044669C91EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669CD1EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669CF1EF11A010082D8BC /* PickUpSomeThingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickUpSomeThingVC.h; sourceTree = "<group>"; };
+		044669D01EF11A010082D8BC /* PickUpSomeThingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickUpSomeThingVC.m; sourceTree = "<group>"; };
+		044669D21EF11A010082D8BC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		044669D41EF11A010082D8BC /* IssueInfoUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoUpView.h; sourceTree = "<group>"; };
+		044669D51EF11A010082D8BC /* IssueInfoUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoUpView.m; sourceTree = "<group>"; };
+		044669D71EF11A010082D8BC /* IssueInfoMiddleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoMiddleView.h; sourceTree = "<group>"; };
+		044669D81EF11A010082D8BC /* IssueInfoMiddleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoMiddleView.m; sourceTree = "<group>"; };
+		044669DA1EF11A010082D8BC /* IssueInfoLowerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueInfoLowerView.h; sourceTree = "<group>"; };
+		044669DB1EF11A010082D8BC /* IssueInfoLowerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueInfoLowerView.m; sourceTree = "<group>"; };
+		044669E41EF11A2E0082D8BC /* LookForCircleLowerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCircleLowerView.h; sourceTree = "<group>"; };
+		044669E51EF11A2E0082D8BC /* LookForCircleLowerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCircleLowerView.m; sourceTree = "<group>"; };
+		044669EA1EF12F360082D8BC /* NetShowHelpDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetShowHelpDownView.h; sourceTree = "<group>"; };
+		044669EB1EF12F360082D8BC /* NetShowHelpDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetShowHelpDownView.m; sourceTree = "<group>"; };
+		044669ED1EF12F4C0082D8BC /* NetShowHelpUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetShowHelpUpView.h; sourceTree = "<group>"; };
+		044669EE1EF12F4C0082D8BC /* NetShowHelpUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetShowHelpUpView.m; sourceTree = "<group>"; };
+		044669F01EF131A20082D8BC /* LookManSomeThingUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookManSomeThingUpView.h; sourceTree = "<group>"; };
+		044669F11EF131A20082D8BC /* LookManSomeThingUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookManSomeThingUpView.m; sourceTree = "<group>"; };
+		044669F31EF131AC0082D8BC /* LookManSomeThingDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookManSomeThingDownView.h; sourceTree = "<group>"; };
+		044669F41EF131AC0082D8BC /* LookManSomeThingDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookManSomeThingDownView.m; sourceTree = "<group>"; };
 		04874F121ED913CE00049758 /* LookForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCell.h; sourceTree = "<group>"; };
 		04874F131ED913CE00049758 /* LookForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCell.m; sourceTree = "<group>"; };
 		049B5DC51EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
@@ -551,216 +567,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0436E5F61EF02A870031FC2B /* 1.LookForCircle */ = {
-			isa = PBXGroup;
-			children = (
-				0436E5F71EF02A870031FC2B /* 0.Comments.h */,
-				0436E5F81EF02A870031FC2B /* 1.Controller */,
-				0436E5F91EF02A870031FC2B /* 2.MyView */,
-			);
-			path = 1.LookForCircle;
-			sourceTree = "<group>";
-		};
-		0436E5F81EF02A870031FC2B /* 1.Controller */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6221EF02B880031FC2B /* LookForCircleVC.h */,
-				0436E6231EF02B880031FC2B /* LookForCircleVC.m */,
-			);
-			path = 1.Controller;
-			sourceTree = "<group>";
-		};
-		0436E5F91EF02A870031FC2B /* 2.MyView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E5FA1EF02A870031FC2B /* 0.Comments.h */,
-				0436E5FB1EF02A870031FC2B /* 1.IssueInfoUpView */,
-				0436E5FC1EF02A870031FC2B /* 2.IssueInfoMiddleView */,
-				0436E5FD1EF02A870031FC2B /* 3.IssueInfolowerView */,
-			);
-			path = 2.MyView;
-			sourceTree = "<group>";
-		};
-		0436E5FB1EF02A870031FC2B /* 1.IssueInfoUpView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 1.IssueInfoUpView;
-			sourceTree = "<group>";
-		};
-		0436E5FC1EF02A870031FC2B /* 2.IssueInfoMiddleView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.IssueInfoMiddleView;
-			sourceTree = "<group>";
-		};
-		0436E5FD1EF02A870031FC2B /* 3.IssueInfolowerView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 3.IssueInfolowerView;
-			sourceTree = "<group>";
-		};
-		0436E5FE1EF02A870031FC2B /* 2.NetShowHelp */ = {
-			isa = PBXGroup;
-			children = (
-				0436E5FF1EF02A870031FC2B /* 0.Comments.h */,
-				0436E6001EF02A870031FC2B /* 1.Controller */,
-				0436E6011EF02A870031FC2B /* 2.MyView */,
-			);
-			path = 2.NetShowHelp;
-			sourceTree = "<group>";
-		};
-		0436E6001EF02A870031FC2B /* 1.Controller */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6251EF02B960031FC2B /* NetShowHelpVC.h */,
-				0436E6261EF02B960031FC2B /* NetShowHelpVC.m */,
-			);
-			path = 1.Controller;
-			sourceTree = "<group>";
-		};
-		0436E6011EF02A870031FC2B /* 2.MyView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6021EF02A870031FC2B /* 0.Comments.h */,
-				0436E6031EF02A870031FC2B /* 1.IssueInfoUpView */,
-				0436E6041EF02A870031FC2B /* 2.IssueInfoMiddleView */,
-				0436E6051EF02A870031FC2B /* 3.IssueInfolowerView */,
-			);
-			path = 2.MyView;
-			sourceTree = "<group>";
-		};
-		0436E6031EF02A870031FC2B /* 1.IssueInfoUpView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 1.IssueInfoUpView;
-			sourceTree = "<group>";
-		};
-		0436E6041EF02A870031FC2B /* 2.IssueInfoMiddleView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.IssueInfoMiddleView;
-			sourceTree = "<group>";
-		};
-		0436E6051EF02A870031FC2B /* 3.IssueInfolowerView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 3.IssueInfolowerView;
-			sourceTree = "<group>";
-		};
-		0436E6061EF02A870031FC2B /* 3.LookManSomeThing */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6071EF02A870031FC2B /* 0.Comments.h */,
-				0436E6081EF02A870031FC2B /* 1.Controller */,
-				0436E6091EF02A870031FC2B /* 2.MyView */,
-			);
-			path = 3.LookManSomeThing;
-			sourceTree = "<group>";
-		};
-		0436E6081EF02A870031FC2B /* 1.Controller */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6281EF02BA50031FC2B /* LookManSomeThingVC.h */,
-				0436E6291EF02BA50031FC2B /* LookManSomeThingVC.m */,
-			);
-			path = 1.Controller;
-			sourceTree = "<group>";
-		};
-		0436E6091EF02A870031FC2B /* 2.MyView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E60A1EF02A870031FC2B /* 0.Comments.h */,
-				0436E60B1EF02A870031FC2B /* 1.IssueInfoUpView */,
-				0436E60C1EF02A870031FC2B /* 2.IssueInfoMiddleView */,
-				0436E60D1EF02A870031FC2B /* 3.IssueInfolowerView */,
-			);
-			path = 2.MyView;
-			sourceTree = "<group>";
-		};
-		0436E60B1EF02A870031FC2B /* 1.IssueInfoUpView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 1.IssueInfoUpView;
-			sourceTree = "<group>";
-		};
-		0436E60C1EF02A870031FC2B /* 2.IssueInfoMiddleView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.IssueInfoMiddleView;
-			sourceTree = "<group>";
-		};
-		0436E60D1EF02A870031FC2B /* 3.IssueInfolowerView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 3.IssueInfolowerView;
-			sourceTree = "<group>";
-		};
-		0436E60E1EF02A870031FC2B /* 4.PickUpSomeThing */ = {
-			isa = PBXGroup;
-			children = (
-				0436E60F1EF02A870031FC2B /* 0.Comments.h */,
-				0436E6101EF02A870031FC2B /* 1.Controller */,
-				0436E6131EF02A870031FC2B /* 2.MyView */,
-			);
-			path = 4.PickUpSomeThing;
-			sourceTree = "<group>";
-		};
-		0436E6101EF02A870031FC2B /* 1.Controller */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6111EF02A870031FC2B /* PickUpSomeThingVC.h */,
-				0436E6121EF02A870031FC2B /* PickUpSomeThingVC.m */,
-			);
-			path = 1.Controller;
-			sourceTree = "<group>";
-		};
-		0436E6131EF02A870031FC2B /* 2.MyView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6141EF02A870031FC2B /* 0.Comments.h */,
-				0436E6151EF02A870031FC2B /* 1.IssueInfoUpView */,
-				0436E6181EF02A870031FC2B /* 2.IssueInfoMiddleView */,
-				0436E61B1EF02A870031FC2B /* 3.IssueInfolowerView */,
-			);
-			path = 2.MyView;
-			sourceTree = "<group>";
-		};
-		0436E6151EF02A870031FC2B /* 1.IssueInfoUpView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6161EF02A870031FC2B /* IssueInfoUpView.h */,
-				0436E6171EF02A870031FC2B /* IssueInfoUpView.m */,
-			);
-			path = 1.IssueInfoUpView;
-			sourceTree = "<group>";
-		};
-		0436E6181EF02A870031FC2B /* 2.IssueInfoMiddleView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E6191EF02A870031FC2B /* IssueInfoMiddleView.h */,
-				0436E61A1EF02A870031FC2B /* IssueInfoMiddleView.m */,
-			);
-			path = 2.IssueInfoMiddleView;
-			sourceTree = "<group>";
-		};
-		0436E61B1EF02A870031FC2B /* 3.IssueInfolowerView */ = {
-			isa = PBXGroup;
-			children = (
-				0436E61C1EF02A870031FC2B /* IssueInfoLowerView.h */,
-				0436E61D1EF02A870031FC2B /* IssueInfoLowerView.m */,
-			);
-			path = 3.IssueInfolowerView;
-			sourceTree = "<group>";
-		};
 		043EF4A41EEC0E4C007AABCD /* 3.FindPassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,18 +574,6 @@
 				043EF4A91EEC0E7C007AABCD /* FindPasswordVC.m */,
 			);
 			path = 3.FindPassword;
-			sourceTree = "<group>";
-		};
-		044669841EEA455F0082D8BC /* 2.IssueInfo */ = {
-			isa = PBXGroup;
-			children = (
-				0436E5F51EF02A870031FC2B /* 0.Comments.h */,
-				0436E5F61EF02A870031FC2B /* 1.LookForCircle */,
-				0436E5FE1EF02A870031FC2B /* 2.NetShowHelp */,
-				0436E6061EF02A870031FC2B /* 3.LookManSomeThing */,
-				0436E60E1EF02A870031FC2B /* 4.PickUpSomeThing */,
-			);
-			path = 2.IssueInfo;
 			sourceTree = "<group>";
 		};
 		0446698E1EEA47BB0082D8BC /* 2.netWorking */ = {
@@ -798,6 +592,216 @@
 				044669951EEA72160082D8BC /* MyTextView.m */,
 			);
 			path = 1.MyTextTV;
+			sourceTree = "<group>";
+		};
+		044669AD1EF11A010082D8BC /* 2.IssueInfo */ = {
+			isa = PBXGroup;
+			children = (
+				044669AE1EF11A010082D8BC /* 0.Comments.h */,
+				044669AF1EF11A010082D8BC /* 1.LookForCircle */,
+				044669BA1EF11A010082D8BC /* 2.NetShowHelp */,
+				044669C31EF11A010082D8BC /* 3.LookManSomeThing */,
+				044669CC1EF11A010082D8BC /* 4.PickUpSomeThing */,
+			);
+			path = 2.IssueInfo;
+			sourceTree = "<group>";
+		};
+		044669AF1EF11A010082D8BC /* 1.LookForCircle */ = {
+			isa = PBXGroup;
+			children = (
+				044669B01EF11A010082D8BC /* 0.Comments.h */,
+				044669B11EF11A010082D8BC /* 1.Controller */,
+				044669B41EF11A010082D8BC /* 2.MyView */,
+			);
+			path = 1.LookForCircle;
+			sourceTree = "<group>";
+		};
+		044669B11EF11A010082D8BC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				044669B21EF11A010082D8BC /* LookForCircleVC.h */,
+				044669B31EF11A010082D8BC /* LookForCircleVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		044669B41EF11A010082D8BC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				044669B51EF11A010082D8BC /* 0.Comments.h */,
+				044669B61EF11A010082D8BC /* 1.IssueInfoUpView */,
+				044669B91EF11A010082D8BC /* 3.IssueInfolowerView */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		044669B61EF11A010082D8BC /* 1.IssueInfoUpView */ = {
+			isa = PBXGroup;
+			children = (
+				044669B71EF11A010082D8BC /* LookForCircleUpView.h */,
+				044669B81EF11A010082D8BC /* LookForCircleUpView.m */,
+			);
+			path = 1.IssueInfoUpView;
+			sourceTree = "<group>";
+		};
+		044669B91EF11A010082D8BC /* 3.IssueInfolowerView */ = {
+			isa = PBXGroup;
+			children = (
+				044669E41EF11A2E0082D8BC /* LookForCircleLowerView.h */,
+				044669E51EF11A2E0082D8BC /* LookForCircleLowerView.m */,
+			);
+			path = 3.IssueInfolowerView;
+			sourceTree = "<group>";
+		};
+		044669BA1EF11A010082D8BC /* 2.NetShowHelp */ = {
+			isa = PBXGroup;
+			children = (
+				044669BB1EF11A010082D8BC /* 0.Comments.h */,
+				044669BC1EF11A010082D8BC /* 1.Controller */,
+				044669BF1EF11A010082D8BC /* 2.MyView */,
+			);
+			path = 2.NetShowHelp;
+			sourceTree = "<group>";
+		};
+		044669BC1EF11A010082D8BC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				044669BD1EF11A010082D8BC /* NetShowHelpVC.h */,
+				044669BE1EF11A010082D8BC /* NetShowHelpVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		044669BF1EF11A010082D8BC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				044669C01EF11A010082D8BC /* 0.Comments.h */,
+				044669C11EF11A010082D8BC /* 1.IssueInfoUpView */,
+				044669C21EF11A010082D8BC /* 3.IssueInfolowerView */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		044669C11EF11A010082D8BC /* 1.IssueInfoUpView */ = {
+			isa = PBXGroup;
+			children = (
+				044669ED1EF12F4C0082D8BC /* NetShowHelpUpView.h */,
+				044669EE1EF12F4C0082D8BC /* NetShowHelpUpView.m */,
+			);
+			path = 1.IssueInfoUpView;
+			sourceTree = "<group>";
+		};
+		044669C21EF11A010082D8BC /* 3.IssueInfolowerView */ = {
+			isa = PBXGroup;
+			children = (
+				044669EA1EF12F360082D8BC /* NetShowHelpDownView.h */,
+				044669EB1EF12F360082D8BC /* NetShowHelpDownView.m */,
+			);
+			path = 3.IssueInfolowerView;
+			sourceTree = "<group>";
+		};
+		044669C31EF11A010082D8BC /* 3.LookManSomeThing */ = {
+			isa = PBXGroup;
+			children = (
+				044669C41EF11A010082D8BC /* 0.Comments.h */,
+				044669C51EF11A010082D8BC /* 1.Controller */,
+				044669C81EF11A010082D8BC /* 2.MyView */,
+			);
+			path = 3.LookManSomeThing;
+			sourceTree = "<group>";
+		};
+		044669C51EF11A010082D8BC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				044669C61EF11A010082D8BC /* LookManSomeThingVC.h */,
+				044669C71EF11A010082D8BC /* LookManSomeThingVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		044669C81EF11A010082D8BC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				044669C91EF11A010082D8BC /* 0.Comments.h */,
+				044669CA1EF11A010082D8BC /* 1.IssueInfoUpView */,
+				044669CB1EF11A010082D8BC /* 3.IssueInfolowerView */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		044669CA1EF11A010082D8BC /* 1.IssueInfoUpView */ = {
+			isa = PBXGroup;
+			children = (
+				044669F01EF131A20082D8BC /* LookManSomeThingUpView.h */,
+				044669F11EF131A20082D8BC /* LookManSomeThingUpView.m */,
+			);
+			path = 1.IssueInfoUpView;
+			sourceTree = "<group>";
+		};
+		044669CB1EF11A010082D8BC /* 3.IssueInfolowerView */ = {
+			isa = PBXGroup;
+			children = (
+				044669F31EF131AC0082D8BC /* LookManSomeThingDownView.h */,
+				044669F41EF131AC0082D8BC /* LookManSomeThingDownView.m */,
+			);
+			path = 3.IssueInfolowerView;
+			sourceTree = "<group>";
+		};
+		044669CC1EF11A010082D8BC /* 4.PickUpSomeThing */ = {
+			isa = PBXGroup;
+			children = (
+				044669CD1EF11A010082D8BC /* 0.Comments.h */,
+				044669CE1EF11A010082D8BC /* 1.Controller */,
+				044669D11EF11A010082D8BC /* 2.MyView */,
+			);
+			path = 4.PickUpSomeThing;
+			sourceTree = "<group>";
+		};
+		044669CE1EF11A010082D8BC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				044669CF1EF11A010082D8BC /* PickUpSomeThingVC.h */,
+				044669D01EF11A010082D8BC /* PickUpSomeThingVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		044669D11EF11A010082D8BC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				044669D21EF11A010082D8BC /* 0.Comments.h */,
+				044669D31EF11A010082D8BC /* 1.IssueInfoUpView */,
+				044669D61EF11A010082D8BC /* 2.IssueInfoMiddleView */,
+				044669D91EF11A010082D8BC /* 3.IssueInfolowerView */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		044669D31EF11A010082D8BC /* 1.IssueInfoUpView */ = {
+			isa = PBXGroup;
+			children = (
+				044669D41EF11A010082D8BC /* IssueInfoUpView.h */,
+				044669D51EF11A010082D8BC /* IssueInfoUpView.m */,
+			);
+			path = 1.IssueInfoUpView;
+			sourceTree = "<group>";
+		};
+		044669D61EF11A010082D8BC /* 2.IssueInfoMiddleView */ = {
+			isa = PBXGroup;
+			children = (
+				044669D71EF11A010082D8BC /* IssueInfoMiddleView.h */,
+				044669D81EF11A010082D8BC /* IssueInfoMiddleView.m */,
+			);
+			path = 2.IssueInfoMiddleView;
+			sourceTree = "<group>";
+		};
+		044669D91EF11A010082D8BC /* 3.IssueInfolowerView */ = {
+			isa = PBXGroup;
+			children = (
+				044669DA1EF11A010082D8BC /* IssueInfoLowerView.h */,
+				044669DB1EF11A010082D8BC /* IssueInfoLowerView.m */,
+			);
+			path = 3.IssueInfolowerView;
 			sourceTree = "<group>";
 		};
 		04874F111ED913AA00049758 /* 02.LookForCell */ = {
@@ -1672,7 +1676,7 @@
 			children = (
 				0410B04D1EE3DD6800E8CBA1 /* 0.Comments.h */,
 				0410B04C1EE3DD6200E8CBA1 /* 1.IssueFirstPage */,
-				044669841EEA455F0082D8BC /* 2.IssueInfo */,
+				044669AD1EF11A010082D8BC /* 2.IssueInfo */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -1992,7 +1996,6 @@
 			isa = PBXGroup;
 			children = (
 				04410F561EEEBF720063CC32 /* area_code.plist */,
-				0436B5A21EEB0EA50003D4AB /* city_code.plist */,
 			);
 			path = 3.P_Plist;
 			sourceTree = "<group>";
@@ -2168,7 +2171,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04410F571EEEBF720063CC32 /* area_code.plist in Resources */,
-				0436B5A31EEB0EA50003D4AB /* city_code.plist in Resources */,
 				78C23C551ED3450A000CD40E /* LaunchScreen.storyboard in Resources */,
 				78C23C521ED3450A000CD40E /* Assets.xcassets in Resources */,
 				78375ADC1ED4734C0046F8C3 /* MJRefresh.bundle in Resources */,
@@ -2201,10 +2203,8 @@
 				049B5E4B1EDF07E90080D552 /* SettingVC.m in Sources */,
 				049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */,
 				049B5E301EDF07600080D552 /* ProvideClueVC.m in Sources */,
-				0436E61E1EF02A870031FC2B /* PickUpSomeThingVC.m in Sources */,
 				78375AF51ED4734C0046F8C3 /* UIImage+WebP.m in Sources */,
 				78375AF21ED4734C0046F8C3 /* UIButton+WebCache.m in Sources */,
-				0436E62A1EF02BA50031FC2B /* LookManSomeThingVC.m in Sources */,
 				049B5E451EDF07C90080D552 /* ClearCacheVC.m in Sources */,
 				049B5E211EDF07150080D552 /* Found_ClaimVC.m in Sources */,
 				78375AD31ED4734C0046F8C3 /* MJRefreshAutoGifFooter.m in Sources */,
@@ -2216,6 +2216,7 @@
 				78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */,
 				04874F141ED913CE00049758 /* LookForCell.m in Sources */,
 				78375ADE1ED4734C0046F8C3 /* NSBundle+MJRefresh.m in Sources */,
+				044669DF1EF11A010082D8BC /* LookManSomeThingVC.m in Sources */,
 				78375AFA1ED4734C0046F8C3 /* SVProgressHUD.m in Sources */,
 				049B5E3F1EDF07B00080D552 /* AboutVC.m in Sources */,
 				78375AEB1ED4734C0046F8C3 /* SDImageCache.m in Sources */,
@@ -2226,18 +2227,23 @@
 				78375AE31ED4734C0046F8C3 /* TAAnimatedDotView.m in Sources */,
 				0436E5F41EF007960031FC2B /* MyLocationManager.m in Sources */,
 				049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */,
+				044669E11EF11A010082D8BC /* IssueInfoUpView.m in Sources */,
+				044669E61EF11A2E0082D8BC /* LookForCircleLowerView.m in Sources */,
 				04DE086D1EE29D6D003F9943 /* FollowCell.m in Sources */,
 				04DE087E1EE308AA003F9943 /* MyClaimCell.m in Sources */,
 				78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */,
+				044669DD1EF11A010082D8BC /* LookForCircleUpView.m in Sources */,
 				0418F0081EECE30500063E93 /* UpUserCardVC.m in Sources */,
 				0418F00E1EECE3D900063E93 /* CertificationView.m in Sources */,
 				78375ACA1ED4734C0046F8C3 /* AFSecurityPolicy.m in Sources */,
 				78375AE91ED4734C0046F8C3 /* MKAnnotationView+WebCache.m in Sources */,
 				78375AD61ED4734C0046F8C3 /* MJRefreshBackGifFooter.m in Sources */,
+				044669EF1EF12F4C0082D8BC /* NetShowHelpUpView.m in Sources */,
+				044669DE1EF11A010082D8BC /* NetShowHelpVC.m in Sources */,
 				0410B0501EE3DDA200E8CBA1 /* IssueFirstPageVC.m in Sources */,
 				78375AD51ED4734C0046F8C3 /* MJRefreshAutoStateFooter.m in Sources */,
+				044669F51EF131AC0082D8BC /* LookManSomeThingDownView.m in Sources */,
 				78375AF71ED4734C0046F8C3 /* UIImageView+WebCache.m in Sources */,
-				0436E6201EF02A870031FC2B /* IssueInfoMiddleView.m in Sources */,
 				78375AE51ED4734C0046F8C3 /* TAPageControl.m in Sources */,
 				78375ADA1ED4734C0046F8C3 /* MJRefreshNormalHeader.m in Sources */,
 				78375AEF1ED4734C0046F8C3 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -2255,10 +2261,11 @@
 				78375AF31ED4734C0046F8C3 /* UIImage+GIF.m in Sources */,
 				78375AF61ED4734C0046F8C3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				78C23C471ED3450A000CD40E /* main.m in Sources */,
-				0436E6241EF02B880031FC2B /* LookForCircleVC.m in Sources */,
 				04DE08701EE29F4C003F9943 /* ExtensionCell.m in Sources */,
 				04DE08671EE2709B003F9943 /* DraftsCell.m in Sources */,
 				78375AF41ED4734C0046F8C3 /* UIImage+MultiFormat.m in Sources */,
+				044669EC1EF12F360082D8BC /* NetShowHelpDownView.m in Sources */,
+				044669E31EF11A010082D8BC /* IssueInfoLowerView.m in Sources */,
 				049B5E361EDF077F0080D552 /* PersonalCertificationVC.m in Sources */,
 				78375AE81ED4734C0046F8C3 /* UIView+SDExtension.m in Sources */,
 				78375AD41ED4734C0046F8C3 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -2269,19 +2276,18 @@
 				049B5E241EDF07240080D552 /* MyExtensionVC.m in Sources */,
 				0418F01A1EED7AF200063E93 /* PerfectVC.m in Sources */,
 				049B5E391EDF07900080D552 /* ComplaintSuggestionVC.m in Sources */,
+				044669E01EF11A010082D8BC /* PickUpSomeThingVC.m in Sources */,
 				049B5E3C1EDF07A20080D552 /* FeedbackVC.m in Sources */,
 				78375ACF1ED4734C0046F8C3 /* MJRefreshBackFooter.m in Sources */,
 				0418F0111EECEF2800063E93 /* UpUserCardView.m in Sources */,
 				049B5E331EDF076D0080D552 /* InvitingFriendsVC.m in Sources */,
-				0436E6211EF02A870031FC2B /* IssueInfoLowerView.m in Sources */,
 				78375AD11ED4734C0046F8C3 /* MJRefreshFooter.m in Sources */,
 				78375AE01ED4734C0046F8C3 /* UIScrollView+MJRefresh.m in Sources */,
+				044669E21EF11A010082D8BC /* IssueInfoMiddleView.m in Sources */,
 				78375AC91ED4734C0046F8C3 /* AFNetworkReachabilityManager.m in Sources */,
 				78375AEE1ED4734C0046F8C3 /* SDWebImageDownloader.m in Sources */,
-				0436E6271EF02B960031FC2B /* NetShowHelpVC.m in Sources */,
 				04DE086A1EE29A31003F9943 /* ClueCell.m in Sources */,
 				78375AF81ED4734C0046F8C3 /* UIView+WebCacheOperation.m in Sources */,
-				0436E61F1EF02A870031FC2B /* IssueInfoUpView.m in Sources */,
 				78375AD21ED4734C0046F8C3 /* MJRefreshHeader.m in Sources */,
 				78375AD71ED4734C0046F8C3 /* MJRefreshBackNormalFooter.m in Sources */,
 				049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */,
@@ -2289,9 +2295,11 @@
 				78375AD01ED4734C0046F8C3 /* MJRefreshComponent.m in Sources */,
 				78375ACC1ED4734C0046F8C3 /* AFURLResponseSerialization.m in Sources */,
 				043EF4AD1EEC0E8F007AABCD /* RegisterVC.m in Sources */,
+				044669DC1EF11A010082D8BC /* LookForCircleVC.m in Sources */,
 				049B5E421EDF07BD0080D552 /* CheckUpdateVC.m in Sources */,
 				78375AF11ED4734C0046F8C3 /* SDWebImagePrefetcher.m in Sources */,
 				78375AE61ED4734C0046F8C3 /* SDCollectionViewCell.m in Sources */,
+				044669F21EF131A20082D8BC /* LookManSomeThingUpView.m in Sources */,
 				78375ADF1ED4734C0046F8C3 /* UIScrollView+MJExtension.m in Sources */,
 				78375AE41ED4734C0046F8C3 /* TADotView.m in Sources */,
 				78375AE21ED4734C0046F8C3 /* TAAbstractDotView.m in Sources */,

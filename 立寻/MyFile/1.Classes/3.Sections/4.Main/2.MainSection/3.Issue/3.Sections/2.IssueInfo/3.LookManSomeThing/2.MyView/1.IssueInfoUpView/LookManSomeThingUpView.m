@@ -1,18 +1,14 @@
 //
-//  IssueInfoUpView.m
+//  LookManSomeThingUpView.m
 //  立寻
 //
-//  Created by Mac on 17/6/9.
+//  Created by Mac on 17/6/14.
 //  Copyright © 2017年 杜浩. All rights reserved.
 //
 
-#import "IssueInfoUpView.h"
-#import "PickUpSomeThingVC.h"
-
-@interface IssueInfoUpView()
-
-@end
-@implementation IssueInfoUpView
+#import "LookManSomeThingUpView.h"
+#import "LookManSomeThingVC.h"
+@implementation LookManSomeThingUpView
 
 -(instancetype)initWithFrame:(CGRect)frame andUserUrl:(NSString *)url andTypeTitle:(NSString *)typeTitle andTypeArray:(NSArray *)typeArray andDelegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
@@ -58,7 +54,7 @@
                 CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)tf];
                 tf.frame = CGRectMake(left, top + user_width/2.0-size.height/2, right-left, size.height);
                 top += user_width/2.0 + size.height/2.0 + 5;
-//                tf.backgroundColor = [UIColor greenColor];
+                //                tf.backgroundColor = [UIColor greenColor];
                 
             }
             //下侧分割线
@@ -158,7 +154,7 @@
                     NSMutableArray *buttons = [[NSMutableArray alloc] init];
                     
                     UIBarButtonItem *myDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-                                                                                                   target: delegate action: @selector(clickOkOfPickerView:)];
+                                                                                                  target: delegate action: @selector(clickOkOfPickerView:)];
                     myDoneButton.tag = 200;
                     myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:delegate action:@selector(clickOkOfPickerView:)];
                     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -186,7 +182,7 @@
             //左侧提示
             {
                 UILabel * label = [UILabel new];
-                label.text = @"认领金额:";
+                label.text = @"悬赏金额:";
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -223,7 +219,7 @@
             //提示
             {
                 UILabel * label = [UILabel new];
-                label.text = @"0元即表示无，由失主线下支付";
+                label.text = @"0元即表示无悬赏";
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
                 label.frame = CGRectMake(left, top, WIDTH-10-left, label_height);
@@ -238,7 +234,7 @@
             //左侧提示
             {
                 UILabel * label = [UILabel new];
-                label.text = @"遗失城市:";
+                label.text = @"丢失城市:";
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];

@@ -8,14 +8,13 @@
 
 #import "PickUpSomeThingVC.h"
 
-@interface PickUpSomeThingVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate>
+@interface PickUpSomeThingVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
 @property(nonatomic,strong)UILabel * num_label;//预览图片时显示的图片序号
 @property(nonatomic,strong)UIView * img_bg_view;//图片背景view
 @property(nonatomic,strong)NSArray * areaArray;//地区数组
 
-@property(nonatomic,strong)NSArray * city_code_array;//省市code及名称数组
 
 @end
 
@@ -43,7 +42,6 @@
     NSString * path = [[NSBundle mainBundle] pathForResource:@"area_code" ofType:@"plist"];
     self.areaArray = [NSArray arrayWithContentsOfFile:path];
     
-    self.city_code_array = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city_code" ofType:@"plist"]];
 //    NSLog(@"list:%@",self.secondTypeList);
     //加载主界面
     [self loadMainView];
@@ -96,7 +94,7 @@
                 UILabel * label = [UILabel new];
                 label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
-                label.text = @"目标或证明图片";
+                label.text = @"认领物品图片";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(left, middle_top - size.height/2, size.width, size.height);
                 [view addSubview:label];
@@ -107,8 +105,8 @@
             {
                 UILabel * label = [UILabel new];
                 label.font = [UIFont systemFontOfSize:9];
-                label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
-                label.text = @"清晰的图片能让人更好的帮助您";
+                label.textColor = [MYTOOL RGBWithRed:255 green:75 blue:75 alpha:1];
+                label.text = @"请上传物品清晰照片方便失主辨认";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(left, lower_top - size.height, size.width, size.height);
                 [view addSubview:label];
@@ -429,11 +427,9 @@
     if (component == 0) {
         [pickerView reloadComponent:1];
         [pickerView selectRow:0 inComponent:1 animated:true];
-        [pickerView reloadComponent:2];
-        [pickerView selectRow:0 inComponent:2 animated:true];
     }else{
-        [pickerView reloadComponent:2];
-        [pickerView selectRow:0 inComponent:2 animated:true];
+//        [pickerView reloadComponent:2];
+//        [pickerView selectRow:0 inComponent:2 animated:true];
     }
     
 }
@@ -448,13 +444,10 @@
     }
     NSInteger row0 = [self.picker selectedRowInComponent:0];
     NSInteger row1 = [self.picker selectedRowInComponent:1];
-    NSInteger row2 = [self.picker selectedRowInComponent:2];
     
     NSDictionary * provinceDic = self.areaArray[row0];
     NSArray * cityArray = provinceDic[@"cityArray"];
     NSDictionary * cityDic = cityArray[row1];
-    NSArray * countryArray = cityDic[@"countryArray"];
-    NSDictionary * countryDic = countryArray[row2];
     
     NSString * provinceId = provinceDic[@"provinceId"];//省id
     NSString * provinceName = provinceDic[@"provinceName"];//省名字

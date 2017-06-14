@@ -1,18 +1,16 @@
 //
-//  IssueInfoUpView.m
+//  LookForCircleUpView.m
 //  立寻
 //
-//  Created by Mac on 17/6/9.
+//  Created by Mac on 17/6/14.
 //  Copyright © 2017年 杜浩. All rights reserved.
 //
 
-#import "IssueInfoUpView.h"
-#import "IssueInfoVC.h"
+#import "LookForCircleUpView.h"
+#import "LookForCircleVC.h"
+@implementation LookForCircleUpView
 
-@interface IssueInfoUpView()
-@property(nonatomic,strong)UILabel * titleNumberLabel;//标题字数label
-@end
-@implementation IssueInfoUpView
+
 
 -(instancetype)initWithFrame:(CGRect)frame andUserUrl:(NSString *)url andTypeTitle:(NSString *)typeTitle andTypeArray:(NSArray *)typeArray andDelegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
@@ -49,7 +47,7 @@
             {
                 UITextField * tf = [UITextField new];
                 tf.placeholder = @"请填写信息标题";
-                tf.font = [UIFont systemFontOfSize:12];
+                tf.font = [UIFont systemFontOfSize:15];
                 tf.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 tf.delegate = delegate;
                 [delegate setTitleTF:tf];
@@ -58,6 +56,8 @@
                 CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)tf];
                 tf.frame = CGRectMake(left, top + user_width/2.0-size.height/2, right-left, size.height);
                 top += user_width/2.0 + size.height/2.0 + 5;
+                //                tf.backgroundColor = [UIColor greenColor];
+                
             }
             //下侧分割线
             {
@@ -67,26 +67,16 @@
                 [self addSubview:space];
             }
         }
-        //一级分类类型
-        {
-            UILabel * label = [UILabel new];
-            label.text = [NSString stringWithFormat:@"类型：%@",typeTitle];
-            label.font = [UIFont systemFontOfSize:12];
-            label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
-            [self addSubview:label];
-            CGSize size = [MYTOOL getSizeWithLabel:label];
-            label.frame = CGRectMake(WIDTH - 10 - size.width, top + 5, size.width, size.height);
-            top += 10 + size.height;
-        }
+        top += 10;
         //文本框
         {
             float height = [MYTOOL getHeightWithIphone_six:75];
             MyTextView * tv = [[MyTextView alloc] initWithFrame:CGRectMake(10, top, WIDTH - 20, height)];
             tv.textColor = MYCOLOR_48_48_48;
-            tv.placeholderLabel.text = @"  尽量详细的描述您的要求";
+            tv.placeholderLabel.text = @"  有啥好玩的，好笑的，好吃的，高营养鸡汤…给大家分享下吧";
             tv.placeholderLabel.font = [UIFont systemFontOfSize:10];
             tv.placeholderLabel.textColor = [MYTOOL RGBWithRed:180 green:180 blue:180 alpha:1];
-            tv.font = [UIFont systemFontOfSize:12];
+            tv.font = [UIFont systemFontOfSize:13];
             [self addSubview:tv];
             [delegate setContentTV:tv];
             tv.layer.masksToBounds = true;
@@ -107,7 +97,7 @@
             label.frame = CGRectMake(WIDTH - 10 - size.width, top , size.width, size.height);
             top += size.height;
         }
-        //下面4行文字
+        //下面2行文字
         float label_height = 0;
         {
             UILabel * llabel = [UILabel new];
@@ -116,7 +106,7 @@
             CGSize size = [MYTOOL getSizeWithLabel:llabel];
             label_height = size.height;
         }
-        float label_space = (frame.size.height - top - 10 - 4 * label_height)/5;
+        float label_space = (frame.size.height - top - 10 - 2 * label_height)/3;
         //目标类型
         {
             top += label_space;
@@ -166,7 +156,7 @@
                     NSMutableArray *buttons = [[NSMutableArray alloc] init];
                     
                     UIBarButtonItem *myDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-                                                                                                   target: delegate action: @selector(clickOkOfPickerView:)];
+                                                                                                  target: delegate action: @selector(clickOkOfPickerView:)];
                     myDoneButton.tag = 200;
                     myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:delegate action:@selector(clickOkOfPickerView:)];
                     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -184,58 +174,6 @@
                     label.textAlignment = NSTextAlignmentCenter;
                     [v addSubview:label];
                 }
-            }
-            top += label_height;
-        }
-        //悬赏金额
-        {
-            left = 0;
-            top += label_space;
-            //左侧提示
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"悬赏金额:";
-                label.font = [UIFont systemFontOfSize:12];
-                label.textColor = MYCOLOR_48_48_48;
-                CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(10, top, size.width, size.height);
-                [self addSubview:label];
-                left += size.width + 20;
-            }
-            //右侧
-            {
-                UITextField * moneyTF = [UITextField new];
-                moneyTF.text = @"0";
-                moneyTF.textAlignment = NSTextAlignmentCenter;
-                moneyTF.frame = CGRectMake(left, top -5, 70, label_height + 10);
-                moneyTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
-                moneyTF.tag = 200;
-                moneyTF.keyboardType = UIKeyboardTypeNumberPad;
-                moneyTF.delegate = delegate;
-                moneyTF.layer.masksToBounds = true;
-                moneyTF.layer.borderWidth = 1;
-                moneyTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
-                [delegate setMoneyTF:moneyTF];
-                [self addSubview:moneyTF];
-                left += 75;
-            }
-            //元
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"元";
-                label.frame = CGRectMake(left, top, 20, label_height);
-                label.font = [UIFont systemFontOfSize:12];
-                [self addSubview:label];
-                left += 25;
-            }
-            //提示
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"0元即表示无悬赏";
-                label.font = [UIFont systemFontOfSize:12];
-                label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
-                label.frame = CGRectMake(left, top, WIDTH-10-left, label_height);
-                [self addSubview:label];
             }
             top += label_height;
         }
@@ -307,37 +245,6 @@
             }
             top += label_height;
         }
-        //详细地址
-        {
-            top += label_space;
-            left = 0;
-            //左侧提示
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"详细地址:";
-                label.font = [UIFont systemFontOfSize:12];
-                label.textColor = MYCOLOR_48_48_48;
-                CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(10, top, size.width, size.height);
-                [self addSubview:label];
-                left = 10 + size.width + 10;
-            }
-            //右侧
-            {
-                UITextField * addressTF = [UITextField new];
-                addressTF.placeholder = @"  请输入详细地址";
-                addressTF.frame = CGRectMake(left, top -5, WIDTH - 10 - left, label_height + 10);
-                addressTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
-                addressTF.tag = 400;
-                addressTF.delegate = delegate;
-                addressTF.layer.masksToBounds = true;
-                addressTF.layer.borderWidth = 1;
-                addressTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
-                [delegate setAddressTF:addressTF];
-                [self addSubview:addressTF];
-            }
-            top += label_height;
-        }
         
     }
     return self;
@@ -345,4 +252,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [MYTOOL hideKeyboard];
 }
+
+
+
 @end

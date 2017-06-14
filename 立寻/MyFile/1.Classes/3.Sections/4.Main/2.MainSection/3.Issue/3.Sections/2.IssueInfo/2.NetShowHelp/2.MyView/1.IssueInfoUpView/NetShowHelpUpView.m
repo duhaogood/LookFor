@@ -1,18 +1,14 @@
 //
-//  IssueInfoUpView.m
+//  NetShowHelpUpView.m
 //  立寻
 //
-//  Created by Mac on 17/6/9.
+//  Created by Mac on 17/6/14.
 //  Copyright © 2017年 杜浩. All rights reserved.
 //
 
-#import "IssueInfoUpView.h"
-#import "PickUpSomeThingVC.h"
-
-@interface IssueInfoUpView()
-
-@end
-@implementation IssueInfoUpView
+#import "NetShowHelpUpView.h"
+#import "NetShowHelpVC.h"
+@implementation NetShowHelpUpView
 
 -(instancetype)initWithFrame:(CGRect)frame andUserUrl:(NSString *)url andTypeTitle:(NSString *)typeTitle andTypeArray:(NSArray *)typeArray andDelegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
@@ -58,7 +54,7 @@
                 CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)tf];
                 tf.frame = CGRectMake(left, top + user_width/2.0-size.height/2, right-left, size.height);
                 top += user_width/2.0 + size.height/2.0 + 5;
-//                tf.backgroundColor = [UIColor greenColor];
+                //                tf.backgroundColor = [UIColor greenColor];
                 
             }
             //下侧分割线
@@ -108,7 +104,7 @@
             CGSize size = [MYTOOL getSizeWithLabel:llabel];
             label_height = size.height;
         }
-        float label_space = (frame.size.height - top - 10 - 4 * label_height)/5;
+        float label_space = (frame.size.height - top - 10 - 2 * label_height)/3;
         //目标类型
         {
             top += label_space;
@@ -158,7 +154,7 @@
                     NSMutableArray *buttons = [[NSMutableArray alloc] init];
                     
                     UIBarButtonItem *myDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-                                                                                                   target: delegate action: @selector(clickOkOfPickerView:)];
+                                                                                                  target: delegate action: @selector(clickOkOfPickerView:)];
                     myDoneButton.tag = 200;
                     myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:delegate action:@selector(clickOkOfPickerView:)];
                     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -179,58 +175,6 @@
             }
             top += label_height;
         }
-        //悬赏金额
-        {
-            left = 0;
-            top += label_space;
-            //左侧提示
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"认领金额:";
-                label.font = [UIFont systemFontOfSize:12];
-                label.textColor = MYCOLOR_48_48_48;
-                CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(10, top, size.width, size.height);
-                [self addSubview:label];
-                left += size.width + 20;
-            }
-            //右侧
-            {
-                UITextField * moneyTF = [UITextField new];
-                moneyTF.text = @"0";
-                moneyTF.textAlignment = NSTextAlignmentCenter;
-                moneyTF.frame = CGRectMake(left, top -5, 70, label_height + 10);
-                moneyTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
-                moneyTF.tag = 200;
-                moneyTF.keyboardType = UIKeyboardTypeNumberPad;
-                moneyTF.delegate = delegate;
-                moneyTF.layer.masksToBounds = true;
-                moneyTF.layer.borderWidth = 1;
-                moneyTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
-                [delegate setMoneyTF:moneyTF];
-                [self addSubview:moneyTF];
-                left += 75;
-            }
-            //元
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"元";
-                label.frame = CGRectMake(left, top, 20, label_height);
-                label.font = [UIFont systemFontOfSize:12];
-                [self addSubview:label];
-                left += 25;
-            }
-            //提示
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"0元即表示无，由失主线下支付";
-                label.font = [UIFont systemFontOfSize:12];
-                label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
-                label.frame = CGRectMake(left, top, WIDTH-10-left, label_height);
-                [self addSubview:label];
-            }
-            top += label_height;
-        }
         //选择城市
         {
             top += label_space;
@@ -238,7 +182,7 @@
             //左侧提示
             {
                 UILabel * label = [UILabel new];
-                label.text = @"遗失城市:";
+                label.text = @"所在城市:";
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -299,37 +243,6 @@
             }
             top += label_height;
         }
-        //详细地址
-        {
-            top += label_space;
-            left = 0;
-            //左侧提示
-            {
-                UILabel * label = [UILabel new];
-                label.text = @"详细地址:";
-                label.font = [UIFont systemFontOfSize:12];
-                label.textColor = MYCOLOR_48_48_48;
-                CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(10, top, size.width, size.height);
-                [self addSubview:label];
-                left = 10 + size.width + 10;
-            }
-            //右侧
-            {
-                UITextField * addressTF = [UITextField new];
-                addressTF.placeholder = @"  请输入详细地址";
-                addressTF.frame = CGRectMake(left, top -5, WIDTH - 10 - left, label_height + 10);
-                addressTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
-                addressTF.tag = 400;
-                addressTF.delegate = delegate;
-                addressTF.layer.masksToBounds = true;
-                addressTF.layer.borderWidth = 1;
-                addressTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
-                [delegate setAddressTF:addressTF];
-                [self addSubview:addressTF];
-            }
-            top += label_height;
-        }
         
     }
     return self;
@@ -337,4 +250,5 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [MYTOOL hideKeyboard];
 }
+
 @end

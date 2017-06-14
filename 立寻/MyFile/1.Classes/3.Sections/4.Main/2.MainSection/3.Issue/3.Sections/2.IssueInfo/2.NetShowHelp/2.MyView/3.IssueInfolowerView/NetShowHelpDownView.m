@@ -1,15 +1,14 @@
 //
-//  IssueInfoLowerView.m
+//  NetShowHelpDownView.m
 //  立寻
 //
-//  Created by Mac on 17/6/9.
+//  Created by Mac on 17/6/14.
 //  Copyright © 2017年 杜浩. All rights reserved.
 //
 
-#import "IssueInfoLowerView.h"
-#import "PickUpSomeThingVC.h"
-
-@implementation IssueInfoLowerView
+#import "NetShowHelpDownView.h"
+#import "NetShowHelpVC.h"
+@implementation NetShowHelpDownView
 
 -(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
@@ -306,4 +305,5 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [MYTOOL hideKeyboard];
 }
+
 @end

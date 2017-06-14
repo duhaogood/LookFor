@@ -1,20 +1,19 @@
 //
-//  IssueInfoLowerView.m
+//  LookManSomeThingDownView.m
 //  立寻
 //
-//  Created by Mac on 17/6/9.
+//  Created by Mac on 17/6/14.
 //  Copyright © 2017年 杜浩. All rights reserved.
 //
 
-#import "IssueInfoLowerView.h"
-#import "IssueInfoVC.h"
+#import "LookManSomeThingDownView.h"
+#import "LookManSomeThingVC.h"
+@implementation LookManSomeThingDownView
 
-@implementation IssueInfoLowerView
 
 -(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
         float top = 0;
-        float left_all = 0;
         //图标
         {
             UIImageView * icon = [UIImageView new];
@@ -307,4 +306,5 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [MYTOOL hideKeyboard];
 }
+
 @end
