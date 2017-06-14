@@ -8,7 +8,7 @@
 
 #import "FeedbackVC.h"
 
-@interface FeedbackVC ()<UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate>
+@interface FeedbackVC ()<UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIButton * selectTypeLeftBtn;//投诉举报按钮
 @property(nonatomic,strong)UIButton * selectTypeRightBtn;//APP吐槽按钮
 @property(nonatomic,strong)UIView * submitView;//按钮下侧提交view

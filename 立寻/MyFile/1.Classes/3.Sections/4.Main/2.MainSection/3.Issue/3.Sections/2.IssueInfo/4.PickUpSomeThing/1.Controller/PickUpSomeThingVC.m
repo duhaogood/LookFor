@@ -806,7 +806,7 @@
     [MYTOOL hiddenTabBar];
     
     //定位开启
-//    [[MyLocationManager sharedLocationManager] startLocation];
+    [[MyLocationManager sharedLocationManager] startLocation];
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)

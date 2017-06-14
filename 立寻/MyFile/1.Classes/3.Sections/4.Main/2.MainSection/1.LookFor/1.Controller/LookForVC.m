@@ -9,7 +9,8 @@
 #import "LookForVC.h"
 #import "FirstPageHeaderView.h"
 #import "LookForCell.h"
-@interface LookForVC ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate>
+#import "GYZChooseCityController.h"
+@interface LookForVC ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
 @property(nonatomic,strong)UITableView * tableView;
@@ -21,7 +22,9 @@
 @end
 
 @implementation LookForVC
-
+{
+    NSString * cityId;//定位到的cityId
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     //加载主界面
@@ -63,7 +66,7 @@
             [v addSubview:btn];
             [btn addTarget:self action:@selector(clickUpLeftCityBtn) forControlEvents:UIControlEventTouchUpInside];
         }
-//        [[MyLocationManager sharedLocationManager] startLocation];
+        [[MyLocationManager sharedLocationManager] startLocation];
     }
     //右侧筛选按钮
     {
@@ -94,8 +97,9 @@
 }
 //点击左上角定位城市事件
 -(void)clickUpLeftCityBtn{
-    NSLog(@"当前城市:%@",self.cityLabel.text);
-    [SVProgressHUD showErrorWithStatus:@"不要着急，亲\n选择地区还没弄" duration:1];
+    GYZChooseCityController *cityPickerVC = [[GYZChooseCityController alloc] init];
+    [cityPickerVC setDelegate:self];
+    [self.navigationController pushViewController:cityPickerVC animated:true];
 }
 //点击右上角筛选
 -(void)clickUpRightSelectBtn{
@@ -280,6 +284,18 @@
         self.cityLabel.frame = CGRectMake(0, 22-size.height/2, size.width, size.height);
         self.areaIcon.frame = CGRectMake(self.cityLabel.frame.origin.x + self.cityLabel.frame.size.width + 5, 19, 11, 6);
     }
+}
+#pragma mark - GYZCityPickerDelegate
+- (void) cityPickerController:(GYZChooseCityController *)chooseCityController didSelectCity:(GYZCity *)city
+{
+    [chooseCityController.navigationController popViewControllerAnimated:true];
+    [self setCityName:city.cityName];
+    cityId = city.cityID;
+}
+
+- (void) cityPickerControllerDidCancel:(GYZChooseCityController *)chooseCityController
+{
+    [chooseCityController.navigationController popViewControllerAnimated:true];
 }
 //接收到定位成功通知
 -(void)receiveUpdateLocationSuccessNotification:(NSNotification *)notification{
