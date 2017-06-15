@@ -9,6 +9,7 @@
 #import "LookManSomeThingVC.h"
 #import "LookManSomeThingUpView.h"
 #import "LookManSomeThingDownView.h"
+#import "PayTopUpVC.h"
 @interface LookManSomeThingVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组

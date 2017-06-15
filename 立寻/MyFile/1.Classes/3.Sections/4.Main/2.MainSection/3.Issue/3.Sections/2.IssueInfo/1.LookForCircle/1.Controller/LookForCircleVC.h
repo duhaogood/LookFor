@@ -25,8 +25,6 @@
 
 
 -(void)clickOkOfPickerView:(UIBarButtonItem*)btn;
-//保存至草稿箱
--(void)saveBtnCallback;
 //现在发布
 -(void)issueBtnCallback;
 

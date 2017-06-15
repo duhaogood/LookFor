@@ -9,6 +9,7 @@
 #import "NetShowHelpVC.h"
 #import "NetShowHelpUpView.h"
 #import "NetShowHelpDownView.h"
+#import "PayTopUpVC.h"
 @interface NetShowHelpVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组

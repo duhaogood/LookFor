@@ -9,6 +9,7 @@
 #import "LookForCircleVC.h"
 #import "LookForCircleUpView.h"
 #import "LookForCircleLowerView.h"
+#import "PayTopUpVC.h"
 @interface LookForCircleVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
@@ -143,24 +144,33 @@
 }
 //判断是否有信息不全
 -(BOOL)checkInfoOfIssue{
-    //检查所有参数是否合法
+    /*检查所有参数是否合法*/
+    //标题
+    if (self.titleTF.text.length == 0 || self.titleTF.text.length > 20) {
+        [SVProgressHUD showErrorWithStatus:@"标题字数不合法" duration:2];
+        return false;
+    }
+    //内容
+    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 500) {
+        [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
+        return false;
+    }
+    //城市
+    if (self.cityTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请选择城市" duration:2];
+        return false;
+    }
+    //图片
+    if ([self getCountOfImgV_arr] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请上传图片" duration:2];
+        return false;
+    }
+    
     
     
     return true;
 }
 #pragma mark - 按钮回调
-//保存至草稿箱
--(void)saveBtnCallback{
-    //先判断是否有空
-    if (![self checkInfoOfIssue]) {
-        return;
-    }
-    isIssue = false;//保存草稿箱
-    //上传图片
-    current_upload_img_index = 0;
-    fileid_array = [NSMutableArray new];
-    [self upLoadAllImage];
-}
 //现在发布
 -(void)issueBtnCallback{
     //先判断是否有空
@@ -263,7 +273,6 @@
     [publishinfo_dictionary setValue:Title forKey:@"Title"];
     [publishinfo_dictionary setValue:Content forKey:@"Content"];
     [publishinfo_dictionary setValue:CategoryID forKey:@"CategoryID"];
-//    [publishinfo_dictionary setValue:Money forKey:@"Money"];
     [publishinfo_dictionary setValue:uploadAreaDic[@"provinceid"] forKey:@"Province"];
     [publishinfo_dictionary setValue:uploadAreaDic[@"cityid"] forKey:@"City"];
     
@@ -276,10 +285,9 @@
                             @"picturelist":picturelist,
                             @"publishinfo":publishinfo
                             };
-    NSLog(@"send:%@",send);
-    NSString * interface = @"/publish/publish/addpublishinfo.html";
+    NSString * interface = @"/publish/publish/addsubmitpublishinfo.html";
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
+        [self.navigationController popViewControllerAnimated:true];
     }];
     
     

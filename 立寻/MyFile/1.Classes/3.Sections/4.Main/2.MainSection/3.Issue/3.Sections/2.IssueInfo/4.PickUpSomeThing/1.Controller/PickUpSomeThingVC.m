@@ -7,6 +7,7 @@
 //
 
 #import "PickUpSomeThingVC.h"
+#import "PayTopUpVC.h"
 
 @interface PickUpSomeThingVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view

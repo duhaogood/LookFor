@@ -10,7 +10,9 @@
 #import "FirstPageHeaderView.h"
 #import "LookForCell.h"
 #import "GYZChooseCityController.h"
-@interface LookForVC ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
+#import "PYSearch.h"
+#import "SelectTypeVC.h"
+@interface LookForVC ()<PYSearchViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
 @property(nonatomic,strong)UITableView * tableView;
@@ -103,7 +105,9 @@
 }
 //点击右上角筛选
 -(void)clickUpRightSelectBtn{
-    [SVProgressHUD showErrorWithStatus:@"不要着急，亲\n筛选还没弄" duration:1];
+    SelectTypeVC * select = [SelectTypeVC new];
+    select.title = @"选择分类";
+    [self.navigationController pushViewController:select animated:true];
 }
 #pragma mark - 头view点击事件
 //tableview数据源选择
@@ -152,7 +156,20 @@
 }
 #pragma mark - UISearchBarDelegate
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    [SVProgressHUD showErrorWithStatus:@"不要乱点，亲\n稍后有页面跳转" duration:1];
+    /*接口-----获取热门标签--->初始化数组*/
+#warning 接口待调
+    NSArray *hotSeaches = @[@"找人", @"找什么", @"举报", @"找狗狗", @"招领人",@"找债权人",@"我的好战友",@"我的钱包丢了",@"失踪儿童",@"法律顾问"];
+    PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:NSLocalizedString(@"找亲人", @"搜索编程语言") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+        
+        //[searchViewController.navigationController pushViewController:[[PYTempViewController alloc] init] animated:YES];
+    }];
+
+    searchViewController.hotSearchStyle = 3;
+    searchViewController.searchHistoryStyle = PYHotSearchStyleDefault;
+   
+    searchViewController.delegate = self;
+    [self.navigationController pushViewController:searchViewController animated:true];
+
     return false;
 }
 //加载轮播图数据
@@ -283,6 +300,22 @@
         CGSize size = [MYTOOL getSizeWithLabel:self.cityLabel];
         self.cityLabel.frame = CGRectMake(0, 22-size.height/2, size.width, size.height);
         self.areaIcon.frame = CGRectMake(self.cityLabel.frame.origin.x + self.cityLabel.frame.size.width + 5, 19, 11, 6);
+    }
+}
+#pragma mark - PYSearchViewControllerDelegate
+- (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
+{
+    if (searchText.length) {
+        // Simulate a send request to get a search suggestions
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
+            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
+                [searchSuggestionsM addObject:searchSuggestion];
+            }
+            // Refresh and display the search suggustions
+            searchViewController.searchSuggestions = searchSuggestionsM;
+        });
     }
 }
 #pragma mark - GYZCityPickerDelegate
