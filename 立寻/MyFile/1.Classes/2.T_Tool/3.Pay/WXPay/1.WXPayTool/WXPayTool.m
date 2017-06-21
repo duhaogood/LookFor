@@ -13,27 +13,24 @@
 @implementation WXPayTool
 
 //支付
--(void)wxPayWithGoodsDictionary:(NSDictionary*)goodsDictionary{
-    
+-(void)wxPayWithGoodsDictionary:(NSDictionary*)payDictionary{
+    NSString * orderId = payDictionary[@"orderId"];
     //payDic和orderDic请求实例
     NSDictionary * payDic = @{
-                              @"api_key":@"jiangsuxuzhoulvyinyuanyilvyinhui",
-                              @"app_id":@"wxc3b31ac5cd6d9d5d",
-                              @"app_secret":@"49b4ea8503959c91daa7d26b88f02caf",
-                              @"mch_id":@"1468640402",
-                              @"notify_url":[NSString stringWithFormat:@"%@%@",SERVER_URL,@"/shop/order/returnPayStatus.intf"]
+                              @"api_key":@"zhaomandewangzhanlixun110henniub",
+                              @"app_id":@"wx7074ea72756fdfbc",
+                              @"app_secret":@"db305d6d99746433564ec3c13330bc44",
+                              @"mch_id":@"1480542612",
+                              @"notify_url":@"http://user.lixun110.com/payment/WxPay/ResultNotifyPage.aspx"
                               };
-    NSString * price = goodsDictionary[@"totalPrice"];
-    price = [NSString stringWithFormat:@"%.2f",price.doubleValue*100];
-    NSString * subject = goodsDictionary[@"goodsList"][0][@"goodsName"];
-    if ([goodsDictionary[@"goodsList"] count] > 1) {
-        subject = [NSString stringWithFormat:@"%@……等",subject];
-    }
+    NSString * price = payDictionary[@"money"];
+    price = [NSString stringWithFormat:@"%d",(int)(price.doubleValue*100)];
+    NSString * subject = @"立寻网余额充值";
     NSDictionary * orderDic = @{
                                 @"enable":@"1",
                                 @"id":@"df2b38795ccd40cea71c2e859aec7e5c",
                                 @"money":price,
-                                @"orderCode":goodsDictionary[@"orderId"],
+                                @"orderCode":orderId,
                                 @"rechargeRule_id":@"1",
                                 @"remark":@"",
                                 @"status":@"",
@@ -42,7 +39,8 @@
                                 @"users_id":@"a38d4da064054e99840efdd91280ee35",
                                 @"way":@"2",
                                 @"productName":subject,
-                                @"productDescription":subject};
+                                @"productDescription":subject
+                                };
     
     //下单成功，调用微信支付
     [[lhSharePay sharePay]wxPayWithPayDic:payDic OrderDic:orderDic];

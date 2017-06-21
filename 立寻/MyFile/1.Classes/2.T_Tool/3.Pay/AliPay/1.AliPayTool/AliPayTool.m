@@ -21,6 +21,8 @@
     
     NSString * appID = APPID_ALIPAY;
     NSString * rsa2PrivateKey = RSA2_PRIMARY_KEY_ALIPAY;
+    rsa2PrivateKey = @"";
+    NSString * rsaPrivateKey = RSA_PRIMARY_KEY_ALIPAY;
     /*
      *生成订单信息及签名
      */
@@ -39,10 +41,11 @@
     // NOTE: 支付版本
     order.version = @"1.0";
     // NOTE: sign_type 根据商户设置的私钥来决定
-    order.sign_type = @"RSA2";
+    order.sign_type = @"RSA";
     
     //后台回调
-    order.notify_url = @"http://user.lixun110.com/payment/alipay/notify_url.aspx";
+    order.notify_url = @"http://user.lixun110.com/payment/alipay/notify_url.aspx";//立寻
+//    order.notify_url = @"http://clywind.vicp.cc:6666/Pay/AlipayNotify";
     // NOTE: 商品数据
     order.biz_content = [BizContent new];
     NSString * body = @"立寻网余额充值";
@@ -60,7 +63,7 @@
     // NOTE: 获取私钥并将商户信息签名，外部商户的加签过程请务必放在服务端，防止公私钥数据泄露；
     //       需要遵循RSA签名规范，并将签名字符串base64编码和UrlEncode
     NSString *signedString = nil;
-    RSADataSigner* signer = [[RSADataSigner alloc] initWithPrivateKey:rsa2PrivateKey];
+    RSADataSigner* signer = [[RSADataSigner alloc] initWithPrivateKey:rsa2PrivateKey.length > 0 ? rsa2PrivateKey:rsaPrivateKey];
     if ((rsa2PrivateKey.length > 1)) {
         signedString = [signer signString:orderInfo withRSA2:YES];
     } else {

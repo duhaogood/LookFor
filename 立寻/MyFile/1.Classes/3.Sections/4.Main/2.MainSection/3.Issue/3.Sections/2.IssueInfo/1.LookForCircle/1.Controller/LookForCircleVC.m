@@ -144,6 +144,15 @@
 }
 //判断是否有信息不全
 -(BOOL)checkInfoOfIssue{
+    
+    if (1) {
+        PayTopUpVC * pay = [PayTopUpVC new];
+        pay.title = @"余额充值";
+        [self.navigationController pushViewController:pay animated:true];
+        return false;
+    }
+    
+    
     /*检查所有参数是否合法*/
     //标题
     if (self.titleTF.text.length == 0 || self.titleTF.text.length > 20) {

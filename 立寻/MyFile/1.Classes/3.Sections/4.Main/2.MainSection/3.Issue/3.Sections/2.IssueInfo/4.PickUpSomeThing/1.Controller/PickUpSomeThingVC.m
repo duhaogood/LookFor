@@ -46,6 +46,8 @@
 //    NSLog(@"list:%@",self.secondTypeList);
     //加载主界面
     [self loadMainView];
+    //定位开启
+    [[MyLocationManager sharedLocationManager] startLocation];
 }
 //加载主界面
 -(void)loadMainView{
@@ -260,15 +262,13 @@
         }
     }
     NSString * Money = self.moneyTF.text;//金额
-    NSString * Province = @"2";//省份
-    NSString * City = @"3";//城市
-    NSString * Country = @"4";//县
+    NSString * Province = uploadAreaDic[@"provinceid"];//省份
+    NSString * City = uploadAreaDic[@"cityid"];//城市
     NSString * Address = self.addressTF.text;//详细地址
-    NSString * PushType = @"0";//推送地区类型（0.丢失地区，1.全国）
+    NSString * PushType = self.allCountryBtn.enabled ? @"0" : @"1";//推送地区类型（0.丢失地区，1.全国）
     NSString * PushMoney = self.pushMoneyTF.text;//推送金额
-    NSString * TopType = @"0";//地区置顶类型（0.不需要，1.需要）
+    NSString * TopType = self.haveBtn.enabled ? @"0" : @"1";//地区置顶类型（0.不需要，1.需要）
     NSString * TopMoney = self.haveMoneyTF.text;//置顶金额
-//    NSString * PublishStatus = self.addressTF.text;//发布状态（1.待发布，2.已发布，3.已结束，4.已完成）
     //拼装
     [publishinfo_dictionary setValue:Title forKey:@"Title"];
     [publishinfo_dictionary setValue:Content forKey:@"Content"];
@@ -276,14 +276,16 @@
     [publishinfo_dictionary setValue:Money forKey:@"Money"];
     [publishinfo_dictionary setValue:Province forKey:@"Province"];
     [publishinfo_dictionary setValue:City forKey:@"City"];
-    [publishinfo_dictionary setValue:Country forKey:@"Country"];
     [publishinfo_dictionary setValue:Address forKey:@"Address"];
     [publishinfo_dictionary setValue:PushType forKey:@"PushType"];
-    [publishinfo_dictionary setValue:PushMoney forKey:@"PushMoney"];
+    if ([PushType isEqualToString:@"1"]) {
+        [publishinfo_dictionary setValue:PushMoney forKey:@"PushMoney"];
+    }
     [publishinfo_dictionary setValue:TopType forKey:@"TopType"];
-    [publishinfo_dictionary setValue:TopMoney forKey:@"TopMoney"];
-    [publishinfo_dictionary setValue:PushMoney forKey:@"PushMoney"];
-
+    if ([TopType isEqualToString:@"1"]) {
+        [publishinfo_dictionary setValue:TopMoney forKey:@"TopMoney"];
+    }
+//    NSLog(@"发布信息:%@",publishinfo_dictionary);
     //正式拼装
     NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
     NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
@@ -293,10 +295,12 @@
                             @"picturelist":picturelist,
                             @"publishinfo":publishinfo
                             };
-    NSLog(@"send:%@",send);
     NSString * interface = @"/publish/publish/addpublishinfo.html";
+    if (isIssue) {
+        interface = @"/publish/publish/addsubmitpublishinfo.html";
+    }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
+        [self popUpViewController];
     }];
     
     
@@ -806,8 +810,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
     
-    //定位开启
-    [[MyLocationManager sharedLocationManager] startLocation];
+    
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)

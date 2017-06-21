@@ -313,7 +313,19 @@
     }
 }
 
-
+//获取招领信息
+-(void)getOthergetData{
+    NSString * interface = @"/publish/publish/getuserrecruitpublishlist.html";
+    NSDictionary * send = @{
+                            @"userid":USER_ID,
+                            @"parentid":@"394"
+                            };
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        NSLog(@"招领:%@",array);
+    }];
+    
+}
 
 
 //返回上个界面
@@ -325,6 +337,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
+    [self getOthergetData];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [MYTOOL showTabBar];

@@ -8,6 +8,7 @@
 
 #import "PayTopUpVC.h"
 #import "AliPayTool.h"
+#import "WXPayTool.h"
 @interface PayTopUpVC ()
 @property(nonatomic,strong)UITextField * moneyTF;//充值金额
 @property(nonatomic,strong)UIImageView * aliIcon;//阿里选择标志
@@ -207,8 +208,11 @@
 //准备开始支付
 -(void)startPay{
     if (self.aliIcon.hidden) {//微信支付
-        [SVProgressHUD showErrorWithStatus:@"微信还没弄呢" duration:2];
-        return;
+        NSDictionary * payInfo = @{
+                                   @"orderId":orderId,
+                                   @"money":self.moneyTF.text
+                                   };
+        [[WXPayTool new] wxPayWithGoodsDictionary:payInfo];
     }else{//支付宝支付
         NSDictionary * payInfo = @{
                                    @"orderId":orderId,

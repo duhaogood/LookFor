@@ -614,6 +614,14 @@
             self.authenticationLabel.text = @"已认证";
             break;
     }
+    //余额
+    NSString * Balance = MYTOOL.userInfo[@"Balance"];
+    self.accountBalanceLabel.text = [NSString stringWithFormat:@"%.2f",[Balance floatValue]];
+    //悬赏金额
+    NSString * BalanceNoCash = MYTOOL.userInfo[@"BalanceNoCash"];
+    self.rewardAmountLabel.text = [NSString stringWithFormat:@"%.2f",[BalanceNoCash floatValue]];
+    
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated{

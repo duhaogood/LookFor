@@ -82,6 +82,8 @@
 		044AE04C1EF2CC2500E43704 /* UIColor+PYSearchExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AE0441EF2CC2500E43704 /* UIColor+PYSearchExtension.m */; };
 		044AE04D1EF2CC2500E43704 /* UIView+PYSearchExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AE0461EF2CC2500E43704 /* UIView+PYSearchExtension.m */; };
 		044AE0501EF2D51900E43704 /* SelectTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AE04F1EF2D51900E43704 /* SelectTypeVC.m */; };
+		0454BD7D1EF573A800B9E8A0 /* NetworkSocialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454BD7C1EF573A800B9E8A0 /* NetworkSocialCell.m */; };
+		0454BD861EF5926900B9E8A0 /* NetworkSocialInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454BD851EF5926900B9E8A0 /* NetworkSocialInfoVC.m */; };
 		04874F141ED913CE00049758 /* LookForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04874F131ED913CE00049758 /* LookForCell.m */; };
 		049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */; };
 		049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */; };
@@ -423,6 +425,12 @@
 		044AE0461EF2CC2500E43704 /* UIView+PYSearchExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PYSearchExtension.m"; sourceTree = "<group>"; };
 		044AE04E1EF2D51900E43704 /* SelectTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTypeVC.h; sourceTree = "<group>"; };
 		044AE04F1EF2D51900E43704 /* SelectTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTypeVC.m; sourceTree = "<group>"; };
+		0454BD7B1EF573A800B9E8A0 /* NetworkSocialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSocialCell.h; sourceTree = "<group>"; };
+		0454BD7C1EF573A800B9E8A0 /* NetworkSocialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSocialCell.m; sourceTree = "<group>"; };
+		0454BD7F1EF591F800B9E8A0 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		0454BD811EF591F800B9E8A0 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		0454BD841EF5926900B9E8A0 /* NetworkSocialInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSocialInfoVC.h; sourceTree = "<group>"; };
+		0454BD851EF5926900B9E8A0 /* NetworkSocialInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSocialInfoVC.m; sourceTree = "<group>"; };
 		04874F121ED913CE00049758 /* LookForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCell.h; sourceTree = "<group>"; };
 		04874F131ED913CE00049758 /* LookForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCell.m; sourceTree = "<group>"; };
 		049B5DC51EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
@@ -1487,6 +1495,50 @@
 			path = PYSearch;
 			sourceTree = "<group>";
 		};
+		0454BD771EF5737C00B9E8A0 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				0454BD7B1EF573A800B9E8A0 /* NetworkSocialCell.h */,
+				0454BD7C1EF573A800B9E8A0 /* NetworkSocialCell.m */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		0454BD7E1EF591F800B9E8A0 /* 3.Sections */ = {
+			isa = PBXGroup;
+			children = (
+				0454BD7F1EF591F800B9E8A0 /* 0.Comments.h */,
+				0454BD801EF591F800B9E8A0 /* 1. NetworkSocialInfo */,
+			);
+			path = 3.Sections;
+			sourceTree = "<group>";
+		};
+		0454BD801EF591F800B9E8A0 /* 1. NetworkSocialInfo */ = {
+			isa = PBXGroup;
+			children = (
+				0454BD811EF591F800B9E8A0 /* 0.Comments.h */,
+				0454BD821EF591F800B9E8A0 /* 1.Controller */,
+				0454BD831EF591F800B9E8A0 /* 2.MyView */,
+			);
+			path = "1. NetworkSocialInfo";
+			sourceTree = "<group>";
+		};
+		0454BD821EF591F800B9E8A0 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0454BD841EF5926900B9E8A0 /* NetworkSocialInfoVC.h */,
+				0454BD851EF5926900B9E8A0 /* NetworkSocialInfoVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		0454BD831EF591F800B9E8A0 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
 		04874F111ED913AA00049758 /* 02.LookForCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1691,7 +1743,8 @@
 			children = (
 				049B5DE31EDF055C0080D552 /* 0.Comments.h */,
 				049B5DE41EDF055C0080D552 /* 1.Controller */,
-				049B5DE51EDF055C0080D552 /* 2.MyView */,
+				0454BD771EF5737C00B9E8A0 /* 2.MyView */,
+				0454BD7E1EF591F800B9E8A0 /* 3.Sections */,
 			);
 			path = 05.NetworkSocial;
 			sourceTree = "<group>";
@@ -1703,13 +1756,6 @@
 				049B5E291EDF07410080D552 /* NetworkSocialVC.m */,
 			);
 			path = 1.Controller;
-			sourceTree = "<group>";
-		};
-		049B5DE51EDF055C0080D552 /* 2.MyView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.MyView;
 			sourceTree = "<group>";
 		};
 		049B5DE61EDF055C0080D552 /* 06.MyFollow */ = {
@@ -2929,10 +2975,12 @@
 				78375AC51ED4734C0046F8C3 /* IssueVC.m in Sources */,
 				049B5E241EDF07240080D552 /* MyExtensionVC.m in Sources */,
 				0418F01A1EED7AF200063E93 /* PerfectVC.m in Sources */,
+				0454BD861EF5926900B9E8A0 /* NetworkSocialInfoVC.m in Sources */,
 				049B5E391EDF07900080D552 /* ComplaintSuggestionVC.m in Sources */,
 				044669E01EF11A010082D8BC /* PickUpSomeThingVC.m in Sources */,
 				049B5E3C1EDF07A20080D552 /* FeedbackVC.m in Sources */,
 				044ADF7C1EF2956300E43704 /* PayTopUpVC.m in Sources */,
+				0454BD7D1EF573A800B9E8A0 /* NetworkSocialCell.m in Sources */,
 				78375ACF1ED4734C0046F8C3 /* MJRefreshBackFooter.m in Sources */,
 				0418F0111EECEF2800063E93 /* UpUserCardView.m in Sources */,
 				049B5E331EDF076D0080D552 /* InvitingFriendsVC.m in Sources */,
