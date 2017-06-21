@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04041C681EFAB847003A6ED6 /* FirstPageMiddleNextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C671EFAB847003A6ED6 /* FirstPageMiddleNextVC.m */; };
+		04041C9B1EFAE859003A6ED6 /* LookPersonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C6F1EFAE859003A6ED6 /* LookPersonVC.m */; };
+		04041C9C1EFAE859003A6ED6 /* LookSomethingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C751EFAE859003A6ED6 /* LookSomethingVC.m */; };
+		04041C9D1EFAE859003A6ED6 /* PersonLookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C7B1EFAE859003A6ED6 /* PersonLookVC.m */; };
+		04041C9E1EFAE859003A6ED6 /* BusinessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C811EFAE859003A6ED6 /* BusinessVC.m */; };
+		04041C9F1EFAE859003A6ED6 /* NetShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C871EFAE859003A6ED6 /* NetShowVC.m */; };
+		04041CA01EFAE859003A6ED6 /* NetHelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C8D1EFAE859003A6ED6 /* NetHelpVC.m */; };
+		04041CA11EFAE859003A6ED6 /* LookCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C931EFAE859003A6ED6 /* LookCircleVC.m */; };
+		04041CA21EFAE859003A6ED6 /* PointStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C991EFAE859003A6ED6 /* PointStoreVC.m */; };
 		0410B0501EE3DDA200E8CBA1 /* IssueFirstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */; };
 		0418F0081EECE30500063E93 /* UpUserCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0071EECE30500063E93 /* UpUserCardVC.m */; };
 		0418F00E1EECE3D900063E93 /* CertificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F00D1EECE3D900063E93 /* CertificationView.m */; };
@@ -194,6 +203,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04041C2B1EFAB38B003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C661EFAB847003A6ED6 /* FirstPageMiddleNextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageMiddleNextVC.h; sourceTree = "<group>"; };
+		04041C671EFAB847003A6ED6 /* FirstPageMiddleNextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageMiddleNextVC.m; sourceTree = "<group>"; };
+		04041C6A1EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C6C1EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C6E1EFAE859003A6ED6 /* LookPersonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookPersonVC.h; sourceTree = "<group>"; };
+		04041C6F1EFAE859003A6ED6 /* LookPersonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookPersonVC.m; sourceTree = "<group>"; };
+		04041C721EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C741EFAE859003A6ED6 /* LookSomethingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookSomethingVC.h; sourceTree = "<group>"; };
+		04041C751EFAE859003A6ED6 /* LookSomethingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookSomethingVC.m; sourceTree = "<group>"; };
+		04041C781EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C7A1EFAE859003A6ED6 /* PersonLookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonLookVC.h; sourceTree = "<group>"; };
+		04041C7B1EFAE859003A6ED6 /* PersonLookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonLookVC.m; sourceTree = "<group>"; };
+		04041C7E1EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C801EFAE859003A6ED6 /* BusinessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessVC.h; sourceTree = "<group>"; };
+		04041C811EFAE859003A6ED6 /* BusinessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessVC.m; sourceTree = "<group>"; };
+		04041C841EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C861EFAE859003A6ED6 /* NetShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetShowVC.h; sourceTree = "<group>"; };
+		04041C871EFAE859003A6ED6 /* NetShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetShowVC.m; sourceTree = "<group>"; };
+		04041C8A1EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C8C1EFAE859003A6ED6 /* NetHelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHelpVC.h; sourceTree = "<group>"; };
+		04041C8D1EFAE859003A6ED6 /* NetHelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetHelpVC.m; sourceTree = "<group>"; };
+		04041C901EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C921EFAE859003A6ED6 /* LookCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookCircleVC.h; sourceTree = "<group>"; };
+		04041C931EFAE859003A6ED6 /* LookCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookCircleVC.m; sourceTree = "<group>"; };
+		04041C961EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04041C981EFAE859003A6ED6 /* PointStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointStoreVC.h; sourceTree = "<group>"; };
+		04041C991EFAE859003A6ED6 /* PointStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointStoreVC.m; sourceTree = "<group>"; };
 		0410B04D1EE3DD6800E8CBA1 /* 0.Comments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		0410B04E1EE3DDA200E8CBA1 /* IssueFirstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueFirstPageVC.h; sourceTree = "<group>"; };
 		0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueFirstPageVC.m; sourceTree = "<group>"; };
@@ -216,7 +253,6 @@
 		043DF9451EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		043DF9491EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		043DF94D1EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
-		043DF9511EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		043DF9551EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		043DF9581EF17ED300EEA3AC /* GYZChooseCityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYZChooseCityController.h; sourceTree = "<group>"; };
 		043DF9591EF17ED300EEA3AC /* GYZChooseCityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYZChooseCityController.m; sourceTree = "<group>"; };
@@ -698,6 +734,246 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04041C641EFAB819003A6ED6 /* 00.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C661EFAB847003A6ED6 /* FirstPageMiddleNextVC.h */,
+				04041C671EFAB847003A6ED6 /* FirstPageMiddleNextVC.m */,
+			);
+			path = 00.Controller;
+			sourceTree = "<group>";
+		};
+		04041C651EFAB819003A6ED6 /* 01.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 01.MyView;
+			sourceTree = "<group>";
+		};
+		04041C691EFAE859003A6ED6 /* 02.Sections */ = {
+			isa = PBXGroup;
+			children = (
+				04041C6A1EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C6B1EFAE859003A6ED6 /* 1.LookPerson */,
+				04041C711EFAE859003A6ED6 /* 2.LookSomething */,
+				04041C771EFAE859003A6ED6 /* 3.PersonLook */,
+				04041C7D1EFAE859003A6ED6 /* 4.Business */,
+				04041C831EFAE859003A6ED6 /* 5.NetShow */,
+				04041C891EFAE859003A6ED6 /* 6.NetHelp */,
+				04041C8F1EFAE859003A6ED6 /* 7.LookCircle */,
+				04041C951EFAE859003A6ED6 /* 8.PointStore */,
+			);
+			path = 02.Sections;
+			sourceTree = "<group>";
+		};
+		04041C6B1EFAE859003A6ED6 /* 1.LookPerson */ = {
+			isa = PBXGroup;
+			children = (
+				04041C6C1EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C6D1EFAE859003A6ED6 /* 1.Controller */,
+				04041C701EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 1.LookPerson;
+			sourceTree = "<group>";
+		};
+		04041C6D1EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C6E1EFAE859003A6ED6 /* LookPersonVC.h */,
+				04041C6F1EFAE859003A6ED6 /* LookPersonVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C701EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C711EFAE859003A6ED6 /* 2.LookSomething */ = {
+			isa = PBXGroup;
+			children = (
+				04041C721EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C731EFAE859003A6ED6 /* 1.Controller */,
+				04041C761EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 2.LookSomething;
+			sourceTree = "<group>";
+		};
+		04041C731EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C741EFAE859003A6ED6 /* LookSomethingVC.h */,
+				04041C751EFAE859003A6ED6 /* LookSomethingVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C761EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C771EFAE859003A6ED6 /* 3.PersonLook */ = {
+			isa = PBXGroup;
+			children = (
+				04041C781EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C791EFAE859003A6ED6 /* 1.Controller */,
+				04041C7C1EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 3.PersonLook;
+			sourceTree = "<group>";
+		};
+		04041C791EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C7A1EFAE859003A6ED6 /* PersonLookVC.h */,
+				04041C7B1EFAE859003A6ED6 /* PersonLookVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C7C1EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C7D1EFAE859003A6ED6 /* 4.Business */ = {
+			isa = PBXGroup;
+			children = (
+				04041C7E1EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C7F1EFAE859003A6ED6 /* 1.Controller */,
+				04041C821EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 4.Business;
+			sourceTree = "<group>";
+		};
+		04041C7F1EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C801EFAE859003A6ED6 /* BusinessVC.h */,
+				04041C811EFAE859003A6ED6 /* BusinessVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C821EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C831EFAE859003A6ED6 /* 5.NetShow */ = {
+			isa = PBXGroup;
+			children = (
+				04041C841EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C851EFAE859003A6ED6 /* 1.Controller */,
+				04041C881EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 5.NetShow;
+			sourceTree = "<group>";
+		};
+		04041C851EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C861EFAE859003A6ED6 /* NetShowVC.h */,
+				04041C871EFAE859003A6ED6 /* NetShowVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C881EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C891EFAE859003A6ED6 /* 6.NetHelp */ = {
+			isa = PBXGroup;
+			children = (
+				04041C8A1EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C8B1EFAE859003A6ED6 /* 1.Controller */,
+				04041C8E1EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 6.NetHelp;
+			sourceTree = "<group>";
+		};
+		04041C8B1EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C8C1EFAE859003A6ED6 /* NetHelpVC.h */,
+				04041C8D1EFAE859003A6ED6 /* NetHelpVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C8E1EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C8F1EFAE859003A6ED6 /* 7.LookCircle */ = {
+			isa = PBXGroup;
+			children = (
+				04041C901EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C911EFAE859003A6ED6 /* 1.Controller */,
+				04041C941EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 7.LookCircle;
+			sourceTree = "<group>";
+		};
+		04041C911EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C921EFAE859003A6ED6 /* LookCircleVC.h */,
+				04041C931EFAE859003A6ED6 /* LookCircleVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C941EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		04041C951EFAE859003A6ED6 /* 8.PointStore */ = {
+			isa = PBXGroup;
+			children = (
+				04041C961EFAE859003A6ED6 /* 0.Comments.h */,
+				04041C971EFAE859003A6ED6 /* 1.Controller */,
+				04041C9A1EFAE859003A6ED6 /* 2.MyView */,
+			);
+			path = 8.PointStore;
+			sourceTree = "<group>";
+		};
+		04041C971EFAE859003A6ED6 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04041C981EFAE859003A6ED6 /* PointStoreVC.h */,
+				04041C991EFAE859003A6ED6 /* PointStoreVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		04041C9A1EFAE859003A6ED6 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
 		040B83301EEC5558002F62CD /* 1.Agreement */ = {
 			isa = PBXGroup;
 			children = (
@@ -912,25 +1188,12 @@
 		043DF9501EF177D600EEA3AC /* 05.MiddleSections */ = {
 			isa = PBXGroup;
 			children = (
-				043DF9511EF177D600EEA3AC /* 0.Comments.h */,
-				043DF9521EF177D600EEA3AC /* 1.Controller */,
-				043DF9531EF177D600EEA3AC /* 2.MyView */,
+				04041C2B1EFAB38B003A6ED6 /* 0.Comments.h */,
+				04041C641EFAB819003A6ED6 /* 00.Controller */,
+				04041C651EFAB819003A6ED6 /* 01.MyView */,
+				04041C691EFAE859003A6ED6 /* 02.Sections */,
 			);
 			path = 05.MiddleSections;
-			sourceTree = "<group>";
-		};
-		043DF9521EF177D600EEA3AC /* 1.Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 1.Controller;
-			sourceTree = "<group>";
-		};
-		043DF9531EF177D600EEA3AC /* 2.MyView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.MyView;
 			sourceTree = "<group>";
 		};
 		043DF9541EF177D600EEA3AC /* 06.LowerBanner */ = {
@@ -2888,6 +3151,8 @@
 				78375AF51ED4734C0046F8C3 /* UIImage+WebP.m in Sources */,
 				78375AF21ED4734C0046F8C3 /* UIButton+WebCache.m in Sources */,
 				049B5E451EDF07C90080D552 /* ClearCacheVC.m in Sources */,
+				04041C9C1EFAE859003A6ED6 /* LookSomethingVC.m in Sources */,
+				04041C9B1EFAE859003A6ED6 /* LookPersonVC.m in Sources */,
 				049B5E211EDF07150080D552 /* Found_ClaimVC.m in Sources */,
 				78375AD31ED4734C0046F8C3 /* MJRefreshAutoGifFooter.m in Sources */,
 				044AE0491EF2CC2500E43704 /* PYSearchConst.m in Sources */,
@@ -2897,6 +3162,7 @@
 				044ADFF01EF2A4B100E43704 /* base64.m in Sources */,
 				0418F0171EED7ADF00063E93 /* PerfectView.m in Sources */,
 				78C23C4A1ED3450A000CD40E /* AppDelegate.m in Sources */,
+				04041CA11EFAE859003A6ED6 /* LookCircleVC.m in Sources */,
 				78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */,
 				044ADFF91EF2A4B100E43704 /* WXUtil.mm in Sources */,
 				04874F141ED913CE00049758 /* LookForCell.m in Sources */,
@@ -2921,9 +3187,11 @@
 				04DE086D1EE29D6D003F9943 /* FollowCell.m in Sources */,
 				04DE087E1EE308AA003F9943 /* MyClaimCell.m in Sources */,
 				78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */,
+				04041C681EFAB847003A6ED6 /* FirstPageMiddleNextVC.m in Sources */,
 				044669DD1EF11A010082D8BC /* LookForCircleUpView.m in Sources */,
 				044AE0471EF2CC2500E43704 /* NSBundle+PYSearchExtension.m in Sources */,
 				0418F0081EECE30500063E93 /* UpUserCardVC.m in Sources */,
+				04041CA01EFAE859003A6ED6 /* NetHelpVC.m in Sources */,
 				0418F00E1EECE3D900063E93 /* CertificationView.m in Sources */,
 				78375ACA1ED4734C0046F8C3 /* AFSecurityPolicy.m in Sources */,
 				78375AE91ED4734C0046F8C3 /* MKAnnotationView+WebCache.m in Sources */,
@@ -2971,6 +3239,8 @@
 				78375AF01ED4734C0046F8C3 /* SDWebImageManager.m in Sources */,
 				044AE0191EF2A50200E43704 /* DHNetWorking.m in Sources */,
 				78375AED1ED4734C0046F8C3 /* SDWebImageDecoder.m in Sources */,
+				04041C9E1EFAE859003A6ED6 /* BusinessVC.m in Sources */,
+				04041CA21EFAE859003A6ED6 /* PointStoreVC.m in Sources */,
 				044AE01A1EF2A50200E43704 /* MyLocationManager.m in Sources */,
 				78375AC51ED4734C0046F8C3 /* IssueVC.m in Sources */,
 				049B5E241EDF07240080D552 /* MyExtensionVC.m in Sources */,
@@ -3005,6 +3275,8 @@
 				044669DC1EF11A010082D8BC /* LookForCircleVC.m in Sources */,
 				049B5E421EDF07BD0080D552 /* CheckUpdateVC.m in Sources */,
 				78375AF11ED4734C0046F8C3 /* SDWebImagePrefetcher.m in Sources */,
+				04041C9F1EFAE859003A6ED6 /* NetShowVC.m in Sources */,
+				04041C9D1EFAE859003A6ED6 /* PersonLookVC.m in Sources */,
 				78375AE61ED4734C0046F8C3 /* SDCollectionViewCell.m in Sources */,
 				044669F21EF131A20082D8BC /* LookManSomeThingUpView.m in Sources */,
 				78375ADF1ED4734C0046F8C3 /* UIScrollView+MJExtension.m in Sources */,

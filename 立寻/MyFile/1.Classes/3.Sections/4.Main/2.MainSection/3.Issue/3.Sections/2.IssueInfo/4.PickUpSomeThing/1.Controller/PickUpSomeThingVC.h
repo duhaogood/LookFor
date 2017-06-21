@@ -12,6 +12,7 @@
 #import "IssueInfoLowerView.h"
 #import "AFNetworking.h"
 @interface PickUpSomeThingVC : UIViewController
+@property(nonatomic,strong)NSDictionary * publishDic;//草稿箱进来的数据
 @property(nonatomic,strong)NSArray * secondTypeList;//二级分类数据
 @property(nonatomic,copy)NSString * typeTitle;//一级分类标题
 

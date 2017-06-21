@@ -12,6 +12,7 @@
 #import "GYZChooseCityController.h"
 #import "PYSearch.h"
 #import "SelectTypeVC.h"
+#import "FirstPageMiddleNextVC.h"
 @interface LookForVC ()<PYSearchViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
@@ -119,7 +120,14 @@
 -(void)iconClick:(UIButton *)tap{
     NSInteger tag = tap.tag;
     NSString * name = self.btn_name_img_array[tag][1];
-    [SVProgressHUD showSuccessWithStatus:name duration:1];
+    if ([name isEqualToString:@"招商加盟"] || [name isEqualToString:@"积分商城"]) {
+        [SVProgressHUD showErrorWithStatus:@"开发中" duration:1];
+        return;
+    }
+    FirstPageMiddleNextVC * vc = [FirstPageMiddleNextVC new];
+    vc.title = name;
+    vc.parentid = self.btn_name_img_array[tag][3];
+    [self.navigationController pushViewController:vc animated:true];
 }
 //置顶、最新事件
 -(void)up_newClick:(UIButton *)btn{
@@ -198,14 +206,14 @@
                      ];
     //头view中间按钮图标及名字数组
     self.btn_name_img_array = @[
-                                 @[@"menu_xr",@"委托寻人"],
-                                 @[@"menu_xw",@"委托寻物"],
-                                 @[@"menu_zlrl",@"招领认领"],
-                                 @[@"menu_zsjm",@"招商加盟"],
-                                 @[@"menu_wlbg",@"网络曝光"],
-                                 @[@"menu_wlqz",@"网络求助"],
-                                 @[@"menu_quanzi",@"立寻圈子"],
-                                 @[@"menu_shop",@"积分商城"]
+                                 @[@"menu_xr",@"委托寻人",@"LookPersonVC",@"83"],
+                                 @[@"menu_xw",@"委托寻物",@"LookSomethingVC",@"82"],
+                                 @[@"menu_zlrl",@"招领认领",@"PersonLookVC",@"394"],
+                                 @[@"menu_zsjm",@"招商加盟",@"BusinessVC",@"0"],
+                                 @[@"menu_wlbg",@"网络曝光",@"NetShowVC",@"80"],
+                                 @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
+                                 @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
+                                 @[@"menu_shop",@"积分商城",@"PointStoreVC",@"0"]
                                  ];
     //表视图
     UITableView * tableView = [UITableView new];

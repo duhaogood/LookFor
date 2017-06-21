@@ -33,9 +33,11 @@
     NSMutableArray * fileid_array;//上传图片的id数组
     BOOL isIssue;//是否发布，还是保存草稿箱
     NSDictionary * uploadAreaDic;//需要上传的地区信息
+    int uploadImgCount;//已经上传的图片张数
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    uploadImgCount = 0;
     //返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
     self.view.backgroundColor = MYCOLOR_240_240_240;
@@ -46,8 +48,11 @@
 //    NSLog(@"list:%@",self.secondTypeList);
     //加载主界面
     [self loadMainView];
-    //定位开启
-    [[MyLocationManager sharedLocationManager] startLocation];
+    if (!self.publishDic) {
+        //定位开启
+        [[MyLocationManager sharedLocationManager] startLocation];
+    }
+    
 }
 //加载主界面
 -(void)loadMainView{
@@ -142,7 +147,136 @@
         top += height;
     }
     scrollView.contentSize = CGSizeMake(0, top);
-    
+    /*如果从草稿箱进来，要刷新界面数据*/
+    if (self.publishDic) {
+        [self fixViewData];
+    }
+}
+//填充界面数据
+-(void)fixViewData{
+    //标题
+    NSString * Title = self.publishDic[@"Title"];
+    if (Title) {
+        self.titleTF.text = Title;
+        self.titleNumberLabel.text = [NSString stringWithFormat:@"%ld/20",Title.length];
+    }
+    //内容
+    NSString * Content = self.publishDic[@"Content"];
+    if (Title) {
+        self.contentTV.text = Content;
+        self.contentNumberLabel.text = [NSString stringWithFormat:@"%ld/500",Content.length];
+        if (Content.length > 0) {
+            self.contentTV.placeholderLabel.hidden = true;
+        }
+    }
+    //目标类型
+    NSString * CategoryName = self.publishDic[@"CategoryName"];
+    if (CategoryName) {
+        self.typeTF.text = CategoryName;
+    }
+    //金额
+    NSString * obj_money = self.publishDic[@"Money"];
+    if (obj_money) {
+        float Money = [obj_money floatValue];
+        NSString * text = [NSString stringWithFormat:@"%.2f",Money];
+        if (Money == (int)Money) {
+            text = [NSString stringWithFormat:@"%d",(int)Money];
+        }
+        self.moneyTF.text = text;
+    }
+    //城市
+    {
+        NSString * ProvinceName = self.publishDic[@"ProvinceName"];
+        NSString * Province = [NSString stringWithFormat:@"%d",[self.publishDic[@"Province"] intValue]];
+        NSString * CityName = self.publishDic[@"CityName"];
+        NSString * City = [NSString stringWithFormat:@"%d",[self.publishDic[@"City"] intValue]];
+        uploadAreaDic = @{
+                          @"provinceid":Province,
+                          @"cityid":City
+                          };
+        self.cityTF.text = [NSString stringWithFormat:@"%@%@",ProvinceName,CityName];
+    }
+    //详细地址
+    NSString * Address = self.publishDic[@"Address"];
+    self.addressTF.text = Address;
+    //推送地区
+    {
+        //按钮
+        {
+            int PushType = [self.publishDic[@"PushType"] intValue];
+            UIButton * btn_area = nil;
+            if (PushType == 1) {
+                btn_area = self.allCountryBtn;
+            }else{
+                btn_area = self.areaSelectBtn;
+            }
+            [self pushAreaButtonCallback:btn_area];
+        }
+        //推送金额
+        {
+            NSString * obj_pushMoney = self.publishDic[@"PushMoney"];
+            float PushMoney = [obj_pushMoney floatValue];
+            NSString * text = [NSString stringWithFormat:@"%.2f",PushMoney];
+            if (PushMoney == (int)PushMoney) {
+                text = [NSString stringWithFormat:@"%d",(int)PushMoney];
+            }
+            self.pushMoneyTF.text = text;
+        }
+    }
+    //地区置顶
+    {
+        //按钮
+        {
+            int TopType = [self.publishDic[@"TopType"] intValue];
+            UIButton * btn = nil;
+            if (TopType == 1) {
+                btn = self.haveBtn;
+            }else{
+                btn = self.noHaveBtn;
+            }
+            [self areaUpButtonCallback:btn];
+        }
+        //金额
+        {
+            NSString * obj_areaMoney = self.publishDic[@"TopMoney"];
+            float TopMoney = [obj_areaMoney floatValue];
+            NSString * text = [NSString stringWithFormat:@"%.2f",TopMoney];
+            if (TopMoney == (int)TopMoney) {
+                text = [NSString stringWithFormat:@"%d",(int)TopMoney];
+            }
+            self.haveMoneyTF.text = text;
+        }
+    }
+    //图片
+    {
+        //获取发布中的所有图片
+        NSString * interface = @"/publish/publish/getpublishdetailcomplex.html";
+        NSObject * publishid = self.publishDic[@"PublishID"];
+        [MYTOOL netWorkingWithTitle:@"加载中…"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:@{@"publishid":publishid} andSuccess:^(NSDictionary *back_dic) {
+            NSLog(@"back:%@",back_dic);
+            NSArray * imgArray = back_dic[@"Data"][@"PictureList"];
+            for (NSDictionary * netImgDic in imgArray) {
+                //已经上传的图片的id
+                int img_id = [netImgDic[@"PictureID"] intValue];
+                //已经上传的图片的url
+                NSString * url = netImgDic[@"ImgFilePath"];
+                for (NSMutableDictionary * dic in self.img_arr) {
+                    NSString * have_image = dic[@"have_image"];
+                    if (![have_image boolValue]) {
+                        [dic setValue:@"1" forKey:@"have_image"];
+                        [dic setValue:[NSString stringWithFormat:@"%d",img_id] forKey:@"ID"];
+                        UIImageView * imgV = dic[@"imgV"];
+                        [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:url];
+                        break;
+                    }
+                }
+                [self refreshImgView];//重新刷新界面
+            }
+            
+        }];
+    }
+        
 }
 //判断是否有信息不全
 -(BOOL)checkInfoOfIssue{
@@ -181,14 +315,26 @@
     int count_img = 0;
     for (int i =  0; i < self.img_arr.count ; i ++){
         NSDictionary * dic = self.img_arr[i];
-        count_img += [dic[@"have_image"] boolValue];
+        count_img += [dic[@"have_image"] boolValue] && (!dic[@"ID"]);
     }
     if (count_img == 0) {
-        [SVProgressHUD showErrorWithStatus:@"没有图片" duration:1];
+        BOOL notImgID = true;
+        for (int i =  0; i < self.img_arr.count ; i ++){
+            NSDictionary * dic = self.img_arr[i];
+            if(dic[@"ID"]){
+                notImgID = false;
+                break;
+            }
+        }
+        if (notImgID) {
+            [SVProgressHUD showErrorWithStatus:@"没有图片" duration:1];
+        }else{
+            [self startIssue];
+        }
         return;
     }
     NSDictionary * dic = self.img_arr[current_upload_img_index];
-    if (![dic[@"have_image"] boolValue]) {
+    if (![dic[@"have_image"] boolValue] || dic[@"ID"]) {
         current_upload_img_index ++;
         [self upLoadAllImage];
         return;
@@ -224,13 +370,14 @@
         
         [formData appendPartWithFileData:imageData name:@"filedata" fileName:fileName mimeType:@"image/png"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
+        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",uploadImgCount+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"Result"] boolValue]) {
+            uploadImgCount ++;
             NSObject * fileid = responseObject[@"Data"][@"fileid"];
             [fileid_array addObject:@{@"PictureID":fileid}];
             current_upload_img_index ++;
-            if (current_upload_img_index >= count_img) {
+            if (uploadImgCount >= count_img) {
                 [SVProgressHUD dismiss];
                 //上传完毕
                 [self startIssue];
@@ -246,6 +393,12 @@
 }
 //准备发布信息
 -(void)startIssue{
+    for (NSDictionary * imgDic in self.img_arr) {
+        NSString * ID = imgDic[@"ID"];
+        if (ID) {
+            [fileid_array addObject:@{@"PictureID":ID}];
+        }
+    }
     NSString * state = isIssue ? @"发布中……" : @"保存中……";
     [MYTOOL netWorkingWithTitle:state];
     //拼装发布信息
@@ -295,9 +448,23 @@
                             @"picturelist":picturelist,
                             @"publishinfo":publishinfo
                             };
+    if (self.publishDic) {
+        send = @{
+                 @"userid":userid,
+                 @"picturelist":picturelist,
+                 @"publishinfo":publishinfo,
+                 @"publishid":self.publishDic[@"PublishID"]
+                 };
+    }
     NSString * interface = @"/publish/publish/addpublishinfo.html";
+    if (self.publishDic) {
+        interface = @"/publish/publish/modifypublishinfo.html";
+    }
     if (isIssue) {
         interface = @"/publish/publish/addsubmitpublishinfo.html";
+        if (self.publishDic) {
+            interface = @"/publish/publish/modifysubmitpublishinfo.html";
+        }
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         [self popUpViewController];

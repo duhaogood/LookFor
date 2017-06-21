@@ -114,7 +114,7 @@
         //不显示分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
-    [self getType_2_dataWithParentid:type_1_array[0][0]];
+    [self getType_2_dataWithParentid:type_1_array[0][1]];
 }
 //选择一级分类事件
 -(void)selectType_1_callback:(UIButton *)btn{

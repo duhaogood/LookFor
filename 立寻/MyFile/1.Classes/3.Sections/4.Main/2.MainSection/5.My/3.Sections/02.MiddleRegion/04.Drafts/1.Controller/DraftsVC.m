@@ -8,6 +8,10 @@
 
 #import "DraftsVC.h"
 #import "DraftsCell.h"
+#import "LookForCircleVC.h"
+#import "NetShowHelpVC.h"
+#import "LookManSomeThingVC.h"
+#import "PickUpSomeThingVC.h"
 @interface DraftsVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -90,12 +94,96 @@
     DraftsCell * cell = [[DraftsCell alloc] initWithDictionary:dic andHeight:tableView.rowHeight andDelegate:self andIndexPath:indexPath];
     return cell;
 }
+//先要设Cell可编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+//进入编辑模式，按下出现的编辑按钮后,进行删除操作
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSDictionary * publishDic = self.cellDateArray[indexPath.section];
+        //要删除的发布id
+        NSObject * PublishID = publishDic[@"PublishID"];
+        NSString * interface = @"/publish/publish/deletepublishinfo.html";
+        NSDictionary * send = @{
+                                @"publishid":PublishID
+                                };
+        [MYTOOL netWorkingWithTitle:@"删除中…"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [self headerRefresh];
+        }];
+    }
+}
 //cell编辑回调
 -(void)cellEditCallback:(UIButton *)btn{
-    NSLog(@"点击:%@",self.cellDateArray[btn.tag]);
-}
-//加载所有数据
--(void)loadCellData{
+    NSDictionary * publishDic = self.cellDateArray[btn.tag];
+    //点击的分类id
+    int CategoryID_1 = [publishDic[@"CategoryID"] intValue];
+    //获取分类id数组
+    NSString * interface = @"/publish/publish/getcategoryiteratelist.html";
+    [MYTOOL netWorkingWithTitle:@"加载中"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        //便利array
+        for (NSDictionary * typeDic in array) {
+            //分类id
+            int CategoryID_2 = [typeDic[@"CategoryID"] intValue];
+            //查找此发布所对应的父分类id
+            if (CategoryID_1 == CategoryID_2) {
+                //父id
+                int ParentID = [typeDic[@"ParentID"] intValue];
+                NSString * CategoryName = typeDic[@"CategoryTitle"];
+                NSLog(@"父id:%d,分类名字:%@",ParentID,CategoryName);
+                NSArray * parentArray = @[
+                                          @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109",@"80",@"NetShowHelpVC"],
+                                          @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96",@"81",@"NetShowHelpVC"],
+                                          @[@"fbbtn_quanzi",@"立寻圈子",@"96",@"109",@"549",@"LookForCircleVC"],
+                                          @[@"fbbtn_xunren",@"委托寻人",@"96",@"109",@"83",@"LookManSomeThingVC"],
+                                          @[@"fbbtn_xw",@"委托寻物",@"88",@"96",@"82",@"LookManSomeThingVC"],
+                                          @[@"fbbtn_zlrl",@"招领认领",@"96",@"109",@"394",@"PickUpSomeThingVC"]
+                                          ];
+                for (NSArray * pArray in parentArray) {
+                    int parentId = [pArray[4] intValue];
+                    if (parentId == ParentID) {
+                        //一级分类的CategoryID------获取二级分类的依据
+                        NSString * parentid = pArray[4];
+                        NSString * interface2 = @"publish/publish/getcategorytwolist.html";
+                        NSDictionary * send2 = @{
+                                                @"appid":APPID_MINE,
+                                                @"parentid":parentid
+                                                };
+                        [MYNETWORKING getNoPopWithInterfaceName:interface2 andDictionary:send2 andSuccess:^(NSDictionary *back_dic) {
+                            //取得对应的控制器类名
+                            NSString * className = pArray[5];
+                            NSString * title = pArray[1];
+                            Class class = NSClassFromString(className);
+                            UIViewController * vc = [class new];
+                            vc.title = title;
+                            ((PickUpSomeThingVC *)vc).secondTypeList = back_dic[@"Data"];
+                            ((PickUpSomeThingVC *)vc).publishDic = publishDic;
+                            //跳转
+                            [self.navigationController pushViewController:vc animated:true];
+                        }];
+                        
+                        break;
+                    }
+                }
+                
+                
+                break;
+            }
+            
+            
+        }
+        
+    }];
+    
     
     
     
@@ -105,7 +193,7 @@
     NSString * interface = @"/publish/publish/getuserdraftpublishlist.html";
     NSDictionary * send = @{@"userid":USER_ID};
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-//        NSLog(@"back:%@",back_dic);
+        NSLog(@"back:%@",back_dic);
         NSArray * array = back_dic[@"Data"];
         self.cellDateArray = [NSMutableArray arrayWithArray:array];
         if (array && array.count > 0) {
@@ -119,8 +207,33 @@
 }
 //上拉刷新
 -(void)footerRefresh{
-    
-    
+    NSString * interface = @"/publish/publish/getuserdraftpublishlist.html";
+    NSDictionary * send = @{@"userid":USER_ID};
+    //最后一条数据
+    if (self.cellDateArray && self.cellDateArray.count > 0) {
+        NSDictionary * lastPublistDic = self.cellDateArray[self.cellDateArray.count-1];
+        NSObject * PublishID = lastPublistDic[@"PublishID"];
+        send = @{
+                 @"userid":USER_ID,
+                 @"lastnumber":PublishID
+                 };
+    }
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+//                NSLog(@"back:%@",back_dic);
+        NSArray * array = back_dic[@"Data"];
+        if (array && array.count > 0) {
+            [self.cellDateArray addObjectsFromArray:array];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"到底了" duration:2];
+            return;
+        }
+        if (array && array.count > 0) {
+            self.noDataView.hidden = true;
+        }else{
+            self.noDataView.hidden = false;
+        }
+        [self.tableView reloadData];
+    }];
     
     
 }
