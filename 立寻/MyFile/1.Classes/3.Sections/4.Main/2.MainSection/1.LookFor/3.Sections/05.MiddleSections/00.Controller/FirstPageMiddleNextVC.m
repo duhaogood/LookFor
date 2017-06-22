@@ -7,7 +7,7 @@
 //
 
 #import "FirstPageMiddleNextVC.h"
-
+#import "FirstPageMiddleNextCell.h"
 @interface FirstPageMiddleNextVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * typeArray;//二级分类数组
@@ -59,6 +59,7 @@
         self.typeArray = [NSArray arrayWithArray:typeArray];
         [self loadType_2_btns];
         [self loadTableView];
+        [self select_3_btns_callback:select_3_btn_array[1]];
     }];
 }
 //加载tableview
@@ -81,7 +82,10 @@
     }];
     self.automaticallyAdjustsScrollViewInsets = false;
     self.tableView = tableView;
+    tableView.rowHeight = [MYTOOL getHeightWithIphone_six:200];
     [self.view addSubview:tableView];
+    //不显示分割线
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
     {
         UIView * view = [UIView new];
@@ -151,8 +155,6 @@
             [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
             btn.frame = CGRectMake(10, 10, 50, 20);
             [self.select_3_view addSubview:btn];
-            btn.enabled = false;
-            current_3_btn = btn;
             [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
             [select_3_btn_array addObject:btn];
         }
@@ -167,6 +169,8 @@
             [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
             [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
             btn.frame = CGRectMake(70, 10, 50, 20);
+            btn.enabled = false;
+            current_3_btn = btn;
             [self.select_3_view addSubview:btn];
             [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
             [select_3_btn_array addObject:btn];
@@ -192,7 +196,7 @@
 -(void)select_2_callback:(UIButton *)btn{
     btn.enabled = false;
     current_2_btn = btn;
-    UIButton * btn_3 = select_3_btn_array[0];
+    UIButton * btn_3 = select_3_btn_array[1];
     [self select_3_btns_callback:btn_3];
     btn.layer.borderWidth = 1;
     //其他按钮重置可用
@@ -215,31 +219,83 @@
         }
     }
     //重新获取数据
-    [self getCellData];
+    [self getCellDataWithHeader:true];
 }
 #pragma mark - 上啦下啦刷新
 -(void)headerRefresh{
-    
+    [self getCellDataWithHeader:true];
 }
 -(void)footerRefresh{
-    
+    [self getCellDataWithHeader:false];
 }
 //重新加载数据
--(void)getCellData{
+-(void)getCellDataWithHeader:(BOOL)flag{
     int categoryId = (int)current_2_btn.tag;
-    NSLog(@"当前id:%d,置顶:%ld",categoryId,current_3_btn.tag);
     NSString * interface = @"/publish/publish/getfindpublishcomplexlist.html";
     NSMutableDictionary * send = [NSMutableDictionary new];
     //如果是全部就不传发布类别ID-categoryid
     if (categoryId) {
         [send setValue:@(categoryId) forKey:@"categoryid"];
+    }else{
+        [send setValue:self.parentid forKey:@"parentid"];
+    }
+    //是否下拉
+    if (!flag) {
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            NSObject * lastnumber = self.cellDataArray[self.cellDataArray.count - 1][@"PublishID"];
+            [send setValue:lastnumber forKey:@"lastnumber"];
+        }
     }
     //置顶-最新-悬赏
-#warning 参数怎么拼接去调接口!!!!
+    {
+        NSInteger index = [select_3_btn_array indexOfObject:current_3_btn];
+        switch (index) {
+            case 0://置顶
+                [send setValue:@"0" forKey:@"pushtype"];//int	推广类型（0所有，1推广，2不推广）
+                [send setValue:@"1" forKey:@"toptype"];//int	置顶类型（0所有，1置顶，2不置顶）
+                [send setValue:@"0" forKey:@"moneytype"];//赏金类型（0所有，1有赏金，2无赏金）
+                break;
+            case 1://最新
+                [send setValue:@"0" forKey:@"pushtype"];//int	推广类型（0所有，1推广，2不推广）
+                [send setValue:@"0" forKey:@"toptype"];//int	置顶类型（0所有，1置顶，2不置顶）
+                [send setValue:@"0" forKey:@"moneytype"];//赏金类型（0所有，1有赏金，2无赏金）
+                break;
+            default://悬赏
+                [send setValue:@"0" forKey:@"pushtype"];//int	推广类型（0所有，1推广，2不推广）
+                [send setValue:@"0" forKey:@"toptype"];//int	置顶类型（0所有，1置顶，2不置顶）
+                [send setValue:@"1" forKey:@"moneytype"];//赏金类型（0所有，1有赏金，2无赏金）
+                break;
+        }
+    }
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        if (flag) {
+            self.cellDataArray = [NSMutableArray arrayWithArray:array];
+        }else{
+            if (array == nil || array.count == 0) {
+                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+                return;
+            }
+            [self.cellDataArray addObjectsFromArray:array];
+        }
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            NSLog(@"第一条数据:%@",self.cellDataArray[0]);
+            self.noDataView.hidden = true;
+        }else{
+            self.noDataView.hidden = false;
+        }
+        [self.tableView reloadData];
+    }];
+}
+#pragma mark - UITableViewDataSource,UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    
+    
     
     
 }
-#pragma mark - UITableViewDataSource,UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.cellDataArray.count;
 }
@@ -247,13 +303,10 @@
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 8;
+    return 0;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [UITableViewCell new];
-    
-    
-    
+    FirstPageMiddleNextCell * cell = [[FirstPageMiddleNextCell alloc] initWithDictionary:self.cellDataArray[indexPath.section] isFirstPage:false];
     return cell;
 }
 //返回上个界面

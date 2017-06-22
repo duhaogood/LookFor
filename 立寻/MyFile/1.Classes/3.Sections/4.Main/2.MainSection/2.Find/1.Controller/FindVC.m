@@ -8,6 +8,7 @@
 
 #import "FindVC.h"
 #import "LookForCell.h"
+#import "FirstPageMiddleNextCell.h"
 @interface FindVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSArray * select_1_array;//一级分类数据
 @property(nonatomic,strong)NSDictionary * select_2_dict;//二级分类数据
@@ -17,9 +18,12 @@
 @property(nonatomic,strong)UIButton * up_btn;//置顶按钮
 @property(nonatomic,strong)UIButton * newest_btn;//最新按钮
 @property(nonatomic,strong)UIButton * money_btn;//悬赏按钮
-
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * cell_show_array;//cell数据源
+
+@property(nonatomic,strong)NSMutableArray * cellDataArray;//cell数据
+@property(nonatomic,strong)UIView * noDataView;//没有数据显示
+@property(nonatomic,strong)NSMutableArray * select_2_data_array;//二级分类数据数组
 @end
 
 @implementation FindVC
@@ -34,15 +38,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.select_1_array = @[
-                            @"委托寻人", @"委托寻物",@"认领招领",@"网络求助",@"网络曝光"
+                            @[@"委托寻人",@"83"],
+                            @[@"委托寻物",@"82"],
+                            @[@"认领招领",@"394"],
+                            @[@"网络求助",@"81"],
+                            @[@"网络曝光",@"80"]
                             ];
-    self.select_2_dict = @{
-                           @"委托寻人":@[@"全部",@"找债权人",@"找战友",@"找同学",@"找朋友"],
-                           @"委托寻物":@[@"全部",@"找宠",@"找钱包",@"找衣服",@"找什么"],
-                           @"认领招领":@[@"全部",@"领宠",@"领钱包",@"领衣服",@"领什么"],
-                           @"网络求助":@[@"全部",@"举报",@"求助",@"再举报",@"再求助"],
-                           @"网络曝光":@[@"全部",@"曝光",@"再曝光",@"有意思吗",@"没意思"]
-                           };
     //加载主界面
     [self loadMainView];
 }
@@ -56,9 +57,36 @@
     tableView.delegate = self;
     tableView.backgroundColor = MYCOLOR_240_240_240;
     [self.view addSubview:tableView];
+    //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
+    {
+        UIView * view = [UIView new];
+        self.noDataView = view;
+        view.frame = tableView.bounds;
+        view.backgroundColor = MYCOLOR_240_240_240;
+        [tableView addSubview:view];
+        //图片-170*135
+        {
+            UIImageView * icon = [UIImageView new];
+            icon.image = [UIImage imageNamed:@"nodate"];
+            icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
+            [view addSubview:icon];
+        }
+    }
+    tableView.rowHeight = [MYTOOL getHeightWithIphone_six:200];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.automaticallyAdjustsScrollViewInsets = false;
-    [self loadCellDate];
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self headerRefresh];
+        // 结束刷新
+        [tableView.mj_header endRefreshing];
+    }];
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    tableView.mj_header.automaticallyChangeAlpha = YES;
+    // 上拉刷新
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self footerRefresh];
+        [tableView.mj_footer endRefreshing];
+    }];
     //选择数据源view
     {
         float height = 100;
@@ -78,13 +106,13 @@
             float space_btn = (WIDTH - 5 * (size.width + 10))/6.0;
             for (int i = 0; i < self.select_1_array.count; i ++) {
                 UIButton * btn = [UIButton new];
-                [btn setTitle:self.select_1_array[i] forState:UIControlStateNormal];
+                [btn setTitle:self.select_1_array[i][0] forState:UIControlStateNormal];
                 [btn addTarget:self action:@selector(select_1_callback:) forControlEvents:UIControlEventTouchUpInside];
                 btn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [btn setTitleColor:[MYTOOL RGBWithRed:51 green:51 blue:51 alpha:1] forState:UIControlStateNormal];
                 btn.frame = CGRectMake(space_btn + (space_btn + size.width+10) * i, 10, 60, 30);
                 [view addSubview:btn];
-                btn.tag = i;
+                btn.tag = [self.select_1_array[i][1] intValue];
                 [select_1_btn_array addObject:btn];
                 if ( i == 0) {
                     current_1_btn = btn;
@@ -109,48 +137,14 @@
         }
         //二级分类按钮
         {
-            //二级分类按钮数据数组
-            NSArray * btn_data_array = self.select_2_dict[@"委托寻人"];
-            select_2_btn_array = [NSMutableArray new];
             //初始化滚动view
             {
                 self.select_2_view = [UIScrollView new];
                 self.select_2_view.frame = CGRectMake(0, 50, WIDTH - 60, 50);
                 [view addSubview:self.select_2_view];
             }
-            float left = 20;
-            for (int i = 0; i < btn_data_array.count; i ++) {
-                UIButton * btn = [UIButton new];
-                UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:13];
-                label.text = btn_data_array[i];
-                CGSize size = [MYTOOL getSizeWithLabel:label];
-                float width = size.width + 20;
-                if (width < 60) {
-                    width = 60;
-                }
-                btn.frame = CGRectMake(left, 12.5, width, 25);
-                left += width + 20;
-                btn.titleLabel.font = [UIFont systemFontOfSize:13];
-                [btn setTitle:btn_data_array[i] forState:UIControlStateNormal];
-                [btn setTitleColor:[MYTOOL RGBWithRed:102 green:102 blue:102 alpha:1] forState:UIControlStateNormal];
-                [btn setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateDisabled];
-                btn.layer.borderWidth = 0;
-                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 0, 1, 0, 1 });
-                [btn.layer setBorderColor:colorref];
-                [select_2_btn_array addObject:btn];
-                [self.select_2_view addSubview:btn];
-                btn.layer.masksToBounds = true;
-                btn.layer.cornerRadius = 15;
-                [btn addTarget:self action:@selector(select_2_callback:) forControlEvents:UIControlEventTouchUpInside];
-                if (i == 0) {
-                    btn.enabled = false;
-                    btn.layer.borderWidth = 1;
-                    current_2_btn = btn;
-                }
-            }
-            self.select_2_view.contentSize = CGSizeMake(left, 0);
+            //加载二级分类按钮
+            [self select_1_callback:select_1_btn_array[0]];
         }
         //筛选按钮 - 60x50
         {
@@ -219,8 +213,6 @@
                 [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
                 btn.frame = CGRectMake(10, 10, 50, 20);
                 [self.select_3_view addSubview:btn];
-                btn.enabled = false;
-                current_3_btn = btn;
                 [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
                 [select_3_btn_array addObject:btn];
             }
@@ -235,6 +227,8 @@
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zhiding"] forState:UIControlStateDisabled];
                 btn.frame = CGRectMake(70, 10, 50, 20);
+                btn.enabled = false;
+                current_3_btn = btn;
                 [self.select_3_view addSubview:btn];
                 [btn addTarget:self action:@selector(select_3_btns_callback:) forControlEvents:UIControlEventTouchUpInside];
                 [select_3_btn_array addObject:btn];
@@ -271,16 +265,17 @@
     
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [MYTOOL getHeightWithIphone_six:200];
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.cell_show_array.count;
+    return 1;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.cellDataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    LookForCell * cell = [[LookForCell alloc] initWithDictionary:self.cell_show_array[indexPath.row] isFirstPage:false];
-    
-    
+    FirstPageMiddleNextCell * cell = [[FirstPageMiddleNextCell alloc] initWithDictionary:self.cellDataArray[indexPath.section] isFirstPage:false];
     return cell;
 }
 #pragma mark - UIScrollViewDelegate
@@ -312,6 +307,106 @@
             self.select_3_view.hidden = true;
         }];
     }
+}
+//一级按钮事件
+-(void)select_1_callback:(UIButton *)btn{
+    current_1_btn = btn;
+    CGRect frame = btn.frame;
+    //重置按钮状态
+    for (UIButton * button_0 in select_1_btn_array) {
+        button_0.enabled = true;
+    }
+    btn.enabled = false;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.select_1_view.frame = CGRectMake(frame.origin.x + frame.size.width/2 - 9, 46, 18, 4);
+    }];
+    //获取二级分类数据数组
+    NSString * parentid = [NSString stringWithFormat:@"%ld",(long)btn.tag];
+    NSString * interface = @"publish/publish/getcategorytwolist.html";
+    NSDictionary * send = @{
+                            @"appid":APPID_MINE,
+                            @"parentid":parentid
+                            };
+    [MYTOOL netWorkingWithTitle:@"加载中…"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        //初始化第一个全部的按钮
+        NSDictionary * allDic = @{
+                                  @"CategoryID":@"0",
+                                  @"CategoryTitle":@"全部"
+                                  };
+        self.select_2_data_array = [NSMutableArray arrayWithArray:array];
+        [self.select_2_data_array insertObject:allDic atIndex:0];
+        //二级分类按钮清空
+        select_2_btn_array = [NSMutableArray new];
+        //清空滚动view
+        {
+            for (UIView * v in self.select_2_view.subviews) {
+                [v removeFromSuperview];
+            }
+        }
+        float contentWidth = 10;//滚动范围
+        for (int i = 0; i < self.select_2_data_array.count; i ++) {
+            NSDictionary * btn_data_dic = self.select_2_data_array[i];
+            //二级分类id
+            int CategoryID = [btn_data_dic[@"CategoryID"] intValue];
+            //二级分类名字
+            NSString * CategoryTitle = btn_data_dic[@"CategoryTitle"];
+            //计算宽度
+            UILabel * label = [UILabel new];
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = CategoryTitle;
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            //按钮宽度最小宽度60
+            float btn_width = size.width + 10;
+            if (btn_width < 60) {
+                btn_width = 60;
+            }
+            
+            UIButton * btn = [UIButton new];
+            btn.frame = CGRectMake(contentWidth, 10, btn_width, 30);
+            
+            contentWidth += btn_width;
+            self.select_2_view.contentSize = CGSizeMake(btn.frame.origin.x + btn.frame.size.width + 20, 0);
+            btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            [btn setTitle:CategoryTitle forState:UIControlStateNormal];
+            [btn setTitleColor:[MYTOOL RGBWithRed:102 green:102 blue:102 alpha:1] forState:UIControlStateNormal];
+            [btn setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateDisabled];
+            btn.layer.borderWidth = 0;
+            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+            CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 0, 1, 0, 1 });
+            [btn.layer setBorderColor:colorref];
+            [select_2_btn_array addObject:btn];
+            [self.select_2_view addSubview:btn];
+            btn.layer.masksToBounds = true;
+            btn.tag = CategoryID;
+            btn.layer.cornerRadius = 15;
+            [btn addTarget:self action:@selector(select_2_callback:) forControlEvents:UIControlEventTouchUpInside];
+            if (i == 0) {
+                btn.enabled = false;
+                btn.layer.borderWidth = 1;
+            }
+        }
+        self.select_2_view.contentSize = CGSizeMake(contentWidth + 10, 0);
+        [self select_2_callback:select_2_btn_array[0]];
+    }];
+}
+//二级按钮事件
+-(void)select_2_callback:(UIButton *)btn{
+    btn.enabled = false;
+    current_2_btn = btn;
+    btn.layer.borderWidth = 1;
+    //其他按钮重置可用
+    for (UIButton * button in select_2_btn_array) {
+        if ([btn isEqual:button]) {
+            continue;
+        }
+        button.enabled = true;
+        button.layer.borderWidth = 0;
+    }
+    //重置3级按钮
+    [self select_3_btns_callback:select_3_btn_array[1]];
+    
     
     
     
@@ -326,129 +421,78 @@
             button.enabled = true;
         }
     }
+    //加载数据
+    [self headerRefresh];
+    
+    
 }
-//二级按钮事件
--(void)select_2_callback:(UIButton *)btn{
-    NSLog(@"%@",btn.currentTitle);
-    btn.enabled = false;
-    current_2_btn = btn;
-    btn.layer.borderWidth = 1;
-    //其他按钮重置可用
-    for (UIButton * button in select_2_btn_array) {
-        if ([btn isEqual:button]) {
-            continue;
-        }
-        button.enabled = true;
-        button.layer.borderWidth = 0;
+#pragma mark - 上啦下啦刷新
+-(void)headerRefresh{
+    [self getCellDataWithHeader:true];
+}
+-(void)footerRefresh{
+    [self getCellDataWithHeader:false];
+}
+//重新加载数据
+-(void)getCellDataWithHeader:(BOOL)flag{
+    int categoryId = (int)current_2_btn.tag;
+    NSString * interface = @"/publish/publish/getfindpublishcomplexlist.html";
+    NSMutableDictionary * send = [NSMutableDictionary new];
+    //如果是全部就不传发布类别ID-categoryid
+    if (categoryId) {
+        [send setValue:@(categoryId) forKey:@"categoryid"];
+    }else{
+        [send setValue:@(current_1_btn.tag) forKey:@"parentid"];
     }
-}
-//一级按钮事件
--(void)select_1_callback:(UIButton *)btn{
-    current_1_btn = btn;
-    CGRect frame = btn.frame;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.select_1_view.frame = CGRectMake(frame.origin.x + frame.size.width/2 - 9, 46, 18, 4);
-    }];
-    //二级分类按钮数据数组
-    NSArray * btn_data_array = self.select_2_dict[btn.currentTitle];
-    select_2_btn_array = [NSMutableArray new];
-    //清空滚动view
+    //是否下拉
+    if (!flag) {
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            NSObject * lastnumber = self.cellDataArray[self.cellDataArray.count - 1][@"PublishID"];
+            [send setValue:lastnumber forKey:@"lastnumber"];
+        }
+    }
+    //置顶-最新-悬赏
     {
-        for (UIView * v in self.select_2_view.subviews) {
-            [v removeFromSuperview];
+        NSInteger index = [select_3_btn_array indexOfObject:current_3_btn];
+        switch (index) {
+            case 0://置顶
+                [send setValue:@"0" forKey:@"pushtype"];//int	推广类型（0所有，1推广，2不推广）
+                [send setValue:@"1" forKey:@"toptype"];//int	置顶类型（0所有，1置顶，2不置顶）
+                [send setValue:@"0" forKey:@"moneytype"];//赏金类型（0所有，1有赏金，2无赏金）
+                break;
+            case 1://最新
+                [send setValue:@"0" forKey:@"pushtype"];//int	推广类型（0所有，1推广，2不推广）
+                [send setValue:@"0" forKey:@"toptype"];//int	置顶类型（0所有，1置顶，2不置顶）
+                [send setValue:@"0" forKey:@"moneytype"];//赏金类型（0所有，1有赏金，2无赏金）
+                break;
+            default://悬赏
+                [send setValue:@"0" forKey:@"pushtype"];//int	推广类型（0所有，1推广，2不推广）
+                [send setValue:@"0" forKey:@"toptype"];//int	置顶类型（0所有，1置顶，2不置顶）
+                [send setValue:@"1" forKey:@"moneytype"];//赏金类型（0所有，1有赏金，2无赏金）
+                break;
         }
     }
-    for (int i = 0; i < btn_data_array.count; i ++) {
-        UIButton * btn = [UIButton new];
-        btn.frame = CGRectMake(20 + 80 * i, 10, 60, 30);
-        self.select_2_view.contentSize = CGSizeMake(btn.frame.origin.x + btn.frame.size.width + 20, 0);
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [btn setTitle:btn_data_array[i] forState:UIControlStateNormal];
-        [btn setTitleColor:[MYTOOL RGBWithRed:102 green:102 blue:102 alpha:1] forState:UIControlStateNormal];
-        [btn setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateDisabled];
-        btn.layer.borderWidth = 0;
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 0, 1, 0, 1 });
-        [btn.layer setBorderColor:colorref];
-        [select_2_btn_array addObject:btn];
-        [self.select_2_view addSubview:btn];
-        btn.layer.masksToBounds = true;
-        btn.layer.cornerRadius = 15;
-        [btn addTarget:self action:@selector(select_2_callback:) forControlEvents:UIControlEventTouchUpInside];
-        if (i == 0) {
-            btn.enabled = false;
-            btn.layer.borderWidth = 1;
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        NSLog(@"array:%@",array);
+        if (flag) {
+            self.cellDataArray = [NSMutableArray arrayWithArray:array];
+        }else{
+            if (array == nil || array.count == 0) {
+                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+                return;
+            }
+            [self.cellDataArray addObjectsFromArray:array];
         }
-    }
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            self.noDataView.hidden = true;
+        }else{
+            self.noDataView.hidden = false;
+        }
+        [self.tableView reloadData];
+    }];
 }
 
-
-//加载cell数据
--(void)loadCellDate{
-    self.cell_show_array = @[
-                             @{
-                                 @"user_url":@"http://p9.qhimg.com/t01e6067def5d05fa70.jpg",
-                                 @"user_name":@"灰太狼",
-                                 @"user_state":@"1",
-                                 @"title":@"我丢了一只狗狗",//标题
-                                 @"type":@"找宠",//找人还是找宠。。。
-                                 @"range":@"全国推广",//推广范围
-                                 @"lost_place":@"江苏省 宿迁市 宿豫区",//丢失地
-                                 @"money":@"50",//悬赏金
-                                 @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望有知道线索者提供信息，一定酬劳感谢!....",//内容
-                                 @"url":@[  //图片链接
-                                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906001486&di=599eaacfc57580b1617da5f185ace5ad&imgtype=0&src=http%3A%2F%2Fwww.monsterparent.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fdf0fead6-5353-a177-b9da-cef468fe43cd.jpg",
-                                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906001486&di=735a99c6d92aaaca1ae992197f23e3be&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160811%2Fd4d58e59d45440bba4810ed2d726b203_th.jpg",
-                                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906001486&di=cdeaf0275907c1558fc6ef9494818703&imgtype=0&src=http%3A%2F%2Ftao.goulew.com%2Fusers%2Fupfile%2F201705%2F201705041133443big.jpg"
-                                         ],
-                                 @"time":@"55分钟前发布",//发布时间
-                                 @"n1":@"123",
-                                 @"n2":@"222",
-                                 @"n3":@"441"
-                                 },
-                             @{
-                                 @"user_url":@"http://k2.jsqq.net/uploads/allimg/1704/7_170426152706_11.jpg",
-                                 @"user_name":@"喜羊羊",
-                                 @"user_state":@"0",
-                                 @"title":@"我捡到一个钱包",//标题
-                                 @"type":@"招领",//找人还是找宠。。。
-                                 @"range":@"全国推广",//推广范围
-                                 @"lost_place":@"江苏省 宿迁市 宿豫区",//丢失地
-                                 @"money":@"40",//悬赏金
-                                 @"content":@"我在宝龙广场美食城捡到一个钱包，里面有几张银行卡和驾驶证，身份证，还有零钱若干...",//内容
-                                 @"url":@[  //图片链接
-                                         @"http://d6.yihaodianimg.com/N07/M0B/1F/72/CgQIz1QDx_uACkLCAAIGj0Cx4yE42500.jpg",
-                                         @"http://pic31.nipic.com/20130706/10803163_142911714165_2.jpg",
-                                         @"http://pic31.nipic.com/20130706/10803163_125034217165_2.jpg"
-                                         ],
-                                 @"time":@"44分钟前发布",//发布时间
-                                 @"n1":@"123",
-                                 @"n2":@"222",
-                                 @"n3":@"441"
-                                 },
-                             @{
-                                 @"user_url":@"http://dynamic-image.yesky.com/300x-/uploadImages/upload/20140912/upload/201409/nfnllt13f5ejpg.jpg",
-                                 @"user_name":@"红太狼",
-                                 @"user_state":@"1",
-                                 @"title":@"我家狗狗不见了",//标题
-                                 @"type":@"找宠",//找人还是找宠。。。
-                                 @"range":@"全国推广",//推广范围
-                                 @"lost_place":@"江苏省 宿迁市 宿豫区",//丢失地
-                                 @"money":@"60",//悬赏金
-                                 @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望有知道线索者提供信息，一定酬劳感谢!我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望有知道线索者提供信息，一定酬劳感谢!",//内容
-                                 @"url":@[  //图片链接
-                                         @"http://image.cnpp.cn/upload2/goodpic/20140418/img_280520_1_35.jpg_800_600.jpg",
-                                         @"http://c.hiphotos.baidu.com/zhidao/pic/item/bd315c6034a85edfef11fff44e540923dc547543.jpg",
-                                         @"http://imgsrc.baidu.com/imgad/pic/item/34fae6cd7b899e518001433648a7d933c8950d00.jpg"
-                                         ],
-                                 @"time":@"12分钟前发布",//发布时间
-                                 @"n1":@"123",
-                                 @"n2":@"222",
-                                 @"n3":@"441"
-                                 }
-                             ];
-    [self.tableView reloadData];
-}
 
 
 @end

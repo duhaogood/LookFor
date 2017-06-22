@@ -24,6 +24,7 @@
 		0418F01A1EED7AF200063E93 /* PerfectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0191EED7AF200063E93 /* PerfectVC.m */; };
 		0436E5EF1EF007730031FC2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5EE1EF007730031FC2B /* CoreLocation.framework */; };
 		0436E5F11EF0077B0031FC2B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5F01EF0077B0031FC2B /* MapKit.framework */; };
+		043D70A31EFBF2910053D71E /* FirstPageMiddleNextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D70A21EFBF2910053D71E /* FirstPageMiddleNextCell.m */; };
 		043DF9611EF17ED300EEA3AC /* GYZChooseCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DF9591EF17ED300EEA3AC /* GYZChooseCityController.m */; };
 		043DF9621EF17ED300EEA3AC /* GYZCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DF95C1EF17ED300EEA3AC /* GYZCity.m */; };
 		043DF9631EF17ED300EEA3AC /* GYZCityGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DF95E1EF17ED300EEA3AC /* GYZCityGroupCell.m */; };
@@ -249,6 +250,8 @@
 		0418F0191EED7AF200063E93 /* PerfectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfectVC.m; sourceTree = "<group>"; };
 		0436E5EE1EF007730031FC2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0436E5F01EF0077B0031FC2B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		043D70A11EFBF2910053D71E /* FirstPageMiddleNextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageMiddleNextCell.h; sourceTree = "<group>"; };
+		043D70A21EFBF2910053D71E /* FirstPageMiddleNextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageMiddleNextCell.m; sourceTree = "<group>"; };
 		043DF9411EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		043DF9451EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		043DF9491EF177D600EEA3AC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 		04041C651EFAB819003A6ED6 /* 01.MyView */ = {
 			isa = PBXGroup;
 			children = (
+				043D70A11EFBF2910053D71E /* FirstPageMiddleNextCell.h */,
+				043D70A21EFBF2910053D71E /* FirstPageMiddleNextCell.m */,
 			);
 			path = 01.MyView;
 			sourceTree = "<group>";
@@ -3170,6 +3175,7 @@
 				044669DF1EF11A010082D8BC /* LookManSomeThingVC.m in Sources */,
 				044ADFF31EF2A4B100E43704 /* RSADataSigner.m in Sources */,
 				78375AFA1ED4734C0046F8C3 /* SVProgressHUD.m in Sources */,
+				043D70A31EFBF2910053D71E /* FirstPageMiddleNextCell.m in Sources */,
 				049B5E3F1EDF07B00080D552 /* AboutVC.m in Sources */,
 				78375AEB1ED4734C0046F8C3 /* SDImageCache.m in Sources */,
 				78375AC71ED4734C0046F8C3 /* MyVC.m in Sources */,
