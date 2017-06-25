@@ -8,6 +8,7 @@
 
 #import "FirstPageMiddleNextVC.h"
 #import "FirstPageMiddleNextCell.h"
+#import "PublishInfoVC.h"
 @interface FirstPageMiddleNextVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * typeArray;//二级分类数组
@@ -290,11 +291,26 @@
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
-    
-    
-    
-    
+    NSDictionary * publishDic = self.cellDataArray[indexPath.section];
+    NSObject * PublishID = publishDic[@"PublishID"];
+    if (!PublishID) {
+        [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        return;
+    }
+    NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{@"publishid":PublishID};
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * publishDictionary = back_dic[@"Data"];
+        if (publishDictionary) {
+            PublishInfoVC * vc = [PublishInfoVC new];
+            vc.title = @"信息详情";
+            vc.publishDictionary = publishDictionary;
+            [self.navigationController pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        }
+    }];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.cellDataArray.count;

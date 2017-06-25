@@ -267,7 +267,8 @@
                 }
             }
         }
-        
+        [delegate selectServiceType:self.leftServiceBtn];
+        [delegate up_newClick:self.leftTypeBtn];
     }
     return self;
 }

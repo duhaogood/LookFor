@@ -13,6 +13,8 @@
 #import "PYSearch.h"
 #import "SelectTypeVC.h"
 #import "FirstPageMiddleNextVC.h"
+#import "FirstPageMiddleNextCell.h"
+#import "PublishInfoVC.h"
 @interface LookForVC ()<PYSearchViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
@@ -22,6 +24,9 @@
 @property(nonatomic,strong)UILabel * cityLabel;//城市名label
 @property(nonatomic,strong)UISearchBar * searchBar;//搜索框
 @property(nonatomic,strong)UIImageView * areaIcon;//城市图标
+
+@property(nonatomic,strong)NSMutableArray * cellDataArray;//cell数据
+@property(nonatomic,strong)UIView * noDataView;//没有数据显示
 @end
 
 @implementation LookForVC
@@ -115,6 +120,8 @@
 -(void)selectServiceType:(UIButton *)btn{
     //更新数据源，然后给头view更新界面
     [self.headerView selectServiceCallback:btn.tag];
+    self.current_money_type_btn = btn;
+    [self up_newClick:self.leftTypeBtn];
 }
 //中部图标点击事件
 -(void)iconClick:(UIButton *)tap{
@@ -132,6 +139,11 @@
 //置顶、最新事件
 -(void)up_newClick:(UIButton *)btn{
     [self.headerView selectBtnForUpOrNew:btn];
+    self.current_toptype_btn = btn;
+    
+    [self getCellDataWithHeader:true];
+    
+    
 }
 //签到事件
 -(void)signClick:(UIButton *)btn{
@@ -140,22 +152,35 @@
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
-    
-    
-    
-    
+    NSDictionary * publishDic = self.cellDataArray[indexPath.section];
+    NSObject * PublishID = publishDic[@"PublishID"];
+    if (!PublishID) {
+        [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        return;
+    }
+    NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{@"publishid":PublishID};
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * publishDictionary = back_dic[@"Data"];
+        if (publishDictionary) {
+            PublishInfoVC * vc = [PublishInfoVC new];
+            vc.title = @"信息详情";
+            vc.publishDictionary = publishDictionary;
+            [self.navigationController pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        }
+    }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [MYTOOL getHeightWithIphone_six:200];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.cell_show_array.count;
+    return self.cellDataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    LookForCell * cell = [[LookForCell alloc] initWithDictionary:self.cell_show_array[indexPath.row] isFirstPage:true];
-    
-    
+    FirstPageMiddleNextCell * cell = [[FirstPageMiddleNextCell alloc] initWithDictionary:self.cellDataArray[indexPath.row] isFirstPage:true];
     return cell;
 }
 #pragma mark - SDCycleScrollViewDelegate
@@ -228,73 +253,88 @@
     tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64 - 49);
     [self.view addSubview:tableView];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self loadCellDate];
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self headerRefresh];
+        // 结束刷新
+        [tableView.mj_header endRefreshing];
+    }];
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    tableView.mj_header.automaticallyChangeAlpha = YES;
+    // 上拉刷新
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self footerRefresh];
+        [tableView.mj_footer endRefreshing];
+    }];
+    self.automaticallyAdjustsScrollViewInsets = false;
+    self.tableView = tableView;
+    tableView.rowHeight = [MYTOOL getHeightWithIphone_six:200];
+    [self.view addSubview:tableView];
+    //不显示分割线
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
+    {
+        UIView * view = [UIView new];
+        self.noDataView = view;
+        view.frame = tableView.bounds;
+        view.backgroundColor = MYCOLOR_240_240_240;
+//        [tableView addSubview:view];
+        //图片-170*135
+        {
+            UIImageView * icon = [UIImageView new];
+            icon.image = [UIImage imageNamed:@"nodate"];
+            icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
+            [view addSubview:icon];
+        }
+    }
+}
+#pragma mark - 上啦下啦刷新
+-(void)headerRefresh{
+    [self getCellDataWithHeader:true];
+}
+-(void)footerRefresh{
+    [self getCellDataWithHeader:false];
+}
+//重新加载数据
+-(void)getCellDataWithHeader:(BOOL)flag{
+    NSLog(@"重新加载数据");
+    NSString * interface = @"/publish/publish/getindexpublishcomplexlist.html";
+    NSMutableDictionary * send = [NSMutableDictionary new];
+    //是否下拉
+    if (!flag) {
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            NSObject * lastnumber = self.cellDataArray[self.cellDataArray.count - 1][@"PublishID"];
+            [send setValue:lastnumber forKey:@"lastnumber"];
+        }
+    }
+    //置顶-最新-悬赏
+    {
+        NSString * moneytype = self.current_money_type_btn.tag == 100 ? @"1" : @"2";
+        [send setValue:moneytype forKey:@"moneytype"];
+        NSString * toptype = self.current_toptype_btn.tag == 100 ? @"1" : @"0";
+        [send setValue:toptype forKey:@"toptype"];
+    }
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        if (flag) {
+            self.cellDataArray = [NSMutableArray arrayWithArray:array];
+        }else{
+            if (array == nil || array.count == 0) {
+                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+                return;
+            }
+            [self.cellDataArray addObjectsFromArray:array];
+        }
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            self.noDataView.hidden = true;
+        }else{
+            self.noDataView.hidden = false;
+        }
+        [self.tableView reloadData];
+    }];
 }
 //加载cell数据
 -(void)loadCellDate{
-    self.cell_show_array = @[
-                             @{
-                                 @"user_url":@"http://p9.qhimg.com/t01e6067def5d05fa70.jpg",
-                                 @"user_name":@"灰太狼",
-                                 @"user_state":@"1",
-                                 @"title":@"我丢了一只狗狗",//标题
-                                 @"type":@"找宠",//找人还是找宠。。。
-                                 @"range":@"全国推广",//推广范围
-                                 @"lost_place":@"江苏省 宿迁市 宿豫区",//丢失地
-                                 @"money":@"50",//悬赏金
-                                 @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望有知道线索者提供信息，一定酬劳感谢!....",//内容
-                                 @"url":@[  //图片链接
-                                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906001486&di=599eaacfc57580b1617da5f185ace5ad&imgtype=0&src=http%3A%2F%2Fwww.monsterparent.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fdf0fead6-5353-a177-b9da-cef468fe43cd.jpg",
-                                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906001486&di=735a99c6d92aaaca1ae992197f23e3be&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160811%2Fd4d58e59d45440bba4810ed2d726b203_th.jpg",
-                                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495906001486&di=cdeaf0275907c1558fc6ef9494818703&imgtype=0&src=http%3A%2F%2Ftao.goulew.com%2Fusers%2Fupfile%2F201705%2F201705041133443big.jpg"
-                                         ],
-                                 @"time":@"55分钟前发布",//发布时间
-                                 @"n1":@"123",
-                                 @"n2":@"222",
-                                 @"n3":@"441"
-                                 },
-                             @{
-                                 @"user_url":@"http://k2.jsqq.net/uploads/allimg/1704/7_170426152706_11.jpg",
-                                 @"user_name":@"喜羊羊",
-                                 @"user_state":@"0",
-                                 @"title":@"我捡到一个钱包",//标题
-                                 @"type":@"招领",//找人还是找宠。。。
-                                 @"range":@"全国推广",//推广范围
-                                 @"lost_place":@"江苏省 宿迁市 宿豫区",//丢失地
-                                 @"money":@"40",//悬赏金
-                                 @"content":@"我在宝龙广场美食城捡到一个钱包，里面有几张银行卡和驾驶证，身份证，还有零钱若干...",//内容
-                                 @"url":@[  //图片链接
-                                         @"http://d6.yihaodianimg.com/N07/M0B/1F/72/CgQIz1QDx_uACkLCAAIGj0Cx4yE42500.jpg",
-                                         @"http://pic31.nipic.com/20130706/10803163_142911714165_2.jpg",
-                                         @"http://pic31.nipic.com/20130706/10803163_125034217165_2.jpg"
-                                         ],
-                                 @"time":@"44分钟前发布",//发布时间
-                                 @"n1":@"123",
-                                 @"n2":@"222",
-                                 @"n3":@"441"
-                                 },
-                             @{
-                                 @"user_url":@"http://dynamic-image.yesky.com/300x-/uploadImages/upload/20140912/upload/201409/nfnllt13f5ejpg.jpg",
-                                 @"user_name":@"红太狼",
-                                 @"user_state":@"1",
-                                 @"title":@"我家狗狗不见了",//标题
-                                 @"type":@"找宠",//找人还是找宠。。。
-                                 @"range":@"全国推广",//推广范围
-                                 @"lost_place":@"江苏省 宿迁市 宿豫区",//丢失地
-                                 @"money":@"60",//悬赏金
-                                 @"content":@"我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望有知道线索者提供信息，一定酬劳感谢!我家10月7日在江山大道附近走失狗狗一只，白颜色毛希望有知道线索者提供信息，一定酬劳感谢!",//内容
-                                 @"url":@[  //图片链接
-                                         @"http://image.cnpp.cn/upload2/goodpic/20140418/img_280520_1_35.jpg_800_600.jpg",
-                                         @"http://c.hiphotos.baidu.com/zhidao/pic/item/bd315c6034a85edfef11fff44e540923dc547543.jpg",
-                                         @"http://imgsrc.baidu.com/imgad/pic/item/34fae6cd7b899e518001433648a7d933c8950d00.jpg"
-                                         ],
-                                 @"time":@"12分钟前发布",//发布时间
-                                 @"n1":@"123",
-                                 @"n2":@"222",
-                                 @"n3":@"441"
-                                 }
-                             ];
+    
     [self.tableView reloadData];
 }
 //设置顶上文字

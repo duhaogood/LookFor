@@ -32,6 +32,9 @@
                 [icon sd_setImageWithURL:[NSURL URLWithString:user_url]];
             }
             [self addSubview:icon];
+            icon.contentMode = UIViewContentModeScaleAspectFill;
+            icon.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+            [icon setContentScaleFactor:[[UIScreen mainScreen] scale]];
             icon.layer.masksToBounds = true;
             icon.layer.cornerRadius = 20;
         }
@@ -313,6 +316,9 @@
                 if (url) {
                     [MYTOOL setImageIncludePrograssOfImageView:icon withUrlString:url];
                 }
+                icon.contentMode = UIViewContentModeScaleAspectFill;
+                icon.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+                [icon setContentScaleFactor:[[UIScreen mainScreen] scale]];
                 [self addSubview:icon];
             }
         }

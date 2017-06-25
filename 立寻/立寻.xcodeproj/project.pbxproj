@@ -16,6 +16,7 @@
 		04041CA01EFAE859003A6ED6 /* NetHelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C8D1EFAE859003A6ED6 /* NetHelpVC.m */; };
 		04041CA11EFAE859003A6ED6 /* LookCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C931EFAE859003A6ED6 /* LookCircleVC.m */; };
 		04041CA21EFAE859003A6ED6 /* PointStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04041C991EFAE859003A6ED6 /* PointStoreVC.m */; };
+		040914B31EFF598C00D919E3 /* PublishInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040914B21EFF598C00D919E3 /* PublishInfoView.m */; };
 		0410B0501EE3DDA200E8CBA1 /* IssueFirstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */; };
 		0418F0081EECE30500063E93 /* UpUserCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0071EECE30500063E93 /* UpUserCardVC.m */; };
 		0418F00E1EECE3D900063E93 /* CertificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F00D1EECE3D900063E93 /* CertificationView.m */; };
@@ -94,6 +95,7 @@
 		044AE0501EF2D51900E43704 /* SelectTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AE04F1EF2D51900E43704 /* SelectTypeVC.m */; };
 		0454BD7D1EF573A800B9E8A0 /* NetworkSocialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454BD7C1EF573A800B9E8A0 /* NetworkSocialCell.m */; };
 		0454BD861EF5926900B9E8A0 /* NetworkSocialInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454BD851EF5926900B9E8A0 /* NetworkSocialInfoVC.m */; };
+		046822D61EFE372E00ADA4D7 /* PublishInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046822D51EFE372E00ADA4D7 /* PublishInfoVC.m */; };
 		04874F141ED913CE00049758 /* LookForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04874F131ED913CE00049758 /* LookForCell.m */; };
 		049B5E181EDF06DF0080D552 /* AccountBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E171EDF06DF0080D552 /* AccountBalanceVC.m */; };
 		049B5E1B1EDF06EE0080D552 /* PersonalMainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E1A1EDF06EE0080D552 /* PersonalMainPageVC.m */; };
@@ -232,6 +234,8 @@
 		04041C961EFAE859003A6ED6 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		04041C981EFAE859003A6ED6 /* PointStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointStoreVC.h; sourceTree = "<group>"; };
 		04041C991EFAE859003A6ED6 /* PointStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointStoreVC.m; sourceTree = "<group>"; };
+		040914B11EFF598C00D919E3 /* PublishInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishInfoView.h; sourceTree = "<group>"; };
+		040914B21EFF598C00D919E3 /* PublishInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishInfoView.m; sourceTree = "<group>"; };
 		0410B04D1EE3DD6800E8CBA1 /* 0.Comments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		0410B04E1EE3DDA200E8CBA1 /* IssueFirstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueFirstPageVC.h; sourceTree = "<group>"; };
 		0410B04F1EE3DDA200E8CBA1 /* IssueFirstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueFirstPageVC.m; sourceTree = "<group>"; };
@@ -470,6 +474,10 @@
 		0454BD811EF591F800B9E8A0 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		0454BD841EF5926900B9E8A0 /* NetworkSocialInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSocialInfoVC.h; sourceTree = "<group>"; };
 		0454BD851EF5926900B9E8A0 /* NetworkSocialInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSocialInfoVC.m; sourceTree = "<group>"; };
+		046822CF1EFE36F000ADA4D7 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		046822D11EFE36F000ADA4D7 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		046822D41EFE372E00ADA4D7 /* PublishInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishInfoVC.h; sourceTree = "<group>"; };
+		046822D51EFE372E00ADA4D7 /* PublishInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishInfoVC.m; sourceTree = "<group>"; };
 		04874F121ED913CE00049758 /* LookForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookForCell.h; sourceTree = "<group>"; };
 		04874F131ED913CE00049758 /* LookForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookForCell.m; sourceTree = "<group>"; };
 		049B5DC51EDF055C0080D552 /* 00.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 00.Comments.h; sourceTree = "<group>"; };
@@ -1807,6 +1815,34 @@
 			path = 2.MyView;
 			sourceTree = "<group>";
 		};
+		046822D01EFE36F000ADA4D7 /* 1.PublishInfo */ = {
+			isa = PBXGroup;
+			children = (
+				046822D11EFE36F000ADA4D7 /* 0.Comments.h */,
+				046822D21EFE36F000ADA4D7 /* 1.Controller */,
+				046822D31EFE36F000ADA4D7 /* 2.MyView */,
+			);
+			path = 1.PublishInfo;
+			sourceTree = "<group>";
+		};
+		046822D21EFE36F000ADA4D7 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				046822D41EFE372E00ADA4D7 /* PublishInfoVC.h */,
+				046822D51EFE372E00ADA4D7 /* PublishInfoVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		046822D31EFE36F000ADA4D7 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+				040914B11EFF598C00D919E3 /* PublishInfoView.h */,
+				040914B21EFF598C00D919E3 /* PublishInfoView.m */,
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
 		04874F111ED913AA00049758 /* 02.LookForCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2580,6 +2616,8 @@
 		78375A311ED4734C0046F8C3 /* 3.Sections */ = {
 			isa = PBXGroup;
 			children = (
+				046822CF1EFE36F000ADA4D7 /* 0.Comments.h */,
+				046822D01EFE36F000ADA4D7 /* 1.PublishInfo */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -3269,6 +3307,7 @@
 				044AE04B1EF2CC2500E43704 /* PYSearchViewController.m in Sources */,
 				78375AC91ED4734C0046F8C3 /* AFNetworkReachabilityManager.m in Sources */,
 				043DF9621EF17ED300EEA3AC /* GYZCity.m in Sources */,
+				040914B31EFF598C00D919E3 /* PublishInfoView.m in Sources */,
 				78375AEE1ED4734C0046F8C3 /* SDWebImageDownloader.m in Sources */,
 				04DE086A1EE29A31003F9943 /* ClueCell.m in Sources */,
 				78375AF81ED4734C0046F8C3 /* UIView+WebCacheOperation.m in Sources */,
@@ -3294,6 +3333,7 @@
 				78375AD91ED4734C0046F8C3 /* MJRefreshGifHeader.m in Sources */,
 				78375ACE1ED4734C0046F8C3 /* MJRefreshAutoFooter.m in Sources */,
 				04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */,
+				046822D61EFE372E00ADA4D7 /* PublishInfoVC.m in Sources */,
 				78375AE71ED4734C0046F8C3 /* SDCycleScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

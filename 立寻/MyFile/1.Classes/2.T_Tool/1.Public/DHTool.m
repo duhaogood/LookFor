@@ -335,7 +335,7 @@ static id instance;
                             };
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         self.userInfo = back_dic[@"Data"];
-        NSLog(@"UserID:%@",MYTOOL.userInfo);
+//        NSLog(@"UserID:%@",MYTOOL.userInfo);
     }];
     
 }

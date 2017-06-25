@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LookForVC : UIViewController
-
-
+@property(nonatomic,strong)UIButton * current_money_type_btn;//当前悬赏类型按钮
+@property(nonatomic,strong)UIButton * current_toptype_btn;//当前置顶类型
+@property(nonatomic,strong)UIButton * leftTypeBtn;//置顶
+@property(nonatomic,strong)UIButton * rightTypeBtn;//最新
 
 
 

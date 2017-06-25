@@ -9,6 +9,7 @@
 #import "FindVC.h"
 #import "LookForCell.h"
 #import "FirstPageMiddleNextCell.h"
+#import "PublishInfoVC.h"
 @interface FindVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSArray * select_1_array;//一级分类数据
 @property(nonatomic,strong)NSDictionary * select_2_dict;//二级分类数据
@@ -259,10 +260,26 @@
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
-    
-    
-    
+    NSDictionary * publishDic = self.cellDataArray[indexPath.section];
+    NSObject * PublishID = publishDic[@"PublishID"];
+    if (!PublishID) {
+        [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        return;
+    }
+    NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{@"publishid":PublishID};
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * publishDictionary = back_dic[@"Data"];
+        if (publishDictionary) {
+            PublishInfoVC * vc = [PublishInfoVC new];
+            vc.title = @"信息详情";
+            vc.publishDictionary = publishDictionary;
+            [self.navigationController pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        }
+    }];
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -474,7 +491,6 @@
     }
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];
-        NSLog(@"array:%@",array);
         if (flag) {
             self.cellDataArray = [NSMutableArray arrayWithArray:array];
         }else{
