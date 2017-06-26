@@ -25,35 +25,40 @@
 }
 //加载主界面
 -(void)loadMainView{
-    //主scrollview
-    UIScrollView * scrollView = [UIScrollView new];
-    scrollView.backgroundColor = self.view.backgroundColor;
-    scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-50);
-    [self.view addSubview:scrollView];
-    //用户信息view
-    float top = 0;
-    {
-        UIView * view = [UIView new];
-        float height = [MYTOOL getHeightWithIphone_six:75];
-        view.frame = CGRectMake(0, 0, WIDTH, height);
-        view.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:view];
-        
-    }
-    
-    
-    //底部按钮
-    {
-        
-    }
+    PublishInfoView * view = [[PublishInfoView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT - 64) andPublishDictionary:self.publishDictionary andDelegate:self];
+    [self.view addSubview:view];
+    self.automaticallyAdjustsScrollViewInsets = false;
 }
 
 
 
 
 
-
-
+#pragma mark - 用户按钮事件
+//举报事件
+-(void)submitReportBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"举报事件" duration:1];
+}
+//个人详情事件
+-(void)submitPersonalBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"个人详情事件" duration:1];
+}
+//关注事件
+-(void)submitAttentionBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"关注事件" duration:1];
+}
+//评论事件
+-(void)submitCommentBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"评论事件" duration:1];
+}
+//留言事件
+-(void)submitMessageBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"留言事件" duration:1];
+}
+//我有线索事件
+-(void)submitMyClueBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"我有线索事件" duration:1];
+}
 //返回上个界面
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];

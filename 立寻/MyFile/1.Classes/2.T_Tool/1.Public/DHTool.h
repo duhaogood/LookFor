@@ -169,7 +169,14 @@
  */
 -(void)setImageIncludePrograssOfImageView:(UIImageView*)imageView withUrlString:(NSString *)imageUrlString;
 
+/**
+ 为UIImageView设置网络图片，并加上自下而上的进度条
 
+ @param imageView <#imageView description#>
+ @param imageUrlString <#imageUrlString description#>
+ @param completed <#completed description#>
+ */
+-(void)setImageIncludePrograssOfImageView:(UIImageView*)imageView withUrlString:(NSString *)imageUrlString andCompleted:(void(^)(UIImage *image)) completed;
 -(void)showAlertWithViewController:(UIViewController *)vc andTitle:(NSString *)title andSureTile:(NSString *)sureTitle andSureBlock:(void(^)(void))sure andCacel:(void(^)(void))cancel;
 -(NSString *)getAPPVersion;
 /**

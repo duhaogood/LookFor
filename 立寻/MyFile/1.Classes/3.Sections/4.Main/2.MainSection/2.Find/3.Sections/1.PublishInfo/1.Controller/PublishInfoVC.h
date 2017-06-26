@@ -10,4 +10,19 @@
 
 @interface PublishInfoVC : UIViewController
 @property(nonatomic,strong)NSDictionary * publishDictionary;//发布详细信息
+
+
+
+//举报事件
+-(void)submitReportBtn:(UIButton *)btn;
+//个人详情事件
+-(void)submitPersonalBtn:(UIButton *)btn;
+//关注事件
+-(void)submitAttentionBtn:(UIButton *)btn;
+//评论事件
+-(void)submitCommentBtn:(UIButton *)btn;
+//留言事件
+-(void)submitMessageBtn:(UIButton *)btn;
+//我有线索事件
+-(void)submitMyClueBtn:(UIButton *)btn;
 @end

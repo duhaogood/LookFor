@@ -224,6 +224,28 @@ static id instance;
         pro_view = nil;
     }];
 }
+-(void)setImageIncludePrograssOfImageView:(UIImageView*)imageView withUrlString:(NSString *)imageUrlString andCompleted:(void(^)(UIImage *image)) completed{
+    __block UIView * pro_view = [UIView new];
+    pro_view.frame = imageView.bounds;
+    [imageView addSubview:pro_view];
+    UIView * upView = [UIView new];
+    UIView * downView = [UIView new];
+    upView.backgroundColor = [UIColor grayColor];
+    downView.backgroundColor = [UIColor clearColor];
+    upView.frame = CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height);
+    downView.frame = CGRectMake(0, imageView.frame.size.height, imageView.frame.size.width, 0);
+    [pro_view addSubview:upView];
+    [pro_view addSubview:downView];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:nil options:SDWebImageCacheMemoryOnly /*SDWebImageLowPriority|SDWebImageRetryFailed*/ progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        float pro = (float)receivedSize/expectedSize;
+        upView.frame = CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height*(1-pro));
+        downView.frame = CGRectMake(0, imageView.frame.size.height*(1-pro), imageView.frame.size.width, imageView.frame.size.height*pro);
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [pro_view removeFromSuperview];
+        pro_view = nil;
+        completed(image);
+    }];
+}
 -(void)showAlertWithViewController:(UIViewController *)vc andTitle:(NSString *)title andSureTile:(NSString *)sureTitle andSureBlock:(void(^)(void))sure andCacel:(void(^)(void))cancel{
     //弹出的回复界面
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:(UIAlertControllerStyleAlert)];
