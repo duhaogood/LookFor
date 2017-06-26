@@ -12,7 +12,8 @@
 @property(nonatomic,strong)NSDictionary * publishDictionary;//发布详细信息
 
 
-
+//评论列表事件
+-(void)submitCommentListBtn:(UIButton *)btn;
 //举报事件
 -(void)submitReportBtn:(UIButton *)btn;
 //个人详情事件

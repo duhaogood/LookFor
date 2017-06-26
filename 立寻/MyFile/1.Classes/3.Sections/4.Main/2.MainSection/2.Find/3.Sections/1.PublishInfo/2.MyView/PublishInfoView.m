@@ -200,7 +200,6 @@
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:119 green:119 blue:119 alpha:1];
                 NSString * Content = publishDictionary[@"Content"];
-                Content = @"有小狗(名叫***)不慎在此附近丢失，小狗年小，背面毛色黄白相间，腹部黑白斑点。小狗的主人心存挂念，愿有心之人在路上捡到小狗，物归原主，定当酬谢! 　　小狗不吃米饭，偶尔吃点面包和酸奶，由于还小，牙齿功能不强，对鸭肉和鸭骨头感兴趣(最好用高压锅煮熟)，只喝水。 　　小狗尚不成性，经常咬人，大便没有规律，随地大小便，如果不愿送回，请细心照料，以宽小狗主人之心。";
                 label.text = Content;
                 label.numberOfLines = 0;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -234,7 +233,97 @@
                     top += img_height + 5;
                 }
             }
+            //目标丢失地
+            top += 15;
+            {
+                //图标
+                {
+                    UIImageView * icon = [UIImageView new];
+                    icon.image = [UIImage imageNamed:@"address"];
+                    icon.frame = CGRectMake(10, top, 9, 11);
+                    [view addSubview:icon];
+                }
+                
+                NSString * ProvinceName = publishDictionary[@"ProvinceName"];
+                NSString * CityName = publishDictionary[@"CityName"];
+                NSString * Address = publishDictionary[@"Address"];
+                NSString * text = @"目标丢失地：暂无";
+                if (ProvinceName && CityName && Address) {
+                    text = [NSString stringWithFormat:@"目标丢失地：%@%@%@",ProvinceName,CityName,Address];
+                }
+                top += 5.5;
+                UILabel * label = [UILabel new];
+                label.font = [UIFont systemFontOfSize:11];
+                label.text = text;
+                label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
+                CGSize size = [MYTOOL getSizeWithLabel:label];
+                int row = size.width / (WIDTH - 10-(10+9+14));
+                if (row * (WIDTH - 10-(10+9+14)) < size.width) {
+                    row ++;
+                }
+                label.frame = CGRectMake(10+9+14, top-size.height/2, WIDTH - 10-(10+9+14), size.height * row);
+                [view addSubview:label];
+                label.numberOfLines = 0;
+                top += size.height * row + 15;
+            }
+            //评论--按钮
+            {
+                UIView * commentView = [UIView new];
+                commentView.backgroundColor = [MYTOOL RGBWithRed:238 green:238 blue:238 alpha:1];
+                commentView.frame = CGRectMake(0, top, WIDTH, 44);
+                [view addSubview:commentView];
+                //评论人数-CommentCount
+                {
+                    UILabel * label = [UILabel new];
+                    label.font = [UIFont systemFontOfSize:12];
+                    label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
+                    int CommentCount = [publishDictionary[@"CommentCount"] intValue];
+                    NSString * text = [NSString stringWithFormat:@"评论（%d）",CommentCount];
+                    label.text = text;
+                    CGSize size = [MYTOOL getSizeWithLabel:label];
+                    label.frame = CGRectMake(10, 22-size.height/2, size.width, size.height);
+                    [commentView addSubview:label];
+                }
+                /*评论人头像*/
+                
+                
+                //右侧小图标
+                {
+                    UIImageView * icon = [UIImageView new];
+                    icon.image = [UIImage imageNamed:@"arrow_right_md"];
+                    [commentView addSubview:icon];
+                    icon.frame = CGRectMake(commentView.frame.size.width - 23, 16, 6, 12);
+                }
+                //评论列表按钮
+                {
+                    UIButton * btn = [UIButton new];
+                    btn.frame = commentView.bounds;
+                    [commentView addSubview:btn];
+                    [btn addTarget:delegate action:@selector(submitCommentListBtn:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                top += 64;
+            }
+            //评论区
+            {
+                //提示
+                {
+                    UILabel * label = [UILabel new];
+                    label.text = @"评论区";
+                    label.font = [UIFont systemFontOfSize:13];
+                    label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
+                    label.frame = CGRectMake(10, top, WIDTH-20, 15);
+                    [view addSubview:label];
+                }
+                /*评论列表*/
+                
+                
+                
+                top += 50;
+            }
             
+            /*待加*/
+            
+            view.frame = CGRectMake(0, view.frame.origin.y, view.frame.size.width, top);
             top_all += top;
         }
         scrollView.contentSize = CGSizeMake(0, top_all);

@@ -35,6 +35,10 @@
 
 
 #pragma mark - 用户按钮事件
+//评论列表事件
+-(void)submitCommentListBtn:(UIButton *)btn{
+    [SVProgressHUD showSuccessWithStatus:@"评论列表事件" duration:1];
+}
 //举报事件
 -(void)submitReportBtn:(UIButton *)btn{
     [SVProgressHUD showSuccessWithStatus:@"举报事件" duration:1];
