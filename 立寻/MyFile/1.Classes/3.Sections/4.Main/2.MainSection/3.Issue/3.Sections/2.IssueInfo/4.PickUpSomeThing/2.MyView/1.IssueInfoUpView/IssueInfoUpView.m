@@ -90,7 +90,7 @@
         //详细信息字数
         {
             UILabel * label = [UILabel new];
-            label.text = @"  0/500";
+            label.text = @"   0/500";
             label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
             label.font = [UIFont systemFontOfSize:10];
             [self addSubview:label];
