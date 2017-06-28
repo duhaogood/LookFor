@@ -7,7 +7,7 @@
 //
 
 #import "SelectTypeVC.h"
-
+#import "FindSameVC.h"
 @interface SelectTypeVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * cellDataArray;//二级分类数组
@@ -171,8 +171,12 @@
 //二级分类按钮选择
 -(void)selectType_2_callback:(UIButton *)btn{
     NSObject * CategoryID = self.cellDataArray[btn.tag][@"CategoryID"];
-    NSLog(@"CategoryID:%@",CategoryID);
-#warning 用二级分类id查询发布信息
+//    NSLog(@"CategoryID:%@",CategoryID);
+    
+    FindSameVC * same = [FindSameVC new];
+    same.title = @"发现列表";
+    [self.navigationController pushViewController:same animated:true];
+    
     
 }
 //返回上个界面

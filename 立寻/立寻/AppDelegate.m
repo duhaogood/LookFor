@@ -10,6 +10,9 @@
 #import "MainVC.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import <PgySDK/PgyManager.h>
+#import <PgyUpdate/PgyUpdateManager.h>
+
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -24,6 +27,17 @@
     [self.window makeKeyAndVisible];
     
     
+    
+    
+    
+    
+    //蒲公英
+    //启动基本SDK
+    [[PgyManager sharedPgyManager] startManagerWithAppId:@"5f7de76ffc45dc469fa27a5d81a6ce54"];
+    //启动更新检查SDK
+    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:@"5f7de76ffc45dc469fa27a5d81a6ce54"];
+    //关闭用户反馈
+    [[PgyManager sharedPgyManager] setEnableFeedback:NO];
     return YES;
 }
 

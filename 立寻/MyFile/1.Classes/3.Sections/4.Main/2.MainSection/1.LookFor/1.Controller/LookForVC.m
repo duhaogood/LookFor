@@ -296,7 +296,7 @@
 }
 //重新加载数据
 -(void)getCellDataWithHeader:(BOOL)flag{
-    NSLog(@"重新加载数据");
+//    NSLog(@"重新加载数据");
     NSString * interface = @"/publish/publish/getindexpublishcomplexlist.html";
     NSMutableDictionary * send = [NSMutableDictionary new];
     //是否下拉

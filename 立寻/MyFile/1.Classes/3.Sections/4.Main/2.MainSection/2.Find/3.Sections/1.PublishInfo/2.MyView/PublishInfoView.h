@@ -11,5 +11,14 @@
 @interface PublishInfoView : UIView
 
 -(instancetype)initWithFrame:(CGRect)frame andPublishDictionary:(NSDictionary*)publishDictionary andDelegate:(PublishInfoVC*)delegate;
+//重新加载评论界面
+-(void)loadCommentViewWithArray:(NSArray *)commentList andIsHeaderRefresh:(BOOL)flag;
+//更新关注状态
+-(void)updateAttentionStatus:(UIButton *)btn;
+
+
+
+
+
 
 @end

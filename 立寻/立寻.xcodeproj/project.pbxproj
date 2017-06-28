@@ -115,6 +115,12 @@
 		049B5E451EDF07C90080D552 /* ClearCacheVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E441EDF07C90080D552 /* ClearCacheVC.m */; };
 		049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E471EDF07D80080D552 /* NotificationMessageVC.m */; };
 		049B5E4B1EDF07E90080D552 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E4A1EDF07E90080D552 /* SettingVC.m */; };
+		049B8EB01F033B2400C73FEC /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B8EAE1F033B2400C73FEC /* PgySDK.framework */; };
+		049B8EB11F033B2400C73FEC /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B8EAF1F033B2400C73FEC /* PgyUpdate.framework */; };
+		049B8EC71F0343BA00C73FEC /* FindSameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8EC61F0343BA00C73FEC /* FindSameVC.m */; };
+		049B8ED61F038F9700C73FEC /* HaveClueVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8ED51F038F9700C73FEC /* HaveClueVC.m */; };
+		049B8ED91F038FA700C73FEC /* WantToClaimVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8ED81F038FA700C73FEC /* WantToClaimVC.m */; };
+		049B8EDC1F03901000C73FEC /* LeaveMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8EDB1F03901000C73FEC /* LeaveMessageVC.m */; };
 		04A990071ED8617300C1C6EC /* FirstPageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */; };
 		04DE08671EE2709B003F9943 /* DraftsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08661EE2709B003F9943 /* DraftsCell.m */; };
 		04DE086A1EE29A31003F9943 /* ClueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08691EE29A31003F9943 /* ClueCell.m */; };
@@ -539,6 +545,20 @@
 		049B5E471EDF07D80080D552 /* NotificationMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationMessageVC.m; sourceTree = "<group>"; };
 		049B5E491EDF07E90080D552 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		049B5E4A1EDF07E90080D552 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		049B8EAE1F033B2400C73FEC /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
+		049B8EAF1F033B2400C73FEC /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
+		049B8EB41F03437900C73FEC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B8EC51F0343BA00C73FEC /* FindSameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSameVC.h; sourceTree = "<group>"; };
+		049B8EC61F0343BA00C73FEC /* FindSameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindSameVC.m; sourceTree = "<group>"; };
+		049B8EC91F038F5600C73FEC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B8ECD1F038F5600C73FEC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B8ED11F038F5600C73FEC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		049B8ED41F038F9700C73FEC /* HaveClueVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaveClueVC.h; sourceTree = "<group>"; };
+		049B8ED51F038F9700C73FEC /* HaveClueVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HaveClueVC.m; sourceTree = "<group>"; };
+		049B8ED71F038FA700C73FEC /* WantToClaimVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WantToClaimVC.h; sourceTree = "<group>"; };
+		049B8ED81F038FA700C73FEC /* WantToClaimVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WantToClaimVC.m; sourceTree = "<group>"; };
+		049B8EDA1F03900F00C73FEC /* LeaveMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveMessageVC.h; sourceTree = "<group>"; };
+		049B8EDB1F03901000C73FEC /* LeaveMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveMessageVC.m; sourceTree = "<group>"; };
 		04A990031ED84C7E00C1C6EC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		04A990051ED8617300C1C6EC /* FirstPageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageHeaderView.h; sourceTree = "<group>"; };
 		04A990061ED8617300C1C6EC /* FirstPageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageHeaderView.m; sourceTree = "<group>"; };
@@ -712,10 +732,12 @@
 				044AE0311EF2A5B100E43704 /* CoreTelephony.framework in Frameworks */,
 				044AE02F1EF2A59B00E43704 /* QuartzCore.framework in Frameworks */,
 				044AE02D1EF2A59200E43704 /* CoreText.framework in Frameworks */,
+				049B8EB11F033B2400C73FEC /* PgyUpdate.framework in Frameworks */,
 				044AE02B1EF2A58B00E43704 /* CoreGraphics.framework in Frameworks */,
 				044AE0291EF2A58000E43704 /* CoreMotion.framework in Frameworks */,
 				044AE0271EF2A57700E43704 /* CFNetwork.framework in Frameworks */,
 				044AE0251EF2A56D00E43704 /* libc++.tbd in Frameworks */,
+				049B8EB01F033B2400C73FEC /* PgySDK.framework in Frameworks */,
 				044AE0231EF2A56500E43704 /* libsqlite3.0.tbd in Frameworks */,
 				044AE0211EF2A55C00E43704 /* UserNotifications.framework in Frameworks */,
 				044AE01F1EF2A55100E43704 /* libresolv.tbd in Frameworks */,
@@ -1154,6 +1176,7 @@
 				043DF9491EF177D600EEA3AC /* 0.Comments.h */,
 				043DF94A1EF177D600EEA3AC /* 1.Controller */,
 				043DF94B1EF177D600EEA3AC /* 2.MyView */,
+				049B8EB21F03434400C73FEC /* 3.Sections */,
 			);
 			path = 03.SelectType;
 			sourceTree = "<group>";
@@ -2380,6 +2403,119 @@
 			path = 2.MyView;
 			sourceTree = "<group>";
 		};
+		049B8EAD1F033B2400C73FEC /* Pgy */ = {
+			isa = PBXGroup;
+			children = (
+				049B8EAE1F033B2400C73FEC /* PgySDK.framework */,
+				049B8EAF1F033B2400C73FEC /* PgyUpdate.framework */,
+			);
+			path = Pgy;
+			sourceTree = "<group>";
+		};
+		049B8EB21F03434400C73FEC /* 3.Sections */ = {
+			isa = PBXGroup;
+			children = (
+				049B8EB31F03437900C73FEC /* 1.FindSameVC */,
+			);
+			path = 3.Sections;
+			sourceTree = "<group>";
+		};
+		049B8EB31F03437900C73FEC /* 1.FindSameVC */ = {
+			isa = PBXGroup;
+			children = (
+				049B8EB41F03437900C73FEC /* 0.Comments.h */,
+				049B8EB51F03437900C73FEC /* 1.Controller */,
+			);
+			path = 1.FindSameVC;
+			sourceTree = "<group>";
+		};
+		049B8EB51F03437900C73FEC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B8EC51F0343BA00C73FEC /* FindSameVC.h */,
+				049B8EC61F0343BA00C73FEC /* FindSameVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B8EC81F038F5600C73FEC /* 2.LeaveMessage */ = {
+			isa = PBXGroup;
+			children = (
+				049B8EC91F038F5600C73FEC /* 0.Comments.h */,
+				049B8ECA1F038F5600C73FEC /* 1.Controller */,
+				049B8ECB1F038F5600C73FEC /* 2.MyView */,
+			);
+			path = 2.LeaveMessage;
+			sourceTree = "<group>";
+		};
+		049B8ECA1F038F5600C73FEC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B8EDA1F03900F00C73FEC /* LeaveMessageVC.h */,
+				049B8EDB1F03901000C73FEC /* LeaveMessageVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B8ECB1F038F5600C73FEC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B8ECC1F038F5600C73FEC /* 3.HaveClue */ = {
+			isa = PBXGroup;
+			children = (
+				049B8ECD1F038F5600C73FEC /* 0.Comments.h */,
+				049B8ECE1F038F5600C73FEC /* 1.Controller */,
+				049B8ECF1F038F5600C73FEC /* 2.MyView */,
+			);
+			path = 3.HaveClue;
+			sourceTree = "<group>";
+		};
+		049B8ECE1F038F5600C73FEC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B8ED41F038F9700C73FEC /* HaveClueVC.h */,
+				049B8ED51F038F9700C73FEC /* HaveClueVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B8ECF1F038F5600C73FEC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		049B8ED01F038F5600C73FEC /* 4.WantToClaim */ = {
+			isa = PBXGroup;
+			children = (
+				049B8ED11F038F5600C73FEC /* 0.Comments.h */,
+				049B8ED21F038F5600C73FEC /* 1.Controller */,
+				049B8ED31F038F5600C73FEC /* 2.MyView */,
+			);
+			path = 4.WantToClaim;
+			sourceTree = "<group>";
+		};
+		049B8ED21F038F5600C73FEC /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049B8ED71F038FA700C73FEC /* WantToClaimVC.h */,
+				049B8ED81F038FA700C73FEC /* WantToClaimVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		049B8ED31F038F5600C73FEC /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
 		04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2618,6 +2754,9 @@
 			children = (
 				046822CF1EFE36F000ADA4D7 /* 0.Comments.h */,
 				046822D01EFE36F000ADA4D7 /* 1.PublishInfo */,
+				049B8EC81F038F5600C73FEC /* 2.LeaveMessage */,
+				049B8ECC1F038F5600C73FEC /* 3.HaveClue */,
+				049B8ED01F038F5600C73FEC /* 4.WantToClaim */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -2746,6 +2885,7 @@
 		78375A491ED4734C0046F8C3 /* 1.Vender */ = {
 			isa = PBXGroup;
 			children = (
+				049B8EAD1F033B2400C73FEC /* Pgy */,
 				044AE0381EF2CC2500E43704 /* PYSearch */,
 				044ADF7D1EF2A4B100E43704 /* Pay */,
 				78375A4A1ED4734C0046F8C3 /* AFNetworking_3.0 */,
@@ -3200,6 +3340,7 @@
 				78375AD31ED4734C0046F8C3 /* MJRefreshAutoGifFooter.m in Sources */,
 				044AE0491EF2CC2500E43704 /* PYSearchConst.m in Sources */,
 				78375ADB1ED4734C0046F8C3 /* MJRefreshStateHeader.m in Sources */,
+				049B8ED91F038FA700C73FEC /* WantToClaimVC.m in Sources */,
 				044669961EEA72160082D8BC /* MyTextView.m in Sources */,
 				78375AD81ED4734C0046F8C3 /* MJRefreshBackStateFooter.m in Sources */,
 				044ADFF01EF2A4B100E43704 /* base64.m in Sources */,
@@ -3209,6 +3350,7 @@
 				78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */,
 				044ADFF91EF2A4B100E43704 /* WXUtil.mm in Sources */,
 				04874F141ED913CE00049758 /* LookForCell.m in Sources */,
+				049B8EDC1F03901000C73FEC /* LeaveMessageVC.m in Sources */,
 				78375ADE1ED4734C0046F8C3 /* NSBundle+MJRefresh.m in Sources */,
 				044669DF1EF11A010082D8BC /* LookManSomeThingVC.m in Sources */,
 				044ADFF31EF2A4B100E43704 /* RSADataSigner.m in Sources */,
@@ -3266,6 +3408,7 @@
 				049B5E271EDF07330080D552 /* DraftsVC.m in Sources */,
 				78375AEC1ED4734C0046F8C3 /* SDWebImageCompat.m in Sources */,
 				78375AC61ED4734C0046F8C3 /* MessageVC.m in Sources */,
+				049B8EC71F0343BA00C73FEC /* FindSameVC.m in Sources */,
 				78375AF31ED4734C0046F8C3 /* UIImage+GIF.m in Sources */,
 				78375AF61ED4734C0046F8C3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				044ADFF21EF2A4B100E43704 /* openssl_wrapper.m in Sources */,
@@ -3303,6 +3446,7 @@
 				044AE04D1EF2CC2500E43704 /* UIView+PYSearchExtension.m in Sources */,
 				044669E21EF11A010082D8BC /* IssueInfoMiddleView.m in Sources */,
 				044AE0181EF2A50200E43704 /* DHTool.m in Sources */,
+				049B8ED61F038F9700C73FEC /* HaveClueVC.m in Sources */,
 				043DF9631EF17ED300EEA3AC /* GYZCityGroupCell.m in Sources */,
 				044AE04B1EF2CC2500E43704 /* PYSearchViewController.m in Sources */,
 				78375AC91ED4734C0046F8C3 /* AFNetworkReachabilityManager.m in Sources */,
@@ -3478,6 +3622,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
+					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pgy",
 				);
 				GCC_PREFIX_HEADER = "/Users/mac/Desktop/项目列表/宿迁/立寻/LookFor/立寻/MyFile/1.Classes/1.PrefixHeaders/1.PrefixHeader/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/MyFile/2.Other/1.Vender/Pay/AliPay\"";
@@ -3503,6 +3648,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
+					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pgy",
 				);
 				GCC_PREFIX_HEADER = "/Users/mac/Desktop/项目列表/宿迁/立寻/LookFor/立寻/MyFile/1.Classes/1.PrefixHeaders/1.PrefixHeader/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/MyFile/2.Other/1.Vender/Pay/AliPay\"";

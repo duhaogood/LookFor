@@ -7,7 +7,17 @@
 //
 
 #import "PublishInfoView.h"
+@interface PublishInfoView()
+@property(nonatomic,strong)UILabel * commentCountLabel;//评论人数label
+@property(nonatomic,strong)UIScrollView * scrollView;
+@property(nonatomic,strong)UIView * commentView;//评论view
+@property(nonatomic,assign)float commentTop;//评论view顶坐标
 
+
+//关注
+@property(nonatomic,strong)UIButton * attentionBtn;//关注按钮
+@property(nonatomic,strong)UIImageView * attentionIcon;//关注图标
+@end
 @implementation PublishInfoView
 
 -(instancetype)initWithFrame:(CGRect)frame andPublishDictionary:(NSDictionary*)publishDictionary andDelegate:(PublishInfoVC*)delegate{
@@ -15,9 +25,24 @@
         
         //主scrollview
         UIScrollView * scrollView = [UIScrollView new];
+        self.scrollView = scrollView;
         scrollView.backgroundColor = MYCOLOR_240_240_240;
         scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-50);
         [self addSubview:scrollView];
+        scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [delegate headerRefresh];
+            // 结束刷新
+            [scrollView.mj_header endRefreshing];
+        }];
+        
+        // 设置自动切换透明度(在导航栏下面自动隐藏)
+        scrollView.mj_header.automaticallyChangeAlpha = YES;
+        
+        // 上拉刷新
+        scrollView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [delegate footerRefresh];
+            [scrollView.mj_footer endRefreshing];
+        }];
         //用户信息view
         float top_all = 0;
         {
@@ -266,7 +291,7 @@
                 label.numberOfLines = 0;
                 top += size.height * row + 15;
             }
-            //评论--按钮
+            //评论人数
             {
                 UIView * commentView = [UIView new];
                 commentView.backgroundColor = [MYTOOL RGBWithRed:238 green:238 blue:238 alpha:1];
@@ -275,6 +300,7 @@
                 //评论人数-CommentCount
                 {
                     UILabel * label = [UILabel new];
+                    self.commentCountLabel = label;
                     label.font = [UIFont systemFontOfSize:12];
                     label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
                     int CommentCount = [publishDictionary[@"CommentCount"] intValue];
@@ -291,14 +317,14 @@
                 {
                     UIImageView * icon = [UIImageView new];
                     icon.image = [UIImage imageNamed:@"arrow_right_md"];
-                    [commentView addSubview:icon];
+//                    [commentView addSubview:icon];
                     icon.frame = CGRectMake(commentView.frame.size.width - 23, 16, 6, 12);
                 }
                 //评论列表按钮
                 {
                     UIButton * btn = [UIButton new];
                     btn.frame = commentView.bounds;
-                    [commentView addSubview:btn];
+//                    [commentView addSubview:btn];
                     [btn addTarget:delegate action:@selector(submitCommentListBtn:) forControlEvents:UIControlEventTouchUpInside];
                 }
                 top += 64;
@@ -315,16 +341,22 @@
                     [view addSubview:label];
                 }
                 /*评论列表*/
+                top += 20;
+                //评论view
+                {
+                    UIView * commentView = [UIView new];
+                    self.commentView = commentView;
+                    commentView.frame = CGRectMake(0, top, WIDTH, 0);
+                    [view addSubview:commentView];
+                    commentView.backgroundColor = [UIColor whiteColor];
+                }
                 
                 
-                
-                top += 50;
+                top += 10;
             }
-            
-            /*待加*/
-            
-            view.frame = CGRectMake(0, view.frame.origin.y, view.frame.size.width, top);
+            view.frame = CGRectMake(0, view.frame.origin.y, view.frame.size.width+10, top);
             top_all += top;
+            self.commentTop = top_all;
         }
         scrollView.contentSize = CGSizeMake(0, top_all);
         //底部按钮
@@ -340,15 +372,16 @@
                 space.backgroundColor = [MYTOOL RGBWithRed:221 green:221 blue:221 alpha:1];
                 [view addSubview:space];
             }
-            //关注
+            //关注-info_ft_gz
+            //已关注-info_ft_gzed
             {
                 //图标
                 {
                     UIImageView * icon = [UIImageView new];
                     icon.frame = CGRectMake(WIDTH/12-9, 9, 18, 16);
-                    icon.backgroundColor = [UIColor greenColor];
                     [view addSubview:icon];
-                    icon.image = [UIImage imageNamed:@""];
+                    self.attentionIcon = icon;
+                    icon.image = [UIImage imageNamed:@"info_ft_gz"];
                 }
                 //文字
                 {
@@ -363,6 +396,8 @@
                 //按钮
                 {
                     UIButton * btn = [UIButton new];
+                    btn.tag = 0;
+                    self.attentionBtn = btn;
                     btn.frame = CGRectMake(0, 0, WIDTH/6, 50);
                     [btn addTarget:delegate action:@selector(submitAttentionBtn:) forControlEvents:UIControlEventTouchUpInside];
                     [view addSubview:btn];
@@ -381,9 +416,8 @@
                 {
                     UIImageView * icon = [UIImageView new];
                     icon.frame = CGRectMake(WIDTH/12*3-9, 9, 18, 16);
-                    icon.backgroundColor = [UIColor greenColor];
                     [view addSubview:icon];
-                    icon.image = [UIImage imageNamed:@""];
+                    icon.image = [UIImage imageNamed:@"comments_btn"];
                 }
                 //文字
                 {
@@ -418,15 +452,117 @@
                 UIButton * btn = [UIButton new];
                 btn.backgroundColor = [MYTOOL RGBWithRed:250 green:101 blue:104 alpha:1];
                 btn.titleLabel.font = [UIFont systemFontOfSize:15];
-                [btn setTitle:@"我有线索" forState:UIControlStateNormal];
                 btn.frame = CGRectMake(WIDTH/3*2, 0, WIDTH/3, 50);
                 [view addSubview:btn];
-                [btn addTarget:delegate action:@selector(submitMyClueBtn:) forControlEvents:UIControlEventTouchUpInside];
+                //一级分类id
+                int ParentCategoryID = [publishDictionary[@"ParentCategoryID"] intValue];
+                if (ParentCategoryID == 394) {
+                    [btn setTitle:@"我要认领" forState:UIControlStateNormal];
+                    [btn addTarget:delegate action:@selector(submitClaimBtn:) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                    [btn addTarget:delegate action:@selector(submitMyClueBtn:) forControlEvents:UIControlEventTouchUpInside];
+                    [btn setTitle:@"我有线索" forState:UIControlStateNormal];
+                }
             }
         }
         
     }
     return self;
 }
-
+//更新关注状态
+-(void)updateAttentionStatus:(UIButton *)btn{
+    //关注-info_ft_gz
+    //已关注-info_ft_gzed
+    NSInteger tag = btn.tag;
+    if (tag) {//已关注
+        self.attentionBtn.tag = 1;
+        self.attentionIcon.image = [UIImage imageNamed:@"info_ft_gzed"];
+    }else{//未关注
+        self.attentionBtn.tag = 0;
+        self.attentionIcon.image = [UIImage imageNamed:@"info_ft_gz"];
+    }
+    
+}
+//设置评论人数
+-(void)setCommentCount:(int)count{
+    UILabel * label = self.commentCountLabel;
+    NSString * text = [NSString stringWithFormat:@"评论（%d）",count];
+    label.text = text;
+    CGSize size = [MYTOOL getSizeWithLabel:label];
+    label.frame = CGRectMake(10, 22-size.height/2, size.width, size.height);
+}
+//重新加载评论界面
+-(void)loadCommentViewWithArray:(NSArray *)commentList andIsHeaderRefresh:(BOOL)flag{
+    int count = (int)commentList.count;
+    [self setCommentCount:count];
+    self.commentView.frame = CGRectMake(0, self.commentView.frame.origin.y, WIDTH, 45*count);
+    self.scrollView.contentSize = CGSizeMake(0, self.commentTop + 45*count);
+    //清除所有子控件
+    for (id v in self.commentView.subviews) {
+        [v removeFromSuperview];
+    }
+    float top = 0;
+    //加载所有评论
+    for(int i = 0; i < commentList.count ; i ++){
+        NSDictionary * dictionary = commentList[i];
+        //头像
+        {
+            NSString * url = dictionary[@"ImgFilePath"];
+            UIImageView * icon = [UIImageView new];
+            icon.frame = CGRectMake(10, 22.5 - 12.5 + top, 25, 25);
+            icon.layer.masksToBounds = true;
+            icon.layer.cornerRadius = 12.5;
+            [self.commentView addSubview:icon];
+            //默认头像
+            icon.image = [UIImage imageNamed:@""];
+            if (url) {
+                [MYTOOL setImageIncludePrograssOfImageView:icon withUrlString:url];
+            }
+        }
+        //用户名字
+        {
+            NSString * name = dictionary[@"UserName"];
+            UILabel * label = [UILabel new];
+            label.font = [UIFont systemFontOfSize:12];
+            label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
+            label.text = name;
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            label.frame = CGRectMake(45, top + 22.5 - size.height-1, size.width, size.height);
+            [self.commentView addSubview:label];
+        }
+        //评论时间
+        {
+            NSString * time = dictionary[@"CreateTime"];
+            UILabel * label = [UILabel new];
+            label.font = [UIFont systemFontOfSize:10];
+            label.text = time;
+            label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            label.frame = CGRectMake(WIDTH - 10 - size.width, top + 22.5 - size.height-2, size.width, size.height);
+            [self.commentView addSubview:label];
+        }
+        //评论内容
+        {
+            NSString * content = dictionary[@"Content"];
+            UILabel * label = [UILabel new];
+            label.text = content;
+            label.font = [UIFont systemFontOfSize:10];
+            label.textColor = MYCOLOR_144;
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            label.frame = CGRectMake(45, top + 22.5 + 2, WIDTH - 45 - 10, size.height);
+            [self.commentView addSubview:label];
+        }
+        
+        //分割线
+        {
+            UIView * space = [UIView new];
+            space.frame = CGRectMake(45, top + 44, WIDTH-10-45, 1);
+            space.backgroundColor = MYCOLOR_240_240_240;
+            [self.commentView addSubview:space];
+        }
+        top += 45;
+    }
+    
+    
+}
 @end

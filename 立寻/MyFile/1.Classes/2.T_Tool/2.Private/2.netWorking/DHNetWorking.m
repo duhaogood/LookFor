@@ -88,7 +88,28 @@ static id instance;
         [SVProgressHUD showErrorWithStatus:@"网络出错" duration:2];
     }];
 }
-
-
+//不管怎样都有回调
+-(void)getDataWithInterfaceName:(NSString *)interfaceName andDictionary:(NSDictionary *)send_dic andSuccess:(void(^)(NSDictionary * back_dic)) back_block andNoSuccess:(void(^)(NSDictionary * back_dic)) no_block andFailure:(void(^)(NSURLSessionTask *, NSError *)) failure_block{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+    
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",SERVER_URL,interfaceName];
+    NSMutableDictionary * send = [NSMutableDictionary dictionaryWithDictionary:send_dic];
+    //验证参数
+    [send setValue:@"99999999" forKey:@"appid"];
+    [manager GET:urlString parameters:send progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if (![[responseObject valueForKey:@"Result"] boolValue]) {
+            no_block(responseObject);
+        }else{
+            back_block(responseObject);
+        }
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"网络出错" duration:2];
+        failure_block(operation,error);
+    }];
+    
+}
 
 @end
