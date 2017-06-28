@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HaveClueVC : UIViewController
-
+@property(nonatomic,strong)NSObject * publishId;//发布id
 @end

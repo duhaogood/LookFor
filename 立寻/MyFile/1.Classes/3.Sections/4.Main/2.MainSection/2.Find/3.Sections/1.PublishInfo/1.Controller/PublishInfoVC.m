@@ -162,12 +162,14 @@
 -(void)submitMyClueBtn:(UIButton *)btn{
     HaveClueVC * vc = [HaveClueVC new];
     vc.title = @"我有线索";
+    vc.publishId = self.publishDictionary[@"PublishID"];
     [self.navigationController pushViewController:vc animated:true];
 }
 //我要认领事件
 -(void)submitClaimBtn:(UIButton *)btn{
     WantToClaimVC * vc = [WantToClaimVC new];
     vc.title = @"我要认领";
+    vc.publishId = self.publishDictionary[@"PublishID"];
     [self.navigationController pushViewController:vc animated:true];
 }
 //重新加载所有评论

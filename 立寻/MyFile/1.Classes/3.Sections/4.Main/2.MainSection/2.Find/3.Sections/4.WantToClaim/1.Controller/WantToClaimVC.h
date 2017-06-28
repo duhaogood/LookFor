@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WantToClaimVC : UIViewController
+@property(nonatomic,strong)NSObject * publishId;//发布id
 
 @end
