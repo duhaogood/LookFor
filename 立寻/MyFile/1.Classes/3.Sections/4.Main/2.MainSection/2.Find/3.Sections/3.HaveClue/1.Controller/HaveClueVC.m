@@ -8,13 +8,16 @@
 
 #import "HaveClueVC.h"
 
-@interface HaveClueVC ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface HaveClueVC ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
 @property(nonatomic,strong)UILabel * num_label;//预览图片时显示的图片序号
 @property(nonatomic,strong)UIView * img_bg_view;//图片背景view
 @property(nonatomic,strong)NSArray * areaArray;//地区数组
-
-
+@property(nonatomic,strong)UILabel * contentCountLabel;//内容文字数量label
+@property(nonatomic,strong)UITextField * cityTF;//城市文本
+@property(nonatomic,strong)UITextField * addressTF;//地址文本
+@property(nonatomic,strong)UIPickerView * picker;//地区选择器
+@property(nonatomic,strong)MyTextView * tv;//内容tv
 
 @end
 
@@ -34,6 +37,9 @@
     //返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
     self.view.backgroundColor = MYCOLOR_240_240_240;
+    //初始化省市区数据
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"area_code" ofType:@"plist"];
+    self.areaArray = [NSArray arrayWithContentsOfFile:path];
     //加载主界面
     [self loadMainView];
 }
@@ -48,11 +54,129 @@
         view.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:view];
         top += view_height;
+        //线索内容
+        {
+            float height = [MYTOOL getHeightWithIphone_six:75];
+            MyTextView * tv = [[MyTextView alloc] initWithFrame:CGRectMake(10, 15, WIDTH - 20, height)];
+            tv.textColor = MYCOLOR_48_48_48;
+            tv.placeholderLabel.text = @"   请描述下您发现的线索，好人终有好报";
+            tv.placeholderLabel.font = [UIFont systemFontOfSize:10];
+            tv.placeholderLabel.textColor = [MYTOOL RGBWithRed:180 green:180 blue:180 alpha:1];
+            tv.font = [UIFont systemFontOfSize:13];
+            [view addSubview:tv];
+            tv.delegate = self;
+            tv.layer.masksToBounds = true;
+            tv.layer.borderWidth = 1;
+            tv.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+            self.tv = tv;
+        }
+        //详细信息字数
+        {
+            UILabel * label = [UILabel new];
+            label.text = @"    0/500";
+            label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
+            label.font = [UIFont systemFontOfSize:10];
+            [view addSubview:label];
+            CGSize size = [MYTOOL getSizeWithLabel:label];
+            label.frame = CGRectMake(WIDTH - 10 - size.width, [MYTOOL getHeightWithIphone_six:96] , size.width, size.height);
+            self.contentCountLabel = label;
+        }
+        //选择城市
+        {
+            float left = 0;
+            //左侧提示
+            {
+                UILabel * label = [UILabel new];
+                label.text = @"发现城市:";
+                label.font = [UIFont systemFontOfSize:12];
+                label.textColor = MYCOLOR_48_48_48;
+                CGSize size = [MYTOOL getSizeWithLabel:label];
+                label.frame = CGRectMake(10, [MYTOOL getHeightWithIphone_six:128], size.width, size.height);
+                [view addSubview:label];
+                left = 10 + size.width + 10;
+            }
+            //右侧
+            {
+                UITextField * cityTF = [UITextField new];
+                cityTF.placeholder = @"  请选择城市";
+                cityTF.frame = CGRectMake(left, [MYTOOL getHeightWithIphone_six:128], WIDTH/2.0, 20);
+                cityTF.font = [UIFont systemFontOfSize:14];
+                cityTF.tag = 300;
+                cityTF.delegate = self;
+                self.cityTF = cityTF;
+                cityTF.layer.masksToBounds = true;
+                cityTF.layer.borderWidth = 1;
+                cityTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                [view addSubview:cityTF];
+                //输入
+                {
+                    UIPickerView * pick = [UIPickerView new];
+                    self.picker = pick;
+                    pick.tag = 100;
+                    UIView * v = [UIView new];
+                    cityTF.inputView = v;
+                    v.frame = CGRectMake(0, 500, WIDTH, 271);
+                    pick.frame = CGRectMake(0, 44, WIDTH, 271-44);
+                    pick.dataSource = self;
+                    pick.delegate = self;
+                    [v addSubview:pick];
+                    //toolbar
+                    UIToolbar * bar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+                    [v addSubview:bar];
+                    [bar setBarStyle:UIBarStyleDefault];
+                    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+                    
+                    UIBarButtonItem *myDoneButton = [[ UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                                   target: self action: @selector(clickOkOfPickerView:)];
+                    myDoneButton.tag = 100;
+                    myDoneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(clickOkOfPickerView:)];
+                    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    
+                    [buttons addObject:flexibleSpace];
+                    [buttons addObject: myDoneButton];
+                    
+                    
+                    [bar setItems:buttons animated:TRUE];
+                    
+                    //toolbar加个label
+                    UILabel * label = [UILabel new];
+                    label.text = [NSString stringWithFormat:@"请选择省、市"];
+                    label.frame = CGRectMake(WIDTH/2-70, 12, 140, 20);
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [v addSubview:label];
+                }
+            }
         
         
-        
-        
-        
+    }
+        //详细地址
+        {
+            float left = 0;
+            //左侧提示
+            {
+                UILabel * label = [UILabel new];
+                label.text = @"发现城市:";
+                label.font = [UIFont systemFontOfSize:12];
+                label.textColor = MYCOLOR_48_48_48;
+                CGSize size = [MYTOOL getSizeWithLabel:label];
+                label.frame = CGRectMake(10, [MYTOOL getHeightWithIphone_six:157], size.width, size.height);
+                [view addSubview:label];
+                left = 10 + size.width + 10;
+            }
+            //右侧
+            {
+                UITextField * cityTF = [UITextField new];
+                cityTF.placeholder = @" 请输入走失地详细地址";
+                cityTF.frame = CGRectMake(left, [MYTOOL getHeightWithIphone_six:157], WIDTH - left - 10, 20);
+                cityTF.font = [UIFont systemFontOfSize:14];
+                cityTF.tag = 400;
+                self.addressTF = cityTF;
+                cityTF.layer.masksToBounds = true;
+                cityTF.layer.borderWidth = 1;
+                cityTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                [view addSubview:cityTF];
+            }
+        }
     }
     top += 10;
     //中部图片view
@@ -130,9 +254,212 @@
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         [self.view addSubview:btn];
+        [btn addTarget:self action:@selector(submitSubmitBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     
 }
+//提交
+-(void)submitSubmitBtn:(UIButton *)btn{
+    //先检查参数是否有空
+    //内容
+    NSString * content = self.tv.text;
+    if (content.length == 0 || content.length > 500) {
+        [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
+        return;
+    }
+    //城市
+    NSString * city = self.cityTF.text;
+    if (city.length < 2) {
+        [SVProgressHUD showErrorWithStatus:@"请选择城市" duration:2];
+        return;
+    }
+    //地址
+    NSString * address = self.addressTF.text;
+    if (address.length < 2) {
+        [SVProgressHUD showErrorWithStatus:@"请填写详细地址" duration:2];
+        return;
+    }
+    //图片
+    if ([self getCountOfImgV_arr] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"无图无真相" duration:2];
+        return;
+    }
+    fileid_array = [NSMutableArray new];
+    //上传所有图片
+    [self upLoadAllImage];
+}
+//提交线索
+-(void)startSubmit{
+    NSString * state = isIssue ? @"发布中……" : @"保存中……";
+    [MYTOOL netWorkingWithTitle:state];
+        //正式拼装
+    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
+    NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
+    NSDictionary * send = @{
+                            @"userid":userid,
+                            @"picturelist":picturelist,
+                            @"provinceid":uploadAreaDic[@"provinceid"],
+                            @"cityid":uploadAreaDic[@"cityid"],
+                            @"publishid":self.publishId,
+                            @"content":self.tv.text,
+                            @"address":self.addressTF.text
+                            };
+    NSLog(@"send:%@",send);
+    NSString * interface = @"publish/publish/addclueinfo.html";
+    [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        
+    } andNoSuccess:^(NSDictionary *back_dic) {
+        
+    } andFailure:^(NSURLSessionTask *operation, NSError *error) {
+        
+    }];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSLog(@"back:%@",back_dic);
+        [self.navigationController popViewControllerAnimated:true];
+    }];
+}
+//上传所有图片
+-(void)upLoadAllImage{
+    int count_img = 0;
+    for (int i =  0; i < self.img_arr.count ; i ++){
+        NSDictionary * dic = self.img_arr[i];
+        count_img += [dic[@"have_image"] boolValue];
+    }
+    if (count_img == 0) {
+        [SVProgressHUD showErrorWithStatus:@"没有图片" duration:1];
+        return;
+    }
+    NSDictionary * dic = self.img_arr[current_upload_img_index];
+    if (![dic[@"have_image"] boolValue]) {
+        current_upload_img_index ++;
+        [self upLoadAllImage];
+        return;
+    }
+    //上传图片
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/plain", nil];
+    // 参数@"image":@"image",
+    NSDictionary * parameter = @{
+                                 @"imageType":@"posts",
+                                 @"appid":@"99999999",
+                                 @"userid":[MYTOOL getProjectPropertyWithKey:@"UserID"]
+                                 };
+    // 访问路径
+    NSString *stringURL = [NSString stringWithFormat:@"%@%@",SERVER_URL,@"/common/filespace/uploadimg.html"];
+    [manager POST:stringURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        // 上传文件
+        NSDictionary * dic = self.img_arr[current_upload_img_index];
+        UIImageView * imgV = dic[@"imgV"];
+        //截取图片
+        float change = 1.0;
+        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
+        UIImage * img = imgV.image;
+        NSData * imageData = UIImageJPEGRepresentation(img,change);
+        while (imageData.length > 1.0 * 1024 * 1024) {
+            change -= 0.1;
+            imageData = UIImageJPEGRepresentation(img,change);
+        }
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat            = @"yyyyMMddHHmmss";
+        NSString * str                         = [formatter stringFromDate:[NSDate date]];
+        NSString * fileName               = [NSString stringWithFormat:@"%@_hao_%d.jpg", str,current_upload_img_index];
+        
+        [formData appendPartWithFileData:imageData name:@"filedata" fileName:fileName mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"Result"] boolValue]) {
+            NSObject * fileid = responseObject[@"Data"][@"fileid"];
+            [fileid_array addObject:@{@"PictureID":fileid}];
+            current_upload_img_index ++;
+            if (current_upload_img_index >= count_img) {
+                [SVProgressHUD dismiss];
+                //上传完毕
+                [self startSubmit];
+            }else{
+                [self upLoadAllImage];
+            }
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"Message"] duration:2];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showErrorWithStatus:@"上传失败" duration:2];
+    }];
+}
+
+#pragma mark - UITextViewDelegate
+-(void)textViewDidChange:(UITextView *)textView{
+    NSInteger count = textView.text.length;
+    self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/500",count];
+}
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    //字数控制-详情字数
+    if (range.length == 0) {//字数增加
+        NSInteger count = textView.text.length;
+        if (count >= 500) {
+            [SVProgressHUD showErrorWithStatus:@"字数不能超过500" duration:2];
+            return false;
+        }
+    }
+    return true;
+}
+#pragma mark - UITextFieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSInteger tag = textField.tag;
+    if (tag == 100 || tag == 300) {
+        return false;
+    }
+    return true;
+}
+#pragma mark - UIPickerViewDelegate,UIPickerViewDataSource
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    if (component == 0) {
+        return self.areaArray.count;
+    }else{
+        NSArray * cityArray = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"];
+        return cityArray.count;
+    }
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 2;
+}
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    if (component == 0) {
+        NSString * title = self.areaArray[row][@"provinceName"];
+        return title;
+    }else{
+        NSString * string = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][row][@"cityName"];
+        return string;
+    }
+}
+//数据变动
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    if (component == 0) {
+        [pickerView reloadComponent:1];
+        [pickerView selectRow:0 inComponent:1 animated:true];
+    }
+}
+//pickerView中事件-确定
+-(void)clickOkOfPickerView:(UIBarButtonItem*)btn{
+    NSInteger row0 = [self.picker selectedRowInComponent:0];
+    NSInteger row1 = [self.picker selectedRowInComponent:1];
+    
+    NSDictionary * provinceDic = self.areaArray[row0];
+    NSArray * cityArray = provinceDic[@"cityArray"];
+    NSDictionary * cityDic = cityArray[row1];
+    
+    NSString * provinceId = provinceDic[@"provinceId"];//省id
+    NSString * provinceName = provinceDic[@"provinceName"];//省名字
+    NSString * cityId = cityDic[@"cityId"];//城市id
+    NSString * cityName = cityDic[@"cityName"];//城市名字
+    uploadAreaDic = @{
+                      @"provinceid":provinceId,
+                      @"cityid":cityId
+                      };
+    self.cityTF.text = [NSString stringWithFormat:@"%@%@",provinceName,cityName];
+    [MYTOOL hideKeyboard];
+}
+
 //点击增加图片
 -(void)submitSelectImage:(UITapGestureRecognizer *)tap{
     //    NSLog(@"目前数组:%@",self.img_arr);
