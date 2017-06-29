@@ -12,6 +12,8 @@
 #import "LeaveMessageVC.h"
 #import "HaveClueVC.h"
 #import "WantToClaimVC.h"
+#import "FeedbackVC.h"
+#import "PersonalInfoVC.h"
 @interface PublishInfoVC ()
 @property(nonatomic,strong)NSMutableArray * commentList;//评论数据
 @property(nonatomic,strong)PublishInfoView * publishView;
@@ -26,7 +28,7 @@
     self.view.backgroundColor = MYCOLOR_240_240_240;
     //加载主界面
     [self loadMainView];
-    NSLog(@"info:%@",self.publishDictionary);
+//    NSLog(@"info:%@",self.publishDictionary);
 }
 //加载主界面
 -(void)loadMainView{
@@ -83,11 +85,32 @@
 }
 //举报事件
 -(void)submitReportBtn:(UIButton *)btn{
-    [SVProgressHUD showSuccessWithStatus:@"举报事件" duration:1];
+    if (![MYTOOL isLogin]) {
+        //跳转至登录页
+        LoginVC * login = [LoginVC new];
+        login.title = @"登录";
+        [self.navigationController pushViewController:login animated:true];
+        return;
+    }
+    FeedbackVC * vc = [FeedbackVC new];
+    vc.title = @"投诉建议";
+    [self.navigationController pushViewController:vc animated:true];
 }
 //个人详情事件
 -(void)submitPersonalBtn:(UIButton *)btn{
-    [SVProgressHUD showSuccessWithStatus:@"个人详情事件" duration:1];
+    NSString * interface = @"user/memberuser/getmemberuserinfo.html";
+    NSDictionary * send = @{
+                            @"userid":self.publishDictionary[@"UserID"]
+                            };
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * info = back_dic[@"Data"];
+        PersonalInfoVC * vc = [PersonalInfoVC new];
+        vc.title = @"个人详情";
+        vc.userInfo = info;
+        [self.navigationController pushViewController:vc animated:true];
+    }];
+    
 }
 //关注事件
 -(void)submitAttentionBtn:(UIButton *)btn{
@@ -156,10 +179,26 @@
 }
 //留言事件
 -(void)submitMessageBtn:(UIButton *)btn{
-    [SVProgressHUD showSuccessWithStatus:@"留言事件" duration:1];
+    if (![MYTOOL isLogin]) {
+        //跳转至登录页
+        LoginVC * login = [LoginVC new];
+        login.title = @"登录";
+        [self.navigationController pushViewController:login animated:true];
+        return;
+    }
+    LeaveMessageVC * vc = [LeaveMessageVC new];
+    vc.publishDictionary = self.publishDictionary;
+    [self.navigationController pushViewController:vc animated:true];
 }
 //我有线索事件
 -(void)submitMyClueBtn:(UIButton *)btn{
+    if (![MYTOOL isLogin]) {
+        //跳转至登录页
+        LoginVC * login = [LoginVC new];
+        login.title = @"登录";
+        [self.navigationController pushViewController:login animated:true];
+        return;
+    }
     HaveClueVC * vc = [HaveClueVC new];
     vc.title = @"我有线索";
     vc.publishId = self.publishDictionary[@"PublishID"];
@@ -167,6 +206,13 @@
 }
 //我要认领事件
 -(void)submitClaimBtn:(UIButton *)btn{
+    if (![MYTOOL isLogin]) {
+        //跳转至登录页
+        LoginVC * login = [LoginVC new];
+        login.title = @"登录";
+        [self.navigationController pushViewController:login animated:true];
+        return;
+    }
     WantToClaimVC * vc = [WantToClaimVC new];
     vc.title = @"我要认领";
     vc.publishId = self.publishDictionary[@"PublishID"];

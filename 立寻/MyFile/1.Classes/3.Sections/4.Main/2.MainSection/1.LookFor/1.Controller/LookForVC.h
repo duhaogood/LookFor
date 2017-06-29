@@ -13,7 +13,7 @@
 @property(nonatomic,strong)UIButton * current_toptype_btn;//当前置顶类型
 @property(nonatomic,strong)UIButton * leftTypeBtn;//置顶
 @property(nonatomic,strong)UIButton * rightTypeBtn;//最新
-
+@property(nonatomic,strong)UIButton * signBtn;//签到按钮
 
 
 

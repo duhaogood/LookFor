@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LeaveMessageVC : UIViewController
-@property(nonatomic,strong)NSObject * publishId;//发布id
+@property(nonatomic,strong)NSDictionary * publishDictionary;//发布详情信息
 
 @end

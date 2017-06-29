@@ -18,24 +18,24 @@
             {
                 UIImageView * icon = [UIImageView new];
                 icon.image = [UIImage imageNamed:@"time"];
-                icon.frame = CGRectMake(10, 40/195.0*height/2-6, 12, 12);
+                icon.frame = CGRectMake(10, 40/146.0*height/2-6, 12, 12);
                 [self addSubview:icon];
             }
             //时间文本
             {
                 UILabel * label = [UILabel new];
-                label.text = [NSString stringWithFormat:@"发布时间：%@",dictionary[@"extensionTime"]];
+                label.text = [NSString stringWithFormat:@"发布时间：%@",dictionary[@"CreateTime"]];
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 [self addSubview:label];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(27, 40/195.0*height/2 - size.height/2, size.width, size.height);
+                label.frame = CGRectMake(27, 40/146.0*height/2 - size.height/2, size.width, size.height);
                 [self addSubview:label];
             }
         }
         //右侧3个数字及图标
         {
-            float top_height = 40/195.0*height;
+            float top_height = 40/146.0*height;
             float left = WIDTH - 10;
             UIFont * font = [UIFont systemFontOfSize:9];
             UIColor * fontColor = MYCOLOR_144;
@@ -44,7 +44,7 @@
             {
                 //数字
                 {
-                    NSString * comment = dictionary[@"comment"];
+                    NSString * comment = [NSString stringWithFormat:@"%d",[dictionary[@"CommentCount"] intValue]];
                     UILabel * label = [UILabel new];
                     label.font = font;
                     label.textColor = fontColor;
@@ -68,7 +68,7 @@
                 //数字
                 {
                     left -= 16;
-                    NSString * comment = dictionary[@"follow"];
+                    NSString * comment = [NSString stringWithFormat:@"%d",[dictionary[@"FollowCount"] intValue]];
                     UILabel * label = [UILabel new];
                     label.font = font;
                     label.textColor = fontColor;
@@ -92,7 +92,7 @@
                 //数字
                 {
                     left -= 16;
-                    NSString * comment = dictionary[@"browse"];
+                    NSString * comment = [NSString stringWithFormat:@"%d",[dictionary[@"VisitCount"] intValue]];
                     UILabel * label = [UILabel new];
                     label.font = font;
                     label.textColor = fontColor;
@@ -120,9 +120,9 @@
             [self addSubview:space];
         }
         //分割线下方坐标
-        float top = 40/195.0*height + 1;
+        float top = 40/146.0*height + 1;
         //悬赏金上方坐标
-        float btn_top = 120/195.0*height;
+        float btn_top = 120/146.0*height;
         //图片
         float left = 10;
         //中间
@@ -133,7 +133,7 @@
             {
                 UIImageView * imgV = [UIImageView new];
                 imgV.frame = CGRectMake(left, top + 8, imgHeight, imgHeight);
-                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"url"]];
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"PicturePath"]];
                 [self addSubview:imgV];
                 left += imgHeight + 10;
             }
@@ -142,7 +142,7 @@
             {
                 top += 8;
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"title"];
+                label.text = dictionary[@"Title"];
                 label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -150,10 +150,26 @@
                 [self addSubview:label];
                 title_middle_top = top + size.height/2;
             }
-            //状态
+            //状态-发布状态（1.待发布，2.已发布，3.已结束，4.已完成
             {
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"state"];
+                int PublishStatus = [dictionary[@"PublishStatus"] intValue];
+                NSString * text = @"";
+                switch (PublishStatus) {
+                    case 1:
+                        text = @"待发布";
+                        break;
+                    case 2:
+                        text = @"已发布";
+                        break;
+                    case 3:
+                        text = @"已结束";
+                        break;
+                    default:
+                        text = @"已完成";
+                        break;
+                }
+                label.text = text;
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -163,7 +179,7 @@
             //内容
             {
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"content"];
+                label.text = dictionary[@"Content"];
                 label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -182,7 +198,7 @@
             {
                 UIImageView * icon = [UIImageView new];
                 icon.image = [UIImage imageNamed:@"xtb"];
-                icon.frame = CGRectMake(10, img_lower_top + (146/195.0*height-img_lower_top)/2.0-6.5, 37, 13);
+                icon.frame = CGRectMake(10, img_lower_top + (146/146.0*height-img_lower_top)/2.0-6.5, 37, 13);
                 [self addSubview:icon];
                 //区域文字
                 {
@@ -197,7 +213,7 @@
                 //推广价格
                 {
                     UILabel * label = [UILabel new];
-                    label.text = [NSString stringWithFormat:@"%@元", dictionary[@"money"]];
+                    label.text = [NSString stringWithFormat:@"%@元", dictionary[@"Money"]];
                     label.textColor = [MYTOOL RGBWithRed:255 green:83 blue:95 alpha:1];
                     label.font = [UIFont systemFontOfSize:12];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -206,52 +222,7 @@
                 }
             }
         }
-        float space_top = 146/195.0*height;
-        //下方分割线
-        {
-            UIView * space = [UIView new];
-            space.frame = CGRectMake(10, space_top, WIDTH-20, 1);
-            space.backgroundColor = MYCOLOR_240_240_240;
-            [self addSubview:space];
-        }
-        //下方中线
-        float lowerMiddleTop = space_top + (height - space_top - 1) / 2.0;
-        //线索提示
-        {
-            UILabel * label = [UILabel new];
-            label.text = [NSString stringWithFormat:@"线索提供(%@)",dictionary[@"extensionCount"]];
-            label.font = [UIFont systemFontOfSize:11];
-            label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
-            CGSize size = [MYTOOL getSizeWithLabel:label];
-            label.frame = CGRectMake(10, lowerMiddleTop-size.height/2, size.width, size.height);
-            [self addSubview:label];
-        }
-        //右侧按钮标志-arrow_right
-        {
-            UIImageView * icon = [UIImageView new];
-            icon.image = [UIImage imageNamed:@"arrow_right"];
-            icon.frame = CGRectMake(WIDTH - 18, lowerMiddleTop - 6, 7, 12);
-            [self addSubview:icon];
-        }
-        NSArray * arr = dictionary[@"extensionList"];
-        float img_height = (height - space_top)/2.0;//头像高度
-        float space = 5;
-        for (int i = 0; i < arr.count && i < 6; i ++) {
-            NSString * urlString = arr[i];
-            UIImageView * imgV = [UIImageView new];
-            imgV.frame = CGRectMake(WIDTH - 18 - (i+1)*(space+img_height), lowerMiddleTop - img_height/2, img_height, img_height);
-            imgV.layer.masksToBounds = true;
-            imgV.layer.cornerRadius = img_height/2.0;
-            [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:urlString];
-            [self addSubview:imgV];
-        }
-        //编辑按钮
-        {
-            UIButton * btn = [UIButton new];btn.frame = CGRectMake(0, space_top, WIDTH, height - space_top);
-            btn.tag = indexPath.section;
-            [self addSubview:btn];
-            [btn addTarget:delegate action:@selector(cellBtnCallback:) forControlEvents:UIControlEventTouchUpInside];
-        }
+        
     }
     return self;
 }

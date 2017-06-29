@@ -109,6 +109,7 @@
                     [btn setTitleColor:MYCOLOR_40_199_0 forState:UIControlStateNormal];
                     [view addSubview:btn];
                     [btn addTarget:delegate action:@selector(signClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [delegate setSignBtn:btn];
                 }
                 //中间分割线
                 {

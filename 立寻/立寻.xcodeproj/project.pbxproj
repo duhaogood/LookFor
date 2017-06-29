@@ -23,6 +23,9 @@
 		0418F0111EECEF2800063E93 /* UpUserCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0101EECEF2800063E93 /* UpUserCardView.m */; };
 		0418F0171EED7ADF00063E93 /* PerfectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0161EED7ADF00063E93 /* PerfectView.m */; };
 		0418F01A1EED7AF200063E93 /* PerfectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0418F0191EED7AF200063E93 /* PerfectVC.m */; };
+		042BAF0C1F04A47A00B86065 /* PersonalInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF0B1F04A47A00B86065 /* PersonalInfoVC.m */; };
+		042BAF101F04A94900B86065 /* hdbj.png in Resources */ = {isa = PBXBuildFile; fileRef = 042BAF0E1F04A94900B86065 /* hdbj.png */; };
+		042BAF111F04A94900B86065 /* morenhdpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 042BAF0F1F04A94900B86065 /* morenhdpic.png */; };
 		0436E5EF1EF007730031FC2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5EE1EF007730031FC2B /* CoreLocation.framework */; };
 		0436E5F11EF0077B0031FC2B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5F01EF0077B0031FC2B /* MapKit.framework */; };
 		043D70A31EFBF2910053D71E /* FirstPageMiddleNextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D70A21EFBF2910053D71E /* FirstPageMiddleNextCell.m */; };
@@ -258,6 +261,11 @@
 		0418F0161EED7ADF00063E93 /* PerfectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfectView.m; sourceTree = "<group>"; };
 		0418F0181EED7AF200063E93 /* PerfectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerfectVC.h; sourceTree = "<group>"; };
 		0418F0191EED7AF200063E93 /* PerfectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfectVC.m; sourceTree = "<group>"; };
+		042BAF071F04A45A00B86065 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		042BAF0A1F04A47A00B86065 /* PersonalInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoVC.h; sourceTree = "<group>"; };
+		042BAF0B1F04A47A00B86065 /* PersonalInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoVC.m; sourceTree = "<group>"; };
+		042BAF0E1F04A94900B86065 /* hdbj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hdbj.png; path = 2.Image/hdbj.png; sourceTree = "<group>"; };
+		042BAF0F1F04A94900B86065 /* morenhdpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = morenhdpic.png; path = 2.Image/morenhdpic.png; sourceTree = "<group>"; };
 		0436E5EE1EF007730031FC2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0436E5F01EF0077B0031FC2B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		043D70A11EFBF2910053D71E /* FirstPageMiddleNextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageMiddleNextCell.h; sourceTree = "<group>"; };
@@ -1089,6 +1097,39 @@
 				0418F0161EED7ADF00063E93 /* PerfectView.m */,
 			);
 			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		042BAF061F04A45A00B86065 /* 5.PersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				042BAF071F04A45A00B86065 /* 0.Comments.h */,
+				042BAF081F04A45A00B86065 /* 1.Controller */,
+				042BAF091F04A45A00B86065 /* 2.MyView */,
+			);
+			path = 5.PersonalInfo;
+			sourceTree = "<group>";
+		};
+		042BAF081F04A45A00B86065 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				042BAF0A1F04A47A00B86065 /* PersonalInfoVC.h */,
+				042BAF0B1F04A47A00B86065 /* PersonalInfoVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
+		042BAF091F04A45A00B86065 /* 2.MyView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.MyView;
+			sourceTree = "<group>";
+		};
+		042BAF0D1F04A82500B86065 /* 2.Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2.Image;
 			sourceTree = "<group>";
 		};
 		0436E5ED1EF007730031FC2B /* Frameworks */ = {
@@ -2757,6 +2798,7 @@
 				049B8EC81F038F5600C73FEC /* 2.LeaveMessage */,
 				049B8ECC1F038F5600C73FEC /* 3.HaveClue */,
 				049B8ED01F038F5600C73FEC /* 4.WantToClaim */,
+				042BAF061F04A45A00B86065 /* 5.PersonalInfo */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -2876,7 +2918,9 @@
 			isa = PBXGroup;
 			children = (
 				78375A491ED4734C0046F8C3 /* 1.Vender */,
-				78375ABF1ED4734C0046F8C3 /* 2.Image */,
+				042BAF0D1F04A82500B86065 /* 2.Image */,
+				042BAF0E1F04A94900B86065 /* hdbj.png */,
+				042BAF0F1F04A94900B86065 /* morenhdpic.png */,
 				78375AC01ED4734C0046F8C3 /* 3.P_Plist */,
 			);
 			path = 2.Other;
@@ -3107,13 +3151,6 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
-		78375ABF1ED4734C0046F8C3 /* 2.Image */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 2.Image;
-			sourceTree = "<group>";
-		};
 		78375AC01ED4734C0046F8C3 /* 3.P_Plist */ = {
 			isa = PBXGroup;
 			children = (
@@ -3294,6 +3331,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				04410F571EEEBF720063CC32 /* area_code.plist in Resources */,
+				042BAF111F04A94900B86065 /* morenhdpic.png in Resources */,
+				042BAF101F04A94900B86065 /* hdbj.png in Resources */,
 				78C23C551ED3450A000CD40E /* LaunchScreen.storyboard in Resources */,
 				044ADFEC1EF2A4B100E43704 /* AlipaySDK.bundle in Resources */,
 				78C23C521ED3450A000CD40E /* Assets.xcassets in Resources */,
@@ -3362,6 +3401,7 @@
 				049B5E1E1EDF07070080D552 /* MyLookingVC.m in Sources */,
 				044AE01C1EF2A50200E43704 /* Order.m in Sources */,
 				78375AEA1ED4734C0046F8C3 /* NSData+ImageContentType.m in Sources */,
+				042BAF0C1F04A47A00B86065 /* PersonalInfoVC.m in Sources */,
 				044AE0501EF2D51900E43704 /* SelectTypeVC.m in Sources */,
 				044AE01D1EF2A50200E43704 /* WXPayTool.m in Sources */,
 				049B5E2A1EDF07410080D552 /* NetworkSocialVC.m in Sources */,

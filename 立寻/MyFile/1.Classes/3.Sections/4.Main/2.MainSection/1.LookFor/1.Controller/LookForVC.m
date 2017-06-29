@@ -147,7 +147,30 @@
 }
 //签到事件
 -(void)signClick:(UIButton *)btn{
-    [SVProgressHUD showSuccessWithStatus:@"签到成功" duration:1];
+    if (![MYTOOL isLogin]) {
+        //跳转至登录页
+        LoginVC * login = [LoginVC new];
+        login.title = @"登录";
+        [self.navigationController pushViewController:login animated:true];
+        return;
+    }
+    NSString * title = btn.currentTitle;
+    if ([title isEqualToString:@"已签到"]) {
+        [SVProgressHUD showErrorWithStatus:@"今天已签到" duration:2];
+        return;
+    }else{
+        NSString * interface = @"user/memberuser/usersignaddpoint.html";
+        NSDictionary * send = @{
+                                @"userid":USER_ID
+                                };
+        [MYTOOL netWorkingWithTitle:@"签到中……"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [self.signBtn setTitle:@"已签到" forState:UIControlStateNormal];
+        }];
+    }
+    
+    
+    
 }
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -286,6 +309,26 @@
             [view addSubview:icon];
         }
     }
+    //加载签到状态
+    [self getSignStatus];
+}
+//加载签到状态
+-(void)getSignStatus{
+    if (![MYTOOL isLogin]) {
+        return;
+    }
+    NSString * interface = @"user/memberuser/userissign.html";
+    NSDictionary * send = @{
+                            @"userid":USER_ID
+                            };
+    [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        [self.signBtn setTitle:@"已签到" forState:UIControlStateNormal];
+    } andNoSuccess:^(NSDictionary *back_dic) {
+        [self.signBtn setTitle:@"签到" forState:UIControlStateNormal];
+    } andFailure:^(NSURLSessionTask *operation, NSError *error) {
+        
+    }];
+    
 }
 #pragma mark - 上啦下啦刷新
 -(void)headerRefresh{
@@ -398,6 +441,8 @@
     searchBar.frame = CGRectMake(90, 14, WIDTH-160, 14.5);
     [self.navigationController.navigationBar addSubview:searchBar];
     searchBar.placeholder = @"请输入查询的关键字";
+    //加载签到状态
+    [self getSignStatus];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     //删除通知

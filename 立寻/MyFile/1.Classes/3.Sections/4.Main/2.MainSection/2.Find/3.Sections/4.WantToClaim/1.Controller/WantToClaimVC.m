@@ -52,6 +52,7 @@
         {
             float height = [MYTOOL getHeightWithIphone_six:75];
             MyTextView * tv = [[MyTextView alloc] initWithFrame:CGRectMake(10, 15, WIDTH - 20, height)];
+            self.automaticallyAdjustsScrollViewInsets = false;
             tv.textColor = MYCOLOR_48_48_48;
             tv.placeholderLabel.text = @"   请描述下您发现的线索，好人终有好报";
             tv.placeholderLabel.font = [UIFont systemFontOfSize:10];
@@ -67,13 +68,15 @@
         //详细信息字数
         {
             UILabel * label = [UILabel new];
-            label.text = @"    0/500";
+            label.text = @"1234/500";
             label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
             label.font = [UIFont systemFontOfSize:10];
             [view addSubview:label];
             CGSize size = [MYTOOL getSizeWithLabel:label];
             label.frame = CGRectMake(WIDTH - 10 - size.width, [MYTOOL getHeightWithIphone_six:96] , size.width, size.height);
             self.contentCountLabel = label;
+            label.text = @"0/500";
+            label.textAlignment = NSTextAlignmentRight;
         }
         //详细地址
         {
@@ -187,16 +190,58 @@
     }
     
 }
-
-
-
 //提交认领
 -(void)submitClainBtn{
-    
+    /*参数检查*/
+    //内容
+    NSString * content = self.tv.text;
+    if (content.length == 0 || content.length > 500) {
+        [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
+        return;
+    }
+    //电话
+    NSString * tel = self.telTF.text;
+    //正则表达式匹配11位手机号码
+    NSString *regex = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
+    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isMatch = [pred evaluateWithObject:tel];
+    if (!isMatch) {
+        [SVProgressHUD showErrorWithStatus:@"手机号不合法" duration:2];
+        return;
+    }
+    //图片数量
+    if ([self getCountOfImgV_arr] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"无图无真相" duration:2];
+        return;
+    }
+    /*开始上传图片*/
+    fileid_array = [NSMutableArray new];
+    [self upLoadAllImage];
 }
 //开始认领
 -(void)startClain{
-    
+    NSString * interface = @"publish/publish/addclaiminfo.html";
+    //内容
+    NSString * content = self.tv.text;
+    //电话
+    NSString * tel = self.telTF.text;
+    NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
+    NSDictionary * send = @{
+                            @"userid":USER_ID,
+                            @"publishid":self.publishId,
+                            @"content":content,
+                            @"mobile":tel,
+                            @"picturelist":picturelist
+                            };
+    [MYTOOL netWorkingWithTitle:@"认领中……"];
+    [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+        [self.navigationController popViewControllerAnimated:true];
+    } andNoSuccess:^(NSDictionary *back_dic) {
+        [SVProgressHUD showErrorWithStatus:back_dic[@"Message"] duration:2];
+    } andFailure:^(NSURLSessionTask *operation, NSError *error) {
+        
+    }];
 }
 //上传所有图片
 -(void)upLoadAllImage{
@@ -256,8 +301,6 @@
                 [SVProgressHUD dismiss];
                 //上传完毕--提交认领
                 [self startClain];
-                
-                
             }else{
                 [self upLoadAllImage];
             }

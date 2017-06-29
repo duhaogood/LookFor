@@ -30,7 +30,7 @@
 #import "MyTextView.h"
 #import "AFNetworking.h"
 #import "MyLocationManager.h"
-
+#import "LoginVC.h"
 
 #endif /* PrefixHeader_pch */
 

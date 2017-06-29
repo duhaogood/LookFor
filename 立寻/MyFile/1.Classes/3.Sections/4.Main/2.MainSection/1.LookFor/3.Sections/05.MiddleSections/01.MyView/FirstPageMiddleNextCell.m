@@ -29,7 +29,7 @@
             UIImageView * icon = [UIImageView new];
             icon.frame = CGRectMake(13, 13, 40, 40);
             if (user_url) {
-                [icon sd_setImageWithURL:[NSURL URLWithString:user_url]];
+                [icon sd_setImageWithURL:[NSURL URLWithString:user_url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
             }
             [self addSubview:icon];
             icon.contentMode = UIViewContentModeScaleAspectFill;

@@ -229,6 +229,7 @@
             imgV.frame = CGRectMake(WIDTH - 18 - (i+1)*(space+img_height), lowerMiddleTop - img_height/2, img_height, img_height);
             imgV.layer.masksToBounds = true;
             imgV.layer.cornerRadius = img_height/2.0;
+            imgV.image = [UIImage imageNamed:@"morenhdpic"];
             [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:urlString];
             [self addSubview:imgV];
         }

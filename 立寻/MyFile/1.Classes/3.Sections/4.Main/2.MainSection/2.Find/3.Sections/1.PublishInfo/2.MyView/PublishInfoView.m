@@ -65,7 +65,7 @@
                 //用户头像
                 NSString * url = publishDictionary[@"ImgFilePath"];
                 if (url) {
-                    [MYTOOL setImageIncludePrograssOfImageView:icon withUrlString:url];
+                    [icon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
                 }
             }
             //用户名字
@@ -514,9 +514,9 @@
             icon.layer.cornerRadius = 12.5;
             [self.commentView addSubview:icon];
             //默认头像
-            icon.image = [UIImage imageNamed:@""];
+            icon.image = [UIImage imageNamed:@"morenhdpic"];
             if (url) {
-                [MYTOOL setImageIncludePrograssOfImageView:icon withUrlString:url];
+                [icon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
             }
         }
         //用户名字

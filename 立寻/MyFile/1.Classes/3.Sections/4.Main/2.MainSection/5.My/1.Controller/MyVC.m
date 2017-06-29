@@ -94,7 +94,7 @@
                     icon.frame = CGRectMake(bgView.frame.size.width + 5+bgView.frame.origin.x, 5+size.height/2.0-6 + bgView.frame.origin.y, 6, 12);
                 }
             }
-            label.text = [NSString stringWithFormat:@"完善度%@",userInfo[@"progress"]];
+            label.text = [NSString stringWithFormat:@"完善信息"];
             
             
         }
@@ -620,7 +620,9 @@
     //悬赏金额
     NSString * BalanceNoCash = MYTOOL.userInfo[@"BalanceNoCash"];
     self.rewardAmountLabel.text = [NSString stringWithFormat:@"%.2f",[BalanceNoCash floatValue]];
-    
+    //积分-Points
+    int Points = [MYTOOL.userInfo[@"Points"] intValue];
+    self.myPointsLabel.text = [NSString stringWithFormat:@"%d",Points];
     
     
 }

@@ -46,6 +46,7 @@
 //加载主界面
 -(void)loadMainView{
     float top = 0;
+    self.automaticallyAdjustsScrollViewInsets = false;
     //上部view
     {
         float view_height = [MYTOOL getHeightWithIphone_six:204];
@@ -64,6 +65,7 @@
             tv.placeholderLabel.textColor = [MYTOOL RGBWithRed:180 green:180 blue:180 alpha:1];
             tv.font = [UIFont systemFontOfSize:13];
             [view addSubview:tv];
+            tv.layoutManager.allowsNonContiguousLayout = NO;
             tv.delegate = self;
             tv.layer.masksToBounds = true;
             tv.layer.borderWidth = 1;
@@ -73,13 +75,15 @@
         //详细信息字数
         {
             UILabel * label = [UILabel new];
-            label.text = @"    0/500";
+            label.text = @"10000/500";
             label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
             label.font = [UIFont systemFontOfSize:10];
             [view addSubview:label];
             CGSize size = [MYTOOL getSizeWithLabel:label];
             label.frame = CGRectMake(WIDTH - 10 - size.width, [MYTOOL getHeightWithIphone_six:96] , size.width, size.height);
             self.contentCountLabel = label;
+            label.text = @"0/500";
+            label.textAlignment = NSTextAlignmentRight;
         }
         //选择城市
         {
@@ -290,32 +294,33 @@
 }
 //提交线索
 -(void)startSubmit{
-    NSString * state = isIssue ? @"发布中……" : @"保存中……";
+    NSString * state = @"提交中……";
     [MYTOOL netWorkingWithTitle:state];
         //正式拼装
-    NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
     NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
+    NSString * provinceid = uploadAreaDic[@"provinceid"];
+    NSString * cityid = uploadAreaDic[@"cityid"];
+    NSString * countryid = uploadAreaDic[@"countryid"];
+    
+    
     NSDictionary * send = @{
-                            @"userid":userid,
+                            @"userid":USER_ID,
                             @"picturelist":picturelist,
-                            @"provinceid":uploadAreaDic[@"provinceid"],
-                            @"cityid":uploadAreaDic[@"cityid"],
+                            @"provinceid":provinceid,
+                            @"cityid":cityid,
+                            @"countryid":countryid,
                             @"publishid":self.publishId,
                             @"content":self.tv.text,
                             @"address":self.addressTF.text
                             };
-    NSLog(@"send:%@",send);
     NSString * interface = @"publish/publish/addclueinfo.html";
     [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        
+        [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+        [self.navigationController popViewControllerAnimated:true];
     } andNoSuccess:^(NSDictionary *back_dic) {
-        
+        [SVProgressHUD showErrorWithStatus:back_dic[@"Message"] duration:2];
     } andFailure:^(NSURLSessionTask *operation, NSError *error) {
         
-    }];
-    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
-        [self.navigationController popViewControllerAnimated:true];
     }];
 }
 //上传所有图片
@@ -415,20 +420,26 @@
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     if (component == 0) {
         return self.areaArray.count;
-    }else{
+    }else if (component == 1){
         NSArray * cityArray = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"];
         return cityArray.count;
+    }else{
+        NSArray * countryArray = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][[pickerView selectedRowInComponent:1]][@"countryArray"];
+        return countryArray.count;
     }
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 2;
+    return 3;
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if (component == 0) {
         NSString * title = self.areaArray[row][@"provinceName"];
         return title;
-    }else{
+    }else if (component == 1){
         NSString * string = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][row][@"cityName"];
+        return string;
+    }else{
+        NSString * string = self.areaArray[[pickerView selectedRowInComponent:0]][@"cityArray"][[pickerView selectedRowInComponent:1]][@"countryArray"][row][@"countryName"];
         return string;
     }
 }
@@ -437,26 +448,39 @@
     if (component == 0) {
         [pickerView reloadComponent:1];
         [pickerView selectRow:0 inComponent:1 animated:true];
+        [pickerView reloadComponent:2];
+        [pickerView selectRow:0 inComponent:2 animated:true];
+    }
+    if (component == 1) {
+        [pickerView reloadComponent:2];
+        [pickerView selectRow:0 inComponent:2 animated:true];
     }
 }
 //pickerView中事件-确定
 -(void)clickOkOfPickerView:(UIBarButtonItem*)btn{
     NSInteger row0 = [self.picker selectedRowInComponent:0];
     NSInteger row1 = [self.picker selectedRowInComponent:1];
+    NSInteger row2 = [self.picker selectedRowInComponent:2];
     
     NSDictionary * provinceDic = self.areaArray[row0];
     NSArray * cityArray = provinceDic[@"cityArray"];
     NSDictionary * cityDic = cityArray[row1];
+    NSArray * countryArray = cityDic[@"countryArray"];
+    NSDictionary * countryDic = countryArray[row2];
+    
     
     NSString * provinceId = provinceDic[@"provinceId"];//省id
     NSString * provinceName = provinceDic[@"provinceName"];//省名字
     NSString * cityId = cityDic[@"cityId"];//城市id
     NSString * cityName = cityDic[@"cityName"];//城市名字
+    NSString * countryId = countryDic[@"countryId"];//县id
+    NSString * countryName = countryDic[@"countryName"];//县名字
     uploadAreaDic = @{
                       @"provinceid":provinceId,
-                      @"cityid":cityId
+                      @"cityid":cityId,
+                      @"countryid":countryId
                       };
-    self.cityTF.text = [NSString stringWithFormat:@"%@%@",provinceName,cityName];
+    self.cityTF.text = [NSString stringWithFormat:@"%@%@%@",provinceName,cityName,countryName];
     [MYTOOL hideKeyboard];
 }
 
