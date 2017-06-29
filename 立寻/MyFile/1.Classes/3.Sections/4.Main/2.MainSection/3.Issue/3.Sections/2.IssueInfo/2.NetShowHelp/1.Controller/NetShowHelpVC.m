@@ -32,9 +32,9 @@
     UIImageView * currentImgView;//当前编辑的图片框
     UIImageView * show_img_view;//查看图片的view
     int current_upload_img_index;//当前上传图片序号
-    NSMutableArray * fileid_array;//上传图片的id数组
     BOOL isIssue;//是否发布，还是保存草稿箱
     NSDictionary * uploadAreaDic;//需要上传的地区信息
+    NSMutableArray * fileid_array;//上传图片的id数组
     int uploadImgCount;//已经上传的图片张数
 }
 - (void)viewDidLoad {

@@ -23,7 +23,7 @@
             //时间文本
             {
                 UILabel * label = [UILabel new];
-                label.text = [NSString stringWithFormat:@"提供线索时间：%@",dictionary[@"provideClueTime"]];
+                label.text = [NSString stringWithFormat:@"提供线索时间：%@",dictionary[@"CreateTime"]];
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 [self addSubview:label];
@@ -34,7 +34,23 @@
             //状态
             {
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"state"];
+                int PublishStatus = [dictionary[@"PublishStatus"] intValue];
+                NSString * text = @"";
+                switch (PublishStatus) {
+                    case 1:
+                        text = @"待发布";
+                        break;
+                    case 2:
+                        text = @"已发布";
+                        break;
+                    case 3:
+                        text = @"已结束";
+                        break;
+                    default:
+                        text = @"已完成";
+                        break;
+                }
+                label.text = text;
                 label.font = [UIFont systemFontOfSize:10];
                 label.textColor = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -63,7 +79,7 @@
             {
                 UIImageView * imgV = [UIImageView new];
                 imgV.frame = CGRectMake(left, top + 8, imgHeight, imgHeight);
-                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"url"]];
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"PicturePath"]];
                 [self addSubview:imgV];
                 left += imgHeight + 10;
             }
@@ -71,7 +87,7 @@
             {
                 top += 8;
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"title"];
+                label.text = dictionary[@"PublishTitle"];
                 label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -81,7 +97,7 @@
             //内容
             {
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"content"];
+                label.text = dictionary[@"PublishContent"];
                 label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];

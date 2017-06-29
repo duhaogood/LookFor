@@ -149,8 +149,25 @@
         //认证
         {
             UILabel * authenticationLabel = [UILabel new];
-            bool state = [userInfo[@"authentication"] boolValue];
-            authenticationLabel.text = state ? @"已认证" : @"未认证";
+            //认证状态  1未认证 2等待认证  3认证没通过 4认证通过
+            int ApproveState = [userInfo[@"ApproveState"] intValue];
+            NSString * text = @"";
+            switch (ApproveState) {
+                case 1:
+                    text = @"未认证";
+                    break;
+                case 2:
+                    text = @"等待认证";
+                    break;
+                case 3:
+                    text = @"认证没通过";
+                    break;
+                default:
+                    text = @"认证通过";
+                    break;
+            }
+            NSLog(@"user:%@",userInfo);
+            authenticationLabel.text = text;
             authenticationLabel.textAlignment = NSTextAlignmentCenter;
             authenticationLabel.font = [UIFont systemFontOfSize:9];
             authenticationLabel.textColor = [UIColor whiteColor];
@@ -548,6 +565,10 @@
 -(void)middleBtnCallback:(UIButton *)btn{
     NSString * text = middle_data_array[btn.tag][0];
     NSString * className = middle_data_array[btn.tag][4];
+    if ([className isEqualToString:@"InvitingFriendsVC"]) {
+        [SVProgressHUD showErrorWithStatus:@"开发中" duration:2];
+        return;
+    }
     Class class = NSClassFromString(className);
     UIViewController * vc = [class new];
     vc.title = text;

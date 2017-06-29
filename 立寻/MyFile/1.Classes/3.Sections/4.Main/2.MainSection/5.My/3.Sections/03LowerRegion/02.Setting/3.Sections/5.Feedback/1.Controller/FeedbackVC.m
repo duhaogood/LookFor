@@ -25,7 +25,10 @@
     UIView * show_view;//查看图片的辅助view
     UIImageView * currentImgView;//当前编辑的图片框
     UIImageView * show_img_view;//查看图片的view
-    
+    NSString * type;//投诉类型（1、投诉举报；2、APP吐槽）
+    NSMutableArray * fileid_array;//上传图片的id数组
+    int uploadImgCount;//已经上传的图片张数
+    int current_upload_img_index;//当前上传图片序号
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,6 +96,7 @@
                 [btn setBackgroundImage:[UIImage imageNamed:@"btn_select"] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"btn_selected"] forState:UIControlStateDisabled];
             }
+            type = @"1";
         }
         
         
@@ -103,6 +107,102 @@
     [self loadSelectTypeLeftBtnLowerView];
     
     
+}
+//上传所有图片
+-(void)upLoadAllImage{
+    int count_img = 0;
+    for (int i =  0; i < self.img_arr.count ; i ++){
+        NSDictionary * dic = self.img_arr[i];
+        count_img += [dic[@"have_image"] boolValue] && (!dic[@"ID"]);
+    }
+    if (count_img == 0) {
+        BOOL notImgID = true;
+        for (int i =  0; i < self.img_arr.count ; i ++){
+            NSDictionary * dic = self.img_arr[i];
+            if(dic[@"ID"]){
+                notImgID = false;
+                break;
+            }
+        }
+        if (notImgID) {
+            [SVProgressHUD showErrorWithStatus:@"没有图片" duration:1];
+        }else{
+            [self startSubmit];
+        }
+        return;
+    }
+    NSDictionary * dic = self.img_arr[current_upload_img_index];
+    if (![dic[@"have_image"] boolValue] || dic[@"ID"]) {
+        current_upload_img_index ++;
+        [self upLoadAllImage];
+        return;
+    }
+    //上传图片
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/plain", nil];
+    // 参数@"image":@"image",
+    NSDictionary * parameter = @{
+                                 @"imageType":@"posts",
+                                 @"appid":@"99999999",
+                                 @"userid":[MYTOOL getProjectPropertyWithKey:@"UserID"]
+                                 };
+    // 访问路径
+    NSString *stringURL = [NSString stringWithFormat:@"%@%@",SERVER_URL,@"/common/filespace/uploadimg.html"];
+    [manager POST:stringURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        // 上传文件
+        NSDictionary * dic = self.img_arr[current_upload_img_index];
+        UIImageView * imgV = dic[@"imgV"];
+        //截取图片
+        float change = 1.0;
+        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
+        UIImage * img = imgV.image;
+        NSData * imageData = UIImageJPEGRepresentation(img,change);
+        while (imageData.length > 1.0 * 1024 * 1024) {
+            change -= 0.1;
+            imageData = UIImageJPEGRepresentation(img,change);
+        }
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat            = @"yyyyMMddHHmmss";
+        NSString * str                         = [formatter stringFromDate:[NSDate date]];
+        NSString * fileName               = [NSString stringWithFormat:@"%@_hao_%d.jpg", str,current_upload_img_index];
+        
+        [formData appendPartWithFileData:imageData name:@"filedata" fileName:fileName mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",uploadImgCount+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"Result"] boolValue]) {
+            uploadImgCount ++;
+            NSObject * fileid = responseObject[@"Data"][@"fileid"];
+            [fileid_array addObject:@{@"PictureID":fileid}];
+            current_upload_img_index ++;
+            if (uploadImgCount >= count_img) {
+                [SVProgressHUD dismiss];
+                //上传完毕
+                [self startSubmit];
+            }else{
+                [self upLoadAllImage];
+            }
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"Message"] duration:2];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showErrorWithStatus:@"上传失败" duration:2];
+    }];
+}
+//开始提交
+-(void)startSubmit{
+    NSString * interface = @"user/memberuser/addadvice.html";
+    NSMutableDictionary * send = [NSMutableDictionary new];
+    [send setValue:USER_ID forKey:@"userid"];
+    [send setValue:type forKey:@"type"];
+    [send setValue:self.contentTV.text forKey:@"content"];
+    NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
+    [send setValue:picturelist forKey:@"picturelist"];
+    [MYTOOL netWorkingWithTitle:@"提交中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSLog(@"back:%@",back_dic);
+        [self.navigationController popViewControllerAnimated:true];
+    }];
 }
 #pragma mark - 按钮事件
 //投诉举报
@@ -366,13 +466,6 @@
     //清除要删除的图片框
     [self.img_arr[show_view.tag][@"imgV"] removeFromSuperview];
     [self.img_arr removeObjectAtIndex:show_view.tag];
-    
-    //需要添加空的图片view
-    float top = 253/736.0*HEIGHT+ 22;
-    float width_img = (WIDTH - 40)/3;
-    //下边的type选择view往下移动
-    
-    
     //取消全屏
     {
         self.num_label = nil;
@@ -410,17 +503,6 @@
             imgV.frame = CGRectMake(10+(width_img+10)*(i%4), top+(i/4)*(width_img+10), width_img, width_img);
         }];
     }
-    //    NSLog(@"---------------------");
-    for (int i = 0; i < self.img_arr.count ; i ++) {
-        NSDictionary * dic = self.img_arr[i];
-        bool flag = [dic[@"have_image"] boolValue];
-        UIImageView * imgV = dic[@"imgV"];
-        //        NSLog(@"第%d个图片框是否有图片:%d,图片size:[%.2f,%.2f]",i+1,flag,imgV.image.size.width,imgV.image.size.height);
-    }
-    
-    
-    //
-    
     
 }
 //缩放图片
@@ -587,7 +669,7 @@
         if (![have_image boolValue]) {
             [dic setValue:@"1" forKey:@"have_image"];
             UIImageView * imgV = dic[@"imgV"];
-            imgV.image = image;
+            imgV.image = [MYTOOL fixOrientationOfImage:image];
             break;
         }
         
@@ -636,13 +718,47 @@
 #pragma mark - 提交事件
 //提交投诉举报
 -(void)submitSelectTypeLeftBtn{
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"提交投诉图片\n数量:%ld",(long)[self getCountOfImgV_arr]] duration:1];
+    type = @"1";
+    if (![self checkAllData]) {
+        return;
+    }
+    //上传图片
+    current_upload_img_index = 0;
+    fileid_array = [NSMutableArray new];
+    [self upLoadAllImage];
 }
 //提交APP吐槽
 -(void)submitSelectTypeRightBtn{
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"APP吐槽图片\n数量:%ld",(long)[self getCountOfImgV_arr]] duration:1];
+    type = @"2";
+    if (![self checkAllData]) {
+        return;
+    }
+    //上传图片
+    current_upload_img_index = 0;
+    fileid_array = [NSMutableArray new];
+    [self upLoadAllImage];
 }
-
+//检查参数
+-(BOOL)checkAllData{
+    //图片
+    if ([self getCountOfImgV_arr] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"无图无真相" duration:2];
+        return false;
+    }
+    //内容
+    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 100) {
+        [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
+        return false;
+    }
+    //昵称
+    if ([type isEqualToString:@"1"]) {
+        if (self.nickNameTF.text.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"昵称不能为空" duration:2];
+            return false;
+        }
+    }
+    return true;
+}
 
 
 
