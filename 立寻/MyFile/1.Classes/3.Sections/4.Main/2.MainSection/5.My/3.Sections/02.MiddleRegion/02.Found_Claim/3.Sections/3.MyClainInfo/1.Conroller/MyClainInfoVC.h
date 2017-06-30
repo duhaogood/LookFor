@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MyClainInfoVC : UIViewController
+@property(nonatomic,strong)NSDictionary * claimDictionary;//认领信息
+@property(nonatomic,assign)BOOL isMine;//是否我的
 
 @end

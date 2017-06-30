@@ -131,6 +131,7 @@
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         MyClueInfoVC * vc = [MyClueInfoVC new];
         vc.isMine = true;
+        vc.title = @"线索详情";
         vc.claimDictionary = back_dic[@"Data"];
         [self.navigationController pushViewController:vc animated:true];
     }];

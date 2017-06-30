@@ -8,6 +8,7 @@
 
 #import "MyExtensionVC.h"
 #import "ExtensionCell.h"
+#import "PublishInfoVC.h"
 @interface MyExtensionVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -119,6 +120,18 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    NSDictionary * dic = self.cellDateArray[indexPath.section];
+    NSString * interface = @"/publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{
+                            @"publishid":dic[@"PublishID"]
+                            };
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        PublishInfoVC * vc = [PublishInfoVC new];
+        vc.publishDictionary = back_dic[@"Data"];
+        vc.title = @"信息详情";
+        [self.navigationController pushViewController:vc animated:true];
+    }];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -131,12 +144,6 @@
     ExtensionCell * cell = [[ExtensionCell alloc] initWithDictionary:dic andHeight:tableView.rowHeight andDelegate:self andIndexPath:indexPath];
     return cell;
 }
-//cell中按钮回调
--(void)cellBtnCallback:(UIButton *)btn{
-    NSLog(@"%@",self.cellDateArray[btn.tag]);
-}
-
-
 //返回上个界面
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];

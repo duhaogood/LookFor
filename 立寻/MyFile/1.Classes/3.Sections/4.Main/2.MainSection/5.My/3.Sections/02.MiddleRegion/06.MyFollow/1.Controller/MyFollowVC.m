@@ -8,6 +8,7 @@
 
 #import "MyFollowVC.h"
 #import "FollowCell.h"
+#import "PublishInfoVC.h"
 @interface MyFollowVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -122,6 +123,26 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    NSDictionary * dic = self.cellDateArray[indexPath.section];
+    NSObject * PublishID = dic[@"PublishID"];
+    if (!PublishID) {
+        [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        return;
+    }
+    NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{@"publishid":PublishID};
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * publishDictionary = back_dic[@"Data"];
+        if (publishDictionary) {
+            PublishInfoVC * vc = [PublishInfoVC new];
+            vc.title = @"信息详情";
+            vc.publishDictionary = publishDictionary;
+            [self.navigationController pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        }
+    }];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -139,7 +160,24 @@
 
 //取消关注回调
 -(void)cancelFollowCallback:(UIButton *)btn{
-    NSLog(@"%@",self.cellDateArray[btn.tag]);
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"确定取消关注？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"执意取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString * interface = @"/publish/publish/cancelfollowpublishinfo.html";
+        NSDictionary * dic = self.cellDateArray[btn.tag];
+        NSMutableDictionary * send = [NSMutableDictionary new];
+        [send setValue:USER_ID forKey:@"userid"];
+        [send setValue:dic[@"PublishID"] forKey:@"publishid"];
+        [MYTOOL netWorkingWithTitle:@"取消中……"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [self headerRefresh];
+        }];
+    }];
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"放弃" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [ac addAction:sure];
+    [ac addAction:cancel];
+    [self presentViewController:ac animated:true completion:nil];
 }
 //返回上个界面
 -(void)popUpViewController{

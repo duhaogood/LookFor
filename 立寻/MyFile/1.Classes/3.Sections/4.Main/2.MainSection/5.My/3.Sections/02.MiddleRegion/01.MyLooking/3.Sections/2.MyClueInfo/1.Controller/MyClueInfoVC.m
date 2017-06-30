@@ -349,8 +349,8 @@
     
     CGRect zoomRect;
     
-    zoomRect.size.height = [scrollView frame].size.height / scale;
     zoomRect.size.width  = [scrollView frame].size.width  / scale;
+    zoomRect.size.height = zoomRect.size.width/WIDTH*HEIGHT;
     
     zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
     zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
@@ -396,7 +396,7 @@
         UIImageView * imgV = [UIImageView new];
         [show_view insertSubview:imgV atIndex:0];
         UIImageView * img_view = imgViewArray[tag-1];
-        [imgV sd_setImageWithURL:[NSURL URLWithString:PictureList[tag-1][@"normalUrl"]]];
+        [imgV sd_setImageWithURL:[NSURL URLWithString:PictureList[tag-1][@"ImgFilePath"]]];
         show_view.tag = tag - 1;
         CGRect frame1 = img_view.frame;
         frame1.size.width = WIDTH;
@@ -425,7 +425,7 @@
         UIImageView * imgV = [UIImageView new];
         [show_view insertSubview:imgV atIndex:0];
         UIImageView * img_view = imgViewArray[tag+1];
-        [imgV sd_setImageWithURL:[NSURL URLWithString:PictureList[tag+1][@"normalUrl"]]];
+        [imgV sd_setImageWithURL:[NSURL URLWithString:PictureList[tag+1][@"ImgFilePath"]]];
         show_view.tag = tag + 1;
         CGRect frame1 = img_view.frame;
         frame1.size.width = WIDTH;

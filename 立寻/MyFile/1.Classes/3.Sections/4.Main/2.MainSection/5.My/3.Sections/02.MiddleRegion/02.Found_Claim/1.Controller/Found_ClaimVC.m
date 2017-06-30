@@ -10,6 +10,8 @@
 #import "FoundClaimCell.h"
 #import "MyClaimCell.h"
 #import "PublishInfoVC.h"
+#import "MyFoundListVC.h"
+#import "MyClainInfoVC.h"
 @interface Found_ClaimVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -215,7 +217,19 @@
             }
         }];
     }else{//我的认领
-        
+        NSString * interface = @"/publish/publish/getclaimdetailcomplex.html";
+        NSDictionary * send = @{
+                                @"claimid":dic[@"ClaimID"]
+                                };
+        [MYTOOL netWorkingWithTitle:@"加载中……"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            NSLog(@"back:%@",back_dic);
+            MyClainInfoVC * vc = [MyClainInfoVC new];
+            vc.title = @"认领详情";
+            vc.claimDictionary = back_dic[@"Data"];
+            vc.isMine = true;
+            [self.navigationController pushViewController:vc animated:true];
+        }];
     }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

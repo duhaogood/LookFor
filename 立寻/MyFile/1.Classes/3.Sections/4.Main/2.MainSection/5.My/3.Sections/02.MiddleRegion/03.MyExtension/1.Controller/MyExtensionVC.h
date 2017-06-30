@@ -12,6 +12,4 @@
 
 
 
-//cell中按钮回调
--(void)cellBtnCallback:(UIButton *)btn;
 @end
