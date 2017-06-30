@@ -14,15 +14,21 @@
 
 
 
-//支付
+
+/**
+ 支付入口
+
+ @param payDictionary 商品参数字典
+ */
 -(void)aliPayWithGoodsDictionary:(NSDictionary*)payDictionary{
-//    NSLog(@"需要支付的商品信息:%@",goodsDictionary);
-    NSString * orderId = payDictionary[@"orderId"];
-    
+    //支付宝相关参数
     NSString * appID = APPID_ALIPAY;
-    NSString * rsa2PrivateKey = RSA2_PRIMARY_KEY_ALIPAY;
-    rsa2PrivateKey = @"";
     NSString * rsaPrivateKey = RSA_PRIMARY_KEY_ALIPAY;
+    NSString * rsa2PrivateKey = @"";
+    
+    
+    
+    NSString * orderId = payDictionary[@"orderId"];
     /*
      *生成订单信息及签名
      */
@@ -44,8 +50,7 @@
     order.sign_type = @"RSA";
     
     //后台回调
-    order.notify_url = @"http://user.lixun110.com/payment/alipay/notify_url.aspx";//立寻
-//    order.notify_url = @"http://clywind.vicp.cc:6666/Pay/AlipayNotify";
+    order.notify_url = @"http://user.lixun110.com/payment/alipay/notify_url.aspx";
     // NOTE: 商品数据
     order.biz_content = [BizContent new];
     NSString * body = @"立寻网余额充值";

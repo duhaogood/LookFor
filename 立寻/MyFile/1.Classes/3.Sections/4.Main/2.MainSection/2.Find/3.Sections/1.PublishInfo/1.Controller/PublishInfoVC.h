@@ -10,7 +10,7 @@
 
 @interface PublishInfoVC : UIViewController
 @property(nonatomic,strong)NSDictionary * publishDictionary;//发布详细信息
-
+@property(nonatomic,assign)BOOL isMine;//是否我的界面传过来
 //下拉事件
 -(void)headerRefresh;
 //上拉事件
@@ -31,5 +31,8 @@
 -(void)submitMyClueBtn:(UIButton *)btn;
 //我要认领事件
 -(void)submitClaimBtn:(UIButton *)btn;
-
+//查看线索
+-(void)submitLookClue;
+//查看招领
+-(void)submitLookClain;
 @end

@@ -9,6 +9,7 @@
 #import "Found_ClaimVC.h"
 #import "FoundClaimCell.h"
 #import "MyClaimCell.h"
+#import "PublishInfoVC.h"
 @interface Found_ClaimVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -128,7 +129,7 @@
     [send setValue:USER_ID forKey:@"userid"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSLog(@"back:%@",back_dic);
-        self.cellDateArray = back_dic[@"Data"];
+        self.cellDateArray = [NSMutableArray arrayWithArray:back_dic[@"Data"]];
         [self.tableView reloadData];
         if (self.cellDateArray.count) {
             self.noDataView.hidden = true;
@@ -191,6 +192,31 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    NSDictionary * dic = self.cellDateArray[indexPath.section];
+    if ([currentButtonTitle isEqualToString:@"我发出的招领"]) {
+        NSObject * PublishID = dic[@"PublishID"];
+        if (!PublishID) {
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+            return;
+        }
+        NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+        NSDictionary * send = @{@"publishid":PublishID};
+        [MYTOOL netWorkingWithTitle:@"加载中……"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            NSDictionary * publishDictionary = back_dic[@"Data"];
+            if (publishDictionary) {
+                PublishInfoVC * vc = [PublishInfoVC new];
+                vc.title = @"信息详情";
+                vc.isMine = true;
+                vc.publishDictionary = publishDictionary;
+                [self.navigationController pushViewController:vc animated:true];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+            }
+        }];
+    }else{//我的认领
+        
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;

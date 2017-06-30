@@ -8,6 +8,7 @@
 
 #import "MyLookingVC.h"
 #import "MyLookingForCell.h"
+#import "PublishInfoVC.h"
 @interface MyLookingVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -170,12 +171,27 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
-    
-    
-    
-    
-    
+    NSDictionary * publishDic = self.cellDateArray[indexPath.section];
+    NSObject * PublishID = publishDic[@"PublishID"];
+    if (!PublishID) {
+        [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        return;
+    }
+    NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{@"publishid":PublishID};
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * publishDictionary = back_dic[@"Data"];
+        if (publishDictionary) {
+            PublishInfoVC * vc = [PublishInfoVC new];
+            vc.title = @"信息详情";
+            vc.isMine = true;
+            vc.publishDictionary = publishDictionary;
+            [self.navigationController pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        }
+    }];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -188,10 +204,6 @@
     MyLookingForCell * cell = [[MyLookingForCell alloc] initWithDictionary:dic andHeight:tableView.rowHeight andDelegate:self andIndexPath:indexPath];
     return cell;
 }
-
-
-
-
 //返回上个界面
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];

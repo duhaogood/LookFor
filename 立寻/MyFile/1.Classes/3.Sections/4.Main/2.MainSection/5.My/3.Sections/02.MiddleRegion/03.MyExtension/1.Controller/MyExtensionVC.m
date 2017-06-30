@@ -79,7 +79,7 @@
     [send setValue:USER_ID forKey:@"userid"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSLog(@"back:%@",back_dic);
-        self.cellDateArray = back_dic[@"Data"];
+        self.cellDateArray = [NSMutableArray arrayWithArray:back_dic[@"Data"]];
         [self.tableView reloadData];
         if (self.cellDateArray.count) {
             self.noDataView.hidden = true;

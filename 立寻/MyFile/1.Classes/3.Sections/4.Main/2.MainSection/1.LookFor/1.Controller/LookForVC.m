@@ -127,7 +127,7 @@
 -(void)iconClick:(UIButton *)tap{
     NSInteger tag = tap.tag;
     NSString * name = self.btn_name_img_array[tag][1];
-    if ([name isEqualToString:@"招商加盟"] || [name isEqualToString:@"积分商城"]) {
+    if ([name isEqualToString:@"招商加盟"] || [name isEqualToString:@"公共平台"]) {
         [SVProgressHUD showErrorWithStatus:@"开发中" duration:1];
         return;
     }
@@ -261,7 +261,7 @@
                                  @[@"menu_wlbg",@"网络曝光",@"NetShowVC",@"80"],
                                  @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
                                  @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
-                                 @[@"menu_shop",@"积分商城",@"PointStoreVC",@"0"]
+                                 @[@"menu_shop",@"公共平台",@"PointStoreVC",@"0"]
                                  ];
     //表视图
     UITableView * tableView = [UITableView new];

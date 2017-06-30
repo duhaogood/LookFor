@@ -8,6 +8,7 @@
 
 #import "ProvideClueVC.h"
 #import "ClueCell.h"
+#import "MyClueInfoVC.h"
 @interface ProvideClueVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * cellDateArray;//cell数据
@@ -81,7 +82,7 @@
     [send setValue:USER_ID forKey:@"userid"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSLog(@"back:%@",back_dic);
-        self.cellDateArray = back_dic[@"Data"];
+        self.cellDateArray = [NSMutableArray arrayWithArray:back_dic[@"Data"]];
         [self.tableView reloadData];
         if (self.cellDateArray.count) {
             self.noDataView.hidden = true;
@@ -121,6 +122,19 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    NSDictionary * dic = self.cellDateArray[indexPath.section];
+    NSString * interface = @"/publish/publish/getcluedetailcomplex.html";
+    NSDictionary * send = @{
+                            @"claimid":dic[@"ClaimID"]
+                            };
+    [MYTOOL netWorkingWithTitle:@"获取线索"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        MyClueInfoVC * vc = [MyClueInfoVC new];
+        vc.isMine = true;
+        vc.claimDictionary = back_dic[@"Data"];
+        [self.navigationController pushViewController:vc animated:true];
+    }];
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;

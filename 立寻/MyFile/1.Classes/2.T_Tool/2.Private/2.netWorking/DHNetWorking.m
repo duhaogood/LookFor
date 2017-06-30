@@ -34,6 +34,9 @@ static id instance;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     
     NSString * urlString = [NSString stringWithFormat:@"%@%@",SERVER_URL,interfaceName];
+    if (![[interfaceName substringToIndex:1] isEqualToString:@"/"]) {
+        urlString = [NSString stringWithFormat:@"%@/%@",SERVER_URL,interfaceName];
+    }
     NSMutableDictionary * send = [NSMutableDictionary dictionaryWithDictionary:send_dic];
     //验证参数
     [send setValue:@"99999999" forKey:@"appid"];
@@ -55,6 +58,9 @@ static id instance;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     
     NSString * urlString = [NSString stringWithFormat:@"%@%@",SERVER_URL,interfaceName];
+    if (![[interfaceName substringToIndex:1] isEqualToString:@"/"]) {
+        urlString = [NSString stringWithFormat:@"%@/%@",SERVER_URL,interfaceName];
+    }
     [manager GET:urlString parameters:send_dic progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         if (![[responseObject valueForKey:@"Result"] boolValue]) {
@@ -74,6 +80,9 @@ static id instance;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     
     NSString * urlString = [NSString stringWithFormat:@"%@%@",SERVER_URL,interfaceName];
+    if (![[interfaceName substringToIndex:1] isEqualToString:@"/"]) {
+        urlString = [NSString stringWithFormat:@"%@/%@",SERVER_URL,interfaceName];
+    }
     NSMutableDictionary * send = [NSMutableDictionary dictionaryWithDictionary:send_dic];
     //验证参数
     [send setValue:@"99999999" forKey:@"appid"];
@@ -95,6 +104,9 @@ static id instance;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     
     NSString * urlString = [NSString stringWithFormat:@"%@%@",SERVER_URL,interfaceName];
+    if (![[interfaceName substringToIndex:1] isEqualToString:@"/"]) {
+        urlString = [NSString stringWithFormat:@"%@/%@",SERVER_URL,interfaceName];
+    }
     NSMutableDictionary * send = [NSMutableDictionary dictionaryWithDictionary:send_dic];
     //验证参数
     [send setValue:@"99999999" forKey:@"appid"];

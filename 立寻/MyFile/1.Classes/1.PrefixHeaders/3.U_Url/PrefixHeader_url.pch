@@ -13,7 +13,7 @@
 /**
  *  服务器地址
  */
-#define SERVER_URL @"http://api.lixun110.com/"
+#define SERVER_URL @"http://api.lixun110.com"
 
 
 

@@ -22,7 +22,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame andPublishDictionary:(NSDictionary*)publishDictionary andDelegate:(PublishInfoVC*)delegate{
     if (self = [super initWithFrame:frame]) {
-        
+        BOOL isMine = delegate.isMine;
         //主scrollview
         UIScrollView * scrollView = [UIScrollView new];
         self.scrollView = scrollView;
@@ -147,19 +147,22 @@
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 label.font = [UIFont systemFontOfSize:11];
                 label.frame = CGRectMake(WIDTH - 45, top - 15, 30, 15);
-                [view addSubview:label];
                 label.layer.masksToBounds = true;
                 label.layer.cornerRadius = 3;
                 label.textAlignment = NSTextAlignmentCenter;
                 label.layer.borderWidth = 1;
                 label.layer.borderColor = [[MYTOOL RGBWithRed:230 green:230 blue:230 alpha:1] CGColor];
-                [view addSubview:label];
+                if (!isMine) {
+                    [view addSubview:label];
+                }
                 //举报按钮
                 {
                     UIButton * btn = [UIButton new];
                     btn.frame = CGRectMake(label.frame.origin.x - 5, label.frame.origin.y - 5, 40, 25);
                     [btn addTarget:delegate action:@selector(submitReportBtn:) forControlEvents:UIControlEventTouchUpInside];
-                    [view addSubview:btn];
+                    if (!isMine) {
+                        [view addSubview:btn];
+                    }
                 }
             }
             //发布信息位置
@@ -448,7 +451,7 @@
                 [btn addTarget:delegate action:@selector(submitMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
             }
             //我有线索
-            {
+            if (!isMine) {
                 UIButton * btn = [UIButton new];
                 btn.backgroundColor = [MYTOOL RGBWithRed:250 green:101 blue:104 alpha:1];
                 btn.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -462,6 +465,21 @@
                 }else{
                     [btn addTarget:delegate action:@selector(submitMyClueBtn:) forControlEvents:UIControlEventTouchUpInside];
                     [btn setTitle:@"我有线索" forState:UIControlStateNormal];
+                }
+            }else{//我的界面过来
+                UIButton * btn = [UIButton new];
+                btn.backgroundColor = [MYTOOL RGBWithRed:250 green:101 blue:104 alpha:1];
+                btn.titleLabel.font = [UIFont systemFontOfSize:15];
+                btn.frame = CGRectMake(WIDTH/3*2, 0, WIDTH/3, 50);
+                [view addSubview:btn];
+                //一级分类id
+                int ParentCategoryID = [publishDictionary[@"ParentCategoryID"] intValue];
+                if (ParentCategoryID == 394) {
+                    [btn setTitle:@"查看认领" forState:UIControlStateNormal];
+                    [btn addTarget:delegate action:@selector(submitLookClain) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                    [btn addTarget:delegate action:@selector(submitLookClue) forControlEvents:UIControlEventTouchUpInside];
+                    [btn setTitle:@"查看线索" forState:UIControlStateNormal];
                 }
             }
         }

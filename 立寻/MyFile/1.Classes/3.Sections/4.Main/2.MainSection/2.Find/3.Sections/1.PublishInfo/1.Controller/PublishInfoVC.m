@@ -14,6 +14,8 @@
 #import "WantToClaimVC.h"
 #import "FeedbackVC.h"
 #import "PersonalInfoVC.h"
+#import "MyClueListVC.h"
+#import "MyFoundListVC.h"
 @interface PublishInfoVC ()
 @property(nonatomic,strong)NSMutableArray * commentList;//评论数据
 @property(nonatomic,strong)PublishInfoView * publishView;
@@ -40,9 +42,52 @@
     [self headerRefresh];
     //加载是否关注状态
     [self loadIsAttention];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStyleDone target:self action:@selector(submitShared)];
+    //如果是我的界面点进来
+    if (self.isMine) {
+        UIView * view = [UIView new];
+        view.frame = CGRectMake(0, 0, 60, 44);
+        //分享按钮
+        UIButton * sharedBtn = [UIButton new];
+        [sharedBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        sharedBtn.frame = CGRectMake(0, 12, 20, 20);
+        [sharedBtn addTarget:self action:@selector(submitShared) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:sharedBtn];
+        //更多
+        UIButton * moreBtn = [UIButton new];
+        [moreBtn setImage:[UIImage imageNamed:@"more_opt"] forState:UIControlStateNormal];
+        moreBtn.frame = CGRectMake(40, 12, 20, 20);
+        [moreBtn addTarget:self action:@selector(submitMore) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:moreBtn];
+        
+        
+        UIBarButtonItem*btn=[[UIBarButtonItem alloc]initWithCustomView:view];
+        self.navigationItem.rightBarButtonItem=btn;
+    }
+}
+//查看线索
+-(void)submitLookClue{
+    MyClueListVC * vc = [MyClueListVC new];
+    vc.title = @"线索列表";
+    vc.publishDictionary = self.publishDictionary;
+    [self.navigationController pushViewController:vc animated:true];
+}
+//查看招领
+-(void)submitLookClain{
+    MyFoundListVC * vc = [MyFoundListVC new];
+    vc.title = @"认领列表";
+    vc.publishDictionary = self.publishDictionary;
+    [self.navigationController pushViewController:vc animated:true];
+}
+//更多功能
+-(void)submitMore{
+    [SVProgressHUD showSuccessWithStatus:@"更多" duration:1];
 }
 
-
+//分享
+-(void)submitShared{
+    [SVProgressHUD showSuccessWithStatus:@"算你分享成功" duration:1];
+}
 //加载是否关注状态
 -(void)loadIsAttention{
     if (![MYTOOL isLogin]) {
