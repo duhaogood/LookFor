@@ -150,8 +150,7 @@
     }
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];
-        NSLog(@"count:%ld",array.count);
-        self.cellDataArray = array;
+        self.cellDataArray = [NSMutableArray arrayWithArray:array];
         if (self.cellDataArray.count) {
             self.noDataView.hidden = true;
         }else{

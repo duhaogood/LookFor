@@ -321,8 +321,6 @@
         [self deleteOtherImageView];
         //
     }];
-    
-    //    NSLog(@"tag:%ld",tap.view.tag);
     //增加-1/2-序号
     if (!self.num_label) {
         UILabel * label = [UILabel new];
@@ -390,7 +388,6 @@
 //查看上一张
 -(void)showUpImageView:(UISwipeGestureRecognizer *)tapBgRecognizer{
     NSInteger tag = tapBgRecognizer.view.tag;
-    //    NSLog(@"上一张:%ld",tag);
     if (tag > 0) {//可以显示上一张[imgV sd_setImageWithURL:[NSURL URLWithString:self.post_dic[@"url"][tag-1][@"normalUrl"]]];
         [self deleteOtherImageView];
         UIImageView * imgV = [UIImageView new];
@@ -417,7 +414,6 @@
 //查看下一张
 -(void)showNextImageView:(UISwipeGestureRecognizer *)tapBgRecognizer{
     NSInteger tag = tapBgRecognizer.view.tag;
-    //    NSLog(@"下一张:%ld",tag);
     //总图片个数
     NSInteger count = [PictureList count];
     if (tag < count - 1) {//可以显示下一张

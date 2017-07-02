@@ -148,8 +148,6 @@
     for (NSString * key in uploadAreaDic) {
         [send setValue:uploadAreaDic[key] forKey:key];
     }
-    
-    NSLog(@"更新send:%@",send);
     [MYTOOL netWorkingWithTitle:@"更新用户信息"];
     NSString * interface = @"/user/memberuser/modifyuserinfo.html";
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
@@ -219,7 +217,6 @@
 -(void)getPhoneImage{
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"增加图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //        NSLog(@"相册");
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;

@@ -250,7 +250,6 @@
                             };
     [MYTOOL netWorkingWithTitle:@"登录中"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-//        NSLog(@"back:%@",back_dic);
         [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
         [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"1"];
         MYTOOL.userInfo = back_dic[@"Data"];

@@ -44,8 +44,6 @@
     //初始化省市区数据
     NSString * path = [[NSBundle mainBundle] pathForResource:@"area_code" ofType:@"plist"];
     self.areaArray = [NSArray arrayWithContentsOfFile:path];
-    
-//    NSLog(@"list:%@",self.secondTypeList);
     //加载主界面
     [self loadMainView];
     if (!self.publishDic) {
@@ -254,7 +252,6 @@
         NSObject * publishid = self.publishDic[@"PublishID"];
         [MYTOOL netWorkingWithTitle:@"加载中…"];
         [MYNETWORKING getWithInterfaceName:interface andDictionary:@{@"publishid":publishid} andSuccess:^(NSDictionary *back_dic) {
-            NSLog(@"back:%@",back_dic);
             NSArray * imgArray = back_dic[@"Data"][@"PictureList"];
             for (NSDictionary * netImgDic in imgArray) {
                 //已经上传的图片的id
@@ -438,7 +435,6 @@
     if ([TopType isEqualToString:@"1"]) {
         [publishinfo_dictionary setValue:TopMoney forKey:@"TopMoney"];
     }
-//    NSLog(@"发布信息:%@",publishinfo_dictionary);
     //正式拼装
     NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
     NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
@@ -634,7 +630,6 @@
 }
 //点击增加图片
 -(void)submitSelectImage:(UITapGestureRecognizer *)tap{
-    //    NSLog(@"目前数组:%@",self.img_arr);
     NSInteger tag = tap.view.tag;
     //判断当前点击的是否有图片
     if ([self.img_arr[tag][@"have_image"] boolValue]) {
@@ -645,7 +640,6 @@
     currentImgView = imageV;
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"增加图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //        NSLog(@"相册");
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
@@ -653,7 +647,6 @@
         }];
     }];
     UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //        NSLog(@"拍照");
         // UIImagePickerControllerCameraDeviceRear 后置摄像头
         // UIImagePickerControllerCameraDeviceFront 前置摄像头
         BOOL isCamera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
@@ -684,7 +677,6 @@
 }
 //删除图片事件
 -(void)deleteImgWithBtn:(UIButton *)btn{
-    //    NSLog(@"delete:%ld",show_view.tag);
     /*
      1.
      */
@@ -775,8 +767,6 @@
         frame.origin.y = (bgView.frame.size.height - frame.size.height) * 0.5;
         imageView.frame = frame;
     }];
-    
-    //    NSLog(@"tag:%ld",tap_view.tag);
     //增加-1/2-序号
     if (!self.num_label) {
         UILabel * label = [UILabel new];
@@ -802,7 +792,6 @@
 //查看上一张
 -(void)showUpImageView:(UISwipeGestureRecognizer *)tapBgRecognizer{
     NSInteger tag = tapBgRecognizer.view.tag;
-    //    NSLog(@"上一张:%ld",tag);
     if (tag > 0) {//可以显示上一张
         UIImageView * imgV = [UIImageView new];
         [show_view insertSubview:imgV atIndex:0];
@@ -826,7 +815,6 @@
 //查看下一张
 -(void)showNextImageView:(UISwipeGestureRecognizer *)tapBgRecognizer{
     NSInteger tag = tapBgRecognizer.view.tag;
-    //    NSLog(@"下一张:%ld",tag);
     //总图片个数
     NSInteger count = [self getCountOfImgV_arr];
     if (tag < count - 1) {//可以显示下一张

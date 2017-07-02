@@ -27,10 +27,11 @@
         {
             NSMutableArray * url_arr = [NSMutableArray new];
             for (NSDictionary * dic in upBannerArray) {
-                [url_arr addObject:dic[@"url"]];
+                [url_arr addObject:dic[@"imgpath"]];
             }
             SDCycleScrollView * cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 125/550.0*height_all) imageURLStringsGroup:url_arr];
             cycleScrollView.delegate = delegate;
+            [delegate setUpBannerView:cycleScrollView];
             [self addSubview:cycleScrollView];
             cycleScrollView.tag = 100;
             top = 125/550.0*height_all;
@@ -172,9 +173,15 @@
             float scroll_width = 5;
             for (int i = 0; i < downBannerArray.count; i ++) {
                 UIImageView * imgV = [UIImageView new];
-                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:downBannerArray[i][@"url"]];
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:downBannerArray[i][@"imgpath"]];
                 imgV.frame = CGRectMake(5 + (5 + img_width) * i, 5, img_width, img_height);
                 [scrollView addSubview:imgV];
+                imgV.tag = i;
+                //添加点击事件
+                [imgV setUserInteractionEnabled:YES];
+                UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:delegate action:@selector(downBannerImageClick:)];
+                tapGesture.numberOfTapsRequired=1;
+                [imgV addGestureRecognizer:tapGesture];
                 scroll_width += i * (5 + img_width);
             }
             scrollView.contentSize = CGSizeMake(scroll_width, 0);

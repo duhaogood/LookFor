@@ -31,7 +31,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     //返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
-    NSLog(@"publish:%@",self.publishDictionary);
     //背景view
     UIScrollView * scrollView = [UIScrollView new];
     {
@@ -227,8 +226,6 @@
         frame.origin.y = (bgView.frame.size.height - frame.size.height) * 0.5;
         imageView.frame = frame;
     }];
-    
-    //    NSLog(@"tag:%ld",tap_view.tag);
     //增加-1/2-序号
     if (!self.num_label) {
         UILabel * label = [UILabel new];
@@ -245,7 +242,6 @@
 //查看上一张
 -(void)showUpImageView:(UISwipeGestureRecognizer *)tapBgRecognizer{
     NSInteger tag = tapBgRecognizer.view.tag;
-    //    NSLog(@"上一张:%ld",tag);
     if (tag > 0) {//可以显示上一张
         UIImageView * imgV = [UIImageView new];
         [show_view insertSubview:imgV atIndex:0];
@@ -269,7 +265,6 @@
 //查看下一张
 -(void)showNextImageView:(UISwipeGestureRecognizer *)tapBgRecognizer{
     NSInteger tag = tapBgRecognizer.view.tag;
-    //    NSLog(@"下一张:%ld",tag);
     //总图片个数
     NSInteger count = self.img_arr.count;
     if (tag < count - 1) {//可以显示下一张

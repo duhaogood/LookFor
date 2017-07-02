@@ -189,4 +189,12 @@
 
 -(void)getUserInfo;
 - (NSString *)getJsonFromDictionaryOrArray:(id)dictionaryOrArray;
+
+/**
+ 从model转为字典
+
+ @param entity model对象
+ @return 对应的字典
+ */
+-(NSDictionary *) getDictionaryWithModel:(id)entity;
 @end

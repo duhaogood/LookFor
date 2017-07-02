@@ -14,7 +14,7 @@
 @property(nonatomic,strong)UIButton * leftTypeBtn;//置顶
 @property(nonatomic,strong)UIButton * rightTypeBtn;//最新
 @property(nonatomic,strong)UIButton * signBtn;//签到按钮
-
+@property(nonatomic,strong)SDCycleScrollView * upBannerView;//上部
 
 
 
@@ -27,4 +27,6 @@
 -(void)signClick:(UIButton *)btn;
 //置顶、最新事件
 -(void)up_newClick:(UIButton *)btn;
+//下部banner图片点击事件
+-(void)downBannerImageClick:(UITapGestureRecognizer *)tap;
 @end

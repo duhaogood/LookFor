@@ -12,5 +12,6 @@
 
 
 
-
+//重新刷新当前页面
+-(void)refreshViewData;
 @end

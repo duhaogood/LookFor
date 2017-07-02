@@ -130,7 +130,6 @@
     NSMutableDictionary * send = [NSMutableDictionary new];
     [send setValue:USER_ID forKey:@"userid"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
         self.cellDateArray = [NSMutableArray arrayWithArray:back_dic[@"Data"]];
         [self.tableView reloadData];
         if (self.cellDateArray.count) {
@@ -152,7 +151,6 @@
         [send setValue:self.cellDateArray[self.cellDateArray.count - 1][@"PublishID"] forKey:@"lastnumber"];
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
         NSArray * array = back_dic[@"Data"];
         if (array.count > 0) {
             [self.cellDateArray addObjectsFromArray:array];
@@ -210,6 +208,7 @@
                 PublishInfoVC * vc = [PublishInfoVC new];
                 vc.title = @"信息详情";
                 vc.isMine = true;
+                vc.delegate = self;
                 vc.publishDictionary = publishDictionary;
                 [self.navigationController pushViewController:vc animated:true];
             }else{
@@ -223,7 +222,6 @@
                                 };
         [MYTOOL netWorkingWithTitle:@"加载中……"];
         [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-            NSLog(@"back:%@",back_dic);
             MyClainInfoVC * vc = [MyClainInfoVC new];
             vc.title = @"认领详情";
             vc.claimDictionary = back_dic[@"Data"];
@@ -249,7 +247,10 @@
     }
 }
 
-
+//重新刷新当前页面
+-(void)refreshViewData{
+    [self headerRefresh];
+}
 //返回上个界面
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];

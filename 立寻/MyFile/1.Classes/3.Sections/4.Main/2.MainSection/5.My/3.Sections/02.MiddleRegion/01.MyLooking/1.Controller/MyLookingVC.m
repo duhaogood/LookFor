@@ -186,6 +186,7 @@
             PublishInfoVC * vc = [PublishInfoVC new];
             vc.title = @"信息详情";
             vc.isMine = true;
+            vc.delegate = self;
             vc.publishDictionary = publishDictionary;
             [self.navigationController pushViewController:vc animated:true];
         }else{
@@ -203,6 +204,10 @@
     NSDictionary * dic = self.cellDateArray[indexPath.section];
     MyLookingForCell * cell = [[MyLookingForCell alloc] initWithDictionary:dic andHeight:tableView.rowHeight andDelegate:self andIndexPath:indexPath];
     return cell;
+}
+//重新刷新当前页面
+-(void)refreshViewData{
+    [self headerRefresh];
 }
 //返回上个界面
 -(void)popUpViewController{

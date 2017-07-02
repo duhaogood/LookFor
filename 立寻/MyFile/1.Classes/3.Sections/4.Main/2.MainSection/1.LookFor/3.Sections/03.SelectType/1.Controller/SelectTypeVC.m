@@ -171,8 +171,6 @@
 //二级分类按钮选择
 -(void)selectType_2_callback:(UIButton *)btn{
     NSObject * CategoryID = self.cellDataArray[btn.tag][@"CategoryID"];
-//    NSLog(@"CategoryID:%@",CategoryID);
-    
     FindSameVC * same = [FindSameVC new];
     same.title = @"发现列表";
     [self.navigationController pushViewController:same animated:true];

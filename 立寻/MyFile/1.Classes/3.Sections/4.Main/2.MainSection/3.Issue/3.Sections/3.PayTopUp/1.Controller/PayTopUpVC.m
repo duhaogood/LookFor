@@ -198,7 +198,7 @@
                         @"amount":self.moneyTF.text
                         };
     [MYTOOL netWorkingWithTitle:@"获取订单号…"];
-    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         orderId = back_dic[@"Data"];
         [SVProgressHUD dismiss];
         [self startPay];

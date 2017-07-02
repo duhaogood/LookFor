@@ -16,6 +16,7 @@
 #import "PersonalInfoVC.h"
 #import "MyClueListVC.h"
 #import "MyFoundListVC.h"
+#import "MyLookingVC.h"
 @interface PublishInfoVC ()
 @property(nonatomic,strong)NSMutableArray * commentList;//评论数据
 @property(nonatomic,strong)PublishInfoView * publishView;
@@ -30,7 +31,6 @@
     self.view.backgroundColor = MYCOLOR_240_240_240;
     //加载主界面
     [self loadMainView];
-//    NSLog(@"info:%@",self.publishDictionary);
 }
 //加载主界面
 -(void)loadMainView{
@@ -59,8 +59,6 @@
         moreBtn.frame = CGRectMake(40, 12, 20, 20);
         [moreBtn addTarget:self action:@selector(submitMore) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:moreBtn];
-        
-        
         UIBarButtonItem*btn=[[UIBarButtonItem alloc]initWithCustomView:view];
         self.navigationItem.rightBarButtonItem=btn;
     }
@@ -81,12 +79,61 @@
 }
 //更多功能
 -(void)submitMore{
-    [SVProgressHUD showSuccessWithStatus:@"更多" duration:1];
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"请选择操作类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //我要推广
+    UIAlertAction * wantPopularize = [UIAlertAction actionWithTitle:@"我要推广" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    //结束寻找
+    UIAlertAction * overLook = [UIAlertAction actionWithTitle:@"结束寻找" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString * interface = @"/publish/publish/endpublishinfo.html";
+         
+        
+    }];
+    //寻找完成
+    UIAlertAction * lookFinish = [UIAlertAction actionWithTitle:@"寻找完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString * interface = @"/publish/publish/finishpublishinfo.html";
+        
+        
+        
+    }];
+    //删除信息
+    UIAlertAction * deletePublish = [UIAlertAction actionWithTitle:@"删除信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self deletePublish];
+    }];
+    //取消
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [ac addAction:wantPopularize];
+    [ac addAction:overLook];
+    [ac addAction:lookFinish];
+    [ac addAction:deletePublish];
+    [ac addAction:cancel];
+    [self presentViewController:ac animated:true completion:nil];
 }
-
+//删除发布信息
+-(void)deletePublish{
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"确定要删除此条发布吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    //删除信息
+    UIAlertAction * deletePublish = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString * interface = @"/publish/publish/deletepublishinfo.html";
+        [MYTOOL netWorkingWithTitle:@"删除中……"];
+        NSDictionary * send = @{
+                                @"publishid":self.publishDictionary[@"PublishID"]
+                                };
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [self.delegate refreshViewData];
+            [self.navigationController popViewControllerAnimated:true];
+        }];
+    }];
+    //取消
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [ac addAction:deletePublish];
+    [ac addAction:cancel];
+    [self presentViewController:ac animated:true completion:nil];
+}
 //分享
 -(void)submitShared{
-    [SVProgressHUD showSuccessWithStatus:@"算你分享成功" duration:1];
+    [SVProgressHUD showSuccessWithStatus:@"开发中" duration:1];
 }
 //加载是否关注状态
 -(void)loadIsAttention{

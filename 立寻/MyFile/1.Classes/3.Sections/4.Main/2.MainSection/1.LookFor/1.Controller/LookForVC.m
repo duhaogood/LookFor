@@ -27,6 +27,9 @@
 
 @property(nonatomic,strong)NSMutableArray * cellDataArray;//cell数据
 @property(nonatomic,strong)UIView * noDataView;//没有数据显示
+@property(nonatomic,strong)NSArray * upBannerImgArray;//上部banner数据
+@property(nonatomic,strong)NSArray * downBannerImgArray;//下部banner数据
+@property(nonatomic,strong)NSArray * cityArray;//城市数组
 @end
 
 @implementation LookForVC
@@ -35,6 +38,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"area_code" ofType:@"plist"];
+    self.cityArray = [NSArray arrayWithContentsOfFile:path];
     //加载主界面
     [self loadMainView];
 }
@@ -209,6 +214,15 @@
 #pragma mark - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     NSLog(@"轮播图tag:%ld,点击了第%ld张图片",cycleScrollView.tag,index);
+    NSDictionary * imgDic = self.upBannerImgArray[index];
+    
+}
+//下部banner图片点击事件
+-(void)downBannerImageClick:(UITapGestureRecognizer *)tap{
+    NSInteger tag = tap.view.tag;
+    NSDictionary * imgDic = self.downBannerImgArray[tag];
+    
+    NSLog(@"tag:%ld",tag);
 }
 #pragma mark - UISearchBarDelegate
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
@@ -230,87 +244,87 @@
 }
 //加载轮播图数据
 -(void)loadBannerArray{
-    NSArray * up = @[
-                     @{
-                         @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455804&di=ed51db649dbb42387c611a890c5769f2&imgtype=0&src=http%3A%2F%2Fimg.tuku.cn%2Ffile_thumb%2F201503%2Fm2015032016253154.jpg"
-                         },
-                     @{
-                         @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455804&di=837cd658ac3fc5fe60f4a5ca5119e258&imgtype=0&src=http%3A%2F%2Fpic17.nipic.com%2F20111122%2F6759425_152002413138_2.jpg"
-                         },
-                     @{
-                         @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815567450&di=bbac4e0a2357629213fcec439bc6622a&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D1610953019%2C3012342313%26fm%3D214%26gp%3D0.jpg"
-                         }
-                     ];
-    NSArray * down = @[
-                     @{
-                         @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455803&di=60817710354f91b20cf6c0643d0454d2&imgtype=0&src=http%3A%2F%2Fpic41.nipic.com%2F20140519%2F18165794_221908372105_2.jpg"
-                         },
-                     @{
-                         @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455803&di=8576a6101f90ac5c4974d2b4e1c674cf&imgtype=0&src=http%3A%2F%2Ft1.niutuku.com%2F190%2F14%2F14-117639.jpg"
-                         },
-                     @{
-                         @"url":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495815455802&di=0eb01ea5f1e45542c9314f6ea55c1c0b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F10%2F32%2F14%2F72bOOOPIC7a.jpg"
-                         }
-                     ];
     //头view中间按钮图标及名字数组
     self.btn_name_img_array = @[
-                                 @[@"menu_xr",@"委托寻人",@"LookPersonVC",@"83"],
-                                 @[@"menu_xw",@"委托寻物",@"LookSomethingVC",@"82"],
-                                 @[@"menu_zlrl",@"招领认领",@"PersonLookVC",@"394"],
-                                 @[@"menu_zsjm",@"招商加盟",@"BusinessVC",@"0"],
-                                 @[@"menu_wlbg",@"网络曝光",@"NetShowVC",@"80"],
-                                 @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
-                                 @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
-                                 @[@"menu_shop",@"公共平台",@"PointStoreVC",@"0"]
-                                 ];
-    //表视图
-    UITableView * tableView = [UITableView new];
-    //头视图
-    FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:550]) andDelegate:self andUpBannerArray:up andDownBannerArray:down andBtnName_imgArray:self.btn_name_img_array];
-    self.headerView = headerView;
-    self.tableView = tableView;
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    tableView.tableHeaderView = headerView;
-    tableView.backgroundColor = MYCOLOR_240_240_240;
-    tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64 - 49);
-    [self.view addSubview:tableView];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self headerRefresh];
-        // 结束刷新
-        [tableView.mj_header endRefreshing];
-    }];
-    // 设置自动切换透明度(在导航栏下面自动隐藏)
-    tableView.mj_header.automaticallyChangeAlpha = YES;
-    // 上拉刷新
-    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self footerRefresh];
-        [tableView.mj_footer endRefreshing];
-    }];
-    self.automaticallyAdjustsScrollViewInsets = false;
-    self.tableView = tableView;
-    tableView.rowHeight = [MYTOOL getHeightWithIphone_six:200];
-    [self.view addSubview:tableView];
-    //不显示分割线
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
-    {
-        UIView * view = [UIView new];
-        self.noDataView = view;
-        view.frame = tableView.bounds;
-        view.backgroundColor = MYCOLOR_240_240_240;
-//        [tableView addSubview:view];
-        //图片-170*135
+                                @[@"menu_xr",@"委托寻人",@"LookPersonVC",@"83"],
+                                @[@"menu_xw",@"委托寻物",@"LookSomethingVC",@"82"],
+                                @[@"menu_zlrl",@"招领认领",@"PersonLookVC",@"394"],
+                                @[@"menu_zsjm",@"招商加盟",@"BusinessVC",@"0"],
+                                @[@"menu_wlbg",@"网络曝光",@"NetShowVC",@"80"],
+                                @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
+                                @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
+                                @[@"menu_shop",@"公共平台",@"PointStoreVC",@"0"]
+                                ];
+    //加载下部banner数据
+    NSString * interface = @"/common/advert/getindexadvertlist.html";
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
+        NSArray * down = back_dic[@"Data"];
+        //表视图
+        UITableView * tableView = [UITableView new];
+        //头视图
+        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:550]) andDelegate:self andUpBannerArray:nil andDownBannerArray:down andBtnName_imgArray:self.btn_name_img_array];
+        self.headerView = headerView;
+        self.tableView = tableView;
+        tableView.dataSource = self;
+        tableView.delegate = self;
+        tableView.tableHeaderView = headerView;
+        tableView.backgroundColor = MYCOLOR_240_240_240;
+        tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64 - 49);
+        [self.view addSubview:tableView];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self headerRefresh];
+            // 结束刷新
+            [tableView.mj_header endRefreshing];
+        }];
+        // 设置自动切换透明度(在导航栏下面自动隐藏)
+        tableView.mj_header.automaticallyChangeAlpha = YES;
+        // 上拉刷新
+        tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [self footerRefresh];
+            [tableView.mj_footer endRefreshing];
+        }];
+        self.automaticallyAdjustsScrollViewInsets = false;
+        self.tableView = tableView;
+        tableView.rowHeight = [MYTOOL getHeightWithIphone_six:200];
+        [self.view addSubview:tableView];
+        //不显示分割线
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
         {
-            UIImageView * icon = [UIImageView new];
-            icon.image = [UIImage imageNamed:@"nodate"];
-            icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
-            [view addSubview:icon];
+            UIView * view = [UIView new];
+            self.noDataView = view;
+            view.frame = tableView.bounds;
+            view.backgroundColor = MYCOLOR_240_240_240;
+            //        [tableView addSubview:view];
+            //图片-170*135
+            {
+                UIImageView * icon = [UIImageView new];
+                icon.image = [UIImage imageNamed:@"nodate"];
+                icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
+                [view addSubview:icon];
+            }
         }
-    }
-    //加载签到状态
-    [self getSignStatus];
+        //加载签到状态
+        [self getSignStatus];
+        //加载上部banner数据
+        [self getUpBannerImageDataWithCityId:0];
+    }];
+}
+//加载上部banner数据
+-(void)getUpBannerImageDataWithCityId:(int)cityId1{
+    NSString * interface = @"/common/advert/getindexrecommendadvertlist.html";
+    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:@{@"cityid":[NSString stringWithFormat:@"%d",cityId1]} andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        self.upBannerImgArray = array;
+        NSMutableArray * url_arr = [NSMutableArray new];
+        for (NSDictionary * dic in array) {
+            [url_arr addObject:dic[@"imgpath"]];
+        }
+        [self.upBannerView setImageURLStringsGroup:url_arr];
+    }];
 }
 //加载签到状态
 -(void)getSignStatus{
@@ -339,7 +353,6 @@
 }
 //重新加载数据
 -(void)getCellDataWithHeader:(BOOL)flag{
-//    NSLog(@"重新加载数据");
     NSString * interface = @"/publish/publish/getindexpublishcomplexlist.html";
     NSMutableDictionary * send = [NSMutableDictionary new];
     //是否下拉
@@ -405,7 +418,7 @@
                 [searchSuggestionsM addObject:searchSuggestion];
             }
             // Refresh and display the search suggustions
-            searchViewController.searchSuggestions = searchSuggestionsM;
+//            searchViewController.searchSuggestions = searchSuggestionsM;
         });
     }
 }
@@ -414,7 +427,20 @@
 {
     [chooseCityController.navigationController popViewControllerAnimated:true];
     [self setCityName:city.cityName];
-    cityId = city.cityID;
+    NSString * name = city.cityName;
+    for (NSDictionary * shengDic in self.cityArray) {
+        NSArray * cityArray = shengDic[@"cityArray"];
+        for (NSDictionary * cityDic in cityArray) {
+            NSString * cityName = cityDic[@"cityName"];
+            if ([cityName isEqualToString:name] || [cityName rangeOfString:name].location != NSNotFound
+                || [name rangeOfString:cityName].location != NSNotFound) {
+                NSString * cityId1 = cityDic[@"cityId"];
+                cityId = cityId1;
+                [self getUpBannerImageDataWithCityId:[cityId1 intValue]];
+                return;
+            }
+        }
+    }
 }
 
 - (void) cityPickerControllerDidCancel:(GYZChooseCityController *)chooseCityController
@@ -426,6 +452,18 @@
     NSDictionary * obj = notification.object;
     NSString * city = obj[@"city"];
     [self setCityName:city];
+    for (NSDictionary * shengDic in self.cityArray) {
+        NSArray * cityArray = shengDic[@"cityArray"];
+        for (NSDictionary * cityDic in cityArray) {
+            NSString * cityName = cityDic[@"cityName"];
+            if ([cityName isEqualToString:city] || [cityName rangeOfString:city].location != NSNotFound
+                || [city rangeOfString:cityName].location != NSNotFound) {
+                NSString * cityId1 = cityDic[@"cityId"];
+                [self getUpBannerImageDataWithCityId:[cityId1 intValue]];
+                return;
+            }
+        }
+    }
 }
 //接收到定位失败通知
 -(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{

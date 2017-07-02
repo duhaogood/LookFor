@@ -81,7 +81,6 @@
     NSMutableDictionary * send = [NSMutableDictionary new];
     [send setValue:USER_ID forKey:@"userid"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
         self.cellDateArray = [NSMutableArray arrayWithArray:back_dic[@"Data"]];
         [self.tableView reloadData];
         if (self.cellDateArray.count) {
@@ -100,7 +99,6 @@
         [send setValue:self.cellDateArray[self.cellDateArray.count - 1][@"PublishID"] forKey:@"lastnumber"];
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
         NSArray * array = back_dic[@"Data"];
         if (array.count > 0) {
             [self.cellDateArray addObjectsFromArray:array];

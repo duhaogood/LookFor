@@ -251,7 +251,6 @@
                     [view addSubview:imgV];
                     [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:url andCompleted:^(UIImage *image) {
                         CGSize size = image.size;
-//                        NSLog(@"%.2f,%.2f",size.width,size.height);
                         float real_width = img_height / size.height * size.width;
                         if (real_width > WIDTH) {
                             real_width = WIDTH;

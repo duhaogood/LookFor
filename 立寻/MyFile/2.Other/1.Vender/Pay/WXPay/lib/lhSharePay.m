@@ -44,8 +44,8 @@ static lhSharePay * sharePay;
     //                                device:device];
     
     NSMutableDictionary * dict = [wxpayManager getPrepayWithPayDic:payDic withOrderDic:orderDic];
-    NSLog(@"prepayId->dict:%@",dict);
     if(dict == nil){
+        [SVProgressHUD showErrorWithStatus:@"支付失败\n请联系管理员" duration:2];
         //错误提示
         NSString *debug = [wxpayManager getDebugInfo];
         NSLog(@"%@",debug);
@@ -87,9 +87,6 @@ static lhSharePay * sharePay;
         //webUrl请求服务器接口前缀
         urlString = [SERVER_URL stringByAppendingFormat:@"%@",urlString];
     }
-    
-    NSLog(@"请求链接  ---- %@",urlString);
-    
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *URLRequest;

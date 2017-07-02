@@ -166,7 +166,6 @@
                     text = @"认证通过";
                     break;
             }
-            NSLog(@"user:%@",userInfo);
             authenticationLabel.text = text;
             authenticationLabel.textAlignment = NSTextAlignmentCenter;
             authenticationLabel.font = [UIFont systemFontOfSize:9];

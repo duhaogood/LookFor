@@ -280,7 +280,6 @@
             [self.cellDataArray addObjectsFromArray:array];
         }
         if (self.cellDataArray && self.cellDataArray.count > 0) {
-//            NSLog(@"第一条数据:%@",self.cellDataArray[0]);
             self.noDataView.hidden = true;
         }else{
             self.noDataView.hidden = false;

@@ -27,7 +27,6 @@
     self.view.backgroundColor = [MYTOOL RGBWithRed:242 green:242 blue:242 alpha:1];
     //返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
-    NSLog(@"user:%@",MYTOOL.userInfo);
     //初始化界面数据
     //余额
     NSString * Balance = [NSString stringWithFormat:@"%.2f元",[MYTOOL.userInfo[@"Balance"] floatValue]];

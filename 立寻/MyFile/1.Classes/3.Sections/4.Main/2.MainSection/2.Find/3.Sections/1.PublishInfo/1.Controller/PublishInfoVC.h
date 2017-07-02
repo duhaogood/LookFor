@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PublishInfoVC : UIViewController
+@property(nonatomic,assign)id delegate;
 @property(nonatomic,strong)NSDictionary * publishDictionary;//发布详细信息
 @property(nonatomic,assign)BOOL isMine;//是否我的界面传过来
 //下拉事件

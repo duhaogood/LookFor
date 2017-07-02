@@ -66,10 +66,21 @@ static id instance;
                      //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
                      city = placemark.administrativeArea;
                  }
+                 NSDictionary * placeDictionary = [MYTOOL getDictionaryWithModel:placemark];
+                 NSDictionary * addressDictionary = placeDictionary[@"addressDictionary"];
+                 NSArray * addressArray = addressDictionary[@"FormattedAddressLines"];
                  NSDictionary * locationDic = @{
                                                 @"city":city,
                                                 @"address":placemark.name
                                                 };
+                 if (addressArray && addressArray.count > 0) {
+                     NSString * addressInfo = [NSString stringWithFormat:@"%@%@",addressArray[0],placemark.name];
+                     locationDic = @{
+                                     @"city":city,
+                                     @"address":placemark.name,
+                                     @"addressInfo":addressInfo
+                                     };
+                 }
                  [MYCENTER_NOTIFICATION postNotificationName:NOTIFICATION_UPDATELOCATION_SUCCESS object:locationDic];
              }
              else if (error == nil && [array count] == 0)

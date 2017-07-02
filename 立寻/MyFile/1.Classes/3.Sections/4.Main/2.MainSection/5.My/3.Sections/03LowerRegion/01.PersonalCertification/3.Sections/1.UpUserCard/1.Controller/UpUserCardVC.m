@@ -118,7 +118,6 @@
 -(void)getPhoneImage:(UIImageView *)imageV{
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"增加图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //        NSLog(@"相册");
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
@@ -249,7 +248,6 @@
                                             };
                     [MYTOOL netWorkingWithTitle:@"提交认证……"];
                     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-                        NSLog(@"back:%@",back_dic);
                         PerfectVC * vc = [PerfectVC new];
                         vc.title = @"完善个人信息";
                         [self.navigationController pushViewController:vc animated:true];

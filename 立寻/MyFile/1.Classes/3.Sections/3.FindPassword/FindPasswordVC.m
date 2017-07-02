@@ -257,12 +257,6 @@
         codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerWorkInHere) userInfo:nil repeats:true];
         codeid_id = back_dic[@"Data"];
     }];
-    
-    
-    
-    
-    
-    NSLog(@"code");
 }
 //定时器任务
 -(void)timerWorkInHere{

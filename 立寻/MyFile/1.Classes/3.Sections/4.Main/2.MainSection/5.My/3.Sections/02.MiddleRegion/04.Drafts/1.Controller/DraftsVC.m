@@ -139,7 +139,6 @@
                 //父id
                 int ParentID = [typeDic[@"ParentID"] intValue];
                 NSString * CategoryName = typeDic[@"CategoryTitle"];
-                NSLog(@"父id:%d,分类名字:%@",ParentID,CategoryName);
                 NSArray * parentArray = @[
                                           @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109",@"80",@"NetShowHelpVC"],
                                           @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96",@"81",@"NetShowHelpVC"],
@@ -193,7 +192,6 @@
     NSString * interface = @"/publish/publish/getuserdraftpublishlist.html";
     NSDictionary * send = @{@"userid":USER_ID};
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        NSLog(@"back:%@",back_dic);
         NSArray * array = back_dic[@"Data"];
         self.cellDateArray = [NSMutableArray arrayWithArray:array];
         if (array && array.count > 0) {
@@ -219,7 +217,6 @@
                  };
     }
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-//                NSLog(@"back:%@",back_dic);
         NSArray * array = back_dic[@"Data"];
         if (array && array.count > 0) {
             [self.cellDateArray addObjectsFromArray:array];
