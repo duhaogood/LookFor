@@ -15,6 +15,7 @@
 @property(nonatomic,strong)UILabel * num_label;//预览图片时显示的图片序号
 @property(nonatomic,strong)UIView * img_bg_view;//图片背景view
 @property(nonatomic,strong)NSArray * areaArray;//地区数组
+@property(nonatomic,strong)NSString * PublishAddress;//定位地址
 
 
 @end
@@ -138,7 +139,7 @@
     }
     //发布底部view
     {
-        float height = [MYTOOL getHeightWithIphone_six:381];
+        float height = [MYTOOL getHeightWithIphone_six:200];
         IssueInfoLowerView * view = [[IssueInfoLowerView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
@@ -149,6 +150,8 @@
     if (self.publishDic) {
         [self fixViewData];
     }
+    //定位开启
+    [[MyLocationManager sharedLocationManager] startLocation];
 }
 //填充界面数据
 -(void)fixViewData{
@@ -197,54 +200,6 @@
     //详细地址
     NSString * Address = self.publishDic[@"Address"];
     self.addressTF.text = Address;
-    //推送地区
-    {
-        //按钮
-        {
-            int PushType = [self.publishDic[@"PushType"] intValue];
-            UIButton * btn_area = nil;
-            if (PushType == 1) {
-                btn_area = self.allCountryBtn;
-            }else{
-                btn_area = self.areaSelectBtn;
-            }
-            [self pushAreaButtonCallback:btn_area];
-        }
-        //推送金额
-        {
-            NSString * obj_pushMoney = self.publishDic[@"PushMoney"];
-            float PushMoney = [obj_pushMoney floatValue];
-            NSString * text = [NSString stringWithFormat:@"%.2f",PushMoney];
-            if (PushMoney == (int)PushMoney) {
-                text = [NSString stringWithFormat:@"%d",(int)PushMoney];
-            }
-            self.pushMoneyTF.text = text;
-        }
-    }
-    //地区置顶
-    {
-        //按钮
-        {
-            int TopType = [self.publishDic[@"TopType"] intValue];
-            UIButton * btn = nil;
-            if (TopType == 1) {
-                btn = self.haveBtn;
-            }else{
-                btn = self.noHaveBtn;
-            }
-            [self areaUpButtonCallback:btn];
-        }
-        //金额
-        {
-            NSString * obj_areaMoney = self.publishDic[@"TopMoney"];
-            float TopMoney = [obj_areaMoney floatValue];
-            NSString * text = [NSString stringWithFormat:@"%.2f",TopMoney];
-            if (TopMoney == (int)TopMoney) {
-                text = [NSString stringWithFormat:@"%d",(int)TopMoney];
-            }
-            self.haveMoneyTF.text = text;
-        }
-    }
     //图片
     {
         //获取发布中的所有图片
@@ -415,10 +370,6 @@
     NSString * Province = uploadAreaDic[@"provinceid"];//省份
     NSString * City = uploadAreaDic[@"cityid"];//城市
     NSString * Address = self.addressTF.text;//详细地址
-    NSString * PushType = self.allCountryBtn.enabled ? @"0" : @"1";//推送地区类型（0.丢失地区，1.全国）
-    NSString * PushMoney = self.pushMoneyTF.text;//推送金额
-    NSString * TopType = self.haveBtn.enabled ? @"0" : @"1";//地区置顶类型（0.不需要，1.需要）
-    NSString * TopMoney = self.haveMoneyTF.text;//置顶金额
     //拼装
     [publishinfo_dictionary setValue:Title forKey:@"Title"];
     [publishinfo_dictionary setValue:Content forKey:@"Content"];
@@ -427,13 +378,8 @@
     [publishinfo_dictionary setValue:Province forKey:@"Province"];
     [publishinfo_dictionary setValue:City forKey:@"City"];
     [publishinfo_dictionary setValue:Address forKey:@"Address"];
-    [publishinfo_dictionary setValue:PushType forKey:@"PushType"];
-    if ([PushType isEqualToString:@"1"]) {
-        [publishinfo_dictionary setValue:PushMoney forKey:@"PushMoney"];
-    }
-    [publishinfo_dictionary setValue:TopType forKey:@"TopType"];
-    if ([TopType isEqualToString:@"1"]) {
-        [publishinfo_dictionary setValue:TopMoney forKey:@"TopMoney"];
+    if (self.PublishAddress && self.PublishAddress.length) {
+        [publishinfo_dictionary setValue:_PublishAddress forKey:@"PublishAddress"];
     }
     //正式拼装
     NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
@@ -467,50 +413,6 @@
     }];
     
     
-}
-//推送地区按钮
--(void)pushAreaButtonCallback:(UIButton *)btn{
-    NSInteger tag = btn.tag;
-    if (tag == 100) {
-        self.allCountryBtn.enabled = true;
-        self.areaSelectBtn.enabled = false;
-        CGRect frame = self.areaMoneyView.frame;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.areaMoneyView.frame = CGRectMake(WIDTH, frame.origin.y, frame.size.width, frame.size.height);
-        } completion:^(BOOL finished) {
-            [MYTOOL hideKeyboard];
-        }];
-        
-    }else{
-        self.allCountryBtn.enabled = false;
-        self.areaSelectBtn.enabled = true;
-        CGRect frame = self.areaMoneyView.frame;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.areaMoneyView.frame = CGRectMake(70, frame.origin.y, frame.size.width, frame.size.height);
-        }];
-    }
-}
-//地区置顶按钮
--(void)areaUpButtonCallback:(UIButton *)btn{
-    NSInteger tag = btn.tag;
-    if (tag == 100) {
-        self.haveBtn.enabled = true;
-        self.noHaveBtn.enabled = false;
-        CGRect frame = self.haveMoneyView.frame;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.haveMoneyView.frame = CGRectMake(WIDTH, frame.origin.y, frame.size.width, frame.size.height);
-        } completion:^(BOOL finished) {
-            [MYTOOL hideKeyboard];
-        }];
-        
-    }else{
-        self.haveBtn.enabled = false;
-        self.noHaveBtn.enabled = true;
-        CGRect frame = self.haveMoneyView.frame;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.haveMoneyView.frame = CGRectMake(70, frame.origin.y, frame.size.width, frame.size.height);
-        }];
-    }
 }
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -683,13 +585,6 @@
     //清除要删除的图片框
     [self.img_arr[show_view.tag][@"imgV"] removeFromSuperview];
     [self.img_arr removeObjectAtIndex:show_view.tag];
-    
-    //需要添加空的图片view
-    float top = 253/736.0*HEIGHT+ 22;
-    float width_img = (WIDTH - 40)/3;
-    //下边的type选择view往下移动
-    
-    
     //取消全屏
     {
         self.num_label = nil;
@@ -907,7 +802,7 @@
 #pragma mark - 键盘出现和隐藏事件
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
-    NSArray * array = @[self.pushMoneyTF,self.haveMoneyTF,self.addressTF];
+    NSArray * array = @[self.addressTF];
     UITextField * tf = nil;
     for (UITextField * tt in array) {
         if ([tt isFirstResponder]) {
@@ -957,21 +852,24 @@
     if (address && address.length > 0) {
         self.addressTF.text = address;
     }
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"定位成功-此信息将在详情中作为发布位置显示" message:obj[@"addressInfo"] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.PublishAddress = obj[@"addressInfo"];
+    }];
+    [ac addAction:sure];
+    [self presentViewController:ac animated:true completion:nil];
 }
 //接收到定位失败通知
 -(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{
-    
+    [SVProgressHUD showErrorWithStatus:@"定位失败\n无法发布信息哦" duration:2];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
-    
-    
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    
     //增加监听，当键退出时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)

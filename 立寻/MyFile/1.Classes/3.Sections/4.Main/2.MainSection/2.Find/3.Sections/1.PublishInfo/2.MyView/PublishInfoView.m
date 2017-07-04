@@ -174,6 +174,10 @@
                 if (ProvinceName && CityName && Address) {
                     text = [NSString stringWithFormat:@"发布信息位置：%@%@%@",ProvinceName,CityName,Address];
                 }
+                NSString * PublishAddress = publishDictionary[@"PublishAddress"];
+                if (PublishAddress && PublishAddress.length) {
+                    text = [NSString stringWithFormat:@"发布信息位置：%@",PublishAddress];
+                }
                 top += 12;
                 UILabel * label = [UILabel new];
                 label.font = [UIFont systemFontOfSize:11];

@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UILabel * num_label;//预览图片时显示的图片序号
 @property(nonatomic,strong)UIView * img_bg_view;//图片背景view
 @property(nonatomic,strong)NSArray * areaArray;//地区数组
+@property(nonatomic,strong)NSString * PublishAddress;//定位地址
 
 @end
 
@@ -44,6 +45,8 @@
     self.areaArray = [NSArray arrayWithContentsOfFile:path];
     //加载主界面
     [self loadMainView];
+    //定位开启
+    [[MyLocationManager sharedLocationManager] startLocation];
 }
 //加载主界面
 -(void)loadMainView{
@@ -282,7 +285,9 @@
     [publishinfo_dictionary setValue:CategoryID forKey:@"CategoryID"];
     [publishinfo_dictionary setValue:uploadAreaDic[@"provinceid"] forKey:@"Province"];
     [publishinfo_dictionary setValue:uploadAreaDic[@"cityid"] forKey:@"City"];
-    
+    if (self.PublishAddress && self.PublishAddress.length) {
+        [publishinfo_dictionary setValue:_PublishAddress forKey:@"PublishAddress"];
+    }
     //正式拼装
     NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];//用户id
     NSString * picturelist = [MYTOOL getJsonFromDictionaryOrArray:fileid_array];//图片参数
@@ -726,12 +731,25 @@
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];
 }
-
+//接收到定位成功通知
+-(void)receiveUpdateLocationSuccessNotification:(NSNotification *)notification{
+    NSDictionary * obj = notification.object;
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"定位成功-此信息将在详情中作为发布位置显示" message:obj[@"addressInfo"] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.PublishAddress = obj[@"addressInfo"];
+    }];
+    [ac addAction:sure];
+    [self presentViewController:ac animated:true completion:nil];
+    
+}
+//接收到定位失败通知
+-(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{
+    [SVProgressHUD showErrorWithStatus:@"定位失败\n无法发布信息哦" duration:2];
+}
 -(void)viewWillAppear:(BOOL)animated{
     [MYTOOL hiddenTabBar];
     
-    //定位开启
-    //    [[MyLocationManager sharedLocationManager] startLocation];
+    
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -743,12 +761,16 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    [MYCENTER_NOTIFICATION addObserver:self selector:@selector(receiveUpdateLocationSuccessNotification:) name:NOTIFICATION_UPDATELOCATION_SUCCESS object:nil];
+    [MYCENTER_NOTIFICATION addObserver:self selector:@selector(receiveUpdateLocationFailedNotification:) name:NOTIFICATION_UPDATELOCATION_FAILED object:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [MYTOOL showTabBar];
     //删除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [MYCENTER_NOTIFICATION removeObserver:self name:NOTIFICATION_UPDATELOCATION_SUCCESS object:nil];
+    [MYCENTER_NOTIFICATION removeObserver:self name:NOTIFICATION_UPDATELOCATION_FAILED object:nil];
     
 }
 

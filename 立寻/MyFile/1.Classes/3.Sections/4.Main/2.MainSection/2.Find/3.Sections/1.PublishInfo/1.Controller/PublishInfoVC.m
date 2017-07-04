@@ -31,6 +31,7 @@
     self.view.backgroundColor = MYCOLOR_240_240_240;
     //加载主界面
     [self loadMainView];
+    NSLog(@"info:%@",self.publishDictionary);
 }
 //加载主界面
 -(void)loadMainView{
@@ -82,7 +83,7 @@
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"请选择操作类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //我要推广
     UIAlertAction * wantPopularize = [UIAlertAction actionWithTitle:@"我要推广" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        [self wantPopularize];
     }];
     //结束寻找
     UIAlertAction * overLook = [UIAlertAction actionWithTitle:@"结束寻找" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -92,10 +93,7 @@
     }];
     //寻找完成
     UIAlertAction * lookFinish = [UIAlertAction actionWithTitle:@"寻找完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString * interface = @"/publish/publish/finishpublishinfo.html";
-        
-        
-        
+        [self lookFinish];
     }];
     //删除信息
     UIAlertAction * deletePublish = [UIAlertAction actionWithTitle:@"删除信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -109,6 +107,15 @@
     [ac addAction:deletePublish];
     [ac addAction:cancel];
     [self presentViewController:ac animated:true completion:nil];
+}
+//我要推广
+-(void)wantPopularize{
+    
+}
+//寻找完成
+-(void)lookFinish{
+    NSString * interface = @"/publish/publish/finishpublishinfo.html";
+    
 }
 //删除发布信息
 -(void)deletePublish{

@@ -74,7 +74,16 @@ static id instance;
                                                 @"address":placemark.name
                                                 };
                  if (addressArray && addressArray.count > 0) {
-                     NSString * addressInfo = [NSString stringWithFormat:@"%@%@",addressArray[0],placemark.name];
+                     NSString * addressInfo = @"";
+                     NSString * add1 = addressArray[0];
+                     NSString * add2 = placemark.name;
+                     if ([add2 rangeOfString:add1].location != NSNotFound) {//不包含
+                         addressInfo = [NSString stringWithFormat:@"%@%@",addressArray[0],placemark.name];
+                     }else{//包含
+                         addressInfo = add1;
+                     }
+                     
+                     
                      locationDic = @{
                                      @"city":city,
                                      @"address":placemark.name,

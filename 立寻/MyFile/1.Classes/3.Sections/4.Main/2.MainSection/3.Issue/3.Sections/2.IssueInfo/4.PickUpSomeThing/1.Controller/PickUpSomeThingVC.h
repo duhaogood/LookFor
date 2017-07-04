@@ -27,23 +27,6 @@
 @property(nonatomic,strong)UITextField * addressTF;//详细地址文本
 @property(nonatomic,strong)UIPickerView * picker;//地区选择器
 @property(nonatomic,strong)UIPickerView * typePicker;//类型选择器
-#pragma mark - 服务支持
-//推送地区
-@property(nonatomic,strong)UIButton * areaSelectBtn;//选择地区按钮
-@property(nonatomic,strong)UIButton * allCountryBtn;//全国按钮
-@property(nonatomic,strong)UIView * areaMoneyView;//地区选择按钮下方view
-@property(nonatomic,strong)UITextField * pushMoneyTF;//全国推送金额文本框
-//地区置顶
-@property(nonatomic,strong)UIButton * noHaveBtn;//不需要按钮
-@property(nonatomic,strong)UIButton * haveBtn;//需要按钮
-@property(nonatomic,strong)UIView * haveMoneyView;//是否需要选择按钮下方view
-@property(nonatomic,strong)UITextField * haveMoneyTF;//地区置顶金额文本框
-
-
-//推送地区按钮
--(void)pushAreaButtonCallback:(UIButton *)btn;
-//地区置顶按钮
--(void)areaUpButtonCallback:(UIButton *)btn;
 
 -(void)clickOkOfPickerView:(UIBarButtonItem*)btn;
 //保存至草稿箱
