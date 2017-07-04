@@ -207,7 +207,7 @@
                 self.up_btn = btn;
                 btn.tag = 100;
                 [btn setTitle:@"置顶" forState:UIControlStateNormal];
-                btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                btn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
                 [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
@@ -222,7 +222,7 @@
                 UIButton * btn = [UIButton new];
                 btn.tag = 200;
                 [btn setTitle:@"最新" forState:UIControlStateNormal];
-                btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                btn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
                 [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
@@ -239,7 +239,7 @@
                 UIButton * btn = [UIButton new];
                 btn.tag = 300;
                 [btn setTitle:@"悬赏" forState:UIControlStateNormal];
-                btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                btn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
                 [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                 [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
@@ -375,7 +375,7 @@
             label.text = CategoryTitle;
             CGSize size = [MYTOOL getSizeWithLabel:label];
             //按钮宽度最小宽度60
-            float btn_width = size.width + 10;
+            float btn_width = size.width + 25;
             if (btn_width < 60) {
                 btn_width = 60;
             }

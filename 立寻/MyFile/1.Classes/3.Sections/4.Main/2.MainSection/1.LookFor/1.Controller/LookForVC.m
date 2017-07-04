@@ -263,7 +263,7 @@
         //表视图
         UITableView * tableView = [UITableView new];
         //头视图
-        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:550]) andDelegate:self andUpBannerArray:nil andDownBannerArray:down andBtnName_imgArray:self.btn_name_img_array];
+        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:593]) andDelegate:self andUpBannerArray:nil andDownBannerArray:down andBtnName_imgArray:self.btn_name_img_array];
         self.headerView = headerView;
         self.tableView = tableView;
         tableView.dataSource = self;

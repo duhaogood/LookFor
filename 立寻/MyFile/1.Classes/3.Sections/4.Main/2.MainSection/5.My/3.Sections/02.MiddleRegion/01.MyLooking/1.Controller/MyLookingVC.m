@@ -49,7 +49,7 @@
             [btn setTitle:title forState:UIControlStateNormal];
             [btn setTitleColor:MYCOLOR_40_199_0 forState:UIControlStateDisabled];
             [btn setTitleColor:MYCOLOR_48_48_48 forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:13];
+            btn.titleLabel.font = [UIFont systemFontOfSize:15];
             btn.frame = CGRectMake(width*i, 5, width, view.frame.size.height-10);
             [view addSubview:btn];
             btn.tag = [calegary_array[i] intValue];

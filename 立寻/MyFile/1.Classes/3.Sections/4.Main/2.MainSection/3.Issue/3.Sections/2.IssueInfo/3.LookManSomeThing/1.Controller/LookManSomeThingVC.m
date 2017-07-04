@@ -61,7 +61,7 @@
     float top = 0;
     //发布上册view
     {
-        float height = [MYTOOL getHeightWithIphone_six:323];
+        float height = [MYTOOL getHeightWithIphone_six:380];
         LookManSomeThingUpView * view = [[LookManSomeThingUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:@"http://img.woyaogexing.com/touxiang/katong/20140110/864ea8353fe3edd3.jpg%21200X200.jpg" andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
@@ -93,7 +93,7 @@
             //提示文字
             {
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:14.5];
                 label.textColor = MYCOLOR_48_48_48;
                 label.text = @"上传目标图片";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -105,7 +105,7 @@
             //提示文字2
             {
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:13];
                 label.textColor = [MYTOOL RGBWithRed:255 green:75 blue:75 alpha:1];
                 label.text = @"寻找债权人需要上传债券证明图片";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -133,7 +133,7 @@
     }
     //发布底部view
     {
-        float height = [MYTOOL getHeightWithIphone_six:200];
+        float height = [MYTOOL getHeightWithIphone_six:122];
         LookManSomeThingDownView * view = [[LookManSomeThingDownView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
@@ -842,6 +842,8 @@
 //接收到定位成功通知
 -(void)receiveUpdateLocationSuccessNotification:(NSNotification *)notification{
     NSDictionary * obj = notification.object;
+    self.PublishAddress = obj[@"addressInfo"];
+    return;
     NSString * city = obj[@"city"];
     NSString * address = obj[@"address"];
     if (city && city.length > 0) {
@@ -859,6 +861,7 @@
 }
 //接收到定位失败通知
 -(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{
+    return;
     [SVProgressHUD showErrorWithStatus:@"定位失败\n无法发布信息哦" duration:2];
 }
 -(void)viewWillAppear:(BOOL)animated{

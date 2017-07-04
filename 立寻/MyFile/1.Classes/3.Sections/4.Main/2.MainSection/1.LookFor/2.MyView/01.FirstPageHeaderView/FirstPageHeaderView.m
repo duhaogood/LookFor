@@ -20,6 +20,7 @@
 @implementation FirstPageHeaderView
 -(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate andUpBannerArray:(NSArray *)upBannerArray andDownBannerArray:(NSArray *)downBannerArray andBtnName_imgArray:(NSArray *)btnName_imgArray{
     if (self = [super initWithFrame:frame]) {
+        float all_height = 593;
         float height_all = frame.size.height;//头view的总高度
         self.backgroundColor = MYCOLOR_240_240_240;
         float top = 0;
@@ -29,16 +30,16 @@
             for (NSDictionary * dic in upBannerArray) {
                 [url_arr addObject:dic[@"imgpath"]];
             }
-            SDCycleScrollView * cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 125/550.0*height_all) imageURLStringsGroup:url_arr];
+            SDCycleScrollView * cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 125/all_height*height_all) imageURLStringsGroup:url_arr];
             cycleScrollView.delegate = delegate;
             [delegate setUpBannerView:cycleScrollView];
             [self addSubview:cycleScrollView];
             cycleScrollView.tag = 100;
-            top = 125/550.0*height_all;
+            top = 125/all_height*height_all;
         }
         //中部按钮区
         {
-            float height = 197/550.0*height_all;
+            float height = 220/all_height*height_all;
             UIView * view = [UIView new];
             view.frame = CGRectMake(0, top, WIDTH, height);
             view.backgroundColor = [UIColor whiteColor];
@@ -55,6 +56,9 @@
                     UIButton * btn = [UIButton new];
                     [btn setImage:[UIImage imageNamed:btnName_imgArray[i][0]] forState:UIControlStateNormal];
                     btn.frame = CGRectMake(space_x + btn_width * col, space_y + btn_height * row, 50, 50);
+                    if (row == 1) {
+                        btn.frame = CGRectMake(space_x + btn_width * col, space_y + btn_height * row - 5, 50, 50);
+                    }
                     [view addSubview:btn];
                     btn.tag = i;
                     [btn addTarget:delegate action:@selector(iconClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -68,6 +72,9 @@
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.textAlignment = NSTextAlignmentCenter;
                     label.frame = CGRectMake(btn_width * col, 50 + space_y * 2 + btn_height * row - size.height / 2, btn_width, size.height);
+                    if (row == 1) {
+                        label.frame = CGRectMake(btn_width * col, 50 + space_y * 2 + btn_height * row - size.height / 2 - 5, btn_width, size.height);
+                    }
                     [view addSubview:label];
                 }
             }
@@ -75,7 +82,7 @@
         }
         //签到、积分
         {
-            float height = 60/550.0*height_all;
+            float height = 80/all_height*height_all;
             UIView * bgView = [UIView new];
             bgView.frame = CGRectMake(0, top, WIDTH, height);
             bgView.backgroundColor = [UIColor blueColor];
@@ -127,9 +134,9 @@
                     label.textColor = [MYTOOL RGBWithRed:51 green:51 blue:51 alpha:1];
                     label.font = [UIFont systemFontOfSize:15];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
-                    label.frame = CGRectMake(14, (height - 7)/4-size.height/2, size.width, size.height);
+                    label.frame = CGRectMake(14, 12, size.width, size.height);
                     [view addSubview:label];
-                    sign_down = (height - 7)/4-size.height/2 + size.height;
+                    sign_down = 12 + size.height;
                 }
                 //描述
                 {
@@ -156,7 +163,7 @@
         }
         //中间banner
         {
-            float height = 95/550.0*height_all;
+            float height = 95/all_height*height_all;
             UIView * view = [UIView new];
             view.frame = CGRectMake(0, top, WIDTH, height);
             view.backgroundColor = MYCOLOR_240_240_240;
@@ -207,7 +214,7 @@
                 {
                     UIButton * btn1 = [UIButton new];
                     [btn1 setTitle:@"悬赏找寻服务" forState:UIControlStateNormal];
-                    btn1.titleLabel.font = [UIFont systemFontOfSize:13];
+                    btn1.titleLabel.font = [UIFont systemFontOfSize:15];
                     [btn1 setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateNormal];
                     btn1.frame = CGRectMake(0, 0, WIDTH/2, height/2);
                     [view addSubview:btn1];
@@ -220,7 +227,7 @@
                 {
                     UIButton * btn2 = [UIButton new];
                     [btn2 setTitle:@"普通找寻服务" forState:UIControlStateNormal];
-                    btn2.titleLabel.font = [UIFont systemFontOfSize:13];
+                    btn2.titleLabel.font = [UIFont systemFontOfSize:15];
                     [btn2 setTitleColor:[MYTOOL RGBWithRed:49 green:49 blue:49 alpha:1] forState:UIControlStateNormal];
                     btn2.frame = CGRectMake(WIDTH/2, 0, WIDTH/2, height/2);
                     [view addSubview:btn2];
@@ -247,7 +254,7 @@
                     self.leftTypeBtn = btn;
                     btn.tag = 100;
                     [btn setTitle:@"置顶" forState:UIControlStateNormal];
-                    btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                    btn.titleLabel.font = [UIFont systemFontOfSize:13];
                     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
                     [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                     [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];
@@ -264,7 +271,7 @@
                     btn.tag = 200;
                     self.rightTypeBtn = btn;
                     [btn setTitle:@"最新" forState:UIControlStateNormal];
-                    btn.titleLabel.font = [UIFont systemFontOfSize:11];
+                    btn.titleLabel.font = [UIFont systemFontOfSize:13];
                     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
                     [btn setTitleColor:[MYTOOL RGBWithRed:64 green:64 blue:64 alpha:1] forState:UIControlStateNormal];
                     [btn setBackgroundImage:[UIImage imageNamed:@"zuixin"] forState:UIControlStateNormal];

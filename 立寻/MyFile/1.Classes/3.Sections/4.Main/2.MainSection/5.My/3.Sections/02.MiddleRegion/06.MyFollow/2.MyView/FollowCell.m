@@ -24,7 +24,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = [NSString stringWithFormat:@"关注时间：%@",dictionary[@"CreateTime"]];
-                label.font = [UIFont systemFontOfSize:10];
+                label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 [self addSubview:label];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -62,7 +62,7 @@
                 top += 8;
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"Title"];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:15];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(left, top, size.width, size.height);
@@ -72,7 +72,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"Content"];
-                label.font = [UIFont systemFontOfSize:11];
+                label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 //宽度
@@ -103,7 +103,7 @@
             {
                 UILabel * label = [UILabel new];
                 NSString * money = dictionary[@"Money"];
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:13];
                 label.text = [NSString stringWithFormat:@"%@元",money];
                 label.textColor = [MYTOOL RGBWithRed:255 green:83 blue:95 alpha:1];
                 [self addSubview:label];
@@ -116,7 +116,7 @@
             UIButton * btn = [UIButton new];
             [btn setBackgroundImage:[UIImage imageNamed:@"list_opt"] forState:UIControlStateNormal];
             [btn setTitle:@"取消关注" forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:12];
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
             [btn setTitleColor:[MYTOOL RGBWithRed:103 green:176 blue:250 alpha:1] forState:UIControlStateNormal];
             btn.frame = CGRectMake(WIDTH - 10 - 64, btn_top-4.5, 64, 22);
             btn.tag = indexPath.section;

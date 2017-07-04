@@ -24,7 +24,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = [NSString stringWithFormat:@"提供线索时间：%@",dictionary[@"CreateTime"]];
-                label.font = [UIFont systemFontOfSize:10];
+                label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 [self addSubview:label];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -51,7 +51,7 @@
                         break;
                 }
                 label.text = text;
-                label.font = [UIFont systemFontOfSize:10];
+                label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(WIDTH - 10 - size.width, 40/122.0*height/2 - size.height/2, size.width, size.height);
@@ -88,7 +88,7 @@
                 top += 8;
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"PublishTitle"];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:15];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(left, top, size.width, size.height);
@@ -98,7 +98,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"PublishContent"];
-                label.font = [UIFont systemFontOfSize:11];
+                label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 //宽度

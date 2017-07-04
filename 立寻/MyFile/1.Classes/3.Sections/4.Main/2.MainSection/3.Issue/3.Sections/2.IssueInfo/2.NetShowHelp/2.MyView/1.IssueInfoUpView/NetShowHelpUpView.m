@@ -109,23 +109,25 @@
         {
             top += label_space;
             left = 0;
+            float middle_right = 0;
             //左侧提示
             {
                 UILabel * label = [UILabel new];
                 label.text = @"目标类型:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
                 [self addSubview:label];
                 left += 20 + size.width;
+                middle_right = top + size.height/2;
             }
             //右侧
             {
                 UITextField * typeTF = [UITextField new];
                 typeTF.text = typeArray[0][@"CategoryTitle"];
                 typeTF.textAlignment = NSTextAlignmentCenter;
-                typeTF.frame = CGRectMake(left, top -5, 100, label_height + 10);
+                typeTF.frame = CGRectMake(left, middle_right - 17.5, 100, 35);
                 typeTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
                 typeTF.tag = 100;
                 typeTF.delegate = delegate;
@@ -173,7 +175,7 @@
                     [v addSubview:label];
                 }
             }
-            top += label_height;
+            top += label_height + 10;
         }
         //选择城市
         {

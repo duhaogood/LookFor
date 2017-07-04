@@ -12,14 +12,18 @@
 @property(nonatomic,strong)UIScrollView * scrollView;
 @property(nonatomic,strong)UIView * commentView;//评论view
 @property(nonatomic,assign)float commentTop;//评论view顶坐标
-
+@property(nonatomic,strong)UIView * down_view;//下方view
+@property(nonatomic,strong)UIView * img_bg_view;//图片背景view
 
 //关注
 @property(nonatomic,strong)UIButton * attentionBtn;//关注按钮
 @property(nonatomic,strong)UIImageView * attentionIcon;//关注图标
+@property(nonatomic,strong)NSMutableArray * img_array;//所有图片数组
 @end
 @implementation PublishInfoView
-
+{
+    float top_of_image;//图片上方top
+}
 -(instancetype)initWithFrame:(CGRect)frame andPublishDictionary:(NSDictionary*)publishDictionary andDelegate:(PublishInfoVC*)delegate{
     if (self = [super initWithFrame:frame]) {
         BOOL isMine = delegate.isMine;
@@ -71,12 +75,12 @@
             //用户名字
             {
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:15];
                 label.textColor = MYCOLOR_48_48_48;
                 NSString * user_name = publishDictionary[@"UserName"];
                 label.text = user_name;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(left, height/2.0-size.height, size.width, size.height);
+                label.frame = CGRectMake(left, height/2.0-size.height/2.0, size.width, size.height);
                 [view addSubview:label];
             }
             //是否认证
@@ -86,14 +90,14 @@
             //个人详情按钮
             {
                 UIButton * btn = [UIButton new];
-                btn.frame = CGRectMake(WIDTH - 82, height/2 - 10, 72, 20);
+                btn.frame = CGRectMake(WIDTH - 90, height/2 - 12, 80, 24);
                 btn.layer.masksToBounds = true;
-                btn.layer.cornerRadius = 10;
+                btn.layer.cornerRadius = 12;
                 btn.layer.borderWidth = 1;
                 btn.layer.borderColor = [MYTOOL RGBWithRed:221 green:221 blue:221 alpha:1].CGColor;
                 [btn setTitle:@"个人详情" forState:UIControlStateNormal];
                 [btn setTitleColor:[MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1] forState:UIControlStateNormal];
-                btn.titleLabel.font = [UIFont systemFontOfSize:12];
+                btn.titleLabel.font = [UIFont systemFontOfSize:14];
                 [view addSubview:btn];
                 [btn addTarget:delegate action:@selector(submitPersonalBtn:) forControlEvents:UIControlEventTouchUpInside];
             }
@@ -101,6 +105,7 @@
         //发布的信息
         {
             UIView * view = [UIView new];
+            self.img_bg_view = view;
             float height = [MYTOOL getHeightWithIphone_six:675];
             view.frame = CGRectMake(0, top_all, WIDTH, height);
             view.backgroundColor = [UIColor whiteColor];
@@ -180,7 +185,7 @@
                 }
                 top += 12;
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:11];
+                label.font = [UIFont systemFontOfSize:14];
                 label.text = text;
                 label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -243,36 +248,42 @@
                 [view addSubview:label];
                 top += size.height * row + 18;
             }
+            top_of_image = top;
             //图片
             {
+                self.img_array = [NSMutableArray new];
                 NSArray * PictureList = publishDictionary[@"PictureList"];
-                float img_height = [MYTOOL getHeightWithIphone_six:234];//图片高度
+                __block float img_height = HEIGHT;//图片高度
                 for (NSDictionary * pictureDic in PictureList) {
                     //图片链接
                     NSString * url = pictureDic[@"ImgFilePath"];
                     UIImageView * imgV = [UIImageView new];
+                    [self.img_array addObject:imgV];
                     imgV.frame = CGRectMake(0, top, WIDTH, img_height);
                     [view addSubview:imgV];
                     [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:url andCompleted:^(UIImage *image) {
                         CGSize size = image.size;
-                        float real_width = img_height / size.height * size.width;
-                        if (real_width > WIDTH) {
-                            real_width = WIDTH;
-                        }
-                        imgV.frame = CGRectMake(0, imgV.frame.origin.y, real_width, img_height);
+                        img_height = WIDTH / size.width * size.height;
+                        imgV.frame = CGRectMake(0, imgV.frame.origin.y, WIDTH, img_height);
+                        [self updateImageAndCommentLocation];
                     }];
-                    top += img_height + 5;
+                    top += HEIGHT + 5;
                 }
             }
             //目标丢失地
-            top += 15;
+            UIView * down_view = [UIView new];
+            down_view.frame = CGRectMake(0, top, WIDTH, 65 + 64+15);
+            self.down_view = down_view;
+            down_view.backgroundColor = [UIColor whiteColor];
+            [view addSubview:down_view];
+            top = 15;
             {
                 //图标
                 {
                     UIImageView * icon = [UIImageView new];
                     icon.image = [UIImage imageNamed:@"address"];
                     icon.frame = CGRectMake(10, top, 9, 11);
-                    [view addSubview:icon];
+                    [down_view addSubview:icon];
                 }
                 
                 NSString * ProvinceName = publishDictionary[@"ProvinceName"];
@@ -293,7 +304,7 @@
                     row ++;
                 }
                 label.frame = CGRectMake(10+9+14, top-size.height/2, WIDTH - 10-(10+9+14), size.height * row);
-                [view addSubview:label];
+                [down_view addSubview:label];
                 label.numberOfLines = 0;
                 top += size.height * row + 15;
             }
@@ -302,7 +313,7 @@
                 UIView * commentView = [UIView new];
                 commentView.backgroundColor = [MYTOOL RGBWithRed:238 green:238 blue:238 alpha:1];
                 commentView.frame = CGRectMake(0, top, WIDTH, 44);
-                [view addSubview:commentView];
+                [down_view addSubview:commentView];
                 //评论人数-CommentCount
                 {
                     UILabel * label = [UILabel new];
@@ -316,23 +327,7 @@
                     label.frame = CGRectMake(10, 22-size.height/2, size.width, size.height);
                     [commentView addSubview:label];
                 }
-                /*评论人头像*/
                 
-                
-                //右侧小图标
-                {
-                    UIImageView * icon = [UIImageView new];
-                    icon.image = [UIImage imageNamed:@"arrow_right_md"];
-//                    [commentView addSubview:icon];
-                    icon.frame = CGRectMake(commentView.frame.size.width - 23, 16, 6, 12);
-                }
-                //评论列表按钮
-                {
-                    UIButton * btn = [UIButton new];
-                    btn.frame = commentView.bounds;
-//                    [commentView addSubview:btn];
-                    [btn addTarget:delegate action:@selector(submitCommentListBtn:) forControlEvents:UIControlEventTouchUpInside];
-                }
                 top += 64;
             }
             //评论区
@@ -344,7 +339,7 @@
                     label.font = [UIFont systemFontOfSize:13];
                     label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
                     label.frame = CGRectMake(10, top, WIDTH-20, 15);
-                    [view addSubview:label];
+                    [down_view addSubview:label];
                 }
                 /*评论列表*/
                 top += 20;
@@ -352,7 +347,7 @@
                 {
                     UIView * commentView = [UIView new];
                     self.commentView = commentView;
-                    commentView.frame = CGRectMake(0, top, WIDTH, 0);
+                    commentView.frame = CGRectMake(0, top+self.commentTop, WIDTH, 0);
                     [view addSubview:commentView];
                     commentView.backgroundColor = [UIColor whiteColor];
                 }
@@ -360,8 +355,8 @@
                 
                 top += 10;
             }
-            view.frame = CGRectMake(0, view.frame.origin.y, view.frame.size.width+10, top);
-            top_all += top;
+            view.frame = CGRectMake(0, view.frame.origin.y, view.frame.size.width+10, top+top_of_image);
+            top_all += top + top_of_image;
             self.commentTop = top_all;
         }
         scrollView.contentSize = CGSizeMake(0, top_all);
@@ -384,7 +379,7 @@
                 //图标
                 {
                     UIImageView * icon = [UIImageView new];
-                    icon.frame = CGRectMake(WIDTH/12-9, 9, 18, 16);
+                    icon.frame = CGRectMake(WIDTH/8-9, 9, 18, 16);
                     [view addSubview:icon];
                     self.attentionIcon = icon;
                     icon.image = [UIImage imageNamed:@"info_ft_gz"];
@@ -396,7 +391,7 @@
                     label.textAlignment = NSTextAlignmentCenter;
                     label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
                     label.font = [UIFont systemFontOfSize:12];
-                    label.frame = CGRectMake(0, 27, WIDTH/6, 20);
+                    label.frame = CGRectMake(0, 27, WIDTH/4, 20);
                     [view addSubview:label];
                 }
                 //按钮
@@ -404,7 +399,7 @@
                     UIButton * btn = [UIButton new];
                     btn.tag = 0;
                     self.attentionBtn = btn;
-                    btn.frame = CGRectMake(0, 0, WIDTH/6, 50);
+                    btn.frame = CGRectMake(0, 0, WIDTH/4, 50);
                     [btn addTarget:delegate action:@selector(submitAttentionBtn:) forControlEvents:UIControlEventTouchUpInside];
                     [view addSubview:btn];
                 }
@@ -412,7 +407,7 @@
             //分割线
             {
                 UIView * space = [UIView new];
-                space.frame = CGRectMake(WIDTH/6-0.5, 7, 1, 36);
+                space.frame = CGRectMake(WIDTH/4-0.5, 7, 1, 36);
                 space.backgroundColor = [MYTOOL RGBWithRed:221 green:221 blue:221 alpha:1];
                 [view addSubview:space];
             }
@@ -421,7 +416,7 @@
                 //图标
                 {
                     UIImageView * icon = [UIImageView new];
-                    icon.frame = CGRectMake(WIDTH/12*3-9, 9, 18, 16);
+                    icon.frame = CGRectMake(WIDTH/8*3-9, 9, 18, 16);
                     [view addSubview:icon];
                     icon.image = [UIImage imageNamed:@"comments_btn"];
                 }
@@ -432,33 +427,23 @@
                     label.textAlignment = NSTextAlignmentCenter;
                     label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
                     label.font = [UIFont systemFontOfSize:12];
-                    label.frame = CGRectMake(WIDTH/6, 27, WIDTH/6, 20);
+                    label.frame = CGRectMake(WIDTH/4, 27, WIDTH/4, 20);
                     [view addSubview:label];
                 }
                 //按钮
                 {
                     UIButton * btn = [UIButton new];
-                    btn.frame = CGRectMake(WIDTH/6, 0, WIDTH/6, 50);
+                    btn.frame = CGRectMake(WIDTH/4, 0, WIDTH/4, 50);
                     [btn addTarget:delegate action:@selector(submitCommentBtn:) forControlEvents:UIControlEventTouchUpInside];
                     [view addSubview:btn];
                 }
-            }
-            //留言
-            {
-                UIButton * btn = [UIButton new];
-                btn.backgroundColor = [MYTOOL RGBWithRed:34 green:204 blue:203 alpha:1];
-                btn.titleLabel.font = [UIFont systemFontOfSize:15];
-                [btn setTitle:@"留言" forState:UIControlStateNormal];
-                btn.frame = CGRectMake(WIDTH/3, 0, WIDTH/3, 50);
-                [view addSubview:btn];
-                [btn addTarget:delegate action:@selector(submitMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
             }
             //我有线索
             if (!isMine) {
                 UIButton * btn = [UIButton new];
                 btn.backgroundColor = [MYTOOL RGBWithRed:250 green:101 blue:104 alpha:1];
                 btn.titleLabel.font = [UIFont systemFontOfSize:15];
-                btn.frame = CGRectMake(WIDTH/3*2, 0, WIDTH/3, 50);
+                btn.frame = CGRectMake(WIDTH/2, 0, WIDTH/2, 50);
                 [view addSubview:btn];
                 //一级分类id
                 int ParentCategoryID = [publishDictionary[@"ParentCategoryID"] intValue];
@@ -489,6 +474,20 @@
         
     }
     return self;
+}
+//刷新图片下方图片位置和评论相关
+-(void)updateImageAndCommentLocation{
+    float top = top_of_image;
+    for (UIImageView * imgV in self.img_array) {
+        imgV.frame = CGRectMake(0, top, WIDTH, imgV.frame.size.height);
+        top += imgV.frame.size.height + 5;
+    }
+    self.img_bg_view.frame = CGRectMake(0, self.img_bg_view.frame.origin.y, WIDTH, top);
+    self.down_view.frame = CGRectMake(0, top, WIDTH, self.down_view.frame.size.height);
+    top += self.down_view.frame.size.height;
+    self.commentTop = top;
+    self.commentView.frame = CGRectMake(0, top, WIDTH, self.commentView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(0, 10 + [MYTOOL getHeightWithIphone_six:75] + top + self.commentView.frame.size.height);
 }
 //更新关注状态
 -(void)updateAttentionStatus:(UIButton *)btn{
@@ -530,9 +529,9 @@
         {
             NSString * url = dictionary[@"ImgFilePath"];
             UIImageView * icon = [UIImageView new];
-            icon.frame = CGRectMake(10, 22.5 - 12.5 + top, 25, 25);
+            icon.frame = CGRectMake(10, 22.5 - 15 + top, 30, 30);
             icon.layer.masksToBounds = true;
-            icon.layer.cornerRadius = 12.5;
+            icon.layer.cornerRadius = 15;
             [self.commentView addSubview:icon];
             //默认头像
             icon.image = [UIImage imageNamed:@"morenhdpic"];
@@ -544,7 +543,7 @@
         {
             NSString * name = dictionary[@"UserName"];
             UILabel * label = [UILabel new];
-            label.font = [UIFont systemFontOfSize:12];
+            label.font = [UIFont systemFontOfSize:14];
             label.textColor = [MYTOOL RGBWithRed:61 green:61 blue:61 alpha:1];
             label.text = name;
             CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -567,7 +566,7 @@
             NSString * content = dictionary[@"Content"];
             UILabel * label = [UILabel new];
             label.text = content;
-            label.font = [UIFont systemFontOfSize:10];
+            label.font = [UIFont systemFontOfSize:13];
             label.textColor = MYCOLOR_144;
             CGSize size = [MYTOOL getSizeWithLabel:label];
             label.frame = CGRectMake(45, top + 22.5 + 2, WIDTH - 45 - 10, size.height);
@@ -584,6 +583,6 @@
         top += 45;
     }
     
-    
+    [self updateImageAndCommentLocation];
 }
 @end

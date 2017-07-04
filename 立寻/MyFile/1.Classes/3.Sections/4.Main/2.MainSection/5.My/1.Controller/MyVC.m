@@ -64,7 +64,7 @@
             UILabel * label = [UILabel new];
             self.progressLabel = label;
             label.text = @"完善度100%";
-            label.font = [UIFont systemFontOfSize:10];
+            label.font = [UIFont systemFontOfSize:13];
             label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
             CGSize size = [MYTOOL getSizeWithLabel:label];
             label.textAlignment = NSTextAlignmentCenter;
@@ -104,7 +104,7 @@
             self.nameLabel = label;
             label.frame = CGRectMake(left, view_height/4.0, nameLabelRight - left - 5, 15);
             label.text = userInfo[@"name"];
-            label.font = [UIFont systemFontOfSize:13];
+            label.font = [UIFont systemFontOfSize:18];
             label.textColor = [MYTOOL RGBWithRed:48 green:48 blue:48 alpha:1];
             [view addSubview:label];
         }
@@ -114,7 +114,7 @@
             signTF.text = userInfo[@"sign"];
             signTF.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
             signTF.delegate = self;
-            signTF.font = [UIFont systemFontOfSize:10];
+            signTF.font = [UIFont systemFontOfSize:13];
             CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)signTF];
             float width = size.width;
             if (width > WIDTH - left - 30) {
@@ -168,10 +168,10 @@
             }
             authenticationLabel.text = text;
             authenticationLabel.textAlignment = NSTextAlignmentCenter;
-            authenticationLabel.font = [UIFont systemFontOfSize:9];
+            authenticationLabel.font = [UIFont systemFontOfSize:13];
             authenticationLabel.textColor = [UIColor whiteColor];
             CGSize size = [MYTOOL getSizeWithLabel:authenticationLabel];
-            authenticationLabel.frame = CGRectMake(left+2, view_height/4*3-size.height/2, size.width+8, size.height);
+            authenticationLabel.frame = CGRectMake(left+2, view_height/4*3, size.width+8, size.height);
             [view addSubview:authenticationLabel];
             authenticationLabel.backgroundColor = [MYTOOL RGBWithRed:150 green:215 blue:85 alpha:1];
         }
@@ -186,7 +186,7 @@
         top_all += view_height + [MYTOOL getHeightWithIphone_six:10];
         //3个余额label、图片及文字
         {
-            UIFont * font = [UIFont systemFontOfSize:12];
+            UIFont * font = [UIFont systemFontOfSize:13];
             UIFont * m_font = [UIFont systemFontOfSize:15];
             UIColor * color = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
             UIColor * m_color = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];
@@ -374,7 +374,7 @@
                     {
                         UILabel * label = [UILabel new];
                         label.text = middle_data_array[i][0];
-                        label.font = [UIFont systemFontOfSize:12];
+                        label.font = [UIFont systemFontOfSize:14];
                         label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
                         CGSize size = [MYTOOL getSizeWithLabel:label];
                         label.frame = CGRectMake(width/2-size.width/2 + (width+1)*col, icon.frame.origin.y+icon.frame.size.height+11, size.width, size.height);
@@ -404,8 +404,8 @@
         top_all += view_height;
         //3个按钮
         {
-            float top_up = view_height/2;
-            float top_down = view_height/2 + 5;
+            float top_up = view_height/2 - 5;
+            float top_down = view_height/2;
             //个人认证
             {
                 //图片-30*30
@@ -420,7 +420,7 @@
                     UILabel * label = [UILabel new];
                     label.text = @"个人认证";
                     label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
-                    label.font = [UIFont systemFontOfSize:12];
+                    label.font = [UIFont systemFontOfSize:14];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.frame = CGRectMake(WIDTH/6.0 - size.width/2, top_down, size.width, size.height);
                     [view addSubview:label];
@@ -448,7 +448,7 @@
                     UILabel * label = [UILabel new];
                     label.text = @"设置";
                     label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
-                    label.font = [UIFont systemFontOfSize:12];
+                    label.font = [UIFont systemFontOfSize:14];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.frame = CGRectMake(WIDTH/2.0 - size.width/2, top_down, size.width, size.height);
                     [view addSubview:label];
@@ -476,7 +476,7 @@
                     UILabel * label = [UILabel new];
                     label.text = @"投诉建议";
                     label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
-                    label.font = [UIFont systemFontOfSize:12];
+                    label.font = [UIFont systemFontOfSize:14];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.frame = CGRectMake(WIDTH/6.0*5 - size.width/2, top_down, size.width, size.height);
                     [view addSubview:label];

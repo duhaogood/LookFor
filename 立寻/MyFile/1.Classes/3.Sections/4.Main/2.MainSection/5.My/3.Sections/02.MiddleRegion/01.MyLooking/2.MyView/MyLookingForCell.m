@@ -37,7 +37,7 @@
         {
             float top_height = 40/146.0*height;
             float left = WIDTH - 10;
-            UIFont * font = [UIFont systemFontOfSize:9];
+            UIFont * font = [UIFont systemFontOfSize:10];
             UIColor * fontColor = MYCOLOR_144;
             CGSize size;
             //评论
@@ -143,7 +143,7 @@
                 top += 8;
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"Title"];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:15];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(left, top, size.width, size.height);
@@ -170,7 +170,7 @@
                         break;
                 }
                 label.text = text;
-                label.font = [UIFont systemFontOfSize:10];
+                label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(WIDTH - 15 - size.width, title_middle_top-size.height/2, size.width, size.height);
@@ -180,7 +180,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"Content"];
-                label.font = [UIFont systemFontOfSize:11];
+                label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 //宽度
@@ -203,7 +203,7 @@
                 //区域文字
                 {
                     UILabel * label = [UILabel new];
-                    label.font = [UIFont systemFontOfSize:9];
+                    label.font = [UIFont systemFontOfSize:10];
                     label.text = @"认领金";
                     label.textColor = MYCOLOR_144;
                     label.frame = icon.bounds;
@@ -215,7 +215,7 @@
                     UILabel * label = [UILabel new];
                     label.text = [NSString stringWithFormat:@"%@元", dictionary[@"Money"]];
                     label.textColor = [MYTOOL RGBWithRed:255 green:83 blue:95 alpha:1];
-                    label.font = [UIFont systemFontOfSize:12];
+                    label.font = [UIFont systemFontOfSize:13];
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.frame = CGRectMake(10+37+10, icon.frame.origin.y+icon.frame.size.height/2-size.height/2, size.width, size.height);
                     [self addSubview:label];

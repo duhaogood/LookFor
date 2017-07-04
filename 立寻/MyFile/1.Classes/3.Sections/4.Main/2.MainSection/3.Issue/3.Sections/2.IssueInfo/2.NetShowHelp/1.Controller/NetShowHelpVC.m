@@ -62,7 +62,7 @@
     float top = 0;
     //发布上册view
     {
-        float height = [MYTOOL getHeightWithIphone_six:246];
+        float height = [MYTOOL getHeightWithIphone_six:266];
         NetShowHelpUpView * view = [[NetShowHelpUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:@"http://img.woyaogexing.com/touxiang/katong/20140110/864ea8353fe3edd3.jpg%21200X200.jpg" andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
@@ -94,7 +94,7 @@
             //提示文字
             {
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:15];
                 label.textColor = MYCOLOR_48_48_48;
                 label.text = @"上传图片";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -106,7 +106,7 @@
             //提示文字2
             {
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:13];
                 label.textColor = [MYTOOL RGBWithRed:255 green:75 blue:75 alpha:1];
                 label.text = @"请上传清晰图片";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -134,7 +134,7 @@
     }
     //发布底部view
     {
-        float height = [MYTOOL getHeightWithIphone_six:200];
+        float height = [MYTOOL getHeightWithIphone_six:122];
         NetShowHelpDownView * view = [[NetShowHelpDownView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
@@ -848,6 +848,8 @@
     if (address && address.length > 0) {
         self.addressTF.text = address;
     }
+    self.PublishAddress = obj[@"addressInfo"];
+    return;
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"定位成功-此信息将在详情中作为发布位置显示" message:obj[@"addressInfo"] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         self.PublishAddress = obj[@"addressInfo"];
@@ -858,6 +860,7 @@
 }
 //接收到定位失败通知
 -(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{
+    return;
     [SVProgressHUD showErrorWithStatus:@"定位失败\n无法发布信息哦" duration:2];
 }
 -(void)viewWillAppear:(BOOL)animated{

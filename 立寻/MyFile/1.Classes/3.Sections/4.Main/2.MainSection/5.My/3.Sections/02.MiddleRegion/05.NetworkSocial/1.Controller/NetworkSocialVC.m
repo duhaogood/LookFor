@@ -46,6 +46,7 @@
         [btn setTitle:btn_title_array[i][0] forState:UIControlStateNormal];
         [btn setTitleColor:MYCOLOR_48_48_48 forState:UIControlStateNormal];
         [btn setTitleColor:MYCOLOR_40_199_0 forState:UIControlStateDisabled];
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.frame = CGRectMake(WIDTH/4 * i, 0, WIDTH/4, 45);
         [btn addTarget:self action:@selector(select_type_1_callback:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];

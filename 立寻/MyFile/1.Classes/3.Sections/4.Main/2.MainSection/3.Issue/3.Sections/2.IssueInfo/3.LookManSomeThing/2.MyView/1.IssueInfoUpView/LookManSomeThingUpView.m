@@ -105,28 +105,31 @@
             label_height = size.height;
         }
         float label_space = (frame.size.height - top - 10 - 4 * label_height)/5;
+        float height_tf = [MYTOOL getHeightWithIphone_six:35];
         //目标类型
         {
             top += label_space;
             left = 0;
+            float middle_right = 0;
             //左侧提示
             {
                 UILabel * label = [UILabel new];
                 label.text = @"目标类型:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
                 [self addSubview:label];
                 left += 20 + size.width;
+                middle_right = top + size.height/2;
             }
             //右侧
             {
                 UITextField * typeTF = [UITextField new];
                 typeTF.text = typeArray[0][@"CategoryTitle"];
                 typeTF.textAlignment = NSTextAlignmentCenter;
-                typeTF.frame = CGRectMake(left, top -5, 100, label_height + 10);
-                typeTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
+                typeTF.frame = CGRectMake(left, middle_right - height_tf/2, 100, height_tf);
+                typeTF.font = [UIFont systemFontOfSize:13];
                 typeTF.tag = 100;
                 typeTF.delegate = delegate;
                 typeTF.layer.masksToBounds = true;
@@ -174,6 +177,7 @@
                 }
             }
             top += label_height;
+            top += 10;
         }
         //悬赏金额
         {
@@ -183,7 +187,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"悬赏金额:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
@@ -195,8 +199,8 @@
                 UITextField * moneyTF = [UITextField new];
                 moneyTF.text = @"0";
                 moneyTF.textAlignment = NSTextAlignmentCenter;
-                moneyTF.frame = CGRectMake(left, top -5, 70, label_height + 10);
-                moneyTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
+                moneyTF.frame = CGRectMake(left, top -5, 70, height_tf);
+                moneyTF.font = [UIFont systemFontOfSize:13];
                 moneyTF.tag = 200;
                 moneyTF.keyboardType = UIKeyboardTypeNumberPad;
                 moneyTF.delegate = delegate;
@@ -235,7 +239,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"丢失城市:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
@@ -246,8 +250,8 @@
             {
                 UITextField * cityTF = [UITextField new];
                 cityTF.placeholder = @"  请选择城市";
-                cityTF.frame = CGRectMake(left, top -5, WIDTH/2.0, label_height + 10);
-                cityTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
+                cityTF.frame = CGRectMake(left, top -5, WIDTH/2.0, height_tf);
+                cityTF.font = [UIFont systemFontOfSize:13];
                 cityTF.tag = 300;
                 cityTF.delegate = delegate;
                 cityTF.layer.masksToBounds = true;
@@ -303,7 +307,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"详细地址:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
@@ -314,8 +318,8 @@
             {
                 UITextField * addressTF = [UITextField new];
                 addressTF.placeholder = @"  请输入详细地址";
-                addressTF.frame = CGRectMake(left, top -5, WIDTH - 10 - left, label_height + 10);
-                addressTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
+                addressTF.frame = CGRectMake(left, top -5, WIDTH - 10 - left, height_tf);
+                addressTF.font = [UIFont systemFontOfSize:13];
                 addressTF.tag = 400;
                 addressTF.delegate = delegate;
                 addressTF.layer.masksToBounds = true;

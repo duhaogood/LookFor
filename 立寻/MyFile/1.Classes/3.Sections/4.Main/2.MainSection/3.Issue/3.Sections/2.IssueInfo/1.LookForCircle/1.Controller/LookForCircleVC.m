@@ -734,9 +734,10 @@
 //接收到定位成功通知
 -(void)receiveUpdateLocationSuccessNotification:(NSNotification *)notification{
     NSDictionary * obj = notification.object;
+    self.PublishAddress = obj[@"addressInfo"];
+    return;
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"定位成功-此信息将在详情中作为发布位置显示" message:obj[@"addressInfo"] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.PublishAddress = obj[@"addressInfo"];
     }];
     [ac addAction:sure];
     [self presentViewController:ac animated:true completion:nil];
@@ -744,6 +745,7 @@
 }
 //接收到定位失败通知
 -(void)receiveUpdateLocationFailedNotification:(NSNotification *)notification{
+    return;
     [SVProgressHUD showErrorWithStatus:@"定位失败\n无法发布信息哦" duration:2];
 }
 -(void)viewWillAppear:(BOOL)animated{

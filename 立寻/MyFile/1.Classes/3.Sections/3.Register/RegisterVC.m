@@ -62,7 +62,7 @@
             UITextField * tf = [UITextField new];
             tf.placeholder = @"手机号码";
             tf.font = [UIFont systemFontOfSize:14];
-            tf.frame = CGRectMake(left2, 10, WIDTH/3.0, 20);
+            tf.frame = CGRectMake(left2, 10, WIDTH - left2 - 100 - 40, 20);
             tf.delegate = self;
             tf.tag = 100;
             tf.keyboardType = UIKeyboardTypeNumberPad;
@@ -120,7 +120,7 @@
             UITextField * tf = [UITextField new];
             tf.placeholder = @"请输入6位数字验证码";
             tf.font = [UIFont systemFontOfSize:14];
-            tf.frame = CGRectMake(left2, 10, WIDTH/2.0, 20);
+            tf.frame = CGRectMake(left2, 10, WIDTH - left2 - 40, 20);
             [view addSubview:tf];
             tf.tag = 200;
             tf.keyboardType = UIKeyboardTypeNumberPad;
@@ -154,7 +154,7 @@
             UITextField * tf = [UITextField new];
             tf.placeholder = @"设置昵称";
             tf.font = [UIFont systemFontOfSize:14];
-            tf.frame = CGRectMake(left2, 10, WIDTH/2.0, 20);
+            tf.frame = CGRectMake(left2, 10, WIDTH - left2 - 40, 20);
             [view addSubview:tf];
             tf.tag = 300;
             self.nickNameTF = tf;
@@ -187,7 +187,7 @@
             UITextField * tf = [UITextField new];
             tf.placeholder = @"设置登录密码";
             tf.font = [UIFont systemFontOfSize:14];
-            tf.frame = CGRectMake(left2, 10, WIDTH/2.0, 20);
+            tf.frame = CGRectMake(left2, 10, WIDTH - left2 - 40, 20);
             [view addSubview:tf];
             tf.tag = 400;
             tf.delegate = self;

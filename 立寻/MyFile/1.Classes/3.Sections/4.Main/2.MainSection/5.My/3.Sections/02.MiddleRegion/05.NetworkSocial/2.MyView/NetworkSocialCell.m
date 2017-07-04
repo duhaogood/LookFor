@@ -26,7 +26,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = [NSString stringWithFormat:@"发布时间：%@",dictionary[@"CreateTime"]];
-                label.font = [UIFont systemFontOfSize:10];
+                label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
                 [self addSubview:label];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -38,7 +38,7 @@
         {
             float top_height = 40/122.0*height;
             float left = WIDTH - 10;
-            UIFont * font = [UIFont systemFontOfSize:9];
+            UIFont * font = [UIFont systemFontOfSize:10];
             UIColor * fontColor = MYCOLOR_144;
             CGSize size;
             //评论
@@ -144,7 +144,7 @@
                 top += 8;
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"Title"];
-                label.font = [UIFont systemFontOfSize:14];
+                label.font = [UIFont systemFontOfSize:15];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(left, top, size.width, size.height);
@@ -155,7 +155,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"state"];
-                label.font = [UIFont systemFontOfSize:10];
+                label.font = [UIFont systemFontOfSize:11];
                 label.textColor = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(WIDTH - 15 - size.width, title_middle_top-size.height/2, size.width, size.height);
@@ -165,7 +165,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = dictionary[@"Content"];
-                label.font = [UIFont systemFontOfSize:11];
+                label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 //宽度
