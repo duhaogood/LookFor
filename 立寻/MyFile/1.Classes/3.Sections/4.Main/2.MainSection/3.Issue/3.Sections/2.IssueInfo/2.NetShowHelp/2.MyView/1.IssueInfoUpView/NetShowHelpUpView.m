@@ -80,7 +80,7 @@
             tv.layer.masksToBounds = true;
             tv.layer.borderWidth = 1;
             tv.delegate = delegate;
-            tv.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+            tv.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
             top += height + 5;
         }
         //详细信息字数
@@ -97,6 +97,8 @@
         }
         //下面4行文字
         float label_height = 0;
+        float height_tf = [MYTOOL getHeightWithIphone_six:35];
+        float middle_right = 0;
         {
             UILabel * llabel = [UILabel new];
             llabel.font = [UIFont systemFontOfSize:12];
@@ -109,7 +111,6 @@
         {
             top += label_space;
             left = 0;
-            float middle_right = 0;
             //左侧提示
             {
                 UILabel * label = [UILabel new];
@@ -127,13 +128,13 @@
                 UITextField * typeTF = [UITextField new];
                 typeTF.text = typeArray[0][@"CategoryTitle"];
                 typeTF.textAlignment = NSTextAlignmentCenter;
-                typeTF.frame = CGRectMake(left, middle_right - 17.5, 100, 35);
-                typeTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
+                typeTF.frame = CGRectMake(left, middle_right - height_tf/2, 100, height_tf);
+                typeTF.font = [UIFont systemFontOfSize:13];
                 typeTF.tag = 100;
                 typeTF.delegate = delegate;
                 typeTF.layer.masksToBounds = true;
                 typeTF.layer.borderWidth = 1;
-                typeTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                typeTF.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
                 [delegate setTypeTF:typeTF];
                 [self addSubview:typeTF];
                 //输入
@@ -190,19 +191,20 @@
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
                 [self addSubview:label];
+                middle_right = top + size.height/2;
                 left = 10 + size.width + 10;
             }
             //右侧
             {
                 UITextField * cityTF = [UITextField new];
                 cityTF.placeholder = @"  请选择城市";
-                cityTF.frame = CGRectMake(left, top -5, WIDTH/2.0, label_height + 10);
-                cityTF.font = [UIFont systemFontOfSize:(label_height + 10)*0.6];
+                cityTF.frame = CGRectMake(left, middle_right - height_tf/2, WIDTH/2.0, height_tf);
+                cityTF.font = [UIFont systemFontOfSize:13];
                 cityTF.tag = 300;
                 cityTF.delegate = delegate;
                 cityTF.layer.masksToBounds = true;
                 cityTF.layer.borderWidth = 1;
-                cityTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                cityTF.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
                 [delegate setCityTF:cityTF];
                 [self addSubview:cityTF];
                 //输入

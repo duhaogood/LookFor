@@ -268,7 +268,7 @@
     }
     NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
     NSDictionary * send = @{@"publishid":PublishID};
-    [MYTOOL netWorkingWithTitle:@"加载中……"];
+//    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSDictionary * publishDictionary = back_dic[@"Data"];
         if (publishDictionary) {
@@ -344,7 +344,7 @@
                             @"appid":APPID_MINE,
                             @"parentid":parentid
                             };
-    [MYTOOL netWorkingWithTitle:@"加载中…"];
+//    [MYTOOL netWorkingWithTitle:@"加载中…"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];
         //初始化第一个全部的按钮
@@ -495,7 +495,7 @@
             self.cellDataArray = [NSMutableArray arrayWithArray:array];
         }else{
             if (array == nil || array.count == 0) {
-                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+//                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
                 return;
             }
             [self.cellDataArray addObjectsFromArray:array];

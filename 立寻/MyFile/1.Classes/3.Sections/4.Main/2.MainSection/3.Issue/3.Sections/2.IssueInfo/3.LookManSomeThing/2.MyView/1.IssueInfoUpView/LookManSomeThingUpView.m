@@ -80,7 +80,7 @@
             tv.layer.masksToBounds = true;
             tv.layer.borderWidth = 1;
             tv.delegate = delegate;
-            tv.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+            tv.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
             top += height + 5;
         }
         //详细信息字数
@@ -134,7 +134,7 @@
                 typeTF.delegate = delegate;
                 typeTF.layer.masksToBounds = true;
                 typeTF.layer.borderWidth = 1;
-                typeTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                typeTF.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
                 [delegate setTypeTF:typeTF];
                 [self addSubview:typeTF];
                 //输入
@@ -206,7 +206,7 @@
                 moneyTF.delegate = delegate;
                 moneyTF.layer.masksToBounds = true;
                 moneyTF.layer.borderWidth = 1;
-                moneyTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                moneyTF.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
                 [delegate setMoneyTF:moneyTF];
                 [self addSubview:moneyTF];
                 left += 75;
@@ -256,7 +256,7 @@
                 cityTF.delegate = delegate;
                 cityTF.layer.masksToBounds = true;
                 cityTF.layer.borderWidth = 1;
-                cityTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                cityTF.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
                 [delegate setCityTF:cityTF];
                 [self addSubview:cityTF];
                 //输入
@@ -324,7 +324,7 @@
                 addressTF.delegate = delegate;
                 addressTF.layer.masksToBounds = true;
                 addressTF.layer.borderWidth = 1;
-                addressTF.layer.borderColor = [MYCOLOR_181_181_181 CGColor];
+                addressTF.layer.borderColor = [MYCOLOR_240_240_240 CGColor];
                 [delegate setAddressTF:addressTF];
                 [self addSubview:addressTF];
             }

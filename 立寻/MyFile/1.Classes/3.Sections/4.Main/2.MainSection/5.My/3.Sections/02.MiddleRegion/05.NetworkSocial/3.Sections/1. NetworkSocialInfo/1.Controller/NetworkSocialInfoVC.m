@@ -60,25 +60,23 @@
         label.frame = CGRectMake(left, top + 35/2.0-size.height/2, size.width, size.height);
         [scrollView addSubview:label];
     }
-    //发布状态（1.待发布，2.已发布，3.已结束，4.已完成）
+    //状态-审核状态(1.待审核，2.审核通过，3.审核不通过)
     {
-        int PublishStatus = [self.publishDictionary[@"PublishStatus"] intValue];
+      
+        UILabel * label = [UILabel new];
+        int CheckState = [self.publishDictionary[@"CheckState"] intValue];
         NSString * text = @"";
-        switch (PublishStatus) {
+        switch (CheckState) {
             case 1:
-                text = @"待发布";
+                text = @"待审核";
                 break;
             case 2:
-                text = @"已发布";
-                break;
-            case 3:
-                text = @"已结束";
+                text = @"审核通过";
                 break;
             default:
-                text = @"已完成";
+                text = @"审核不通过";
                 break;
         }
-        UILabel * label = [UILabel new];
         label.text = text;
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [MYTOOL RGBWithRed:255 green:101 blue:101 alpha:1];

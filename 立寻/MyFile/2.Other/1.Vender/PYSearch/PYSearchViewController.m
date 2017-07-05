@@ -7,7 +7,7 @@
 #import "PYSearchViewController.h"
 #import "PYSearchConst.h"
 #import "PYSearchSuggestionViewController.h"
-
+#import "SearchSomethingVC.h"
 #define PYRectangleTagMaxCol 3
 #define PYTextColor PYSEARCH_COLOR(113, 113, 113)
 #define PYSEARCH_COLORPolRandomColor self.colorPol[arc4random_uniform((uint32_t)self.colorPol.count)]
@@ -133,7 +133,11 @@
 }
 //搜索
 -(void)searchButtonDown{
-    NSLog(@"搜索");
+    NSString * keyWord = self.searchBar.text;
+    if (keyWord == nil || keyWord.length == 0) {
+        return;
+    }
+    [self searchBarSearchButtonClicked:self.searchBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1052,7 +1056,9 @@
         [self saveSearchCacheAndRefreshView];
         return;
     }
-    if (self.didSearchBlock) self.didSearchBlock(self, searchBar, searchBar.text);
+    if (self.didSearchBlock){
+        self.didSearchBlock(self, searchBar, searchBar.text);
+    }
     [self saveSearchCacheAndRefreshView];
 }
 

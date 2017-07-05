@@ -10,6 +10,7 @@
 #import "LookManSomeThingUpView.h"
 #import "LookManSomeThingDownView.h"
 #import "PayTopUpVC.h"
+#import "MyLookingVC.h"
 @interface LookManSomeThingVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
@@ -105,7 +106,7 @@
             //提示文字2
             {
                 UILabel * label = [UILabel new];
-                label.font = [UIFont systemFontOfSize:13];
+                label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:255 green:75 blue:75 alpha:1];
                 label.text = @"寻找债权人需要上传债券证明图片";
                 CGSize size = [MYTOOL getSizeWithLabel:label];
@@ -404,6 +405,18 @@
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         [self popUpViewController];
+        if (isIssue) {
+            AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            MainVC * main = (MainVC *)app.window.rootViewController;
+            [main setSelectedIndex:4];
+            UINavigationController * nc = main.selectedViewController;
+            //跳转网络社交
+            MyLookingVC * vc = [MyLookingVC new];
+            vc.title = @"网络社交";
+            [nc pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
+        }
     }];
     
 }

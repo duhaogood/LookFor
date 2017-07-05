@@ -335,7 +335,7 @@
     if (url == nil || [url isKindOfClass:[NSNull class]]) {
         
     }else{
-        [self.user_imgV sd_setImageWithURL:[NSURL URLWithString:url]];
+        [self.user_imgV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
     }
     self.love_tf.text = MySummary;
     self.address_tf.text = Address;

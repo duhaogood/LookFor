@@ -48,7 +48,7 @@
     NSDictionary * send = @{
                             @"parentid":_parentid
                             };
-    [MYTOOL netWorkingWithTitle:@"重新读取二级分类"];
+//    [MYTOOL netWorkingWithTitle:@"重新读取二级分类"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];
         NSMutableArray * typeArray = [NSMutableArray arrayWithArray:array];
@@ -274,7 +274,7 @@
             self.cellDataArray = [NSMutableArray arrayWithArray:array];
         }else{
             if (array == nil || array.count == 0) {
-                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+//                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
                 return;
             }
             [self.cellDataArray addObjectsFromArray:array];
@@ -298,7 +298,7 @@
     }
     NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
     NSDictionary * send = @{@"publishid":PublishID};
-    [MYTOOL netWorkingWithTitle:@"加载中……"];
+//    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSDictionary * publishDictionary = back_dic[@"Data"];
         if (publishDictionary) {

@@ -7,6 +7,7 @@
 //
 
 #import "RegisterVC.h"
+#import "PersonalCertificationVC.h"
 //#import "AgreementVC.h"
 @interface RegisterVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField * phoneTF;//手机号码
@@ -315,8 +316,27 @@
                             @"password": password
                             };
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self popUpViewController];
-        [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+        NSString * interface1 = @"/user/memberuser/memberuserlogin.html";
+        NSDictionary * send1 = @{
+                                @"mobile":mobile,
+                                @"password":password
+                                };
+        [MYNETWORKING getWithInterfaceName:interface1 andDictionary:send1 andSuccess:^(NSDictionary *back_dic1) {
+            [SVProgressHUD showSuccessWithStatus:back_dic1[@"Message"] duration:1];
+            [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"1"];
+            MYTOOL.userInfo = back_dic1[@"Data"];
+            NSString * UserID = back_dic1[@"Data"][@"UserID"];
+            NSLog(@"UserID:%@",UserID);
+            [MYTOOL setProjectPropertyWithKey:@"UserID" andValue:UserID];
+            [self.navigationController popViewControllerAnimated:false];
+            [self.navigationController popViewControllerAnimated:false];
+            //判断状态-ApproveState-认证状态  1未认证 2等待认证  3认证没通过 4认证通过
+            int ApproveState = [MYTOOL.userInfo[@"ApproveState"] intValue];
+            if (ApproveState != 4) {
+                PersonalCertificationVC * vc = [PersonalCertificationVC new];
+                [self.navigationController pushViewController:vc animated:true];
+            }
+        }];
     }];
     
     

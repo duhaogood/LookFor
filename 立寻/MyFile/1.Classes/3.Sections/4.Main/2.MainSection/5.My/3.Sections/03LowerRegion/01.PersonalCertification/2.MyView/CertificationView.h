@@ -10,7 +10,7 @@
 
 @interface CertificationView : UIView
 
--(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate;
+-(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate andUserInfo:(NSDictionary *)userInfo;
 
 
 @end

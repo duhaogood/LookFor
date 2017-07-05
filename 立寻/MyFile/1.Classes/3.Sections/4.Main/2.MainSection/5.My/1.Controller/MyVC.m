@@ -53,7 +53,7 @@
             [view addSubview:userImgV];
             self.user_img = userImgV;
             NSString * url = userInfo[@"url"];
-            [MYTOOL setImageIncludePrograssOfImageView:userImgV withUrlString:url];
+            [userImgV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
             userImgV.layer.masksToBounds = true;
             userImgV.layer.cornerRadius = icon_r/2;
             left = icon_r + 10 + 9;
@@ -606,7 +606,7 @@
     if (url == nil || [url isKindOfClass:[NSNull class]]) {
         
     }else{
-        [self.user_img sd_setImageWithURL:[NSURL URLWithString:url]];
+        [self.user_img sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
     }
     self.nameLabel.text = UserName;
     //
@@ -647,6 +647,8 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [MYTOOL showTabBar];
     NSString * interface = @"/user/memberuser/getmemberuserinfo.html";
     NSString * userid = [MYTOOL getProjectPropertyWithKey:@"UserID"];
     if (!userid) {
@@ -661,6 +663,6 @@
     }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    
+    [super viewWillDisappear:animated];
 }
 @end

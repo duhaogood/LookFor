@@ -10,6 +10,7 @@
 #import "LookForCircleUpView.h"
 #import "LookForCircleLowerView.h"
 #import "PayTopUpVC.h"
+#import "NetworkSocialVC.h"
 @interface LookForCircleVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
@@ -62,7 +63,7 @@
     float top = 0;
     //发布上册view
     {
-        float height = [MYTOOL getHeightWithIphone_six:246];
+        float height = [MYTOOL getHeightWithIphone_six:270];
         LookForCircleUpView * view = [[LookForCircleUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:@"http://img.woyaogexing.com/touxiang/katong/20140110/864ea8353fe3edd3.jpg%21200X200.jpg" andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
@@ -146,7 +147,7 @@
 //判断是否有信息不全
 -(BOOL)checkInfoOfIssue{
     
-    if (1) {
+    if (0) {
         PayTopUpVC * pay = [PayTopUpVC new];
         pay.title = @"余额充值";
         [self.navigationController pushViewController:pay animated:true];
@@ -299,7 +300,16 @@
                             };
     NSString * interface = @"/publish/publish/addsubmitpublishinfo.html";
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self.navigationController popViewControllerAnimated:true];
+        [self.navigationController popViewControllerAnimated:false];
+        
+        AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        MainVC * main = (MainVC *)app.window.rootViewController;
+        [main setSelectedIndex:4];
+        UINavigationController * nc = main.selectedViewController;
+        //跳转网络社交
+        NetworkSocialVC * vc = [NetworkSocialVC new];
+        vc.title = @"网络社交";
+        [nc pushViewController:vc animated:true];
     }];
     
     

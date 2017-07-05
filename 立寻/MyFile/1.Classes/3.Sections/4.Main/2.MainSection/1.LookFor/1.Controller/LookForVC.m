@@ -15,6 +15,7 @@
 #import "FirstPageMiddleNextVC.h"
 #import "FirstPageMiddleNextCell.h"
 #import "PublishInfoVC.h"
+#import "SearchSomethingVC.h"
 @interface LookForVC ()<PYSearchViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
@@ -188,7 +189,7 @@
     }
     NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
     NSDictionary * send = @{@"publishid":PublishID};
-    [MYTOOL netWorkingWithTitle:@"加载中……"];
+//    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSDictionary * publishDictionary = back_dic[@"Data"];
         if (publishDictionary) {
@@ -230,8 +231,11 @@
 #warning 接口待调
     NSArray *hotSeaches = @[@"找人", @"找什么", @"举报", @"找狗狗", @"招领人",@"找债权人",@"我的好战友",@"我的钱包丢了",@"失踪儿童",@"法律顾问"];
     PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:NSLocalizedString(@"找亲人", @"搜索编程语言") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
-        
-        //[searchViewController.navigationController pushViewController:[[PYTempViewController alloc] init] animated:YES];
+        [self.navigationController popViewControllerAnimated:false];
+        SearchSomethingVC * vc = [SearchSomethingVC new];
+        vc.keyWord = searchText;
+        vc.title = @"搜索列表";
+        [self.navigationController pushViewController:vc animated:true];
     }];
 
     searchViewController.hotSearchStyle = 3;
@@ -375,7 +379,7 @@
             self.cellDataArray = [NSMutableArray arrayWithArray:array];
         }else{
             if (array == nil || array.count == 0) {
-                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+//                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
                 return;
             }
             [self.cellDataArray addObjectsFromArray:array];

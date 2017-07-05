@@ -9,6 +9,7 @@
 #import "LoginVC.h"
 #import "RegisterVC.h"
 #import "FindPasswordVC.h"
+#import "PersonalCertificationVC.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField * phoneTF;//手机号码
 @property(nonatomic,strong)UITextField * passwordTF;//密码
@@ -254,9 +255,15 @@
         [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"1"];
         MYTOOL.userInfo = back_dic[@"Data"];
         NSString * UserID = back_dic[@"Data"][@"UserID"];
-        NSLog(@"UserID:%@",UserID);
+        NSLog(@"User:%@",MYTOOL.userInfo);
         [MYTOOL setProjectPropertyWithKey:@"UserID" andValue:UserID];
         [self.navigationController popViewControllerAnimated:true];
+        //判断状态-ApproveState-认证状态  1未认证 2等待认证  3认证没通过 4认证通过
+        int ApproveState = [MYTOOL.userInfo[@"ApproveState"] intValue];
+        if (ApproveState != 4) {
+            PersonalCertificationVC * vc = [PersonalCertificationVC new];
+            [self.navigationController pushViewController:vc animated:true];
+        }
     }];
     
     

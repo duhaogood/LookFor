@@ -12,7 +12,7 @@
 @implementation CertificationView
 
 
--(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate{
+-(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate andUserInfo:(NSDictionary *)userInfo{
     if (self = [super initWithFrame:frame]) {
         float top = 0;
         //上部背景view
@@ -58,7 +58,7 @@
                 label.frame = CGRectMake(0, tel_top+10, WIDTH, 15);
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [UIColor whiteColor];
-                label.text = @"18724199038";
+                label.text = userInfo[@"CellPhone"];
                 label.textAlignment = NSTextAlignmentCenter;
                 [self addSubview:label];
             }
@@ -75,7 +75,24 @@
         //状态
         {
             UILabel * label = [UILabel new];
-            label.text = @"未认证";
+            //认证状态  1未认证 2等待认证  3认证没通过 4认证通过
+            int ApproveState = [userInfo[@"ApproveState"] intValue];
+            NSString * text = @"";
+            switch (ApproveState) {
+                case 1:
+                    text = @"未认证";
+                    break;
+                case 2:
+                    text = @"等待认证";
+                    break;
+                case 3:
+                    text = @"认证没通过";
+                    break;
+                default:
+                    text = @"认证通过";
+                    break;
+            }
+            label.text = text;
             [delegate setState_label:label];
             label.font = [UIFont systemFontOfSize:13];
             label.textColor = [MYTOOL RGBWithRed:51 green:51 blue:51 alpha:1];

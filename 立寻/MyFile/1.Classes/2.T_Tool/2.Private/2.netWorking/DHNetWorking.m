@@ -45,7 +45,7 @@ static id instance;
         if (![[responseObject valueForKey:@"Result"] boolValue]) {
             [SVProgressHUD showErrorWithStatus:[responseObject valueForKey:@"Message"] duration:2];
         }else{
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"Message"] duration:1];
+//            [SVProgressHUD showSuccessWithStatus:responseObject[@"Message"] duration:1];
             back_block(responseObject);
         }
     } failure:^(NSURLSessionTask *operation, NSError *error) {

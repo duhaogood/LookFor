@@ -150,23 +150,20 @@
                 [self addSubview:label];
                 title_middle_top = top + size.height/2;
             }
-            //状态-发布状态（1.待发布，2.已发布，3.已结束，4.已完成
+            //状态-审核状态(1.待审核，2.审核通过，3.审核不通过)
             {
                 UILabel * label = [UILabel new];
-                int PublishStatus = [dictionary[@"PublishStatus"] intValue];
+                int CheckState = [dictionary[@"CheckState"] intValue];
                 NSString * text = @"";
-                switch (PublishStatus) {
+                switch (CheckState) {
                     case 1:
-                        text = @"待发布";
+                        text = @"待审核";
                         break;
                     case 2:
-                        text = @"已发布";
-                        break;
-                    case 3:
-                        text = @"已结束";
+                        text = @"审核通过";
                         break;
                     default:
-                        text = @"已完成";
+                        text = @"审核不通过";
                         break;
                 }
                 label.text = text;

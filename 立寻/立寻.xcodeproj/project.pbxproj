@@ -31,6 +31,7 @@
 		042BAF321F062AF800B86065 /* MyFoundListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF311F062AF800B86065 /* MyFoundListVC.m */; };
 		042BAF351F062B0600B86065 /* MyFoundInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF341F062B0600B86065 /* MyFoundInfoVC.m */; };
 		042BAF381F062B1500B86065 /* MyClainInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF371F062B1500B86065 /* MyClainInfoVC.m */; };
+		042BAF3B1F0C90B500B86065 /* SearchSomethingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF3A1F0C90B500B86065 /* SearchSomethingVC.m */; };
 		0436E5EF1EF007730031FC2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5EE1EF007730031FC2B /* CoreLocation.framework */; };
 		0436E5F11EF0077B0031FC2B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5F01EF0077B0031FC2B /* MapKit.framework */; };
 		043D70A31EFBF2910053D71E /* FirstPageMiddleNextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D70A21EFBF2910053D71E /* FirstPageMiddleNextCell.m */; };
@@ -288,6 +289,8 @@
 		042BAF341F062B0600B86065 /* MyFoundInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFoundInfoVC.m; sourceTree = "<group>"; };
 		042BAF361F062B1500B86065 /* MyClainInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClainInfoVC.h; sourceTree = "<group>"; };
 		042BAF371F062B1500B86065 /* MyClainInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClainInfoVC.m; sourceTree = "<group>"; };
+		042BAF391F0C90B500B86065 /* SearchSomethingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSomethingVC.h; sourceTree = "<group>"; };
+		042BAF3A1F0C90B500B86065 /* SearchSomethingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSomethingVC.m; sourceTree = "<group>"; };
 		0436E5EE1EF007730031FC2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0436E5F01EF0077B0031FC2B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		043D70A11EFBF2910053D71E /* FirstPageMiddleNextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageMiddleNextCell.h; sourceTree = "<group>"; };
@@ -1373,6 +1376,8 @@
 		043DF9461EF177D600EEA3AC /* 1.Controller */ = {
 			isa = PBXGroup;
 			children = (
+				042BAF391F0C90B500B86065 /* SearchSomethingVC.h */,
+				042BAF3A1F0C90B500B86065 /* SearchSomethingVC.m */,
 			);
 			path = 1.Controller;
 			sourceTree = "<group>";
@@ -3615,6 +3620,7 @@
 				049B5E2D1EDF07510080D552 /* MyFollowVC.m in Sources */,
 				78375AE11ED4734C0046F8C3 /* UIView+MJExtension.m in Sources */,
 				042BAF351F062B0600B86065 /* MyFoundInfoVC.m in Sources */,
+				042BAF3B1F0C90B500B86065 /* SearchSomethingVC.m in Sources */,
 				78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */,
 				78375ACB1ED4734C0046F8C3 /* AFURLRequestSerialization.m in Sources */,
 				04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */,

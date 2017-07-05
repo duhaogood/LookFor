@@ -81,15 +81,9 @@
 //更多功能
 -(void)submitMore{
     UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"请选择操作类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    //我要推广
-    UIAlertAction * wantPopularize = [UIAlertAction actionWithTitle:@"我要推广" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self wantPopularize];
-    }];
     //结束寻找
     UIAlertAction * overLook = [UIAlertAction actionWithTitle:@"结束寻找" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString * interface = @"/publish/publish/endpublishinfo.html";
-         
-        
+        [self overLook];
     }];
     //寻找完成
     UIAlertAction * lookFinish = [UIAlertAction actionWithTitle:@"寻找完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -101,21 +95,70 @@
     }];
     //取消
     UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    [ac addAction:wantPopularize];
-    [ac addAction:overLook];
+//    [ac addAction:overLook];
     [ac addAction:lookFinish];
     [ac addAction:deletePublish];
     [ac addAction:cancel];
     [self presentViewController:ac animated:true completion:nil];
 }
-//我要推广
--(void)wantPopularize{
+//结束寻找
+-(void)overLook{
+    NSString * interface = @"/publish/publish/endpublishinfo.html";
+    /// 发布状态（1.待发布，2.已发布，3.已结束，4.已完成）-PublishStatus
+    
+    
     
 }
 //寻找完成
 -(void)lookFinish{
-    NSString * interface = @"/publish/publish/finishpublishinfo.html";
-    
+    int PublishStatus = [self.publishDictionary[@"PublishStatus"] intValue];
+//    NSLog(@"publishStatus:%d",PublishStatus);
+    if (PublishStatus != 2) {
+        NSString * text = @"";
+        switch (PublishStatus) {
+            case 1:
+                text = @"待发布";
+                break;
+            case 2:
+                text = @"已发布";
+                break;
+            case 3:
+                text = @"已结束";
+                break;
+            default:
+                text = @"已完成";
+                break;
+        }
+        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"发布状态:%@",text] duration:2];
+        return;
+    }
+    /// 发布状态（1.待发布，2.已发布，3.已结束，4.已完成）-PublishStatus
+    UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"寻找完成" message:@"请输入提供线索的用户名" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * end = [UIAlertAction actionWithTitle:@"结束" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField * tf = ac.textFields.firstObject;
+        if (tf.text.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"用户名必填" duration:2];
+            return;
+        }
+        NSString * interface = @"/publish/publish/finishpublishinfo.html";
+        NSDictionary * send = @{
+                                @"publishid":self.publishDictionary[@"PublishID"],
+                                @"username":tf.text
+                                };
+        [MYTOOL netWorkingWithTitle:@"完成中……"];
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+            [self.navigationController popViewControllerAnimated:true];
+            
+        }];
+    }];
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {   }];
+    [ac addTextFieldWithConfigurationHandler:^(UITextField *tf){
+        tf.placeholder = @"用户名";
+    }];
+    [ac addAction:end];
+    [ac addAction:cancel];
+    [self presentViewController:ac animated:true completion:nil];
 }
 //删除发布信息
 -(void)deletePublish{
@@ -152,7 +195,7 @@
                             @"userid":USER_ID,
                             @"publishid":self.publishDictionary[@"PublishID"]
                             };
-    [MYTOOL netWorkingWithTitle:@"加载中……"];
+//    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         UIButton * btn = [UIButton new];
         btn.tag = 1;
@@ -201,7 +244,7 @@
     NSDictionary * send = @{
                             @"userid":self.publishDictionary[@"UserID"]
                             };
-    [MYTOOL netWorkingWithTitle:@"加载中……"];
+//    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSDictionary * info = back_dic[@"Data"];
         PersonalInfoVC * vc = [PersonalInfoVC new];

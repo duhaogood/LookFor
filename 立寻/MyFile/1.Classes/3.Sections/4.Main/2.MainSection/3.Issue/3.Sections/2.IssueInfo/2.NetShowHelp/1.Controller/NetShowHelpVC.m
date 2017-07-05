@@ -405,6 +405,18 @@
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         [self popUpViewController];
+        if (isIssue) {
+            AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            MainVC * main = (MainVC *)app.window.rootViewController;
+            [main setSelectedIndex:4];
+            UINavigationController * nc = main.selectedViewController;
+            //跳转网络社交
+            NetworkSocialVC * vc = [NetworkSocialVC new];
+            vc.title = @"网络社交";
+            [nc pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
+        }
     }];
     
     
