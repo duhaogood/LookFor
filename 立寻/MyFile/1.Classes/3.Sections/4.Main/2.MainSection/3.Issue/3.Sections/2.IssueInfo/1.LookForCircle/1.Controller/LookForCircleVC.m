@@ -147,7 +147,7 @@
 //判断是否有信息不全
 -(BOOL)checkInfoOfIssue{
     
-    if (0) {
+    if (1) {
         PayTopUpVC * pay = [PayTopUpVC new];
         pay.title = @"余额充值";
         [self.navigationController pushViewController:pay animated:true];

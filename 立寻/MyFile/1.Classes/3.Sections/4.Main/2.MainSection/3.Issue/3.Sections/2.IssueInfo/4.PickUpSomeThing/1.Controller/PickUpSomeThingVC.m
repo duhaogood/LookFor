@@ -408,6 +408,7 @@
             interface = @"/publish/publish/modifysubmitpublishinfo.html";
         }
     }
+#warning 余额不足，将跳转支付界面
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         [self popUpViewController];
         if (isIssue) {
