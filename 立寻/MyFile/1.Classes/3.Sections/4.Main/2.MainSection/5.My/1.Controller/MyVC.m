@@ -51,6 +51,9 @@
             UIImageView * userImgV = [UIImageView new];
             userImgV.frame = CGRectMake(10, view_height/2.0-icon_r/2.0, icon_r, icon_r);
             [view addSubview:userImgV];
+            userImgV.contentMode = UIViewContentModeScaleAspectFill;
+            userImgV.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+            [userImgV setContentScaleFactor:[[UIScreen mainScreen] scale]];
             self.user_img = userImgV;
             NSString * url = userInfo[@"url"];
             [userImgV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];

@@ -12,7 +12,7 @@
 #import "WXApi.h"
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
-
+#import "DraftsVC.h"
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -90,6 +90,11 @@
 //支付成功后
 -(void)paySuccess{
     [MYCENTER_NOTIFICATION postNotificationName:NOTIFICATION_PAY_SUCCESS object:nil];
+    MainVC * main = (MainVC *)self.window.rootViewController;
+    [main setSelectedIndex:4];
+//    UINavigationController * nc = main.childViewControllers[4];
+    
+    
 }
 // NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options

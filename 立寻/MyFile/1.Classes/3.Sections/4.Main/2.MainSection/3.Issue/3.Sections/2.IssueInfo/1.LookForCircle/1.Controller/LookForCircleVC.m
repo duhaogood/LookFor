@@ -63,8 +63,12 @@
     float top = 0;
     //发布上册view
     {
+        NSString * img_url = MYTOOL.userInfo[@"ImgFilePath"];
+        if (img_url == nil || ![img_url isKindOfClass:[NSString class]]) {
+            img_url = @"";
+        }
         float height = [MYTOOL getHeightWithIphone_six:270];
-        LookForCircleUpView * view = [[LookForCircleUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:@"http://img.woyaogexing.com/touxiang/katong/20140110/864ea8353fe3edd3.jpg%21200X200.jpg" andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
+        LookForCircleUpView * view = [[LookForCircleUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:img_url andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
         top += height + 10;
@@ -192,6 +196,7 @@
     //上传图片
     current_upload_img_index = 0;
     fileid_array = [NSMutableArray new];
+    [MYTOOL netWorkingWithTitle:@"信息发布中……"];
     [self upLoadAllImage];
 }
 //上传所有图片
@@ -228,10 +233,10 @@
         UIImageView * imgV = dic[@"imgV"];
         //截取图片
         float change = 1.0;
-        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
+//        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
         UIImage * img = imgV.image;
         NSData * imageData = UIImageJPEGRepresentation(img,change);
-        while (imageData.length > 1.0 * 1024 * 1024) {
+        while (imageData.length > 300 * 1024) {
             change -= 0.1;
             imageData = UIImageJPEGRepresentation(img,change);
         }
@@ -242,7 +247,7 @@
         
         [formData appendPartWithFileData:imageData name:@"filedata" fileName:fileName mimeType:@"image/png"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
+//        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"Result"] boolValue]) {
             NSObject * fileid = responseObject[@"Data"][@"fileid"];
@@ -685,6 +690,9 @@
             [dic setValue:@"1" forKey:@"have_image"];
             UIImageView * imgV = dic[@"imgV"];
             imgV.image = img;
+            imgV.contentMode = UIViewContentModeScaleAspectFill;
+            imgV.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+            [imgV setContentScaleFactor:[[UIScreen mainScreen] scale]];
             break;
         }
         

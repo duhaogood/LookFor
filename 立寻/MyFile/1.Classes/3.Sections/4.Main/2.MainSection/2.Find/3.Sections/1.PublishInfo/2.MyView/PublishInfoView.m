@@ -262,10 +262,12 @@
                     imgV.frame = CGRectMake(0, top, WIDTH, img_height);
                     [view addSubview:imgV];
                     [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:url andCompleted:^(UIImage *image) {
-                        CGSize size = image.size;
-                        img_height = WIDTH / size.width * size.height;
-                        imgV.frame = CGRectMake(0, imgV.frame.origin.y, WIDTH, img_height);
-                        [self updateImageAndCommentLocation];
+                        if (image) {
+                            CGSize size = image.size;
+                            img_height = WIDTH / size.width * size.height;
+                            imgV.frame = CGRectMake(0, imgV.frame.origin.y, WIDTH, img_height);
+                            [self updateImageAndCommentLocation];
+                        }
                     }];
                     top += HEIGHT + 5;
                 }
@@ -458,7 +460,7 @@
                 UIButton * btn = [UIButton new];
                 btn.backgroundColor = [MYTOOL RGBWithRed:250 green:101 blue:104 alpha:1];
                 btn.titleLabel.font = [UIFont systemFontOfSize:15];
-                btn.frame = CGRectMake(WIDTH/3*2, 0, WIDTH/3, 50);
+                btn.frame = CGRectMake(WIDTH/2, 0, WIDTH/2, 50);
                 [view addSubview:btn];
                 //一级分类id
                 int ParentCategoryID = [publishDictionary[@"ParentCategoryID"] intValue];

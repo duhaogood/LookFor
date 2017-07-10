@@ -57,10 +57,13 @@
         {
             UITextField * moneyTF = [UITextField new];
             moneyTF.placeholder = @"清输入充值金额";
+            if (self.minPayNumber > 0) {
+                moneyTF.placeholder = [NSString stringWithFormat:@"最小值金额:%.2f",self.minPayNumber];
+            }
             moneyTF.font = [UIFont systemFontOfSize:14];
             moneyTF.frame = CGRectMake(left, 10, WIDTH-10-left, 30);
             [bgView addSubview:moneyTF];
-            moneyTF.keyboardType = UIKeyboardTypeDecimalPad;
+//            moneyTF.keyboardType = UIKeyboardTypeDecimalPad;
             moneyTF.textColor = [MYTOOL RGBWithRed:144 green:144 blue:144 alpha:1];
             self.moneyTF = moneyTF;
         }
@@ -245,8 +248,8 @@
 
 //接收到支付成功通知
 -(void)receivePaySuccess:(NSNotification *)notification{
-    [self.navigationController popViewControllerAnimated:true];
-    [SVProgressHUD showSuccessWithStatus:@"充值成功喽" duration:1];
+    [self.navigationController popToRootViewControllerAnimated:false];
+    [SVProgressHUD showSuccessWithStatus:@"充值成功" duration:1];
     
 }
 

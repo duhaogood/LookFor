@@ -23,8 +23,11 @@
             icon.layer.masksToBounds = true;
             icon.layer.cornerRadius = user_width/2.0;
             [self addSubview:icon];
-            [icon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@""]];
+            [icon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
             left = 10 + user_width + 10;
+            icon.contentMode = UIViewContentModeScaleAspectFill;
+            icon.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+            [icon setContentScaleFactor:[[UIScreen mainScreen] scale]];
         }
         //标题文本框
         {
@@ -52,7 +55,7 @@
                 tf.tag = 50;
                 [self addSubview:tf];
                 CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)tf];
-                tf.frame = CGRectMake(left, top + user_width/2.0-size.height/2, right-left, size.height);
+                tf.frame = CGRectMake(left, top + user_width/2.0-size.height/2-10, right-left, size.height+10);
                 top += user_width/2.0 + size.height/2.0 + 5;
                 //                tf.backgroundColor = [UIColor greenColor];
                 
@@ -197,7 +200,7 @@
             //右侧
             {
                 UITextField * moneyTF = [UITextField new];
-                moneyTF.text = @"0";
+                moneyTF.text = @"50";
                 moneyTF.textAlignment = NSTextAlignmentCenter;
                 moneyTF.frame = CGRectMake(left, top -5, 70, height_tf);
                 moneyTF.font = [UIFont systemFontOfSize:13];
@@ -223,7 +226,7 @@
             //提示
             {
                 UILabel * label = [UILabel new];
-                label.text = @"0元即表示无悬赏";
+                label.text = @"悬赏最低50元";
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
                 label.frame = CGRectMake(left, top, WIDTH-10-left, label_height);

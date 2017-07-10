@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PayTopUpVC : UIViewController
-
+@property(nonatomic,assign)float minPayNumber;//最小充值数
 @end

@@ -67,8 +67,12 @@
     float top = 0;
     //发布上册view
     {
+        NSString * img_url = MYTOOL.userInfo[@"ImgFilePath"];
+        if (img_url == nil || ![img_url isKindOfClass:[NSString class]]) {
+            img_url = @"";
+        }
         float height = [MYTOOL getHeightWithIphone_six:350];
-        IssueInfoUpView * view = [[IssueInfoUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:@"http://img.woyaogexing.com/touxiang/katong/20140110/864ea8353fe3edd3.jpg%21200X200.jpg" andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
+        IssueInfoUpView * view = [[IssueInfoUpView alloc] initWithFrame:CGRectMake(0, top, WIDTH, height) andUserUrl:img_url andTypeTitle:self.typeTitle andTypeArray:self.secondTypeList andDelegate:self];
         view.backgroundColor = [UIColor whiteColor];
         [scrollView addSubview:view];
         top += height + 10;
@@ -233,7 +237,31 @@
 //判断是否有信息不全
 -(BOOL)checkInfoOfIssue{
     //检查所有参数是否合法
-    
+    //标题
+    if (self.titleTF.text.length == 0 || self.titleTF.text.length > 20) {
+        [SVProgressHUD showErrorWithStatus:@"标题字数不合法" duration:2];
+        return false;
+    }
+    //内容
+    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 500) {
+        [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
+        return false;
+    }
+    //城市
+    if (self.cityTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请选择城市" duration:2];
+        return false;
+    }
+    //图片
+    if ([self getCountOfImgV_arr] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请上传图片" duration:2];
+        return false;
+    }
+    //详细地址
+    if (self.addressTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"详细地址不能为空" duration:2];
+        return false;
+    }
     
     return true;
 }
@@ -257,9 +285,10 @@
         return;
     }
     isIssue = true;//现在发布
-    //上传图片
-    current_upload_img_index = 0;
+    //上传图片    current_upload_img_index = 0;
+
     fileid_array = [NSMutableArray new];
+    [MYTOOL netWorkingWithTitle:@"信息发布中……"];
     [self upLoadAllImage];
 }
 //上传所有图片
@@ -308,10 +337,10 @@
         UIImageView * imgV = dic[@"imgV"];
         //截取图片
         float change = 1.0;
-        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
+//        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
         UIImage * img = imgV.image;
         NSData * imageData = UIImageJPEGRepresentation(img,change);
-        while (imageData.length > 1.0 * 1024 * 1024) {
+        while (imageData.length > 300 * 1024) {
             change -= 0.1;
             imageData = UIImageJPEGRepresentation(img,change);
         }
@@ -322,7 +351,7 @@
         
         [formData appendPartWithFileData:imageData name:@"filedata" fileName:fileName mimeType:@"image/png"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",uploadImgCount+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
+//        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",uploadImgCount+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"Result"] boolValue]) {
             uploadImgCount ++;
@@ -408,8 +437,7 @@
             interface = @"/publish/publish/modifysubmitpublishinfo.html";
         }
     }
-#warning 余额不足，将跳转支付界面
-    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+    [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         [self popUpViewController];
         if (isIssue) {
             AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -423,9 +451,37 @@
         }else{
             [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
         }
+    } andNoSuccess:^(NSDictionary *back_dic) {
+        NSString * error = back_dic[@"Code"];
+        NSLog(@"error:%@",error);
+        NSString * msg = back_dic[@"Message"];
+        NSLog(@"msg:%@",msg);
+        if ([error isEqualToString:@"BalanceError"]) {//需要充值
+            UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"发布失败" message:msg preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+                [self popUpViewController];
+            }];
+            UIAlertAction * pay = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //跳转支付
+                PayTopUpVC * vc = [PayTopUpVC new];
+                //需要支付的钱
+                float mustPayMoney = [Money floatValue];
+                //自己的余额
+                float haveMoney = [MYTOOL.userInfo[@"Balance"] floatValue];
+                vc.minPayNumber = mustPayMoney - haveMoney;
+                vc.title = @"余额充值";
+                [self.navigationController pushViewController:vc animated:true];
+            }];
+            [ac addAction:cancel];
+            [ac addAction:pay];
+            [self presentViewController:ac animated:true completion:nil];
+        }else{
+            [SVProgressHUD showErrorWithStatus:msg duration:2];
+        }
+    } andFailure:^(NSURLSessionTask *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误" duration:2];
     }];
-    
-    
+
 }
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -798,6 +854,9 @@
             [dic setValue:@"1" forKey:@"have_image"];
             UIImageView * imgV = dic[@"imgV"];
             imgV.image = img;
+            imgV.contentMode = UIViewContentModeScaleAspectFill;
+            imgV.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+            [imgV setContentScaleFactor:[[UIScreen mainScreen] scale]];
             break;
         }
         

@@ -10,7 +10,7 @@
 #import "IssueFirstPageVC.h"
 #import "LoginVC.h"
 @interface MainVC ()<UITabBarControllerDelegate>
-
+@property(nonatomic,strong)MessageVC * messageVC;
 @end
 
 @implementation MainVC
@@ -77,6 +77,7 @@
     //消息
     {
         MessageVC * message = [MessageVC new];
+        self.messageVC = message;
         message.title = @"消息";
         UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:message];
         //修改navigationbar背景色
@@ -86,8 +87,6 @@
         //修改title字体颜色及大小
         nc.navigationBar.titleTextAttributes = dictColor;
         [self addChildViewController:nc];
-        //设置消息数量
-        message.navigationController.tabBarItem.badgeValue = @"2";
         
         nc.tabBarItem.image = [UIImage imageNamed:@"notice"];
         nc.tabBarItem.selectedImage = [UIImage imageNamed:@"notice_active"];
@@ -115,8 +114,27 @@
     btn.frame = CGRectMake(WIDTH/2 - 20, -8, 40, 40);
     [self.tabBar addSubview:btn];
     [btn addTarget:self action:@selector(issueBtnCallback) forControlEvents:UIControlEventTouchUpInside];
+    [self getUnreadMessageCount];
     
 //    self.selectedIndex = 4;//以后删除
+}
+//获取未读消息数量
+-(void)getUnreadMessageCount{
+    NSString * interface = @"/common/messages/getmsgcount.html";
+    NSDictionary * send = @{@"userid":USER_ID};
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        if (array.count > 2) {
+            NSInteger count = [array[2] longValue];
+            if (count > 0) {
+                //设置消息数量
+                self.messageVC.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",count];
+            }else{
+                //设置消息数量
+                self.messageVC.navigationController.tabBarItem.badgeValue = nil;
+            }
+        }
+    }];
 }
 //发布按钮
 -(void)issueBtnCallback{

@@ -189,22 +189,27 @@
             label.text = content;
             [self addSubview:label];
             CGSize size = [MYTOOL getSizeWithLabel:label];
-            if (size.width < label_width) {
-                label.frame = CGRectMake(left, top_all, label_width, size.height );
-                top_all += size.height + 10;
-            }else{
-                if (size.width > label_width * 2 + label.font.pointSize * 3) {
-                    float row = size.width / label_width;
-                    NSInteger length = content.length * 1.8 / row;
-                    NSString * text = [content substringToIndex:length];
-                    text = [NSString stringWithFormat:@"%@…",text];
-                    label.text = text;
-                    size = [MYTOOL getSizeWithLabel:label];
-                }
-                label.frame = CGRectMake(left, top_all, label_width, size.height * 2);
-                label.numberOfLines = 0;
-                top_all += size.height * 2 + 10;
-            }
+            label.lineBreakMode = NSLineBreakByCharWrapping;
+            label.numberOfLines = 0;
+            float height_content = size.width > label_width ? 30 : 15;
+            label.frame = CGRectMake(left, top_all, label_width, height_content);
+            top_all += height_content + 10;
+//            if (size.width < label_width) {
+//                label.frame = CGRectMake(left, top_all, label_width, size.height );
+//                top_all += size.height + 10;
+//            }else{
+//                if (size.width > label_width * 2 + label.font.pointSize * 3) {
+//                    float row = size.width / label_width;
+//                    NSInteger length = content.length * 1.8 / row;
+//                    NSString * text = [content substringToIndex:length];
+//                    text = [NSString stringWithFormat:@"%@…",text];
+//                    label.text = text;
+//                    size = [MYTOOL getSizeWithLabel:label];
+//                }
+//                label.frame = CGRectMake(left, top_all, label_width, size.height * 2);
+//                label.numberOfLines = 0;
+//                top_all += size.height * 2 + 10;
+//            }
         }
         //发布时间
         float top_down = height - 24;

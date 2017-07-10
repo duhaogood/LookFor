@@ -82,8 +82,6 @@ static id instance;
                      }else{//包含
                          addressInfo = add1;
                      }
-                     
-                     
                      locationDic = @{
                                      @"city":city,
                                      @"address":placemark.name,
@@ -103,20 +101,7 @@ static id instance;
                  [MYCENTER_NOTIFICATION postNotificationName:NOTIFICATION_UPDATELOCATION_FAILED object:@{@"msg":@"定位出错"}];
              }
          }];
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
 +(instancetype)alloc{
     if (instance == nil) {
         instance = [[super alloc] init];

@@ -157,7 +157,7 @@
         [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
         UIImage * img = imgV.image;
         NSData * imageData = UIImageJPEGRepresentation(img,change);
-        while (imageData.length > 1.0 * 1024 * 1024) {
+        while (imageData.length > 300 * 1024) {
             change -= 0.1;
             imageData = UIImageJPEGRepresentation(img,change);
         }

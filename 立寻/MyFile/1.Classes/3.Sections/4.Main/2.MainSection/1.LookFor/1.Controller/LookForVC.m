@@ -16,6 +16,7 @@
 #import "FirstPageMiddleNextCell.h"
 #import "PublishInfoVC.h"
 #import "SearchSomethingVC.h"
+#import "BannerInfoVC.h"
 @interface LookForVC ()<PYSearchViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
@@ -133,8 +134,8 @@
 -(void)iconClick:(UIButton *)tap{
     NSInteger tag = tap.tag;
     NSString * name = self.btn_name_img_array[tag][1];
-    if ([name isEqualToString:@"招商加盟"] || [name isEqualToString:@"公共平台"]) {
-        [SVProgressHUD showErrorWithStatus:@"开发中" duration:1];
+    if ([name isEqualToString:@"人脸识别"] || [name isEqualToString:@"公共平台"]) {
+        [SVProgressHUD showErrorWithStatus:@"该功能正在开发中……" duration:1];
         return;
     }
     FirstPageMiddleNextVC * vc = [FirstPageMiddleNextVC new];
@@ -214,16 +215,20 @@
 }
 #pragma mark - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-    NSLog(@"轮播图tag:%ld,点击了第%ld张图片",cycleScrollView.tag,index);
     NSDictionary * imgDic = self.upBannerImgArray[index];
-    
+    NSString * url = imgDic[@"linkurl"];
+    BannerInfoVC * vc = [BannerInfoVC new];
+    vc.url = url;
+    [self.navigationController pushViewController:vc animated:true];
 }
 //下部banner图片点击事件
 -(void)downBannerImageClick:(UITapGestureRecognizer *)tap{
     NSInteger tag = tap.view.tag;
     NSDictionary * imgDic = self.downBannerImgArray[tag];
-    
-    NSLog(@"tag:%ld",tag);
+    NSString * url = imgDic[@"linkurl"];
+    BannerInfoVC * vc = [BannerInfoVC new];
+    vc.url = url;
+    [self.navigationController pushViewController:vc animated:true];
 }
 #pragma mark - UISearchBarDelegate
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
@@ -253,7 +258,7 @@
                                 @[@"menu_xr",@"委托寻人",@"LookPersonVC",@"83"],
                                 @[@"menu_xw",@"委托寻物",@"LookSomethingVC",@"82"],
                                 @[@"menu_zlrl",@"招领认领",@"PersonLookVC",@"394"],
-                                @[@"menu_zsjm",@"招商加盟",@"BusinessVC",@"0"],
+                                @[@"menu_zsjm",@"人脸识别",@"BusinessVC",@"0"],
                                 @[@"menu_wlbg",@"网络曝光",@"NetShowVC",@"80"],
                                 @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
                                 @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
@@ -264,6 +269,7 @@
 //    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
         NSArray * down = back_dic[@"Data"];
+        self.downBannerImgArray = down;
         //表视图
         UITableView * tableView = [UITableView new];
         //头视图
@@ -368,10 +374,20 @@
     }
     //置顶-最新-悬赏
     {
-        NSString * moneytype = self.current_money_type_btn.tag == 100 ? @"1" : @"2";
-        [send setValue:moneytype forKey:@"moneytype"];
+        NSString * pushtype = self.current_money_type_btn.tag == 100 ? @"1" : @"2";
+        [send setValue:pushtype forKey:@"pushtype"];
         NSString * toptype = self.current_toptype_btn.tag == 100 ? @"1" : @"0";
         [send setValue:toptype forKey:@"toptype"];
+    }
+    //城市id
+    {
+        NSString * city = nil;
+        if (cityId) {
+            city = cityId;
+        }else{
+            city = @"0";
+        }
+        [send setValue:city forKey:@"cityid"];
     }
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];
@@ -440,7 +456,9 @@
                 || [name rangeOfString:cityName].location != NSNotFound) {
                 NSString * cityId1 = cityDic[@"cityId"];
                 cityId = cityId1;
+                [MYTOOL setProjectPropertyWithKey:@"cityId" andValue:cityId];
                 [self getUpBannerImageDataWithCityId:[cityId1 intValue]];
+                [self getCellDataWithHeader:true];
                 return;
             }
         }
@@ -463,7 +481,10 @@
             if ([cityName isEqualToString:city] || [cityName rangeOfString:city].location != NSNotFound
                 || [city rangeOfString:cityName].location != NSNotFound) {
                 NSString * cityId1 = cityDic[@"cityId"];
+                cityId = cityId1;
+                [MYTOOL setProjectPropertyWithKey:@"cityId" andValue:cityId];
                 [self getUpBannerImageDataWithCityId:[cityId1 intValue]];
+                [self getCellDataWithHeader:true];
                 return;
             }
         }

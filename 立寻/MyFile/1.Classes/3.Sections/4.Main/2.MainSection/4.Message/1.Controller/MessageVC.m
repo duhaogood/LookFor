@@ -10,7 +10,8 @@
 
 @interface MessageVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
-@property(nonatomic,strong)NSArray * cellDateArray;//cell数据
+@property(nonatomic,strong)NSMutableArray * cellDataArray;//cell数据
+@property(nonatomic,strong)UIView * noDataView;//没有数据显示
 
 @end
 
@@ -18,55 +19,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cellDateArray = @[
-                           @{
-                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-                               @"nickName":@"水煮蛋小姐",
-                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦",
-                               @"time":@"2个小时前"
-                               },
-                           @{
-                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-                               @"nickName":@"水煮蛋小姐",
-                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦，不要着急哈，亲。您订阅的是陪练，我会尽快给你回复的哦，不要着急哈，亲",
-                               @"time":@"2个小时前"
-                               },
-                           @{
-                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-                               @"nickName":@"水煮蛋小姐",
-                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦，不要着急哈，亲。",
-                               @"time":@"2个小时前"
-                               },
-                           @{
-                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-                               @"nickName":@"水煮蛋小姐",
-                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦，不要着急哈，亲。",
-                               @"time":@"2个小时前"
-                               },
-                           @{
-                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-                               @"nickName":@"水煮蛋小姐",
-                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦，不要着急哈，亲。",
-                               @"time":@"2个小时前"
-                               },
-                           @{
-                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-                               @"nickName":@"水煮蛋小姐",
-                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦，不要着急哈，亲。",
-                               @"time":@"2个小时前"
-                               }
-                           ];
+//    self.cellDateArray = @[
+//                           @{
+//                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
+//                               @"nickName":@"水煮蛋小姐",
+//                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦",
+//                               @"time":@"2个小时前"
+//                               }
+//                           ];
     //加载主界面
     [self loadMainView];
 }
 //加载主界面
 -(void)loadMainView{
     self.view.backgroundColor = MYCOLOR_240_240_240;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_btn"] style:UIBarButtonItemStyleDone target:self action:@selector(submitSearchBtn)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_btn"] style:UIBarButtonItemStyleDone target:self action:@selector(submitSearchBtn)];
     //tableView
     {
         UITableView * tableView = [UITableView new];
-        tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64);
+        tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64-50);
         self.automaticallyAdjustsScrollViewInsets = false;
         tableView.dataSource = self;
         tableView.delegate = self;
@@ -75,19 +46,108 @@
         tableView.rowHeight = [MYTOOL getHeightWithIphone_six:75];
         tableView.backgroundColor = MYCOLOR_240_240_240;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
+        {
+            UIView * view = [UIView new];
+            self.noDataView = view;
+            view.frame = tableView.bounds;
+            view.backgroundColor = MYCOLOR_240_240_240;
+            [tableView addSubview:view];
+            //图片-170*135
+            {
+                UIImageView * icon = [UIImageView new];
+                icon.image = [UIImage imageNamed:@"nodate"];
+                icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
+                [view addSubview:icon];
+            }
+        }
+        self.automaticallyAdjustsScrollViewInsets = false;
+        tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self headerRefresh];
+            // 结束刷新
+            [tableView.mj_header endRefreshing];
+        }];
+        // 设置自动切换透明度(在导航栏下面自动隐藏)
+        tableView.mj_header.automaticallyChangeAlpha = YES;
+        // 上拉刷新
+        tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [self footerRefresh];
+            [tableView.mj_footer endRefreshing];
+        }];
     }
     
+    [self headerRefresh];
+}
+#pragma mark - 上啦下啦刷新
+-(void)headerRefresh{
+    [self getCellDataWithHeader:true];
+}
+-(void)footerRefresh{
+    [self getCellDataWithHeader:false];
+}
+//重新加载数据
+-(void)getCellDataWithHeader:(BOOL)flag{
+    NSString * interface = @"/common/messages/getstationmsglist.html";
+    NSMutableDictionary * send = [NSMutableDictionary new];
+    [send setValue:@"2" forKey:@"categoryid"];
+    if (USER_ID) {
+        [send setValue:USER_ID forKey:@"userid"];
+    }else{
+        return;
+    }
+    //是否下拉
+    if (!flag) {
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            NSObject * lastnumber = self.cellDataArray[self.cellDataArray.count - 1][@"ID"];
+            [send setValue:lastnumber forKey:@"lastnumber"];
+        }
+    }
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+//        NSLog(@"back:%@",back_dic);
+        NSArray * array = back_dic[@"Data"];
+        if (flag) {
+            self.cellDataArray = [NSMutableArray arrayWithArray:array];
+        }else{
+            if (array == nil || array.count == 0) {
+                //                [SVProgressHUD showErrorWithStatus:@"到底啦" duration:2];
+                return;
+            }
+            [self.cellDataArray addObjectsFromArray:array];
+        }
+        if (self.cellDataArray && self.cellDataArray.count > 0) {
+            self.noDataView.hidden = true;
+        }else{
+            self.noDataView.hidden = false;
+        }
+        [self.tableView reloadData];
+    }];
     
 }
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    NSDictionary * dic = self.cellDataArray[indexPath.row];
+    //如果消息未读，置为已读
+    bool readType = [dic[@"IsRead"] boolValue];
+    if (!readType) {
+        NSString * msgId = [NSString stringWithFormat:@"%ld",[dic[@"ID"] longValue]];
+        NSString * interface = @"/common/messages/setmsgread.html";
+        NSDictionary * send = @{
+                                @"userid":USER_ID,
+                                @"idlist":msgId
+                                };
+        [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+            [self headerRefresh];
+            [self getUnreadMessageCount];
+        }];
+    }
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.cellDateArray.count;
+    return self.cellDataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * dic = self.cellDateArray[indexPath.row];
+    NSDictionary * dic = self.cellDataArray[indexPath.row];
     UITableViewCell * cell = [UITableViewCell new];
     float left = 10;
     float top = tableView.rowHeight/6.0;
@@ -100,13 +160,26 @@
         icon.layer.cornerRadius = img_width/2.0;
         NSString * url = dic[@"url"];
         [MYTOOL setImageIncludePrograssOfImageView:icon withUrlString:url];
-        [cell addSubview:icon];
-        left += img_width + 10;
+//        [cell addSubview:icon];
+//        left += img_width + 10;
+    }
+    left += 20;
+    //是否已读
+    {
+        bool readType = [dic[@"IsRead"] boolValue];
+        if (!readType) {
+            UIView * view = [UIView new];
+            view.backgroundColor = [UIColor redColor];
+            view.frame = CGRectMake(5, tableView.rowHeight/2-2, 4, 4);
+            view.layer.masksToBounds = true;
+            view.layer.cornerRadius = 2;
+            [cell addSubview:view];
+        }
     }
     float time_middle_top = 0;
     //昵称
     {
-        NSString * nickName = dic[@"nickName"];
+        NSString * nickName = dic[@"MessageBody"];
         UILabel * label = [UILabel new];
         label.text = nickName;
         label.textColor = MYCOLOR_48_48_48;
@@ -118,7 +191,7 @@
     }
     //时间
     {
-        NSString * time = dic[@"time"];
+        NSString * time = dic[@"MessageTime"];
         UILabel * label = [UILabel new];
         label.text = time;
         label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
@@ -129,7 +202,7 @@
     }
     //消息文字
     {
-        NSString * message = dic[@"message"];
+        NSString * message = dic[@"MessageSubject"];
         UILabel * label = [UILabel new];
         label.text = message;
         label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
@@ -146,7 +219,7 @@
     
     //分割线
     {
-        if (indexPath.row < self.cellDateArray.count - 1) {
+        if (indexPath.row < self.cellDataArray.count - 1) {
             UIView * space = [UIView new];
             space.backgroundColor = MYCOLOR_240_240_240;
             space.frame = CGRectMake(0, tableView.rowHeight - 1, WIDTH, 1);
@@ -155,7 +228,24 @@
     }
     return cell;
 }
-
+//获取未读消息数量
+-(void)getUnreadMessageCount{
+    NSString * interface = @"/common/messages/getmsgcount.html";
+    NSDictionary * send = @{@"userid":USER_ID};
+    [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSArray * array = back_dic[@"Data"];
+        if (array.count > 2) {
+            NSInteger count = [array[2] longValue];
+            if (count > 0) {
+                //设置消息数量
+                self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",count];
+            }else{
+                //设置消息数量
+                self.navigationController.tabBarItem.badgeValue = nil;
+            }
+        }
+    }];
+}
 #pragma mark - 按钮事件
 //搜索事件
 -(void)submitSearchBtn{
@@ -163,7 +253,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.tabBarItem.badgeValue = @"6";
+    [self getUnreadMessageCount];
 }
 
 @end

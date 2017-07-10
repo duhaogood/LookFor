@@ -7,7 +7,7 @@
 //
 
 #import "AccountBalanceVC.h"
-
+#import "PayTopUpVC.h"
 @interface AccountBalanceVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * cellDataArray;//cell数据数组
@@ -27,6 +27,9 @@
     self.view.backgroundColor = [MYTOOL RGBWithRed:242 green:242 blue:242 alpha:1];
     //返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
+    //充值按钮
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"充值" style:UIBarButtonItemStyleDone target:self action:@selector(submitTopup)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     //初始化界面数据
     //余额
     NSString * Balance = [NSString stringWithFormat:@"%.2f元",[MYTOOL.userInfo[@"Balance"] floatValue]];
@@ -55,7 +58,12 @@
     self.automaticallyAdjustsScrollViewInsets = false;
 }
 
-
+//充值入口
+-(void)submitTopup{
+    PayTopUpVC * vc = [PayTopUpVC new];
+    vc.title = @"余额充值";
+    [self.navigationController pushViewController:vc animated:true];
+}
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
