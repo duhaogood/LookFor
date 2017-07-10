@@ -49,7 +49,7 @@
     self.automaticallyAdjustsScrollViewInsets = false;
     //上部view
     {
-        float view_height = [MYTOOL getHeightWithIphone_six:204];
+        float view_height = [MYTOOL getHeightWithIphone_six:244];
         UIView * view = [UIView new];
         view.frame = CGRectMake(0, 0, WIDTH, view_height);
         view.backgroundColor = [UIColor whiteColor];
@@ -85,6 +85,8 @@
             label.text = @"0/500";
             label.textAlignment = NSTextAlignmentRight;
         }
+        float height_tf = [MYTOOL getHeightWithIphone_six:35];
+        float middle_top = 0;
         //选择城市
         {
             float left = 0;
@@ -92,18 +94,19 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"发现城市:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:13];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(10, [MYTOOL getHeightWithIphone_six:128], size.width, size.height);
+                label.frame = CGRectMake(10, [MYTOOL getHeightWithIphone_six:138], size.width, size.height);
                 [view addSubview:label];
+                middle_top = [MYTOOL getHeightWithIphone_six:138] + size.height/2;
                 left = 10 + size.width + 10;
             }
             //右侧
             {
                 UITextField * cityTF = [UITextField new];
                 cityTF.placeholder = @"  请选择城市";
-                cityTF.frame = CGRectMake(left, [MYTOOL getHeightWithIphone_six:128], WIDTH/2.0, 20);
+                cityTF.frame = CGRectMake(left, middle_top - height_tf/2, WIDTH/2.0, height_tf);
                 cityTF.font = [UIFont systemFontOfSize:14];
                 cityTF.tag = 300;
                 cityTF.delegate = self;
@@ -160,10 +163,11 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"发现城市:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:13];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(10, [MYTOOL getHeightWithIphone_six:157], size.width, size.height);
+                label.frame = CGRectMake(10, [MYTOOL getHeightWithIphone_six:187], size.width, size.height);
+                middle_top = [MYTOOL getHeightWithIphone_six:187] + size.height/2;
                 [view addSubview:label];
                 left = 10 + size.width + 10;
             }
@@ -171,7 +175,7 @@
             {
                 UITextField * cityTF = [UITextField new];
                 cityTF.placeholder = @" 请输入走失地详细地址";
-                cityTF.frame = CGRectMake(left, [MYTOOL getHeightWithIphone_six:157], WIDTH - left - 10, 20);
+                cityTF.frame = CGRectMake(left, middle_top - height_tf/2, WIDTH - left - 10, height_tf);
                 cityTF.font = [UIFont systemFontOfSize:14];
                 cityTF.tag = 400;
                 self.addressTF = cityTF;

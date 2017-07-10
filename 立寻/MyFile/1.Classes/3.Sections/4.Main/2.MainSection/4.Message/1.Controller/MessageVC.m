@@ -19,14 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.cellDateArray = @[
-//                           @{
-//                               @"url":@"http://scimg.jb51.net/touxiang/201705/2017050421535596.jpg",
-//                               @"nickName":@"水煮蛋小姐",
-//                               @"message":@"您订阅的是陪练，我会尽快给你回复的哦",
-//                               @"time":@"2个小时前"
-//                               }
-//                           ];
     //加载主界面
     [self loadMainView];
 }
@@ -163,7 +155,7 @@
 //        [cell addSubview:icon];
 //        left += img_width + 10;
     }
-    left += 20;
+    left += 10;
     //是否已读
     {
         bool readType = [dic[@"IsRead"] boolValue];
@@ -183,7 +175,7 @@
         UILabel * label = [UILabel new];
         label.text = nickName;
         label.textColor = MYCOLOR_48_48_48;
-        label.font = [UIFont systemFontOfSize:13];
+        label.font = [UIFont systemFontOfSize:14];
         CGSize size = [MYTOOL getSizeWithLabel:label];
         label.frame = CGRectMake(left, top, size.width, size.height);
         [cell addSubview:label];
@@ -206,7 +198,7 @@
         UILabel * label = [UILabel new];
         label.text = message;
         label.textColor = [MYTOOL RGBWithRed:112 green:112 blue:112 alpha:1];
-        label.font = [UIFont systemFontOfSize:11];
+        label.font = [UIFont systemFontOfSize:13];
         CGSize size = [MYTOOL getSizeWithLabel:label];
         label.frame = CGRectMake(left, tableView.rowHeight/2, WIDTH-10-left, size.height);
         if (size.width > WIDTH - 10 - left + label.font.pointSize) {

@@ -134,6 +134,9 @@
             {
                 UIImageView * imgV = [UIImageView new];
                 imgV.frame = CGRectMake(left, top + 8, imgHeight, imgHeight);
+                imgV.contentMode = UIViewContentModeScaleAspectFill;
+                imgV.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+                [imgV setContentScaleFactor:[[UIScreen mainScreen] scale]];
                 [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:dictionary[@"PicturePath"]];
                 [self addSubview:imgV];
                 left += imgHeight + 10;

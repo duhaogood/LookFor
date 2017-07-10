@@ -66,6 +66,9 @@
                 user_icon.layer.masksToBounds = true;
                 user_icon.layer.cornerRadius = r/2.0;
                 [delegate setUser_imgV:user_icon];
+                user_icon.contentMode = UIViewContentModeScaleAspectFill;
+                user_icon.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
+                [user_icon setContentScaleFactor:[[UIScreen mainScreen] scale]];
                 
                 [user_icon setUserInteractionEnabled:YES];
                 UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:delegate action:@selector(clickUserIconCallback2:)];
@@ -110,7 +113,7 @@
                 UITextField * tf = [UITextField new];
                 tf.placeholder = @"请简介的描述您的主营业务";
                 tf.frame = CGRectMake(left, middle_top - 10, WIDTH - 30-left, 20);
-                tf.font = [UIFont systemFontOfSize:12];
+                tf.font = [UIFont systemFontOfSize:13];
                 [self addSubview:tf];
                 [delegate setLove_tf:tf];
             }
@@ -152,7 +155,7 @@
                 UITextField * tf = [UITextField new];
                 tf.placeholder = @"请选择店铺所在城市";
                 tf.frame = CGRectMake(left, middle_top - 10, WIDTH - 30-left, 20);
-                tf.font = [UIFont systemFontOfSize:12];
+                tf.font = [UIFont systemFontOfSize:13];
                 tf.delegate = delegate;
                 [self addSubview:tf];
                 [delegate setArea_tf:tf];
@@ -239,7 +242,7 @@
                 UITextField * tf = [UITextField new];
                 tf.placeholder = @"请填写店铺详细地址";
                 tf.frame = CGRectMake(left, middle_top - 10, WIDTH - 30-left, 20);
-                tf.font = [UIFont systemFontOfSize:12];
+                tf.font = [UIFont systemFontOfSize:13];
                 [self addSubview:tf];
                 [delegate setAddress_tf:tf];
             }
