@@ -259,7 +259,7 @@
                                 @[@"menu_xw",@"委托寻物",@"LookSomethingVC",@"82"],
                                 @[@"menu_zlrl",@"招领认领",@"PersonLookVC",@"394"],
                                 @[@"menu_zsjm",@"人脸识别",@"BusinessVC",@"0"],
-                                @[@"menu_wlbg",@"网络曝光",@"NetShowVC",@"80"],
+                                @[@"menu_wlbg",@"网络寻家",@"NetShowVC",@"80"],
                                 @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
                                 @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
                                 @[@"menu_shop",@"公共平台",@"PointStoreVC",@"0"]

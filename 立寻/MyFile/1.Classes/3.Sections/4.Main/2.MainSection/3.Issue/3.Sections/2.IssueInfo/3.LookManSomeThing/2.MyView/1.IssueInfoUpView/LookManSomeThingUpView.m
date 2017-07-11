@@ -242,6 +242,9 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"丢失城市:";
+                if ([[delegate parentid] isEqualToString:@"83"]) {
+                    label.text = @"走失城市:";
+                }
                 label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];

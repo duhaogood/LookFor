@@ -120,7 +120,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"目标类型:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);
@@ -191,7 +191,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"选择城市:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top+5, size.width, size.height);

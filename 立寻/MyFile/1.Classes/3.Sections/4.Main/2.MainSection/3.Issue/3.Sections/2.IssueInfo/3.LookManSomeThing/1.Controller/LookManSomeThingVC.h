@@ -13,6 +13,7 @@
 
 @property(nonatomic,strong)NSArray * secondTypeList;//二级分类数据
 @property(nonatomic,copy)NSString * typeTitle;//一级分类标题
+@property(nonatomic,copy)NSString * parentid;//一级分类id
 
 
 @property(nonatomic,strong)UILabel * titleNumberLabel;//标题数字label

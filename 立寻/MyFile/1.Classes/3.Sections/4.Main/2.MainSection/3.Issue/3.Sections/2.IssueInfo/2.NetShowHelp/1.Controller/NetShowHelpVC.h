@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NetShowHelpVC : UIViewController
+@property(nonatomic,copy)NSString * parentid;//一级分类id
 @property(nonatomic,strong)NSDictionary * publishDic;//草稿箱进来的数据
 
 

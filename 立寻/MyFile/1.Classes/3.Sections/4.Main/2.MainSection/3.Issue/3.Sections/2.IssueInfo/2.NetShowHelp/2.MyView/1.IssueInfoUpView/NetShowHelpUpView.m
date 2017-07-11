@@ -188,7 +188,7 @@
             {
                 UILabel * label = [UILabel new];
                 label.text = @"所在城市:";
-                label.font = [UIFont systemFontOfSize:12];
+                label.font = [UIFont systemFontOfSize:14];
                 label.textColor = MYCOLOR_48_48_48;
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 label.frame = CGRectMake(10, top, size.width, size.height);

@@ -46,7 +46,7 @@
     //图片按钮数组
     img_name_array = @[
                        @[
-                           @[@"fbbtn_baoguang",@"网络曝光",@"96",@"109",@"80",@"NetShowHelpVC"],
+                           @[@"fbbtn_baoguang",@"网络寻家",@"96",@"109",@"80",@"NetShowHelpVC"],
                            @[@"fbbtn_qiuzhu",@"网络求助",@"88",@"96",@"81",@"NetShowHelpVC"],
                            @[@"fbbtn_quanzi",@"立寻圈子",@"96",@"109",@"549",@"LookForCircleVC"]
                            ],//第一行
@@ -118,6 +118,7 @@
         UIViewController * vc = [class new];
         vc.title = title;
         ((PickUpSomeThingVC *)vc).secondTypeList = back_dic[@"Data"];
+        ((PickUpSomeThingVC *)vc).parentid = parentid;
         //跳转
         [[self.delegate navigationController] pushViewController:vc animated:true];
         [self submitCloseBtn];

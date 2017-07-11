@@ -121,6 +121,9 @@
 //获取未读消息数量
 -(void)getUnreadMessageCount{
     NSString * interface = @"/common/messages/getmsgcount.html";
+    if (![MYTOOL isLogin]) {
+        return;
+    }
     NSDictionary * send = @{@"userid":USER_ID};
     [MYNETWORKING getNoPopWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];

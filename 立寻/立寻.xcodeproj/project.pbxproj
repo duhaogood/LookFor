@@ -33,6 +33,7 @@
 		042BAF381F062B1500B86065 /* MyClainInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF371F062B1500B86065 /* MyClainInfoVC.m */; };
 		042BAF3B1F0C90B500B86065 /* SearchSomethingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAF3A1F0C90B500B86065 /* SearchSomethingVC.m */; };
 		042BAFB61F132DFE00B86065 /* BannerInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042BAFB51F132DFE00B86065 /* BannerInfoVC.m */; };
+		042BAFF91F14BB1600B86065 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 042BAFF81F14BB1600B86065 /* launch.png */; };
 		0436E5EF1EF007730031FC2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5EE1EF007730031FC2B /* CoreLocation.framework */; };
 		0436E5F11EF0077B0031FC2B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436E5F01EF0077B0031FC2B /* MapKit.framework */; };
 		043D70A31EFBF2910053D71E /* FirstPageMiddleNextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D70A21EFBF2910053D71E /* FirstPageMiddleNextCell.m */; };
@@ -294,6 +295,7 @@
 		042BAF3A1F0C90B500B86065 /* SearchSomethingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSomethingVC.m; sourceTree = "<group>"; };
 		042BAFB41F132DFE00B86065 /* BannerInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerInfoVC.h; sourceTree = "<group>"; };
 		042BAFB51F132DFE00B86065 /* BannerInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerInfoVC.m; sourceTree = "<group>"; };
+		042BAFF81F14BB1600B86065 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		0436E5EE1EF007730031FC2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0436E5F01EF0077B0031FC2B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		043D70A11EFBF2910053D71E /* FirstPageMiddleNextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageMiddleNextCell.h; sourceTree = "<group>"; };
@@ -1156,6 +1158,7 @@
 		042BAF0D1F04A82500B86065 /* 2.Image */ = {
 			isa = PBXGroup;
 			children = (
+				042BAFF81F14BB1600B86065 /* launch.png */,
 			);
 			path = 2.Image;
 			sourceTree = "<group>";
@@ -3473,7 +3476,7 @@
 				TargetAttributes = {
 					78C23C411ED3450A000CD40E = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = XDPHBM3QS8;
+						DevelopmentTeam = XK49G3E4V8;
 						ProvisioningStyle = Automatic;
 					};
 					78C23C5A1ED3450A000CD40E = {
@@ -3515,6 +3518,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042BAFF91F14BB1600B86065 /* launch.png in Resources */,
 				04410F571EEEBF720063CC32 /* area_code.plist in Resources */,
 				042BAF111F04A94900B86065 /* morenhdpic.png in Resources */,
 				042BAF101F04A94900B86065 /* hdbj.png in Resources */,
@@ -3850,7 +3854,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = XDPHBM3QS8;
+				DEVELOPMENT_TEAM = XK49G3E4V8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
@@ -3866,7 +3870,7 @@
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/WXPay",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hao.looking;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hao.lookingFor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3876,7 +3880,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = XDPHBM3QS8;
+				DEVELOPMENT_TEAM = XK49G3E4V8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
@@ -3892,7 +3896,7 @@
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/WXPay",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hao.looking;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hao.lookingFor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
