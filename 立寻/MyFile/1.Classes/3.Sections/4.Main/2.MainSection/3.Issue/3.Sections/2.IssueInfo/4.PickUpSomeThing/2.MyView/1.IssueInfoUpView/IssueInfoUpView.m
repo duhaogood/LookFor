@@ -17,22 +17,8 @@
 -(instancetype)initWithFrame:(CGRect)frame andUserUrl:(NSString *)url andTypeTitle:(NSString *)typeTitle andTypeArray:(NSArray *)typeArray andDelegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
         //[MYTOOL getHeightWithIphone_six:323]
-        float left = 0;
-        float top = [MYTOOL getHeightWithIphone_six:14];
-        //头像
-        float user_width = [MYTOOL getHeightWithIphone_six:35];
-        {
-            UIImageView * icon = [UIImageView new];
-            icon.frame = CGRectMake(10, top, user_width, user_width);
-            icon.layer.masksToBounds = true;
-            icon.layer.cornerRadius = user_width/2.0;
-            [self addSubview:icon];
-            [icon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"morenhdpic"]];
-            left = 10 + user_width + 10;
-            icon.contentMode = UIViewContentModeScaleAspectFill;
-            icon.clipsToBounds=YES;//  是否剪切掉超出 UIImageView 范围的图片
-            [icon setContentScaleFactor:[[UIScreen mainScreen] scale]];
-        }
+        float left = 10;
+        float top = [MYTOOL getHeightWithIphone_six:20];
         //标题文本框
         {
             float right = 0;
@@ -45,7 +31,7 @@
                 label.font = [UIFont systemFontOfSize:10];
                 [self addSubview:label];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
-                label.frame = CGRectMake(WIDTH - 10 - size.width, top + user_width/2.0-size.height/2, size.width, size.height);
+                label.frame = CGRectMake(WIDTH - 10 - size.width, top -size.height/2, size.width, size.height);
                 right = WIDTH - 10 - size.width - 10;
             }
             //中间文本框
@@ -59,8 +45,8 @@
                 tf.tag = 50;
                 [self addSubview:tf];
                 CGSize size = [MYTOOL getSizeWithLabel:(UILabel *)tf];
-                tf.frame = CGRectMake(left, top + user_width/2.0-size.height/2-10, right-left, size.height+10);
-                top += user_width/2.0 + size.height/2.0 + 5;
+                tf.frame = CGRectMake(left, top -size.height/2-10, right-left, size.height+10);
+                top += size.height/2.0 + 5;
             }
             //下侧分割线
             {
@@ -91,12 +77,13 @@
         //详细信息字数
         {
             UILabel * label = [UILabel new];
-            label.text = @"   0/500";
+            label.text = @"123456/5000";
             label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
             label.font = [UIFont systemFontOfSize:10];
             [self addSubview:label];
             [delegate setContentNumberLabel:label];
             CGSize size = [MYTOOL getSizeWithLabel:label];
+            label.text = @"0/5000";
             label.frame = CGRectMake(WIDTH - 10 - size.width, top , size.width, size.height);
             top += size.height;
         }

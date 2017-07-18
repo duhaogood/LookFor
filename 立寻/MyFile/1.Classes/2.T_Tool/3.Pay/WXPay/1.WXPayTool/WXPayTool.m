@@ -17,10 +17,10 @@
     NSString * orderId = payDictionary[@"orderId"];
     //payDic和orderDic请求实例
     NSDictionary * payDic = @{
-                              @"api_key":@"zhaomandewangzhanlixun110henniub",
-                              @"app_id":@"wx7074ea72756fdfbc",
-                              @"app_secret":@"db305d6d99746433564ec3c13330bc44",
-                              @"mch_id":@"1480542612",
+                              @"api_key":@"ps321323198711182537lixunappmima",
+                              @"app_id":@"wx5ff1105426a8e8d9",
+                              @"app_secret":@"a0cb8aee9361220290c2370e657e4186",
+                              @"mch_id":@"1484366962",
                               @"notify_url":@"http://user.lixun110.com/payment/WxPay/ResultNotifyPage.aspx"
                               };
     NSString * price = payDictionary[@"money"];

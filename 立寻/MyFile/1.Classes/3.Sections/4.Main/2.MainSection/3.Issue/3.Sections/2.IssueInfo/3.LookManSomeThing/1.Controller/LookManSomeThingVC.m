@@ -11,6 +11,8 @@
 #import "LookManSomeThingDownView.h"
 #import "PayTopUpVC.h"
 #import "MyLookingVC.h"
+#import "PayMoneyVC.h"
+#import "MyLookingVC.h"
 @interface LookManSomeThingVC ()<UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIScrollView * scrollView;//背景view
 @property(nonatomic,strong)NSMutableArray * img_arr;//图片view数组
@@ -237,7 +239,7 @@
         return false;
     }
     //内容
-    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 500) {
+    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 5000) {
         [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
         return false;
     }
@@ -425,57 +427,32 @@
                  @"publishid":self.publishDic[@"PublishID"]
                  };
     }
-    NSString * interface = @"/publish/publish/addpublishinfo.html";
-    if (self.publishDic) {
+    NSString * interface = @"/publish/publish/addpublishinfo.html";//添加草稿箱
+    if (self.publishDic) {//从草稿箱进来,再次保存草稿箱
         interface = @"/publish/publish/modifypublishinfo.html";
     }
-    if (isIssue) {
-        interface = @"/publish/publish/addsubmitpublishinfo.html";
+    if (isIssue) {//现在发布
+        interface = @"/publish/publish/addsubmitpublishinfonew.html";
         if (self.publishDic) {
-            interface = @"/publish/publish/modifysubmitpublishinfo.html";
+            interface = @"/publish/publish/modifysubmitpublishinfonew.html";
         }
     }
     [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self popUpViewController];
+        [self.navigationController popViewControllerAnimated:false];
         if (isIssue) {
+            PayMoneyVC * vc = [PayMoneyVC new];
+            vc.waittingPayNumber = [Money floatValue];
+            vc.publishId = back_dic[@"Data"];
             AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
             MainVC * main = (MainVC *)app.window.rootViewController;
-            [main setSelectedIndex:4];
             UINavigationController * nc = main.selectedViewController;
-            //跳转网络社交
-            Found_ClaimVC * vc = [Found_ClaimVC new];
-            vc.title = @"网络社交";
             [nc pushViewController:vc animated:true];
         }else{
             [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
         }
     } andNoSuccess:^(NSDictionary *back_dic) {
-        NSString * error = back_dic[@"Code"];
-        NSLog(@"error:%@",error);
         NSString * msg = back_dic[@"Message"];
-        NSLog(@"msg:%@",msg);
-        if ([error isEqualToString:@"BalanceError"]) {//需要充值
-            UIAlertController * ac = [UIAlertController alertControllerWithTitle:@"发布失败" message:msg preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
-                [self popUpViewController];
-            }];
-            UIAlertAction * pay = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                //跳转支付
-                PayTopUpVC * vc = [PayTopUpVC new];
-                //需要支付的钱
-                float mustPayMoney = [Money floatValue];
-                //自己的余额
-                float haveMoney = [MYTOOL.userInfo[@"Balance"] floatValue];
-                vc.minPayNumber = mustPayMoney - haveMoney;
-                vc.title = @"余额充值";
-                [self.navigationController pushViewController:vc animated:true];
-            }];
-            [ac addAction:cancel];
-            [ac addAction:pay];
-            [self presentViewController:ac animated:true completion:nil];
-        }else{
-            [SVProgressHUD showErrorWithStatus:msg duration:2];
-        }
+        [SVProgressHUD showErrorWithStatus:msg duration:2];
     } andFailure:^(NSURLSessionTask *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"网络错误" duration:2];
     }];
@@ -512,8 +489,8 @@
     //字数控制-详情字数
     if (range.length == 0) {//字数增加
         NSInteger count = textView.text.length;
-        if (count >= 500) {
-            [SVProgressHUD showErrorWithStatus:@"字数不能超过500" duration:2];
+        if (count >= 5000) {
+            [SVProgressHUD showErrorWithStatus:@"字数不能超过5000" duration:2];
             return false;
         }
     }
@@ -521,7 +498,7 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     NSInteger count = textView.text.length;
-    self.contentNumberLabel.text = [NSString stringWithFormat:@"%ld/500",count];
+    self.contentNumberLabel.text = [NSString stringWithFormat:@"%ld/5000",count];
 }
 #pragma mark - UIPickerViewDelegate,UIPickerViewDataSource
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{

@@ -243,7 +243,7 @@
         return false;
     }
     //内容
-    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 500) {
+    if (self.contentTV.text.length == 0 || self.contentTV.text.length > 5000) {
         [SVProgressHUD showErrorWithStatus:@"内容字数不合法" duration:2];
         return false;
     }
@@ -514,8 +514,8 @@
     //字数控制-详情字数
     if (range.length == 0) {//字数增加
         NSInteger count = textView.text.length;
-        if (count >= 500) {
-            [SVProgressHUD showErrorWithStatus:@"字数不能超过500" duration:2];
+        if (count >= 5000) {
+            [SVProgressHUD showErrorWithStatus:@"字数不能超过5000" duration:2];
             return false;
         }
     }
@@ -523,7 +523,7 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     NSInteger count = textView.text.length;
-    self.contentNumberLabel.text = [NSString stringWithFormat:@"%ld/500",count];
+    self.contentNumberLabel.text = [NSString stringWithFormat:@"%ld/5000",count];
 }
 #pragma mark - UIPickerViewDelegate,UIPickerViewDataSource
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{

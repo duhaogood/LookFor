@@ -138,6 +138,7 @@
 		04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08721EE2C3DB003F9943 /* MyLookingForCell.m */; };
 		04DE087B1EE30890003F9943 /* FoundClaimCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08791EE30890003F9943 /* FoundClaimCell.m */; };
 		04DE087E1EE308AA003F9943 /* MyClaimCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE087D1EE308AA003F9943 /* MyClaimCell.m */; };
+		04EDA70E1F1DB6E000646C36 /* PayMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EDA70D1F1DB6E000646C36 /* PayMoneyVC.m */; };
 		78375AC21ED4734C0046F8C3 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A211ED4734C0046F8C3 /* MainVC.m */; };
 		78375AC31ED4734C0046F8C3 /* LookForVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A281ED4734C0046F8C3 /* LookForVC.m */; };
 		78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78375A2F1ED4734C0046F8C3 /* FindVC.m */; };
@@ -610,6 +611,9 @@
 		04DE08791EE30890003F9943 /* FoundClaimCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundClaimCell.m; sourceTree = "<group>"; };
 		04DE087C1EE308AA003F9943 /* MyClaimCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClaimCell.h; sourceTree = "<group>"; };
 		04DE087D1EE308AA003F9943 /* MyClaimCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClaimCell.m; sourceTree = "<group>"; };
+		04EDA70A1F1DB6C400646C36 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
+		04EDA70C1F1DB6E000646C36 /* PayMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMoneyVC.h; sourceTree = "<group>"; };
+		04EDA70D1F1DB6E000646C36 /* PayMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMoneyVC.m; sourceTree = "<group>"; };
 		783759FD1ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		783759FF1ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		78375A011ED4734C0046F8C3 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
@@ -2757,6 +2761,24 @@
 			path = 2.MyClaimCell;
 			sourceTree = "<group>";
 		};
+		04EDA7091F1DB6C400646C36 /* 4.PayMoney */ = {
+			isa = PBXGroup;
+			children = (
+				04EDA70A1F1DB6C400646C36 /* 0.Comments.h */,
+				04EDA70B1F1DB6C400646C36 /* 1.Controller */,
+			);
+			path = 4.PayMoney;
+			sourceTree = "<group>";
+		};
+		04EDA70B1F1DB6C400646C36 /* 1.Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04EDA70C1F1DB6E000646C36 /* PayMoneyVC.h */,
+				04EDA70D1F1DB6E000646C36 /* PayMoneyVC.m */,
+			);
+			path = 1.Controller;
+			sourceTree = "<group>";
+		};
 		783759FC1ED4734C0046F8C3 /* MyFile */ = {
 			isa = PBXGroup;
 			children = (
@@ -3011,6 +3033,7 @@
 				0410B04C1EE3DD6200E8CBA1 /* 1.IssueFirstPage */,
 				044669AD1EF11A010082D8BC /* 2.IssueInfo */,
 				044ADF761EF2952300E43704 /* 3.PayTopUp */,
+				04EDA7091F1DB6C400646C36 /* 4.PayMoney */,
 			);
 			path = 3.Sections;
 			sourceTree = "<group>";
@@ -3688,6 +3711,7 @@
 				04041C9D1EFAE859003A6ED6 /* PersonLookVC.m in Sources */,
 				78375AE61ED4734C0046F8C3 /* SDCollectionViewCell.m in Sources */,
 				044669F21EF131A20082D8BC /* LookManSomeThingUpView.m in Sources */,
+				04EDA70E1F1DB6E000646C36 /* PayMoneyVC.m in Sources */,
 				78375ADF1ED4734C0046F8C3 /* UIScrollView+MJExtension.m in Sources */,
 				044ADFF81EF2A4B100E43704 /* WeChatPayManager.m in Sources */,
 				78375AE41ED4734C0046F8C3 /* TADotView.m in Sources */,
