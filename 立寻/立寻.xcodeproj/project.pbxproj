@@ -126,8 +126,6 @@
 		049B5E451EDF07C90080D552 /* ClearCacheVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E441EDF07C90080D552 /* ClearCacheVC.m */; };
 		049B5E481EDF07D80080D552 /* NotificationMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E471EDF07D80080D552 /* NotificationMessageVC.m */; };
 		049B5E4B1EDF07E90080D552 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B5E4A1EDF07E90080D552 /* SettingVC.m */; };
-		049B8EB01F033B2400C73FEC /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B8EAE1F033B2400C73FEC /* PgySDK.framework */; };
-		049B8EB11F033B2400C73FEC /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B8EAF1F033B2400C73FEC /* PgyUpdate.framework */; };
 		049B8EC71F0343BA00C73FEC /* FindSameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8EC61F0343BA00C73FEC /* FindSameVC.m */; };
 		049B8ED61F038F9700C73FEC /* HaveClueVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8ED51F038F9700C73FEC /* HaveClueVC.m */; };
 		049B8ED91F038FA700C73FEC /* WantToClaimVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B8ED81F038FA700C73FEC /* WantToClaimVC.m */; };
@@ -583,8 +581,6 @@
 		049B5E471EDF07D80080D552 /* NotificationMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationMessageVC.m; sourceTree = "<group>"; };
 		049B5E491EDF07E90080D552 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		049B5E4A1EDF07E90080D552 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
-		049B8EAE1F033B2400C73FEC /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
-		049B8EAF1F033B2400C73FEC /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		049B8EB41F03437900C73FEC /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		049B8EC51F0343BA00C73FEC /* FindSameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSameVC.h; sourceTree = "<group>"; };
 		049B8EC61F0343BA00C73FEC /* FindSameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindSameVC.m; sourceTree = "<group>"; };
@@ -770,12 +766,10 @@
 				044AE0311EF2A5B100E43704 /* CoreTelephony.framework in Frameworks */,
 				044AE02F1EF2A59B00E43704 /* QuartzCore.framework in Frameworks */,
 				044AE02D1EF2A59200E43704 /* CoreText.framework in Frameworks */,
-				049B8EB11F033B2400C73FEC /* PgyUpdate.framework in Frameworks */,
 				044AE02B1EF2A58B00E43704 /* CoreGraphics.framework in Frameworks */,
 				044AE0291EF2A58000E43704 /* CoreMotion.framework in Frameworks */,
 				044AE0271EF2A57700E43704 /* CFNetwork.framework in Frameworks */,
 				044AE0251EF2A56D00E43704 /* libc++.tbd in Frameworks */,
-				049B8EB01F033B2400C73FEC /* PgySDK.framework in Frameworks */,
 				044AE0231EF2A56500E43704 /* libsqlite3.0.tbd in Frameworks */,
 				044AE0211EF2A55C00E43704 /* UserNotifications.framework in Frameworks */,
 				044AE01F1EF2A55100E43704 /* libresolv.tbd in Frameworks */,
@@ -2632,15 +2626,6 @@
 			path = 2.MyView;
 			sourceTree = "<group>";
 		};
-		049B8EAD1F033B2400C73FEC /* Pgy */ = {
-			isa = PBXGroup;
-			children = (
-				049B8EAE1F033B2400C73FEC /* PgySDK.framework */,
-				049B8EAF1F033B2400C73FEC /* PgyUpdate.framework */,
-			);
-			path = Pgy;
-			sourceTree = "<group>";
-		};
 		049B8EB21F03434400C73FEC /* 3.Sections */ = {
 			isa = PBXGroup;
 			children = (
@@ -3117,7 +3102,6 @@
 		78375A491ED4734C0046F8C3 /* 1.Vender */ = {
 			isa = PBXGroup;
 			children = (
-				049B8EAD1F033B2400C73FEC /* Pgy */,
 				044AE0381EF2CC2500E43704 /* PYSearch */,
 				044ADF7D1EF2A4B100E43704 /* Pay */,
 				78375A4A1ED4734C0046F8C3 /* AFNetworking_3.0 */,

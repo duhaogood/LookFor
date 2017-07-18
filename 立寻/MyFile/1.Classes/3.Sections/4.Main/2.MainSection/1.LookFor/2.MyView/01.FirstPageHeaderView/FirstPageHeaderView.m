@@ -180,7 +180,11 @@
             float scroll_width = 5;
             for (int i = 0; i < downBannerArray.count; i ++) {
                 UIImageView * imgV = [UIImageView new];
-                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:downBannerArray[i][@"imgpath"]];
+                NSString * ss = downBannerArray[i][@"imgpath"];
+                if ([ss isKindOfClass:[NSNull class]]) {
+                    ss = @"";
+                }
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:ss];
                 imgV.frame = CGRectMake(5 + (5 + img_width) * i, 5, img_width, img_height);
                 [scrollView addSubview:imgV];
                 imgV.tag = i;

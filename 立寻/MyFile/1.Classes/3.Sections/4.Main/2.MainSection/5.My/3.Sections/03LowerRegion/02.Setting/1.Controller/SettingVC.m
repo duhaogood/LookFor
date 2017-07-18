@@ -8,6 +8,7 @@
 
 #import "SettingVC.h"
 #import "MainVC.h"
+#import "MessageVC.h"
 @interface SettingVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * view_data_array;//界面数据数组
@@ -20,11 +21,11 @@
     //初始化界面数据数组
     self.view_data_array = @[
                              @[
-                                 @[@"通知与消息",@"NotificationMessageVC"],
+                                 @[@"消息",@"NotificationMessageVC"],
                                  @[@"清除缓存",@"ClearCacheVC"]
                                  ],
                              @[
-                                 @[@"检查更新",@"CheckUpdateVC"],
+//                                 @[@"检查更新",@"CheckUpdateVC"],
                                  @[@"关于立寻",@"AboutVC"],
                                  @[@"反馈意见",@"FeedbackVC"]
                                  ]
@@ -109,9 +110,6 @@
         [alert addAction:action];
         [alert addAction:cancel];
         [self showDetailViewController:alert sender:nil];
-    }else if([text isEqualToString:@"检查更新"]){
-#warning 暂时不弄
-        [SVProgressHUD showSuccessWithStatus:@"没弄" duration:1];
     }else{//其他的跳转
         Class class = NSClassFromString(className);
         UIViewController * vc = [class new];
@@ -154,17 +152,6 @@
         //显示缓存大小
         UILabel * cache_label = [UILabel new];
         cache_label.text = [NSString stringWithFormat:@"%.2fM",size];
-        cache_label.textAlignment = NSTextAlignmentRight;
-        cache_label.textColor = [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1];
-        cache_label.font = [UIFont systemFontOfSize:12];
-        CGSize labelSize = [MYTOOL getSizeWithLabel:cache_label];
-        
-        cache_label.frame = CGRectMake(WIDTH-35-labelSize.width, tableView.rowHeight/2-6, labelSize.width, 13);
-        [cell addSubview:cache_label];
-    }else if([text isEqualToString:@"检查更新"]){
-        //版本号
-        UILabel * cache_label = [UILabel new];
-        cache_label.text = [NSString stringWithFormat:@"版本:%@",[MYTOOL getAPPVersion]];
         cache_label.textAlignment = NSTextAlignmentRight;
         cache_label.textColor = [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1];
         cache_label.font = [UIFont systemFontOfSize:12];
