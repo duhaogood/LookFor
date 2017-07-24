@@ -98,6 +98,21 @@
             [self footerRefresh];
             [tableView.mj_footer endRefreshing];
         }];
+        //@property(nonatomic,strong)UIView * noDataView;//没有数据显示
+        {
+            UIView * view = [UIView new];
+            self.noDataView = view;
+            view.frame = tableView.frame;
+            view.backgroundColor = MYCOLOR_240_240_240;
+            [tableView addSubview:view];
+            //图片-170*135
+            {
+                UIImageView * icon = [UIImageView new];
+                icon.image = [UIImage imageNamed:@"nodate"];
+                icon.frame = CGRectMake(WIDTH/2-169/2.0, (HEIGHT-64)/2-135, 169, 135);
+                [view addSubview:icon];
+            }
+        }
     }
     [self headerRefresh];
 }

@@ -265,7 +265,7 @@
                                 @[@"menu_shop",@"公共平台",@"PointStoreVC",@"0"]
                                 ];
     //加载下部banner数据
-    NSString * interface = @"/common/advert/getindexadvertlist.html";
+    NSString * interface = @"/common/advert/getindexrecommendadvertlist.html";
 //    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
         NSArray * down = back_dic[@"Data"];
@@ -324,7 +324,7 @@
 }
 //加载上部banner数据
 -(void)getUpBannerImageDataWithCityId:(int)cityId1{
-    NSString * interface = @"/common/advert/getindexrecommendadvertlist.html";
+    NSString * interface = @"/common/advert/getindexadvertlist.html";
 //    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:@{@"cityid":[NSString stringWithFormat:@"%d",cityId1]} andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];

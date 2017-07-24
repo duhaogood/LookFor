@@ -24,7 +24,8 @@
     self.window.rootViewController = main;
     [self.window makeKeyAndVisible];
     
-    
+    //微信注册
+    [WXApi registerApp:@"wx5ff1105426a8e8d9" enableMTA:YES];//注册微信
     
     
     
@@ -158,14 +159,14 @@
                  NSLog(@"用户取消支付");
                 
                 //...支付取消相应的处理
-                
+                [SVProgressHUD showErrorWithStatus:@"取消支付" duration:2];
                 break;
             }
             default: {
                 
                 //                NSLog(@"支付失败");
                 [self paySuccess];
-                [SVProgressHUD showErrorWithStatus:@"支付失败\n请从我的订单查看" duration:2];
+                [SVProgressHUD showErrorWithStatus:@"支付失败" duration:2];
                 //...做相应的处理，重新支付或删除支付
                 
                 break;

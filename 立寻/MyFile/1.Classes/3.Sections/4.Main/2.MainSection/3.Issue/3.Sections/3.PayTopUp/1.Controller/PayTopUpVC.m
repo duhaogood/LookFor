@@ -211,8 +211,8 @@
 //准备开始支付
 -(void)startPay{
     if (self.aliIcon.hidden) {//微信支付
-        [SVProgressHUD showErrorWithStatus:@"开发中\n请使用支付宝" duration:2];
-        return;
+//        [SVProgressHUD showErrorWithStatus:@"开发中\n请使用支付宝" duration:2];
+//        return;
         NSDictionary * payInfo = @{
                                    @"orderId":orderId,
                                    @"money":self.moneyTF.text

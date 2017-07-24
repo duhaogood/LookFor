@@ -260,10 +260,10 @@
         }];
         return;
     }
-    if (![self.wxIcon isHidden]) {//微信支付
-        [SVProgressHUD showErrorWithStatus:@"微信支付暂不支持\n请使用余额或支付宝" duration:2];
-        return;
-    }
+//    if (![self.wxIcon isHidden]) {//微信支付
+//        [SVProgressHUD showErrorWithStatus:@"微信支付暂不支持\n请使用余额或支付宝" duration:2];
+//        return;
+//    }
     NSString * paytypeid = @"9";
     if (![self.wxIcon isHidden]) {//微信支付
         paytypeid = @"12";

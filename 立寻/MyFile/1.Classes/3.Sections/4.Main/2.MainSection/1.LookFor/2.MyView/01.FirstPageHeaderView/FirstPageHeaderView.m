@@ -214,10 +214,10 @@
             }
             //两个服务选择按钮
             {
-                //地区寻找服务
+                //全国寻找服务
                 {
                     UIButton * btn1 = [UIButton new];
-                    [btn1 setTitle:@"地区寻找" forState:UIControlStateNormal];
+                    [btn1 setTitle:@"全国找寻" forState:UIControlStateNormal];
                     btn1.titleLabel.font = [UIFont systemFontOfSize:15];
                     [btn1 setTitleColor:[MYTOOL RGBWithRed:40 green:199 blue:0 alpha:1] forState:UIControlStateNormal];
                     btn1.frame = CGRectMake(0, 0, WIDTH/2, height/2);
@@ -227,10 +227,10 @@
                     btn1.enabled = false;
                     btn1.tag = 100;
                 }
-                //全国寻找服务
+                //地区寻找服务
                 {
                     UIButton * btn2 = [UIButton new];
-                    [btn2 setTitle:@"全国寻找" forState:UIControlStateNormal];
+                    [btn2 setTitle:@"地区寻找" forState:UIControlStateNormal];
                     btn2.titleLabel.font = [UIFont systemFontOfSize:15];
                     [btn2 setTitleColor:[MYTOOL RGBWithRed:49 green:49 blue:49 alpha:1] forState:UIControlStateNormal];
                     btn2.frame = CGRectMake(WIDTH/2, 0, WIDTH/2, height/2);

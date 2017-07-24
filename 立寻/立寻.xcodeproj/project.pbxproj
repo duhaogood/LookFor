@@ -3863,6 +3863,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = XK49G3E4V8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
@@ -3877,6 +3878,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/WXPay",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hao.lookingFor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3889,6 +3894,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = XK49G3E4V8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
@@ -3903,6 +3909,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/AliPay",
 					"$(PROJECT_DIR)/MyFile/2.Other/1.Vender/Pay/WXPay",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hao.lookingFor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
