@@ -44,7 +44,7 @@
             view.frame = CGRectMake(0, top, WIDTH, height);
             view.backgroundColor = [UIColor whiteColor];
             [self addSubview:view];
-            for (int i = 0; i < 8; i ++) {
+            for (int i = 0; i < btnName_imgArray.count; i ++) {
                 int row = i / 4;//行
                 int col = i % 4;//列
                 float space_x = (WIDTH - 200) / 8.0;

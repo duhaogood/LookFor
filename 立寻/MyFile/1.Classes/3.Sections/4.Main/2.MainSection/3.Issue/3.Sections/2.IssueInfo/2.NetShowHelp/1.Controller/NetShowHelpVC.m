@@ -278,6 +278,7 @@
     //上传图片
     current_upload_img_index = 0;
     fileid_array = [NSMutableArray new];
+    [MYTOOL netWorkingWithTitle:@"信息发布中……"];
     [self upLoadAllImage];
 }
 //上传所有图片
@@ -427,22 +428,26 @@
         }
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self popUpViewController];
+        
         if (isIssue) {
-            AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            MainVC * main = (MainVC *)app.window.rootViewController;
-            [main setSelectedIndex:4];
-            UINavigationController * nc = main.selectedViewController;
-            //跳转网络社交
-            NetworkSocialVC * vc = [NetworkSocialVC new];
-            vc.title = @"网络社交";
-            [nc pushViewController:vc animated:true];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功" duration:1];
+            [self performSelector:@selector(issueSuccess) withObject:nil afterDelay:1];
         }else{
             [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
+            [self performSelector:@selector(saveSuccess) withObject:nil afterDelay:1];
         }
     }];
     
     
+}
+-(void)issueSuccess{
+    [self.navigationController popViewControllerAnimated:false];
+    AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainVC * main = (MainVC *)app.window.rootViewController;
+    [main setSelectedIndex:4];
+}
+-(void)saveSuccess{
+    [self.navigationController popViewControllerAnimated:false];
 }
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

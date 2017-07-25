@@ -67,6 +67,7 @@ static lhSharePay * sharePay;
     BOOL flag = [WXApi sendReq:req];
     if (!flag) {
         NSLog(@"请求微信失败");
+        [SVProgressHUD showErrorWithStatus:@"请求微信失败" duration:2];
         //...提示用户
     }
     else{

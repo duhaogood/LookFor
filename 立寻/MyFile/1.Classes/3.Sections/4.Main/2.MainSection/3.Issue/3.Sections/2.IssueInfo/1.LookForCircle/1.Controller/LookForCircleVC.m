@@ -296,19 +296,17 @@
                             };
     NSString * interface = @"/publish/publish/addsubmitpublishinfo.html";
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self.navigationController popViewControllerAnimated:false];
-        
-        AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        MainVC * main = (MainVC *)app.window.rootViewController;
-        [main setSelectedIndex:4];
-        UINavigationController * nc = main.selectedViewController;
-        //跳转网络社交
-        NetworkSocialVC * vc = [NetworkSocialVC new];
-        vc.title = @"网络社交";
-        [nc pushViewController:vc animated:true];
+        [SVProgressHUD showSuccessWithStatus:@"发布成功" duration:1];
+        [self performSelector:@selector(issueSuccess) withObject:nil afterDelay:1];
     }];
     
     
+}
+-(void)issueSuccess{
+    [self.navigationController popViewControllerAnimated:false];
+    AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainVC * main = (MainVC *)app.window.rootViewController;
+    [main setSelectedIndex:4];
 }
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

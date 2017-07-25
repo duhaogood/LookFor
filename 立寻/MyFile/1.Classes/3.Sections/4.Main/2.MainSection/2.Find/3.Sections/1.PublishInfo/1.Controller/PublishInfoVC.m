@@ -43,7 +43,7 @@
     [self headerRefresh];
     //加载是否关注状态
     [self loadIsAttention];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStyleDone target:self action:@selector(submitShared)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStyleDone target:self action:@selector(submitShared)];
     //如果是我的界面点进来
     if (self.isMine) {
         UIView * view = [UIView new];
@@ -53,7 +53,7 @@
         [sharedBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
         sharedBtn.frame = CGRectMake(0, 12, 20, 20);
         [sharedBtn addTarget:self action:@selector(submitShared) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:sharedBtn];
+//        [view addSubview:sharedBtn];
         //更多
         UIButton * moreBtn = [UIButton new];
         [moreBtn setImage:[UIImage imageNamed:@"more_opt"] forState:UIControlStateNormal];

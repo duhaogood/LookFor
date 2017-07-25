@@ -138,65 +138,65 @@
         [self.view addSubview:btn];
     }
     //快速登录
-    {
-        top = 64 + (HEIGHT - 64)/2;
-        //文字
-        CGSize size;
-        {
-            UILabel * label = [UILabel new];
-            label.text = @"快速登录";
-            label.font = [UIFont systemFontOfSize:12];
-            label.textColor = [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1];
-            size = [MYTOOL getSizeWithLabel:label];
-            label.frame = CGRectMake(WIDTH/2-size.width/2, top, size.width, size.height);
-            [self.view addSubview:label];
-        }
-        float left_width = WIDTH/2 - size.width/2;
-        //分割线-左
-        {
-            UIView * space = [UIView new];
-            space.frame = CGRectMake(left_width/3 - 15, size.height/2-0.5+top, left_width*2/3.0, 1);
-            space.backgroundColor = MYCOLOR_181_181_181;
-            [self.view addSubview:space];
-        }
-        //分割线-右
-        {
-            UIView * space = [UIView new];
-            space.frame = CGRectMake(WIDTH/2 + size.width/2 + 15, size.height/2-0.5+top, left_width*2/3.0, 1);
-            space.backgroundColor = MYCOLOR_181_181_181;
-            [self.view addSubview:space];
-        }
-    }
-    //三个按钮
-    {
-        float width = 44;
-        float space = (WIDTH - width*3)/6;
-        top += 30;
-        //QQ-qqlogin
-        {
-            UIButton * btn = [UIButton new];
-            [btn setImage:[UIImage imageNamed:@"qqlogin"] forState:UIControlStateNormal];
-            [btn addTarget:self action:@selector(getAuthWithUserInfoFromQQ) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(space * 2, top, width, width);
-            [self.view addSubview:btn];
-        }
-        //微信-weixinlogin
-        {
-            UIButton * btn = [UIButton new];
-            [btn setImage:[UIImage imageNamed:@"weixinlogin"] forState:UIControlStateNormal];
-            [btn addTarget:self action:@selector(getAuthWithUserInfoFromWechat) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(space * 3 + width , top, width, width);
-            [self.view addSubview:btn];
-        }
-        //微博-sinalogin
-        {
-            UIButton * btn = [UIButton new];
-            [btn setImage:[UIImage imageNamed:@"sinalogin"] forState:UIControlStateNormal];
-            [btn addTarget:self action:@selector(getAuthWithUserInfoFromSina) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(space * 4 + width*2, top, width, width);
-            [self.view addSubview:btn];
-        }
-    }
+//    {
+//        top = 64 + (HEIGHT - 64)/2;
+//        //文字
+//        CGSize size;
+//        {
+//            UILabel * label = [UILabel new];
+//            label.text = @"快速登录";
+//            label.font = [UIFont systemFontOfSize:12];
+//            label.textColor = [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1];
+//            size = [MYTOOL getSizeWithLabel:label];
+//            label.frame = CGRectMake(WIDTH/2-size.width/2, top, size.width, size.height);
+//            [self.view addSubview:label];
+//        }
+//        float left_width = WIDTH/2 - size.width/2;
+//        //分割线-左
+//        {
+//            UIView * space = [UIView new];
+//            space.frame = CGRectMake(left_width/3 - 15, size.height/2-0.5+top, left_width*2/3.0, 1);
+//            space.backgroundColor = MYCOLOR_181_181_181;
+//            [self.view addSubview:space];
+//        }
+//        //分割线-右
+//        {
+//            UIView * space = [UIView new];
+//            space.frame = CGRectMake(WIDTH/2 + size.width/2 + 15, size.height/2-0.5+top, left_width*2/3.0, 1);
+//            space.backgroundColor = MYCOLOR_181_181_181;
+//            [self.view addSubview:space];
+//        }
+//    }
+//    //三个按钮
+//    {
+//        float width = 44;
+//        float space = (WIDTH - width*3)/6;
+//        top += 30;
+//        //QQ-qqlogin
+//        {
+//            UIButton * btn = [UIButton new];
+//            [btn setImage:[UIImage imageNamed:@"qqlogin"] forState:UIControlStateNormal];
+//            [btn addTarget:self action:@selector(getAuthWithUserInfoFromQQ) forControlEvents:UIControlEventTouchUpInside];
+//            btn.frame = CGRectMake(space * 2, top, width, width);
+//            [self.view addSubview:btn];
+//        }
+//        //微信-weixinlogin
+//        {
+//            UIButton * btn = [UIButton new];
+//            [btn setImage:[UIImage imageNamed:@"weixinlogin"] forState:UIControlStateNormal];
+//            [btn addTarget:self action:@selector(getAuthWithUserInfoFromWechat) forControlEvents:UIControlEventTouchUpInside];
+//            btn.frame = CGRectMake(space * 3 + width , top, width, width);
+//            [self.view addSubview:btn];
+//        }
+//        //微博-sinalogin
+//        {
+//            UIButton * btn = [UIButton new];
+//            [btn setImage:[UIImage imageNamed:@"sinalogin"] forState:UIControlStateNormal];
+//            [btn addTarget:self action:@selector(getAuthWithUserInfoFromSina) forControlEvents:UIControlEventTouchUpInside];
+//            btn.frame = CGRectMake(space * 4 + width*2, top, width, width);
+//            [self.view addSubview:btn];
+//        }
+//    }
 
 }
 #pragma mark - 按钮回调

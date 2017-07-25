@@ -438,18 +438,12 @@
         }
     }
     [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self popUpViewController];
+        NSString * msg = back_dic[@"Message"];
+        [SVProgressHUD showSuccessWithStatus:msg duration:1];
         if (isIssue) {
-            AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            MainVC * main = (MainVC *)app.window.rootViewController;
-            [main setSelectedIndex:4];
-            UINavigationController * nc = main.selectedViewController;
-            //跳转网络社交
-            Found_ClaimVC * vc = [Found_ClaimVC new];
-            vc.title = @"网络社交";
-            [nc pushViewController:vc animated:true];
+            [self performSelector:@selector(issueSuccess) withObject:nil afterDelay:1];
         }else{
-            [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
+            [self performSelector:@selector(saveSuccess) withObject:nil afterDelay:1];
         }
     } andNoSuccess:^(NSDictionary *back_dic) {
         NSString * error = back_dic[@"Code"];
@@ -482,6 +476,20 @@
         [SVProgressHUD showErrorWithStatus:@"网络错误" duration:2];
     }];
 
+}
+-(void)issueSuccess{
+    [self.navigationController popViewControllerAnimated:false];
+    AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainVC * main = (MainVC *)app.window.rootViewController;
+    [main setSelectedIndex:4];
+    UINavigationController * nc = main.selectedViewController;
+    //跳转网络社交
+    Found_ClaimVC * vc = [Found_ClaimVC new];
+    vc.title = @"网络社交";
+    [nc pushViewController:vc animated:true];
+}
+-(void)saveSuccess{
+    [self.navigationController popViewControllerAnimated:false];
 }
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

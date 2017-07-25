@@ -41,12 +41,13 @@
     self.cellDataArray = @[
                            @[@{@"left":@"账户余额",@"right":Balance}],
                            @[@{@"left":@"悬赏金额",@"right":BalanceNoCash}],
-                           @[@{@"left":@"账户积分",@"right":Points}],
-                           @[
-                               @{@"left":@"提现",@"right":[NSString stringWithFormat:@"可提现%@",Balance]},
-                               @{@"left":@"提现记录"},
-                               @{@"left":@"收支明细"}
-                               ]
+                           @[@{@"left":@"账户积分",@"right":Points}]
+                           //,
+//                           @[
+//                               @{@"left":@"提现",@"right":[NSString stringWithFormat:@"可提现%@",Balance]},
+//                               @{@"left":@"提现记录"},
+//                               @{@"left":@"收支明细"}
+//                               ]
                            ];
     UITableView * tableView = [UITableView new];
     tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);

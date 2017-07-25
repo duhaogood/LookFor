@@ -355,8 +355,9 @@
                                   @[@"草稿箱",@"draftbox",@"25",@"25",@"DraftsVC"],
                                   @[@"网络社交",@"networking",@"25",@"25",@"NetworkSocialVC"],
                                   @[@"我的关注",@"guanzhu",@"29",@"25",@"MyFollowVC"],
-                                  @[@"提供线索",@"xiansuo",@"33",@"25",@"ProvideClueVC"],
-                                  @[@"好友邀请",@"yaoqing",@"23",@"25",@"InvitingFriendsVC"]
+                                  @[@"提供线索",@"xiansuo",@"33",@"25",@"ProvideClueVC"]
+//                                  ,
+//                                  @[@"好友邀请",@"yaoqing",@"23",@"25",@"InvitingFriendsVC"]
                                   ];
             //加载图片和文字
             {

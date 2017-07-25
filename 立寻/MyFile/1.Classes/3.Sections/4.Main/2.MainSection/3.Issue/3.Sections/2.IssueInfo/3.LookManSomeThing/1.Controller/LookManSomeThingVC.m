@@ -438,8 +438,8 @@
         }
     }
     [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
-        [self.navigationController popViewControllerAnimated:false];
         if (isIssue) {
+            [self.navigationController popViewControllerAnimated:false];
             PayMoneyVC * vc = [PayMoneyVC new];
             vc.waittingPayNumber = [Money floatValue];
             vc.publishId = back_dic[@"Data"];
@@ -449,6 +449,7 @@
             [nc pushViewController:vc animated:true];
         }else{
             [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
+            [self performSelector:@selector(saveSuccess) withObject:nil afterDelay:1];
         }
     } andNoSuccess:^(NSDictionary *back_dic) {
         NSString * msg = back_dic[@"Message"];
@@ -457,6 +458,15 @@
         [SVProgressHUD showErrorWithStatus:@"网络错误" duration:2];
     }];
     
+}
+-(void)issueSuccess{
+    [self.navigationController popViewControllerAnimated:false];
+    AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainVC * main = (MainVC *)app.window.rootViewController;
+    [main setSelectedIndex:4];
+}
+-(void)saveSuccess{
+    [self.navigationController popViewControllerAnimated:false];
 }
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

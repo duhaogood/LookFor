@@ -25,7 +25,16 @@
     self.view.backgroundColor = [MYTOOL RGBWithRed:242 green:242 blue:242 alpha:1];
     //返回按钮
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStyleDone target:self action:@selector(popUpViewController)];
-    
+    NSString * interface = @"/common/setting/getaboutus.html";
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:nil andSuccess:^(NSDictionary *back_dic) {
+        NSString * content = back_dic[@"Data"];
+        if (content && [content isKindOfClass:[NSString class]]) {
+            UIWebView * webView = [UIWebView new];
+            webView.frame = self.view.bounds;
+            [self.view addSubview:webView];
+            [webView loadHTMLString:content baseURL:nil];
+        }
+    }];
 }
 
 
