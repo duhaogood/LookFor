@@ -351,7 +351,7 @@
             middle_data_array = @[
                                   @[@"我的寻找",@"my_find",@"25",@"25",@"MyLookingVC"],
                                   @[@"招领认领",@"zlrl",@"29",@"25",@"Found_ClaimVC"],
-                                  @[@"我的推广",@"my_tg",@"30",@"25",@"MyExtensionVC"],
+//                                  @[@"我的推广",@"my_tg",@"30",@"25",@"MyExtensionVC"],
                                   @[@"草稿箱",@"draftbox",@"25",@"25",@"DraftsVC"],
                                   @[@"网络社交",@"networking",@"25",@"25",@"NetworkSocialVC"],
                                   @[@"我的关注",@"guanzhu",@"29",@"25",@"MyFollowVC"],

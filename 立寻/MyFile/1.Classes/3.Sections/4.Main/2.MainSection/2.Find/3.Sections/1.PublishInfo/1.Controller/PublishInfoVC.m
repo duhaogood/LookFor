@@ -17,6 +17,7 @@
 #import "MyClueListVC.h"
 #import "MyFoundListVC.h"
 #import "MyLookingVC.h"
+#import "SharedManagerVC.h"
 @interface PublishInfoVC ()
 @property(nonatomic,strong)NSMutableArray * commentList;//评论数据
 @property(nonatomic,strong)PublishInfoView * publishView;
@@ -43,7 +44,7 @@
     [self headerRefresh];
     //加载是否关注状态
     [self loadIsAttention];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStyleDone target:self action:@selector(submitShared)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStyleDone target:self action:@selector(submitShared)];
     //如果是我的界面点进来
     if (self.isMine) {
         UIView * view = [UIView new];
@@ -53,7 +54,7 @@
         [sharedBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
         sharedBtn.frame = CGRectMake(0, 12, 20, 20);
         [sharedBtn addTarget:self action:@selector(submitShared) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:sharedBtn];
+        [view addSubview:sharedBtn];
         //更多
         UIButton * moreBtn = [UIButton new];
         [moreBtn setImage:[UIImage imageNamed:@"more_opt"] forState:UIControlStateNormal];
@@ -183,7 +184,23 @@
 }
 //分享
 -(void)submitShared{
-    [SVProgressHUD showSuccessWithStatus:@"开发中" duration:1];
+    SharedManagerVC * share = [SharedManagerVC new];
+    NSLog(@"publish:%@",self.publishDictionary);
+    NSString * des = @"";
+    NSString * Content = self.publishDictionary[@"Content"];
+    if (Content.length <= 30) {
+        des = Content;
+    }else{
+        des = [Content substringToIndex:30];
+    }
+    share.sharedDictionary = @{
+                               @"title":self.publishDictionary[@"Title"],
+                               @"shareDescribe":des,
+                               @"img_url":@"",
+                               @"shared_url":[NSString stringWithFormat:@"http://user.lixun110.com/sharepublish.aspx?publishid=%@",self.publishDictionary[@"PublishID"]]
+                               };
+    NSLog(@"share:%@",share.sharedDictionary);
+    [share show];
 }
 //加载是否关注状态
 -(void)loadIsAttention{

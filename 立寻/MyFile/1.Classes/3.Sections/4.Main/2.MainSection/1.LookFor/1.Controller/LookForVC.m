@@ -269,11 +269,25 @@
 //    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
         NSArray * down = back_dic[@"Data"];
-        self.downBannerImgArray = down;
+        NSArray * array ;
+        if (down.count > 2) {
+            NSMutableArray * mArray = [NSMutableArray arrayWithArray:down];
+            //取第一个数据
+            long index = arc4random_uniform((uint32_t)(mArray.count));
+            NSDictionary * map1 = mArray[index];
+            [mArray removeObject:map1];
+            //取第二个数据
+            index = arc4random_uniform((uint32_t)(mArray.count));
+            NSDictionary * map2 = mArray[index];
+            array = @[map1,map2];
+        }else{
+            array = down;
+        }
+        self.downBannerImgArray = array;
         //表视图
         UITableView * tableView = [UITableView new];
         //头视图
-        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:593]) andDelegate:self andUpBannerArray:nil andDownBannerArray:down andBtnName_imgArray:self.btn_name_img_array];
+        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:593]) andDelegate:self andUpBannerArray:nil andDownBannerArray:array andBtnName_imgArray:self.btn_name_img_array];
         self.headerView = headerView;
         self.tableView = tableView;
         tableView.dataSource = self;
@@ -326,7 +340,7 @@
 -(void)getUpBannerImageDataWithCityId:(int)cityId1{
     NSString * interface = @"/common/advert/getindexadvertlist.html";
 //    [MYTOOL netWorkingWithTitle:@"加载中……"];
-    [MYNETWORKING getWithInterfaceName:interface andDictionary:@{@"cityid":[NSString stringWithFormat:@"%d",cityId1]} andSuccess:^(NSDictionary *back_dic) {
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:nil andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];
         self.upBannerImgArray = array;
         NSMutableArray * url_arr = [NSMutableArray new];
@@ -357,6 +371,36 @@
 #pragma mark - 上啦下啦刷新
 -(void)headerRefresh{
     [self getCellDataWithHeader:true];
+    NSString * interface = @"/common/advert/getindexrecommendadvertlist.html";
+    //    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
+        NSArray * down = back_dic[@"Data"];
+        NSArray * array ;
+        if (down.count > 2) {
+            NSMutableArray * mArray = [NSMutableArray arrayWithArray:down];
+            //取第一个数据
+            long index = arc4random_uniform((uint32_t)(mArray.count));
+            NSDictionary * map1 = mArray[index];
+            [mArray removeObject:map1];
+            //取第二个数据
+            index = arc4random_uniform((uint32_t)(mArray.count));
+            NSDictionary * map2 = mArray[index];
+            array = @[map1,map2];
+        }else{
+            array = down;
+        }
+        self.downBannerImgArray = array;
+        for (int i = 0 ;i < self.middle_img_array.count ; i ++) {
+            UIImageView * imgV = self.middle_img_array[i];
+            if (imgV) {
+                NSString * ss = array[i][@"imgpath"];
+                if ([ss isKindOfClass:[NSNull class]]) {
+                    ss = @"";
+                }
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:ss];
+            }
+        }
+    }];
 }
 -(void)footerRefresh{
     [self getCellDataWithHeader:false];
@@ -373,19 +417,20 @@
         }
     }
     //置顶-最新-悬赏
+    NSString * pushtype = self.current_money_type_btn.tag == 100 ? @"1" : @"2";
     {
-        NSString * pushtype = self.current_money_type_btn.tag == 100 ? @"1" : @"2";
-        [send setValue:pushtype forKey:@"pushtype"];
-        NSString * toptype = self.current_toptype_btn.tag == 100 ? @"1" : @"0";
-        [send setValue:toptype forKey:@"toptype"];
+//        [send setValue:pushtype forKey:@"pushtype"];
+//        NSString * toptype = self.current_toptype_btn.tag == 100 ? @"1" : @"0";
+//        [send setValue:toptype forKey:@"toptype"];
     }
     //城市id
+    if([pushtype isEqualToString:@"2"])
     {
         NSString * city = nil;
         if (cityId) {
             city = cityId;
         }else{
-            city = @"0";
+            city = @"3140";
         }
         [send setValue:city forKey:@"cityid"];
     }

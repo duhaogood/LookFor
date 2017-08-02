@@ -15,7 +15,7 @@
 @property(nonatomic,strong)UIButton * rightTypeBtn;//最新
 @property(nonatomic,strong)UIButton * signBtn;//签到按钮
 @property(nonatomic,strong)SDCycleScrollView * upBannerView;//上部
-
+@property(nonatomic,strong)NSMutableArray * middle_img_array;//中间图片数组
 
 
 

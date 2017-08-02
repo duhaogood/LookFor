@@ -141,7 +141,7 @@
                 //描述
                 {
                     UILabel * label = [UILabel new];
-                    label.text = @"可在积分商城直接退换商品，开发中";
+                    label.text = @"可在积分商城直接兑换商品，开发中";
                     label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
                     label.font = [UIFont systemFontOfSize:12];
                     if (WIDTH < 375) {
@@ -168,25 +168,24 @@
             view.frame = CGRectMake(0, top, WIDTH, height);
             view.backgroundColor = MYCOLOR_240_240_240;
             [self addSubview:view];
-            //横向滑动scrollView
-            UIScrollView * scrollView = [UIScrollView new];
-            {
-                scrollView.frame = CGRectMake(0, 0, WIDTH, height - 5);
-                scrollView.backgroundColor = [UIColor whiteColor];
-                [view addSubview:scrollView];
-            }
-            float img_width = WIDTH / 2.5;
-            float img_height = height - 15;
+            UIView * view2 = [UIView new];
+            view2.frame = CGRectMake(0, 5, WIDTH, height - 10);
+            [view addSubview:view2];
+            view2.backgroundColor = [UIColor whiteColor];
+            float img_width = (WIDTH-15) / 2.0;
+            float img_height = height - 20;
             float scroll_width = 5;
-            for (int i = 0; i < downBannerArray.count; i ++) {
+            NSMutableArray * array = [NSMutableArray new];
+            for (int i = 0; i < (downBannerArray.count > 2 ? 2 : downBannerArray.count); i ++) {
                 UIImageView * imgV = [UIImageView new];
+                [array addObject:imgV];
                 NSString * ss = downBannerArray[i][@"imgpath"];
                 if ([ss isKindOfClass:[NSNull class]]) {
                     ss = @"";
                 }
                 [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:ss];
                 imgV.frame = CGRectMake(5 + (5 + img_width) * i, 5, img_width, img_height);
-                [scrollView addSubview:imgV];
+                [view2 addSubview:imgV];
                 imgV.tag = i;
                 //添加点击事件
                 [imgV setUserInteractionEnabled:YES];
@@ -195,7 +194,7 @@
                 [imgV addGestureRecognizer:tapGesture];
                 scroll_width += i * (5 + img_width);
             }
-            scrollView.contentSize = CGSizeMake(scroll_width, 0);
+            [delegate setMiddle_img_array:array];
             top += height;
         }
         //cell选择数据源view

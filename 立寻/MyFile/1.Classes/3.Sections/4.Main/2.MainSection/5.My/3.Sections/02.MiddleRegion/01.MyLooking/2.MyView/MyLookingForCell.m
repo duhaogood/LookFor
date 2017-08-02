@@ -176,18 +176,34 @@
             //内容
             {
                 UILabel * label = [UILabel new];
-                label.text = dictionary[@"Content"];
+                NSString * signature = dictionary[@"Content"];
+                //过滤换行
+                signature = [signature stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                label.text = signature;
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:136 green:136 blue:136 alpha:1];
                 CGSize size = [MYTOOL getSizeWithLabel:label];
                 //宽度
                 float label_width = WIDTH - 10 - left;
-                label.frame = CGRectMake(left, top + imgHeight/2.0-3, label_width, size.height*2);
+                label.frame = CGRectMake(left, top + imgHeight/2.0-3, label_width, 30);
                 [self addSubview:label];
+//                label.backgroundColor = [UIColor greenColor];
                 label.numberOfLines = 0;
-                if (size.width > label_width * 2 + label.font.pointSize * 2) {
-                    
+                NSString * string = [signature stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去除掉首尾的空白字符和换行字符
+                NSMutableString * text = [NSMutableString new];
+                for(int i = 0; i < string.length ; i ++){
+                    NSString * sub = [string substringWithRange:NSMakeRange(i, 1)];
+                    if (![sub isEqualToString:@"\n"] ) {
+                        [text appendString:sub];
+                    }
+                    label.text = text;
+                    size = [MYTOOL getSizeWithLabel:label];
+                    if (size.width >= label_width * 1.8) {
+                        NSLog(@"text:%@",text);
+                        break;
+                    }
                 }
+                
             }
             //图片下方坐标
             float img_lower_top = top + imgHeight;

@@ -96,7 +96,7 @@
     NSMutableDictionary * send = [NSMutableDictionary new];
     [send setValue:USER_ID forKey:@"userid"];
     if (self.cellDateArray.count) {
-        [send setValue:self.cellDateArray[self.cellDateArray.count - 1][@"PublishID"] forKey:@"lastnumber"];
+        [send setValue:self.cellDateArray[self.cellDateArray.count - 1][@"ClaimID"] forKey:@"lastnumber"];
     }
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         NSArray * array = back_dic[@"Data"];

@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
+	<key>CFBundleDisplayName</key>
+	<string>立寻网</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -36,7 +38,12 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.4</string>
+	<string>1.2</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>wechat</string>
+		<string>weixin</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -46,10 +53,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>立寻APP将使用摄像头，是否同意?</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>立寻APP可能会在后台获取您的位置信息，是否同意?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>立寻APP将使用定位功能，发布信息时获取您的详细地址，是否同意？</string>
+	<string>立寻APP将使用定位功能，通过您当前位置获取周边数据，是否同意？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>立寻APP想访问您的相册，是否同意？</string>
 	<key>UILaunchStoryboardName</key>
@@ -58,8 +63,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

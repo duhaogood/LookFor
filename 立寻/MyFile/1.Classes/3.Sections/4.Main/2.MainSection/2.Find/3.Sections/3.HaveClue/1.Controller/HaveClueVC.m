@@ -355,17 +355,17 @@
                                  };
     // 访问路径
     NSString *stringURL = [NSString stringWithFormat:@"%@%@",SERVER_URL,@"/common/filespace/uploadimg.html"];
+    [MYTOOL netWorkingWithTitle:@"上传中……"];
     [manager POST:stringURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // 上传文件
         NSDictionary * dic = self.img_arr[current_upload_img_index];
         UIImageView * imgV = dic[@"imgV"];
         //截取图片
         float change = 1.0;
-        [SVProgressHUD showWithStatus:@"%d/%d\n上传进度:%0" maskType:SVProgressHUDMaskTypeClear];
         UIImage * img = imgV.image;
         NSData * imageData = UIImageJPEGRepresentation(img,change);
         while (imageData.length > 300 * 1024) {
-            change -= 0.1;
+            change -= 0.2;
             imageData = UIImageJPEGRepresentation(img,change);
         }
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -375,7 +375,7 @@
         
         [formData appendPartWithFileData:imageData name:@"filedata" fileName:fileName mimeType:@"image/png"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
+//        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d/%d\n上传进度:%.2f%%",current_upload_img_index+1,count_img,uploadProgress.fractionCompleted*100] maskType:SVProgressHUDMaskTypeClear];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"Result"] boolValue]) {
             NSObject * fileid = responseObject[@"Data"][@"fileid"];

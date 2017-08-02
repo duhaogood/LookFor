@@ -136,7 +136,6 @@
     NSDictionary * send = @{
                             @"parentid":parentid
                             };
-    [MYTOOL netWorkingWithTitle:@"重新读取二级分类"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         self.cellDataArray = back_dic[@"Data"];
         [self.tableView reloadData];

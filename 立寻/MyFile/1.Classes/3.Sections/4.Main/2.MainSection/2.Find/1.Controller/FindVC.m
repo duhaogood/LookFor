@@ -468,10 +468,10 @@
             [send setValue:lastnumber forKey:@"lastnumber"];
         }
     }
-    NSString * cityId = [MYTOOL getProjectPropertyWithKey:@"cityId"];
-    if (cityId) {
-        [send setValue:cityId forKey:@"cityid"];
-    }
+//    NSString * cityId = [MYTOOL getProjectPropertyWithKey:@"cityId"];
+//    if (cityId) {
+//        [send setValue:cityId forKey:@"cityid"];
+//    }
     //置顶-最新-悬赏
     {
         NSInteger index = [select_3_btn_array indexOfObject:current_3_btn];

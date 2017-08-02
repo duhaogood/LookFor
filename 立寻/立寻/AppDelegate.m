@@ -11,29 +11,47 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "DraftsVC.h"
+#import <UMSocialCore/UMSocialCore.h>
+
+#define USHARE_DEMO_APPKEY @"59770e3d4ad1565003001069"
+
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     MainVC * main = [MainVC new];
     self.window.rootViewController = main;
     [self.window makeKeyAndVisible];
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //微信注册
     [WXApi registerApp:@"wx5ff1105426a8e8d9" enableMTA:YES];//注册微信
     
-    
+    //友盟
+    [UMSocialGlobal shareInstance].isClearCacheWhenGetUserInfo = NO;
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_DEMO_APPKEY];
+    [self configUSharePlatforms];
     
     
     
     return YES;
 }
-
+- (void)configUSharePlatforms
+{
+    /* 设置微信的appKey和appSecret */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx5ff1105426a8e8d9" appSecret:@"a0cb8aee9361220290c2370e657e4186" redirectURL:@""];
+    
+    /* 设置分享到QQ互联的appID  - 未申请*/
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"101398535"/*设置QQ平台的appID*/  appSecret:@"c743dd692f0c004e9cfe0bbbf08ffeea" redirectURL:@""];
+    
+    /* 设置新浪的appKey和appSecret    -未申请*/
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"1539877462"  appSecret:@"f0b045862b7e857439e600c28f689c23" redirectURL:@""];
+    
+}
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication

@@ -513,7 +513,7 @@
         }else{
             count --;
         }
-        self.titleNumberLabel.text = [NSString stringWithFormat:@"%ld/20",count];
+        self.titleNumberLabel.text = [NSString stringWithFormat:@"%ld/20",(long)count];
     }
     return true;
 }
