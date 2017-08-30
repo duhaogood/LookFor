@@ -601,7 +601,7 @@
     NSString * url = DHTOOL.userInfo[@"ImgFilePath"];//用户头像
     NSString * UserName = DHTOOL.userInfo[@"UserName"];//用户名
     NSString * Motto = DHTOOL.userInfo[@"Motto"];//签名
-    if (Motto == nil || Motto.length == 0) {
+    if ([Motto isKindOfClass:[NSNull class]] || Motto == nil || Motto.length == 0) {
         Motto = @"";
     }
     int ApproveState = [DHTOOL.userInfo[@"ApproveState"] intValue];// 1未认证 2待认证  3未通过 4已认证

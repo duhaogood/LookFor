@@ -17,6 +17,7 @@
 #import "PublishInfoVC.h"
 #import "SearchSomethingVC.h"
 #import "BannerInfoVC.h"
+#import "FirstCell_change.h"
 @interface LookForVC ()<PYSearchViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,UISearchBarDelegate,GYZChooseCityDelegate>
 @property(nonatomic,strong)FirstPageHeaderView * headerView;
 @property(nonatomic,strong)NSArray * btn_name_img_array;//中部按钮图片及名字
@@ -181,7 +182,9 @@
 }
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:true];
+//    [tableView deselectRowAtIndexPath:indexPath animated:true];
+//    NSLog(@"%@",self.cellDataArray[indexPath.row]);
+    return;
     NSDictionary * publishDic = self.cellDataArray[indexPath.section];
     NSObject * PublishID = publishDic[@"PublishID"];
     if (!PublishID) {
@@ -204,14 +207,28 @@
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [MYTOOL getHeightWithIphone_six:200];
+    return (WIDTH - 30)/2.0 + 70;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.cellDataArray.count;
+    NSInteger count = self.cellDataArray.count/2;
+    if (self.cellDataArray.count > count * 2) {
+        count ++;
+    }
+    return count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FirstPageMiddleNextCell * cell = [[FirstPageMiddleNextCell alloc] initWithDictionary:self.cellDataArray[indexPath.row] isFirstPage:true];
-    return cell;
+//    FirstPageMiddleNextCell * cell = [[FirstPageMiddleNextCell alloc] initWithDictionary:self.cellDataArray[indexPath.row] isFirstPage:true];
+//    return cell;
+    NSInteger count = self.cellDataArray.count;
+    NSInteger row = indexPath.row;
+    NSDictionary * dic1 = self.cellDataArray[row*2];
+    NSDictionary * dic2 = nil;
+    if (count > row * 2 + 1) {
+        dic2 = self.cellDataArray[row*2 + 1];
+    }
+    FirstCell_change * cell2 = [[FirstCell_change alloc] initWithLeft:dic1 andRight:dic2 andArray:self.cellDataArray andDelegate:self];
+    cell2.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell2;
 }
 #pragma mark - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
@@ -229,6 +246,30 @@
     BannerInfoVC * vc = [BannerInfoVC new];
     vc.url = url;
     [self.navigationController pushViewController:vc animated:true];
+}
+//cell图片点击事件
+-(void)cellImageClick:(UITapGestureRecognizer *)tap{
+    NSInteger index = tap.view.tag;
+    NSDictionary * publishDic = self.cellDataArray[index];
+    NSObject * PublishID = publishDic[@"PublishID"];
+    if (!PublishID) {
+        [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        return;
+    }
+    NSString * interface = @"publish/publish/getpublishdetailcomplex.html";
+    NSDictionary * send = @{@"publishid":PublishID};
+    //    [MYTOOL netWorkingWithTitle:@"加载中……"];
+    [MYNETWORKING getWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        NSDictionary * publishDictionary = back_dic[@"Data"];
+        if (publishDictionary) {
+            PublishInfoVC * vc = [PublishInfoVC new];
+            vc.title = @"信息详情";
+            vc.publishDictionary = publishDictionary;
+            [self.navigationController pushViewController:vc animated:true];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"此信息有问题" duration:2];
+        }
+    }];
 }
 #pragma mark - UISearchBarDelegate
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
@@ -260,7 +301,7 @@
                                 @[@"menu_zlrl",@"招领认领",@"PersonLookVC",@"394"],
 //                                @[@"menu_zsjm",@"人脸识别",@"BusinessVC",@"0"],
                                 @[@"menu_wlbg",@"网络寻家",@"NetShowVC",@"80"],
-                                @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
+//                                @[@"menu_wlqz",@"网络求助",@"NetHelpVC",@"81"],
                                 @[@"menu_quanzi",@"立寻圈子",@"LookCircleVC",@"549"],
 //                                @[@"menu_shop",@"公共平台",@"PointStoreVC",@"0"]
                                 ];
@@ -269,25 +310,44 @@
 //    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
         NSArray * down = back_dic[@"Data"];
-        NSArray * array ;
-        if (down.count > 2) {
-            NSMutableArray * mArray = [NSMutableArray arrayWithArray:down];
-            //取第一个数据
-            long index = arc4random_uniform((uint32_t)(mArray.count));
-            NSDictionary * map1 = mArray[index];
-            [mArray removeObject:map1];
-            //取第二个数据
-            index = arc4random_uniform((uint32_t)(mArray.count));
-            NSDictionary * map2 = mArray[index];
-            array = @[map1,map2];
+        NSMutableArray * arr = [NSMutableArray arrayWithArray:down];
+        NSMutableArray * array = [NSMutableArray new];
+        if (arr.count < 4) {
+            NSInteger index = arc4random_uniform((uint32_t)arr.count);
+            NSDictionary * imgDic = arr[index];
+            [array addObject:imgDic];
+            for (int i = 1; i < 4; i ++) {
+                imgDic = [arr objectAtIndex:(index + i)%arr.count];
+                [array addObject:imgDic];
+            }
         }else{
-            array = down;
+            //1
+            NSInteger index = arc4random_uniform((uint32_t)arr.count);
+            NSDictionary * imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
+            //2
+            index = arc4random_uniform((uint32_t)arr.count);
+            imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
+            //3
+            index = arc4random_uniform((uint32_t)arr.count);
+            imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
+            //4
+            index = arc4random_uniform((uint32_t)arr.count);
+            imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
         }
         self.downBannerImgArray = array;
+        MYTOOL.imgArray = array;
         //表视图
         UITableView * tableView = [UITableView new];
         //头视图
-        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:593]) andDelegate:self andUpBannerArray:nil andDownBannerArray:array andBtnName_imgArray:self.btn_name_img_array];
+        FirstPageHeaderView * headerView = [[FirstPageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, [MYTOOL getHeightWithIphone_six:478]) andDelegate:self andUpBannerArray:nil andDownBannerArray:array andBtnName_imgArray:self.btn_name_img_array];
         self.headerView = headerView;
         self.tableView = tableView;
         tableView.dataSource = self;
@@ -296,6 +356,7 @@
         tableView.backgroundColor = MYCOLOR_240_240_240;
         tableView.frame = CGRectMake(0, 0, WIDTH, HEIGHT - 64 - 49);
         [self.view addSubview:tableView];
+        
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self headerRefresh];
@@ -375,21 +436,41 @@
     //    [MYTOOL netWorkingWithTitle:@"加载中……"];
     [MYNETWORKING getWithInterfaceName:interface andDictionary:[NSDictionary new] andSuccess:^(NSDictionary *back_dic) {
         NSArray * down = back_dic[@"Data"];
-        NSArray * array ;
-        if (down.count > 2) {
-            NSMutableArray * mArray = [NSMutableArray arrayWithArray:down];
-            //取第一个数据
-            long index = arc4random_uniform((uint32_t)(mArray.count));
-            NSDictionary * map1 = mArray[index];
-            [mArray removeObject:map1];
-            //取第二个数据
-            index = arc4random_uniform((uint32_t)(mArray.count));
-            NSDictionary * map2 = mArray[index];
-            array = @[map1,map2];
+        NSMutableArray * arr = [NSMutableArray arrayWithArray:down];
+        NSMutableArray * array = [NSMutableArray new];
+        if (arr.count < 4) {
+            NSInteger index = arc4random_uniform((uint32_t)arr.count);
+            NSDictionary * imgDic = arr[index];
+            [array addObject:imgDic];
+            for (int i = 1; i < 4; i ++) {
+                imgDic = [arr objectAtIndex:(index + i)%arr.count];
+                [array addObject:imgDic];
+            }
         }else{
-            array = down;
+            //1
+            NSInteger index = arc4random_uniform((uint32_t)arr.count);
+            NSDictionary * imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
+            //2
+            index = arc4random_uniform((uint32_t)arr.count);
+            imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
+            //3
+            index = arc4random_uniform((uint32_t)arr.count);
+            imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
+            //4
+            index = arc4random_uniform((uint32_t)arr.count);
+            imgDic = arr[index];
+            [array addObject:imgDic];
+            [arr removeObject:imgDic];
         }
+        
         self.downBannerImgArray = array;
+        MYTOOL.imgArray = array;
         for (int i = 0 ;i < self.middle_img_array.count ; i ++) {
             UIImageView * imgV = self.middle_img_array[i];
             if (imgV) {

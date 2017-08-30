@@ -41,6 +41,9 @@
         //用户名字
         {
             NSString * user_name = dictionary[@"UserName"];
+            if (user_name.length > 4) {
+                user_name = [NSString stringWithFormat:@"%@**%@",[user_name substringToIndex:1],[user_name substringFromIndex:user_name.length-1]];
+            }
             UILabel * label = [UILabel new];
             label.text = user_name;
             label.textAlignment = NSTextAlignmentCenter;
@@ -49,7 +52,7 @@
             float label_width = 40+13+13;
             CGSize size = [MYTOOL getSizeWithLabel:label];
             while (size.width > label_width + label.font.pointSize) {
-                label.font = [UIFont systemFontOfSize:label.font.pointSize];
+                label.font = [UIFont systemFontOfSize:label.font.pointSize-0.1];
                 size = [MYTOOL getSizeWithLabel:label];
             }
             label.frame = CGRectMake(0, 60, label_width, size.height);

@@ -60,7 +60,7 @@
         NSArray * btn_array = @[
                                 @[@"icon_wechat",@"微信"],
                                 @[@"icon_moments",@"朋友圈"],
-//                                @[@"icon_qq",@"QQ"],
+                                @[@"icon_qq",@"QQ"],
 //                                @[@"icon_weibo",@"新浪微博"]
                                 ];
         //分享按钮
@@ -93,7 +93,7 @@
             }
             [arr[0] addTarget:self action:@selector(sharedToWeiChat) forControlEvents:UIControlEventTouchUpInside];
             [arr[1] addTarget:self action:@selector(sharedToFriend) forControlEvents:UIControlEventTouchUpInside];
-//            [arr[2] addTarget:self action:@selector(sharedToQQ) forControlEvents:UIControlEventTouchUpInside];
+            [arr[2] addTarget:self action:@selector(sharedToQQ) forControlEvents:UIControlEventTouchUpInside];
 //            [arr[3] addTarget:self action:@selector(sharedToWeiBo) forControlEvents:UIControlEventTouchUpInside];
         }
         //取消按钮
@@ -124,8 +124,6 @@
 }
 //分享微博
 -(void)sharedToWeiBo{
-    [SVProgressHUD showErrorWithStatus:@"微博暂不支持" duration:2];
-    return;
     [self sharedWithType:0];
 }
 //分享qq

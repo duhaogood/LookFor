@@ -282,6 +282,14 @@
     [publishinfo_dictionary setValue:CategoryID forKey:@"CategoryID"];
     [publishinfo_dictionary setValue:uploadAreaDic[@"provinceid"] forKey:@"Province"];
     [publishinfo_dictionary setValue:uploadAreaDic[@"cityid"] forKey:@"City"];
+    if (MYTOOL.appLocation) {
+        float lat = MYTOOL.appLocation.coordinate.latitude;
+        float lon = MYTOOL.appLocation.coordinate.longitude;
+        NSString * Latitude = [NSString stringWithFormat:@"%.f",lat];
+        NSString * Longitude = [NSString stringWithFormat:@"%.f",lon];
+        [publishinfo_dictionary setValue:Latitude forKey:@"Latitude"];
+        [publishinfo_dictionary setValue:Longitude forKey:@"Longitude"];
+    }
     if (self.PublishAddress && self.PublishAddress.length) {
         [publishinfo_dictionary setValue:_PublishAddress forKey:@"PublishAddress"];
     }

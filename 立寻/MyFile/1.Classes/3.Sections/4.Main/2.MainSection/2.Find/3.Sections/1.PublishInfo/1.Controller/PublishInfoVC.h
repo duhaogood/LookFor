@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BannerInfoVC.h"
 @interface PublishInfoVC : UIViewController
 @property(nonatomic,assign)id delegate;
 @property(nonatomic,strong)NSDictionary * publishDictionary;//发布详细信息
 @property(nonatomic,assign)BOOL isMine;//是否我的界面传过来
+@property(nonatomic,strong)UIImageView * advertisementImgV;//广告
 //下拉事件
 -(void)headerRefresh;
 //上拉事件
@@ -36,4 +37,8 @@
 -(void)submitLookClue;
 //查看招领
 -(void)submitLookClain;
+//点击广告
+-(void)clickDownImage:(UITapGestureRecognizer *)tap;
+//点击广告关闭
+-(void)clickCloseImage:(UIButton *)btn;
 @end

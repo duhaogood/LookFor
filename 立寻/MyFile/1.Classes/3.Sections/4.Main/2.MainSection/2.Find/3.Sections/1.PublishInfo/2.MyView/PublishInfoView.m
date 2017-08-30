@@ -122,7 +122,7 @@
                     label.textColor = MYCOLOR_40_199_0;
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.frame = CGRectMake(left, top, size.width, size.height);
-                    left += size.width + 18;
+                    left += size.width + 5;
                     top += size.height;
                     [view addSubview:label];
                 }
@@ -140,6 +140,16 @@
                         text = [NSString stringWithFormat:@"￥%d",(int)Money];
                     }
                     label.text = text;
+                    CGSize size = [MYTOOL getSizeWithLabel:label];
+                    label.frame = CGRectMake(left, top - size.height, size.width, size.height);
+                    [view addSubview:label];
+                    left += size.width + 10;
+                }
+                //赏金由发布人支付，平台不参与赏金服务
+                {
+                    UILabel * label = [UILabel new];
+                    label.font = [UIFont systemFontOfSize:8];
+                    label.text = @"赏金由发布人支付，平台不参与赏金服务";
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.frame = CGRectMake(left, top - size.height, size.width, size.height);
                     [view addSubview:label];
@@ -471,6 +481,34 @@
                     [btn addTarget:delegate action:@selector(submitLookClue) forControlEvents:UIControlEventTouchUpInside];
                     [btn setTitle:@"查看线索" forState:UIControlStateNormal];
                 }
+            }
+            //广告
+            {
+                UIImageView * imgV = [UIImageView new];
+                float width = WIDTH/2.0;
+                float height = width/16.0*9;
+                imgV.frame = CGRectMake(0, HEIGHT-height - 64, width, height);
+                [self addSubview:imgV];
+                NSInteger index = arc4random_uniform((uint32_t)MYTOOL.imgArray.count);
+                NSDictionary * dic = MYTOOL.imgArray[index];
+                NSString * url = dic[@"imgpath"];
+                if ([url isKindOfClass:[NSNull class]]) {
+                    url = @"";
+                }
+                imgV.tag = index;
+                //添加点击事件
+                [imgV setUserInteractionEnabled:YES];
+                UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:delegate action:@selector(clickDownImage:)];
+                tapGesture.numberOfTapsRequired=1;
+                [delegate setAdvertisementImgV:imgV];
+                [imgV addGestureRecognizer:tapGesture];
+                [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:url];
+                //关闭按钮
+                UIButton * btn = [UIButton new];
+                [btn setImage:[UIImage imageNamed:@"industryclose"] forState:UIControlStateNormal];
+                [btn addTarget:delegate action:@selector(clickCloseImage:) forControlEvents:UIControlEventTouchUpInside];
+                btn.frame = CGRectMake(WIDTH/2.0, HEIGHT-height - 64 - 10, 20, 20);
+                [self addSubview:btn];
             }
         }
         

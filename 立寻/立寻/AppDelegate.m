@@ -30,6 +30,7 @@
     //微信注册
     [WXApi registerApp:@"wx5ff1105426a8e8d9" enableMTA:YES];//注册微信
     
+    [[UMSocialManager defaultManager] openLog:YES];
     //友盟
     [UMSocialGlobal shareInstance].isClearCacheWhenGetUserInfo = NO;
     /* 设置友盟appkey */
@@ -45,8 +46,8 @@
     /* 设置微信的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx5ff1105426a8e8d9" appSecret:@"a0cb8aee9361220290c2370e657e4186" redirectURL:@""];
     
-    /* 设置分享到QQ互联的appID  - 未申请*/
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"101398535"/*设置QQ平台的appID*/  appSecret:@"c743dd692f0c004e9cfe0bbbf08ffeea" redirectURL:@""];
+    /* 设置分享到QQ互联的appID*/
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106340594"/*设置QQ平台的appID*/  appSecret:@"ui9LjbPuXjdvwJCb" redirectURL:@""];
     
     /* 设置新浪的appKey和appSecret    -未申请*/
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"1539877462"  appSecret:@"f0b045862b7e857439e600c28f689c23" redirectURL:@""];
@@ -56,7 +57,7 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    BOOL result = false;
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
     if (!result) {
         // 其他如支付等SDK的回调
         if(url != nil && [[url host] isEqualToString:@"pay"]){//微信支付
@@ -110,7 +111,7 @@
 // NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
-    BOOL result = false;
+    BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
     if (!result) {
         // 其他如支付等SDK的回调
         if(url != nil && [[url host] isEqualToString:@"pay"]){
@@ -157,6 +158,7 @@
 }
 //收到一个来自微信的处理结果。调用一次sendReq后会收到onResp。
 - (void)onResp:(BaseResp *)resp{
+    
     if ([resp isKindOfClass:[PayResp class]])
     {
         PayResp *response = (PayResp *)resp;

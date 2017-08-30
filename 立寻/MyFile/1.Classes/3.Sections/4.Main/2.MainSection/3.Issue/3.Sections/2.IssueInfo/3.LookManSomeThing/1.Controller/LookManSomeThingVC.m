@@ -258,11 +258,11 @@
         [SVProgressHUD showErrorWithStatus:@"详细地址不能为空" duration:2];
         return false;
     }
-    //赏金余额
-    if ([self.moneyTF.text floatValue] < 50) {
-        [SVProgressHUD showErrorWithStatus:@"赏金不能低于50" duration:2];
-        return false;
-    }
+//    //赏金余额
+//    if ([self.moneyTF.text floatValue] < 50) {
+//        [SVProgressHUD showErrorWithStatus:@"赏金不能低于50" duration:2];
+//        return false;
+//    }
     return true;
 }
 #pragma mark - 按钮回调
@@ -407,6 +407,14 @@
     [publishinfo_dictionary setValue:Province forKey:@"Province"];
     [publishinfo_dictionary setValue:City forKey:@"City"];
     [publishinfo_dictionary setValue:Address forKey:@"Address"];
+    if (MYTOOL.appLocation) {
+        float lat = MYTOOL.appLocation.coordinate.latitude;
+        float lon = MYTOOL.appLocation.coordinate.longitude;
+        NSString * Latitude = [NSString stringWithFormat:@"%.f",lat];
+        NSString * Longitude = [NSString stringWithFormat:@"%.f",lon];
+        [publishinfo_dictionary setValue:Latitude forKey:@"Latitude"];
+        [publishinfo_dictionary setValue:Longitude forKey:@"Longitude"];
+    }
     if (self.PublishAddress && self.PublishAddress.length) {
         [publishinfo_dictionary setValue:_PublishAddress forKey:@"PublishAddress"];
     }
@@ -439,14 +447,16 @@
     }
     [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
         if (isIssue) {
-            [self.navigationController popViewControllerAnimated:false];
-            PayMoneyVC * vc = [PayMoneyVC new];
-            vc.waittingPayNumber = [Money floatValue];
-            vc.publishId = back_dic[@"Data"];
-            AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            MainVC * main = (MainVC *)app.window.rootViewController;
-            UINavigationController * nc = main.selectedViewController;
-            [nc pushViewController:vc animated:true];
+//            [self.navigationController popViewControllerAnimated:false];
+//            PayMoneyVC * vc = [PayMoneyVC new];
+//            vc.waittingPayNumber = [Money floatValue];
+//            vc.publishId = back_dic[@"Data"];
+//            AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//            MainVC * main = (MainVC *)app.window.rootViewController;
+//            UINavigationController * nc = main.selectedViewController;
+//            [nc pushViewController:vc animated:true];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功" duration:2];
+            [self performSelector:@selector(paySuccess) withObject:nil afterDelay:1];
         }else{
             [SVProgressHUD showSuccessWithStatus:@"保存草稿箱成功\n请至我的草稿箱查看" duration:1];
             [self performSelector:@selector(saveSuccess) withObject:nil afterDelay:1];
@@ -458,6 +468,12 @@
         [SVProgressHUD showErrorWithStatus:@"网络错误" duration:2];
     }];
     
+}
+-(void)paySuccess{
+    [self.navigationController popToRootViewControllerAnimated:false];
+    AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainVC * main = (MainVC *)app.window.rootViewController;
+    [main setSelectedIndex:4];
 }
 -(void)issueSuccess{
     [self.navigationController popViewControllerAnimated:false];

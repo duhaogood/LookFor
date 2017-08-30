@@ -393,4 +393,16 @@ static id instance;
     NSDictionary* returnDic = [NSDictionary dictionaryWithObjects:valueArray forKeys:propertyArray];
     return returnDic;
 }
+-(float)distanceBetweenBMKuserLocationA:(CLLocation *)location1 andLocationB:(CLLocation *)location2{
+    float r = 6370996.81;//地球半径
+    float pi = 3.141592653589793;
+    float lat1 = location1.coordinate.latitude;
+    float lng1 = location1.coordinate.longitude;
+    float lat2 = location2.coordinate.latitude;
+    float lng2 = location2.coordinate.longitude;
+    float distance = r * acos(cos(lat1*pi/180 )*cos(lat2*pi/180)*cos(lng1*pi/180 -lng2*pi/180)+
+                              sin(lat1*pi/180 )*sin(lat2*pi/180));
+    //其中，R=6370996.81;//地球半径，pi()为圆周率π，(lng1,lat1),(lng2,lat2)分别是百度地图的两个经纬度，带入数值计算即可
+    return distance;
+}
 @end

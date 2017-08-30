@@ -407,6 +407,14 @@
     [publishinfo_dictionary setValue:Province forKey:@"Province"];
     [publishinfo_dictionary setValue:City forKey:@"City"];
     [publishinfo_dictionary setValue:Address forKey:@"Address"];
+    if (MYTOOL.appLocation) {
+        float lat = MYTOOL.appLocation.coordinate.latitude;
+        float lon = MYTOOL.appLocation.coordinate.longitude;
+        NSString * Latitude = [NSString stringWithFormat:@"%.f",lat];
+        NSString * Longitude = [NSString stringWithFormat:@"%.f",lon];
+        [publishinfo_dictionary setValue:Latitude forKey:@"Latitude"];
+        [publishinfo_dictionary setValue:Longitude forKey:@"Longitude"];
+    }
     if (self.PublishAddress && self.PublishAddress.length) {
         [publishinfo_dictionary setValue:_PublishAddress forKey:@"PublishAddress"];
     }

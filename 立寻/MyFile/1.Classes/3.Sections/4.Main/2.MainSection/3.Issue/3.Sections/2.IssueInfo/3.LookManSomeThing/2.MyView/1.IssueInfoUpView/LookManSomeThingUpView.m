@@ -187,7 +187,7 @@
             //右侧
             {
                 UITextField * moneyTF = [UITextField new];
-                moneyTF.text = @"50";
+                moneyTF.text = @"0";
                 moneyTF.textAlignment = NSTextAlignmentCenter;
                 moneyTF.frame = CGRectMake(left, top -5, 70, height_tf);
                 moneyTF.font = [UIFont systemFontOfSize:13];
@@ -217,7 +217,7 @@
                 label.font = [UIFont systemFontOfSize:12];
                 label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
                 label.frame = CGRectMake(left, top, WIDTH-10-left, label_height);
-                [self addSubview:label];
+//                [self addSubview:label];
             }
             top += label_height;
         }

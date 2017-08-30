@@ -137,6 +137,10 @@
 		04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08721EE2C3DB003F9943 /* MyLookingForCell.m */; };
 		04DE087B1EE30890003F9943 /* FoundClaimCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE08791EE30890003F9943 /* FoundClaimCell.m */; };
 		04DE087E1EE308AA003F9943 /* MyClaimCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DE087D1EE308AA003F9943 /* MyClaimCell.m */; };
+		04E8296A1F3BF41400388787 /* launch_png.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E829691F3BF41400388787 /* launch_png.png */; };
+		04E8296E1F3BF93400388787 /* FirstCell_change.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E8296D1F3BF93400388787 /* FirstCell_change.m */; };
+		04E829701F3C2EE900388787 /* gz_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E8296F1F3C2EE900388787 /* gz_white.png */; };
+		04E829721F3C2EF000388787 /* yuedu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E829711F3C2EF000388787 /* yuedu_white.png */; };
 		04EDA70E1F1DB6E000646C36 /* PayMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EDA70D1F1DB6E000646C36 /* PayMoneyVC.m */; };
 		04F6156D1F28248600538F9C /* libAPOpenSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F614C01F28248600538F9C /* libAPOpenSdk.a */; };
 		04F6156E1F28248600538F9C /* libSocialAlipayShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F614C11F28248600538F9C /* libSocialAlipayShare.a */; };
@@ -664,6 +668,11 @@
 		04DE08791EE30890003F9943 /* FoundClaimCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundClaimCell.m; sourceTree = "<group>"; };
 		04DE087C1EE308AA003F9943 /* MyClaimCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClaimCell.h; sourceTree = "<group>"; };
 		04DE087D1EE308AA003F9943 /* MyClaimCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClaimCell.m; sourceTree = "<group>"; };
+		04E829691F3BF41400388787 /* launch_png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_png.png; sourceTree = "<group>"; };
+		04E8296C1F3BF93400388787 /* FirstCell_change.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstCell_change.h; sourceTree = "<group>"; };
+		04E8296D1F3BF93400388787 /* FirstCell_change.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstCell_change.m; sourceTree = "<group>"; };
+		04E8296F1F3C2EE900388787 /* gz_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gz_white.png; sourceTree = "<group>"; };
+		04E829711F3C2EF000388787 /* yuedu_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuedu_white.png; sourceTree = "<group>"; };
 		04EDA70A1F1DB6C400646C36 /* 0.Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 0.Comments.h; sourceTree = "<group>"; };
 		04EDA70C1F1DB6E000646C36 /* PayMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMoneyVC.h; sourceTree = "<group>"; };
 		04EDA70D1F1DB6E000646C36 /* PayMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMoneyVC.m; sourceTree = "<group>"; };
@@ -1406,6 +1415,9 @@
 		042BAF0D1F04A82500B86065 /* 2.Image */ = {
 			isa = PBXGroup;
 			children = (
+				04E829711F3C2EF000388787 /* yuedu_white.png */,
+				04E8296F1F3C2EE900388787 /* gz_white.png */,
+				04E829691F3BF41400388787 /* launch_png.png */,
 				04F615A51F28301A00538F9C /* sharedImage.png */,
 				04F615A71F308E1500538F9C /* launch_img.jpg */,
 			);
@@ -3013,6 +3025,15 @@
 			path = 2.MyClaimCell;
 			sourceTree = "<group>";
 		};
+		04E8296B1F3BF8F600388787 /* 03.FirstCell_change */ = {
+			isa = PBXGroup;
+			children = (
+				04E8296C1F3BF93400388787 /* FirstCell_change.h */,
+				04E8296D1F3BF93400388787 /* FirstCell_change.m */,
+			);
+			path = 03.FirstCell_change;
+			sourceTree = "<group>";
+		};
 		04EDA7091F1DB6C400646C36 /* 4.PayMoney */ = {
 			isa = PBXGroup;
 			children = (
@@ -3617,6 +3638,7 @@
 				04A990031ED84C7E00C1C6EC /* 0.Comments.h */,
 				04A990041ED84C7E00C1C6EC /* 01.FirstPageHeaderView */,
 				04874F111ED913AA00049758 /* 02.LookForCell */,
+				04E8296B1F3BF8F600388787 /* 03.FirstCell_change */,
 			);
 			path = 2.MyView;
 			sourceTree = "<group>";
@@ -4160,7 +4182,7 @@
 				TargetAttributes = {
 					78C23C411ED3450A000CD40E = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7QCF4945GF;
+						DevelopmentTeam = XK49G3E4V8;
 						ProvisioningStyle = Automatic;
 					};
 					78C23C5A1ED3450A000CD40E = {
@@ -4202,12 +4224,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E829721F3C2EF000388787 /* yuedu_white.png in Resources */,
 				04410F571EEEBF720063CC32 /* area_code.plist in Resources */,
 				042BAF111F04A94900B86065 /* morenhdpic.png in Resources */,
 				04F6159C1F28248600538F9C /* UMSocialSDKPromptResources.bundle in Resources */,
 				042BAF101F04A94900B86065 /* hdbj.png in Resources */,
 				04F615941F28248600538F9C /* VKSdkResources.bundle in Resources */,
 				78C23C551ED3450A000CD40E /* LaunchScreen.storyboard in Resources */,
+				04E829701F3C2EE900388787 /* gz_white.png in Resources */,
+				04E8296A1F3BF41400388787 /* launch_png.png in Resources */,
 				044ADFEC1EF2A4B100E43704 /* AlipaySDK.bundle in Resources */,
 				78C23C521ED3450A000CD40E /* Assets.xcassets in Resources */,
 				78375ADC1ED4734C0046F8C3 /* MJRefresh.bundle in Resources */,
@@ -4320,6 +4345,7 @@
 				78375AE11ED4734C0046F8C3 /* UIView+MJExtension.m in Sources */,
 				042BAF351F062B0600B86065 /* MyFoundInfoVC.m in Sources */,
 				042BAF3B1F0C90B500B86065 /* SearchSomethingVC.m in Sources */,
+				04E8296E1F3BF93400388787 /* FirstCell_change.m in Sources */,
 				78375AC41ED4734C0046F8C3 /* FindVC.m in Sources */,
 				78375ACB1ED4734C0046F8C3 /* AFURLRequestSerialization.m in Sources */,
 				04DE08731EE2C3DB003F9943 /* MyLookingForCell.m in Sources */,
@@ -4544,7 +4570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7QCF4945GF;
+				DEVELOPMENT_TEAM = XK49G3E4V8;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4602,7 +4628,7 @@
 					"-all_load",
 					"-Objc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hao.look;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hao.lookingFor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -4612,7 +4638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7QCF4945GF;
+				DEVELOPMENT_TEAM = XK49G3E4V8;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4670,7 +4696,7 @@
 					"-all_load",
 					"-Objc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hao.look;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hao.lookingFor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

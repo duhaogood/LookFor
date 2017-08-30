@@ -20,7 +20,7 @@
 @implementation FirstPageHeaderView
 -(instancetype)initWithFrame:(CGRect)frame andDelegate:(id)delegate andUpBannerArray:(NSArray *)upBannerArray andDownBannerArray:(NSArray *)downBannerArray andBtnName_imgArray:(NSArray *)btnName_imgArray{
     if (self = [super initWithFrame:frame]) {
-        float all_height = 593;
+        float all_height = 478;
         float height_all = frame.size.height;//头view的总高度
         self.backgroundColor = MYCOLOR_240_240_240;
         float top = 0;
@@ -39,18 +39,18 @@
         }
         //中部按钮区
         {
-            float height = 220/all_height*height_all;
+            float height = 110/all_height*height_all;
             UIView * view = [UIView new];
             view.frame = CGRectMake(0, top, WIDTH, height);
             view.backgroundColor = [UIColor whiteColor];
             [self addSubview:view];
             for (int i = 0; i < btnName_imgArray.count; i ++) {
-                int row = i / 4;//行
-                int col = i % 4;//列
-                float space_x = (WIDTH - 200) / 8.0;
-                float space_y = (height / 2.0 - 50) / 3.0;
+                int row = 0;//行
+                int col = i % 5;//列
+                float space_x = (WIDTH - 250) / 10.0;
+                float space_y = (height - 80) / 2.0;
                 float btn_width = space_x * 2 + 50;
-                float btn_height = height / 2;
+                float btn_height = height;
                 //图片
                 {
                     UIButton * btn = [UIButton new];
@@ -69,9 +69,12 @@
                     label.text = btnName_imgArray[i][1];
                     label.textColor = [MYTOOL RGBWithRed:16 green:16 blue:16 alpha:1];
                     label.font = [UIFont systemFontOfSize:14];
+                    if (WIDTH < 360) {
+                        label.font = [UIFont systemFontOfSize:13];
+                    }
                     CGSize size = [MYTOOL getSizeWithLabel:label];
                     label.textAlignment = NSTextAlignmentCenter;
-                    label.frame = CGRectMake(btn_width * col, 50 + space_y * 2 + btn_height * row - size.height / 2, btn_width, size.height);
+                    label.frame = CGRectMake(btn_width * col, 50 + space_y * 2 + btn_height * row - size.height / 2 + 5, btn_width, size.height);
                     if (row == 1) {
                         label.frame = CGRectMake(btn_width * col, 50 + space_y * 2 + btn_height * row - size.height / 2 - 5, btn_width, size.height);
                     }
@@ -80,90 +83,9 @@
             }
             top += height;
         }
-        //签到、积分
-        {
-            float height = 80/all_height*height_all;
-            UIView * bgView = [UIView new];
-            bgView.frame = CGRectMake(0, top, WIDTH, height);
-            bgView.backgroundColor = [UIColor blueColor];
-            [self addSubview:bgView];
-            //分割线
-            {
-                UIView * space = [UIView new];
-                space.frame = CGRectMake(0, 0, WIDTH, 1);
-                space.backgroundColor = MYCOLOR_240_240_240;
-                [bgView addSubview:space];
-            }
-            //主view
-            {
-                UIView * view = [UIView new];
-                view.frame = CGRectMake(0, 1, WIDTH, height - 7);
-                view.backgroundColor = [UIColor whiteColor];
-                [bgView addSubview:view];
-                //右侧签到按钮
-                {
-                    float btn_width = 80;
-                    float btn_height = 28;
-                    UIButton * btn = [UIButton new];
-                    self.signBtn = btn;
-                    btn.frame = CGRectMake(WIDTH - 80 - 15, (height - 35) / 2.0, btn_width, btn_height);
-                    btn.layer.masksToBounds = true;
-                    btn.layer.cornerRadius = btn_height/2;
-                    [btn.layer setBorderWidth:1];
-                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                    CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 0, 1, 0, 1 });
-                    [btn.layer setBorderColor:colorref];
-                    [btn setTitle:@"签到" forState:UIControlStateNormal];
-                    [btn setTitleColor:MYCOLOR_40_199_0 forState:UIControlStateNormal];
-                    [view addSubview:btn];
-                    [btn addTarget:delegate action:@selector(signClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [delegate setSignBtn:btn];
-                }
-                //中间分割线
-                {
-                    UIView * space = [UIView new];
-                    space.backgroundColor = MYCOLOR_240_240_240;
-                    space.frame = CGRectMake(WIDTH - 80 - 30, (height - 35) / 2.0, 1, 28);
-                    [view addSubview:space];
-                }
-                float sign_down = 0;
-                //签到加积分
-                {
-                    UILabel * label = [UILabel new];
-                    label.text = @"签到加积分";
-                    label.textColor = [MYTOOL RGBWithRed:51 green:51 blue:51 alpha:1];
-                    label.font = [UIFont systemFontOfSize:15];
-                    CGSize size = [MYTOOL getSizeWithLabel:label];
-                    label.frame = CGRectMake(14, 12, size.width, size.height);
-                    [view addSubview:label];
-                    sign_down = 12 + size.height;
-                }
-                //描述
-                {
-                    UILabel * label = [UILabel new];
-                    label.text = @"可在积分商城直接兑换商品，开发中";
-                    label.textColor = [MYTOOL RGBWithRed:168 green:168 blue:168 alpha:1];
-                    label.font = [UIFont systemFontOfSize:12];
-                    if (WIDTH < 375) {
-                        label.font = [UIFont systemFontOfSize:10];
-                    }
-                    CGSize size = [MYTOOL getSizeWithLabel:label];
-                    label.frame = CGRectMake(14, sign_down + 7, size.width, size.height);
-                    [view addSubview:label];
-                }
-            }
-            //分割线
-            {
-                UIView * space = [UIView new];
-                space.frame = CGRectMake(0, height-6, WIDTH, 6);
-                space.backgroundColor = MYCOLOR_240_240_240;
-                [bgView addSubview:space];
-            }
-            top += height;
-        }
         //中间banner
         {
-            float height = 95/all_height*height_all;
+            float height = 170/all_height*height_all;
             UIView * view = [UIView new];
             view.frame = CGRectMake(0, top, WIDTH, height);
             view.backgroundColor = MYCOLOR_240_240_240;
@@ -172,11 +94,15 @@
             view2.frame = CGRectMake(0, 5, WIDTH, height - 10);
             [view addSubview:view2];
             view2.backgroundColor = [UIColor whiteColor];
-            float img_width = (WIDTH-15) / 2.0;
+            float img_width = WIDTH*4/5.0;
             float img_height = height - 20;
-            float scroll_width = 5;
+            float scroll_width = 0;
+            UIScrollView * scrollView = [UIScrollView new];
+            scrollView.frame = view.bounds;
+            [view2 addSubview:scrollView];
+            [delegate setScrollView:scrollView];
             NSMutableArray * array = [NSMutableArray new];
-            for (int i = 0; i < (downBannerArray.count > 2 ? 2 : downBannerArray.count); i ++) {
+            for (int i = 0; i < downBannerArray.count; i ++) {
                 UIImageView * imgV = [UIImageView new];
                 [array addObject:imgV];
                 NSString * ss = downBannerArray[i][@"imgpath"];
@@ -184,17 +110,18 @@
                     ss = @"";
                 }
                 [MYTOOL setImageIncludePrograssOfImageView:imgV withUrlString:ss];
-                imgV.frame = CGRectMake(5 + (5 + img_width) * i, 5, img_width, img_height);
-                [view2 addSubview:imgV];
+                imgV.frame = CGRectMake(5 + (10 + img_width) * i, 5, img_width, img_height);
+                [scrollView addSubview:imgV];
                 imgV.tag = i;
                 //添加点击事件
                 [imgV setUserInteractionEnabled:YES];
                 UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:delegate action:@selector(downBannerImageClick:)];
                 tapGesture.numberOfTapsRequired=1;
                 [imgV addGestureRecognizer:tapGesture];
-                scroll_width += i * (5 + img_width);
+                scroll_width += (10 + img_width);
             }
             [delegate setMiddle_img_array:array];
+            scrollView.contentSize = CGSizeMake(scroll_width, 0);
             top += height;
         }
         //cell选择数据源view

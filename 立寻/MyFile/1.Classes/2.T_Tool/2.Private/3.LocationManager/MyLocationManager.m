@@ -89,6 +89,7 @@ static id instance;
                                      };
                  }
                  [MYCENTER_NOTIFICATION postNotificationName:NOTIFICATION_UPDATELOCATION_SUCCESS object:locationDic];
+                 DHTOOL.appLocation = newLocation;
              }
              else if (error == nil && [array count] == 0)
              {

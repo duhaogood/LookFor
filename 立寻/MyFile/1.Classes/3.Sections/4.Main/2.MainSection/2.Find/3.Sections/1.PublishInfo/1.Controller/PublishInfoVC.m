@@ -407,7 +407,20 @@
     }];
 }
 
-
+//点击广告
+-(void)clickDownImage:(UITapGestureRecognizer *)tap{
+    NSInteger tag = tap.view.tag;
+    NSDictionary * imgDic = MYTOOL.imgArray[tag];
+    NSString * url = imgDic[@"linkurl"];
+    BannerInfoVC * vc = [BannerInfoVC new];
+    vc.url = url;
+    [self.navigationController pushViewController:vc animated:true];
+}
+//点击广告关闭
+-(void)clickCloseImage:(UIButton *)btn{
+    [btn removeFromSuperview];
+    [self.advertisementImgV removeFromSuperview];
+}
 //返回上个界面
 -(void)popUpViewController{
     [self.navigationController popViewControllerAnimated:true];

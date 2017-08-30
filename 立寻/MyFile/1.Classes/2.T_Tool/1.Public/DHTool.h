@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <CoreLocation/CoreLocation.h>
 
 @interface DHTool : NSObject
 @property(nonatomic,copy)NSString * store_version;//商店版本
 @property(nonatomic,strong)NSDictionary * userInfo;//用户信息
+@property(nonatomic,strong)CLLocation * appLocation;//定位位置
+@property(nonatomic,strong)NSArray * imgArray;//首页中部广告
 /**
  *  获取单例工具类对象
  *
@@ -197,4 +199,13 @@
  @return 对应的字典
  */
 -(NSDictionary *) getDictionaryWithModel:(id)entity;
+/**
+ *  计算两个百度经纬度之间的距离，别的坐标系不准！！
+ *
+ *  @param location1 点1
+ *  @param location2 点2
+ *
+ *  @return 两点之间的距离，单位(米)
+ */
+-(float)distanceBetweenBMKuserLocationA:(CLLocation *)location1 andLocationB:(CLLocation *)location2;
 @end

@@ -10,6 +10,7 @@
 #import "RegisterVC.h"
 #import "FindPasswordVC.h"
 #import "PersonalCertificationVC.h"
+#import <UMSocialCore/UMSocialCore.h>
 @interface LoginVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField * phoneTF;//手机号码
 @property(nonatomic,strong)UITextField * passwordTF;//密码
@@ -138,66 +139,110 @@
         [self.view addSubview:btn];
     }
     //快速登录
-//    {
-//        top = 64 + (HEIGHT - 64)/2;
-//        //文字
-//        CGSize size;
-//        {
-//            UILabel * label = [UILabel new];
-//            label.text = @"快速登录";
-//            label.font = [UIFont systemFontOfSize:12];
-//            label.textColor = [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1];
-//            size = [MYTOOL getSizeWithLabel:label];
-//            label.frame = CGRectMake(WIDTH/2-size.width/2, top, size.width, size.height);
-//            [self.view addSubview:label];
-//        }
-//        float left_width = WIDTH/2 - size.width/2;
-//        //分割线-左
-//        {
-//            UIView * space = [UIView new];
-//            space.frame = CGRectMake(left_width/3 - 15, size.height/2-0.5+top, left_width*2/3.0, 1);
-//            space.backgroundColor = MYCOLOR_181_181_181;
-//            [self.view addSubview:space];
-//        }
-//        //分割线-右
-//        {
-//            UIView * space = [UIView new];
-//            space.frame = CGRectMake(WIDTH/2 + size.width/2 + 15, size.height/2-0.5+top, left_width*2/3.0, 1);
-//            space.backgroundColor = MYCOLOR_181_181_181;
-//            [self.view addSubview:space];
-//        }
-//    }
-//    //三个按钮
-//    {
-//        float width = 44;
-//        float space = (WIDTH - width*3)/6;
-//        top += 30;
-//        //QQ-qqlogin
-//        {
-//            UIButton * btn = [UIButton new];
-//            [btn setImage:[UIImage imageNamed:@"qqlogin"] forState:UIControlStateNormal];
-//            [btn addTarget:self action:@selector(getAuthWithUserInfoFromQQ) forControlEvents:UIControlEventTouchUpInside];
-//            btn.frame = CGRectMake(space * 2, top, width, width);
+    {
+        top = 64 + (HEIGHT - 64)/2;
+        //文字
+        CGSize size;
+        {
+            UILabel * label = [UILabel new];
+            label.text = @"快速登录";
+            label.font = [UIFont systemFontOfSize:12];
+            label.textColor = [MYTOOL RGBWithRed:181 green:181 blue:181 alpha:1];
+            size = [MYTOOL getSizeWithLabel:label];
+            label.frame = CGRectMake(WIDTH/2-size.width/2, top, size.width, size.height);
+            [self.view addSubview:label];
+        }
+        float left_width = WIDTH/2 - size.width/2;
+        //分割线-左
+        {
+            UIView * space = [UIView new];
+            space.frame = CGRectMake(left_width/3 - 15, size.height/2-0.5+top, left_width*2/3.0, 1);
+            space.backgroundColor = MYCOLOR_181_181_181;
+            [self.view addSubview:space];
+        }
+        //分割线-右
+        {
+            UIView * space = [UIView new];
+            space.frame = CGRectMake(WIDTH/2 + size.width/2 + 15, size.height/2-0.5+top, left_width*2/3.0, 1);
+            space.backgroundColor = MYCOLOR_181_181_181;
+            [self.view addSubview:space];
+        }
+    }
+    //三个按钮
+    {
+        float width = 44;
+        float space = (WIDTH - width*3)/6;
+        top += 30;
+        //QQ-qqlogin
+        {
+            UIButton * btn = [UIButton new];
+            [btn setImage:[UIImage imageNamed:@"qqlogin"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(getAuthWithUserInfoFromQQ) forControlEvents:UIControlEventTouchUpInside];
+            btn.frame = CGRectMake(space * 2, top, width, width);
 //            [self.view addSubview:btn];
-//        }
-//        //微信-weixinlogin
-//        {
-//            UIButton * btn = [UIButton new];
-//            [btn setImage:[UIImage imageNamed:@"weixinlogin"] forState:UIControlStateNormal];
-//            [btn addTarget:self action:@selector(getAuthWithUserInfoFromWechat) forControlEvents:UIControlEventTouchUpInside];
-//            btn.frame = CGRectMake(space * 3 + width , top, width, width);
+        }
+        //微信-weixinlogin
+        {
+            UIButton * btn = [UIButton new];
+            [btn setImage:[UIImage imageNamed:@"weixinlogin"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(getAuthWithUserInfoFromWechat) forControlEvents:UIControlEventTouchUpInside];
+            btn.frame = CGRectMake(space * 3 + width , top, width, width);
+            [self.view addSubview:btn];
+        }
+        //微博-sinalogin
+        {
+            UIButton * btn = [UIButton new];
+            [btn setImage:[UIImage imageNamed:@"sinalogin"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(getAuthWithUserInfoFromSina) forControlEvents:UIControlEventTouchUpInside];
+            btn.frame = CGRectMake(space * 4 + width*2, top, width, width);
 //            [self.view addSubview:btn];
-//        }
-//        //微博-sinalogin
-//        {
-//            UIButton * btn = [UIButton new];
-//            [btn setImage:[UIImage imageNamed:@"sinalogin"] forState:UIControlStateNormal];
-//            [btn addTarget:self action:@selector(getAuthWithUserInfoFromSina) forControlEvents:UIControlEventTouchUpInside];
-//            btn.frame = CGRectMake(space * 4 + width*2, top, width, width);
-//            [self.view addSubview:btn];
-//        }
-//    }
+        }
+    }
 
+}
+//第三方登录
+-(void)thirtLoginWithInfo:(NSDictionary *)info{
+    NSString * interface = @"/user/memberuser/memberuseroauthlogin.html";
+    NSMutableDictionary * send = [NSMutableDictionary new];
+    [send setValue:@"ios" forKey:@"terminal"];
+    for (NSString * key in info.allKeys) {
+        [send setValue:info[key] forKey:key];
+    }
+    [MYTOOL netWorkingWithTitle:@"登录中"];
+    [MYNETWORKING getDataWithInterfaceName:interface andDictionary:send andSuccess:^(NSDictionary *back_dic) {
+        [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+        [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"1"];
+        MYTOOL.userInfo = back_dic[@"Data"];
+        NSString * UserID = back_dic[@"Data"][@"UserID"];
+        NSLog(@"User:%@",MYTOOL.userInfo);
+        [MYTOOL setProjectPropertyWithKey:@"UserID" andValue:UserID];
+        [self.navigationController popViewControllerAnimated:true];
+        //判断状态-ApproveState-认证状态  1未认证 2等待认证  3认证没通过 4认证通过
+        int ApproveState = [MYTOOL.userInfo[@"ApproveState"] intValue];
+        if (ApproveState != 4) {
+            PersonalCertificationVC * vc = [PersonalCertificationVC new];
+            [self.navigationController pushViewController:vc animated:true];
+        }
+    } andNoSuccess:^(NSDictionary *back_dic) {
+        NSString * interface2 = @"/user/memberuser/memberuseroauthbind.html";
+        [MYNETWORKING getWithInterfaceName:interface2 andDictionary:info andSuccess:^(NSDictionary *back_dic) {
+            [SVProgressHUD showSuccessWithStatus:back_dic[@"Message"] duration:1];
+            [MYTOOL setProjectPropertyWithKey:@"isLogin" andValue:@"1"];
+            MYTOOL.userInfo = back_dic[@"Data"];
+            NSString * UserID = back_dic[@"Data"][@"UserID"];
+            [MYTOOL setProjectPropertyWithKey:@"UserID" andValue:UserID];
+            [self.navigationController popViewControllerAnimated:true];
+            //判断状态-ApproveState-认证状态  1未认证 2等待认证  3认证没通过 4认证通过
+            int ApproveState = [MYTOOL.userInfo[@"ApproveState"] intValue];
+            if (ApproveState != 4) {
+                PersonalCertificationVC * vc = [PersonalCertificationVC new];
+                [self.navigationController pushViewController:vc animated:true];
+            }
+        }];
+        
+    } andFailure:^(NSURLSessionTask *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误" duration:2];
+    }];
 }
 #pragma mark - 按钮回调
 //微博授权
@@ -206,11 +251,46 @@
 }
 //qq授权
 - (void)getAuthWithUserInfoFromQQ{
-    NSLog(@"qq");
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
+        NSLog(@"qq登录");
+        if (error) {
+            NSString * msg = error.userInfo[@"message"];
+            if ([msg isEqualToString:@"Operation is cancel"]) {
+                msg = @"取消登录";
+            }
+            [SVProgressHUD showErrorWithStatus:msg duration:2];
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+            NSDictionary * info = @{
+                                    @"oauthid":@"1",
+                                    @"openid":resp.openid,
+                                    @"username":resp.name,
+                                    @"headImg":resp.iconurl
+                                    };
+            [self thirtLoginWithInfo:info];
+        }
+    }];
 }
 //微信授权
 - (void)getAuthWithUserInfoFromWechat{
-    NSLog(@"微信");
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+            NSString * msg = error.userInfo[@"message"];
+            if ([msg isEqualToString:@"Operation is cancel"]) {
+                msg = @"取消登录";
+            }
+            [SVProgressHUD showErrorWithStatus:msg duration:2];
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+            NSDictionary * info = @{
+                                    @"oauthid":@"3",
+                                    @"openid":resp.unionId,
+                                    @"username":resp.name,
+                                    @"headimgurl":resp.iconurl
+                                    };
+            [self thirtLoginWithInfo:info];
+        }
+    }];
 }
 //忘记密码事件
 -(void)forgetPassword{
